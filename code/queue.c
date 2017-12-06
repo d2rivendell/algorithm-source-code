@@ -48,6 +48,9 @@
 /*11*/      return Q;
         }
 
+/**
+ 初始化队列：rear在front 的前面表示队列为空
+ */
 /* START: fig3_59.txt */
         void
         MakeEmpty( Queue Q )
