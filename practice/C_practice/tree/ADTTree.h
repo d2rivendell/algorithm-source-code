@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-typedef int  ElemwnrType;
+typedef int  ElementType;
 
 struct TreeNode;
 typedef struct TreeNode *Position;
@@ -19,6 +19,12 @@ typedef struct TreeNode *SearchTree;
 void MakeEmpty( SearchTree T);
 SearchTree FindMax(SearchTree T);
 SearchTree FindMin(SearchTree T);
-SearchTree Insert(SearchTree T,ElemwnrType X);
-SearchTree Delete(SearchTree T,ElemwnrType X);
+SearchTree Insert(SearchTree T,ElementType X);
+SearchTree Delete(SearchTree T,ElementType X);
+
+struct TreeNode{
+    ElementType element;
+    SearchTree left;
+    SearchTree right;
+};
 #endif /* ADTTree_h */

@@ -10,5 +10,20 @@
 #define AVLTree_h
 
 #include <stdio.h>
+typedef int  AvlElementType;
+struct AvlNode;
 
+typedef struct AvlNode *AvlTree;
+typedef struct AvlNode *AvlPosition;
+int Height(AvlTree T);
+AvlPosition Avl_Find(AvlElementType X,AvlTree T);
+AvlPosition Avl_FindMin(AvlElementType X,AvlTree T);
+AvlPosition Avl_FindMax(AvlElementType X,AvlTree T);
+
+
+AvlPosition SingleRotateWidthLeft(AvlTree T);
+AvlPosition SingleRotateWidthRight(AvlTree T);
+AvlPosition DoubleRotateWidthLeft(AvlTree T);
+AvlPosition DoubleRotateWidthRight(AvlTree T);
+AvlTree Insert(AvlTree T,AvlElementType X);
 #endif /* AVLTree_h */

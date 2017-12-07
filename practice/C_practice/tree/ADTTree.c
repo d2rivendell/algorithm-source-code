@@ -8,11 +8,7 @@
 
 #include "ADTTree.h"
 #include <stdlib.h>
-struct TreeNode{
-    ElemwnrType element;
-    SearchTree left;
-    SearchTree right;
-};
+
 
 void
 MakeEmpty( SearchTree T){
@@ -24,7 +20,7 @@ MakeEmpty( SearchTree T){
 }
 
 SearchTree
-Find(SearchTree T,ElemwnrType X){
+Find(SearchTree T,ElementType X){
     if (T == NULL) {
         return NULL;
     }
@@ -67,7 +63,7 @@ FindMin(SearchTree T){
     }
 }
 SearchTree
-Insert(SearchTree T,ElemwnrType X){
+Insert(SearchTree T,ElementType X){
     if(T == NULL){
         T = malloc(sizeof(SearchTree));
         T->element = X;
@@ -83,8 +79,16 @@ Insert(SearchTree T,ElemwnrType X){
 };
 
 
+
+/**
+ 1:如果被删除的节点有一个儿子，让该节点的父节点指向该节点的子节点，再把该节点删掉即可，参考ADT.png
+ 2:如果被删除的节点有两个儿子，找出该节点“右树的最小节点”（右最小）。把“右最小”的值复制到被删除节点。最后删除“右最小节点”。这里可以了解到，其实删除的并不是该节点，而是该节点的右数最小节点。
+ @param T 要删除节点的树
+ @param X 删除的节点值
+ @return 返回NULL表示该节点已经被删除或者不存在。返回有值表示要删除的节点在它的儿子下面
+ */
 SearchTree
-Delete(SearchTree T,ElemwnrType X){
+Delete(SearchTree T,ElementType X){
     if(T == NULL){
         printf("T is NULL!!!\n");
         return NULL;
