@@ -7,7 +7,7 @@
 		<key>C_practice.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Heap.xcscheme</key>
 		<dict>
@@ -17,7 +17,12 @@
 		<key>Queue.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>1</integer>
+		</dict>
+		<key>Sort.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>Stack.xcscheme</key>
 		<dict>
@@ -37,7 +42,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>351509F31FDD347B00465413</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>35D42D281FD7D0A800A8C9A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>35E2CFA61FD8EE1500BF7EF2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4F17B7A51E9DBF2C00EDEEBA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4FC0C2101E9F3B1A00A9D63D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4FD55BC61E9E179C00FFEE59</key>
 		<dict>
 			<key>primary</key>
 			<true/>

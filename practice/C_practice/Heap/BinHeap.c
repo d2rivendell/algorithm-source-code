@@ -58,7 +58,7 @@ ElementType
 DeleteMin(PriorityQueue Q){
     if(isEmpy(Q)){
         printf("PriorityQueue is empy!!!!\n");
-        return H ;
+        return -1 ;
     }
     // 0为占用为，根节点在1处
     ElementType  minElement= Q->elements[1];
@@ -66,14 +66,19 @@ DeleteMin(PriorityQueue Q){
     Q->size--; //把最后一个位置空出来
     int i;
     int child;
-    for (i = 1; i <= Q->size; i *= 2) {
-        child = i;
-        //找出左右最小节点 i != Q->size表明有右节点存在
-         if(i != Q->size && Q->elements[i] > Q->elements[i+1])
-             i++;
+    for (i = 1; i *= 2 <= Q->size; i = child ) {
+        child = i * 2;
+        //找出左右最小节点 child != Q->size表明有右节点存在
+        if(child != Q->size && Q->elements[child] > Q->elements[child+1])
+             child++;
         //下滤 将空穴下移
-        Q->elements[child/2] = Q->elements[i];
-        
-        
+        if(lastValue < Q->elements[child]){//如果lastValue比儿子更合适在位置i, 则该位置应该让给lastValue
+            break;
+        }else{
+             Q->elements[i] = Q->elements[child];
+        }
     }
+    Q->elements[i] = lastValue;
+    return minElement;
+    
 }
