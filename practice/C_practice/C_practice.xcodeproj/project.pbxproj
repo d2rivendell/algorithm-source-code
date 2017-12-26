@@ -89,6 +89,7 @@
 		351509F41FDD347B00465413 /* Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sort; sourceTree = BUILT_PRODUCTS_DIR; };
 		351509F61FDD347B00465413 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		352542C51FDD4FC600501AF9 /* shellSort.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shellSort.jpg; sourceTree = "<group>"; };
+		35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PercolateDown_to_buidHeap.png; sourceTree = "<group>"; };
 		35D42D291FD7D0A800A8C9A5 /* Queue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Queue; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D42D2B1FD7D0A800A8C9A5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		35D42D301FD7D0C400A8C9A5 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = queue.h; path = queue/queue.h; sourceTree = SOURCE_ROOT; };
@@ -175,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				352542C51FDD4FC600501AF9 /* shellSort.jpg */,
+				35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */,
 				351509F61FDD347B00465413 /* main.c */,
 			);
 			path = Sort;

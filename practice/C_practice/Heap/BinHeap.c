@@ -37,6 +37,7 @@ isEmpy(PriorityQueue Q){
 /**
  插入：首先，在size未达到capacity的时候，肯定会在elements加入数据。
  因为父节点一般总会小于或等于子节点。插入之前要和父节点们做对比，直至找到最合适位置
+ Note:该过程称为上滤
  */
 void
 Insert(ElementType X,PriorityQueue Q){

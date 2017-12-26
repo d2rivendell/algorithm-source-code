@@ -5,7 +5,7 @@
 //  Created by leon on 2017/12/6.
 //  Copyright © 2017年 Leon. All rights reserved.
 //
-// ADT数：对于树中每个节点X。它的左树关键字的值小于X关键字的值，相反右树的关键字的值大于X关键字的值
+// ADT树（二叉搜索树）：对于树中每个节点X。它的左树关键字的值小于X关键字的值，相反右树的关键字的值大于X关键字的值
 #ifndef ADTTree_h
 #define ADTTree_h
 

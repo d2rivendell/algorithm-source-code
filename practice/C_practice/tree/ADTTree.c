@@ -70,9 +70,9 @@ Insert(SearchTree T,ElementType X){
         T->left = T->right = NULL;
     }else{
         if (T->element > X) {
-            Insert(T->left, X);
+           T->left = Insert(T->left, X);
         }else if (T->element < X){
-             Insert(T->right, X);
+           T->right =  Insert(T->right, X);
         }
     }
     return T;

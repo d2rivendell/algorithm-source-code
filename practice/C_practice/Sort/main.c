@@ -12,21 +12,27 @@ typedef  int ElementType;
 void InsertSort(ElementType A[],int n);
 void ShellSort(ElementType A[],int n);
 void HeapSort(ElementType A[],int n);
+void PercDown(ElementType A[],int i,int N);
+void Swap(ElementType *a,ElementType *b);
 int main(int argc, const char * argv[]) {
    
     
-    ElementType A[] = {26,8,43,16,12,11,4,32,18,22,7,17,33,3,25};
-    ShellSort(A, 15);
-    for (int i = 0; i < 15; i++) {
-        printf("%d ",A[i]);
-    }
-    printf("\n");
+//    ElementType A[] = {26,8,43,16,12,11,4,32,18,22,7,17,33,3,25};
+//    ShellSort(A, 15);
+//    for (int i = 0; i < 15; i++) {
+//        printf("%d ",A[i]);
+//    }
+//    printf("\n");
+    ElementType a = 5;
+    ElementType b = 8;
+    printf("before:a=%d  b=%d \n",a,b);
+    Swap(&a, &b);
+    printf("after:a=%d  b=%d \n",a,b);
     return 0;
 }
 
 
-/**
- 插入排序
+/**插入排序
  */
 void
 InsertSort(ElementType A[],int N){
@@ -46,7 +52,7 @@ InsertSort(ElementType A[],int N){
 }
 
 
-/**
+/** 希尔排序
  希尔排序是基于插入排序，普通插入排序的增量固定为1。希尔排序的增量 为 N ／= 2
  其实喝插入排序的逻辑相识这里的Increment 相当于插入排序的1
  具体过程可由shellSort.jpg看出。
@@ -69,14 +75,60 @@ void ShellSort(ElementType A[],int N){
     }
 }
 
-/**
+/** 堆排序
  堆排序： 利用之前实现的deleMin函数，每次delete出来的是在堆里面的最小的值。
- 把delete的值放在该堆的第size个位置（没delete一次size减1）。这样就避免再开辟
+ 把delete的值放在该堆的第size个位置（每delete一次size减1）。这样就避免再开辟
  空间来存储delete出来的值。delete完后，该堆结构的数字就存储了递减排序的数值。
  为了让它最后是正序的，我们改变堆结构使得父节点总是大于子节点，实现deleteMax函数。
 （和优先队列相反）
+ 实现思路：先把传入的无序数组构建成堆结构（和队列不同，这里下标从0开始），之前在二叉堆Insert方法用了上滤的思想，这里构建Max堆用下滤实现,
+ 具体过程参考 PercolateDown_to_buidHeap.png
  
+ @param A 待排序的数组
+ @param N 数组长度
  */
-void HeapSort(ElementType A[],int n){
+void HeapSort(ElementType A[],int N){
+    int i = 0;
+    //构建max堆
+    for (i = N/2; i >= 0; i--) {
+        PercDown(A, i, N);
+    }
+    //deleteMax 把删除的max值依次放在最后面
+    for (int i = N - 1; i >= 0; i--) {
+        //A[0] 根据max堆的特性 A[0]肯定是数组中最大的值，交换过后相当于把Max删除再放到后面
+        Swap(&A[i], &A[0]);
+        //上次交换过后A[0]肯定不是最大的，这时候要进行下滤进行归位
+        PercDown(A, 0, N);
+    }
+}
 
+/**
+ 构建堆（下滤）,和优先队列里的二叉堆不一样，这里数组下标从0开始。
+ 节点i的左儿子在2i+1,右儿子在2i+2
+
+ @param A 待构建的数组
+ @param i 位置
+ @param N 数组元素个数
+ */
+void PercDown(ElementType A[],int i,int N){
+    ElementType temp = A[i];
+    int child = 0;
+    for (; 2*i + 1 < N; i = child) {
+        child = 2i + 1;
+        if (child != N - 1 && A[child] < A[child + 1]) {
+            child++;
+        }
+        if (temp < A[child]) {
+            A[i] = A[child];
+        }else{
+            break;
+        }
+    }
+    A[i] = temp;
+}
+
+void Swap(ElementType *a,ElementType *b){
+     *a = *a^*b;
+     *b = *a^*b;
+     *a = *a^*b;
 }
