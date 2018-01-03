@@ -17,17 +17,13 @@ void Swap(ElementType *a,ElementType *b);
 int main(int argc, const char * argv[]) {
    
     
-//    ElementType A[] = {26,8,43,16,12,11,4,32,18,22,7,17,33,3,25};
-//    ShellSort(A, 15);
-//    for (int i = 0; i < 15; i++) {
-//        printf("%d ",A[i]);
-//    }
-//    printf("\n");
-    ElementType a = 5;
-    ElementType b = 8;
-    printf("before:a=%d  b=%d \n",a,b);
-    Swap(&a, &b);
-    printf("after:a=%d  b=%d \n",a,b);
+    ElementType A[] = {26,8,43,16,12,11,4,32,18,22,7,17,33,3,25};
+    HeapSort(A, 15);
+    for (int i = 0; i < 15; i++) {
+        printf("%d ",A[i]);
+    }
+    printf("\n");
+
     return 0;
 }
 
@@ -94,11 +90,11 @@ void HeapSort(ElementType A[],int N){
         PercDown(A, i, N);
     }
     //deleteMax 把删除的max值依次放在最后面
-    for (int i = N - 1; i >= 0; i--) {
+    for (i = N - 1; i >= 0; i--) {
         //A[0] 根据max堆的特性 A[0]肯定是数组中最大的值，交换过后相当于把Max删除再放到后面
         Swap(&A[i], &A[0]);
         //上次交换过后A[0]肯定不是最大的，这时候要进行下滤进行归位
-        PercDown(A, 0, N);
+        PercDown(A, 0, i);
     }
 }
 
@@ -111,10 +107,10 @@ void HeapSort(ElementType A[],int N){
  @param N 数组元素个数
  */
 void PercDown(ElementType A[],int i,int N){
-    ElementType temp = A[i];
+    ElementType temp;
     int child = 0;
-    for (; 2*i + 1 < N; i = child) {
-        child = 2i + 1;
+    for (temp = A[i]; 2 * i + 1 < N; i = child) {
+        child = 2 * i + 1;
         if (child != N - 1 && A[child] < A[child + 1]) {
             child++;
         }
