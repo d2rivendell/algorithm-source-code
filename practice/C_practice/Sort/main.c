@@ -50,7 +50,7 @@ InsertSort(ElementType A[],int N){
 
 /** 希尔排序
  希尔排序是基于插入排序，普通插入排序的增量固定为1。希尔排序的增量 为 N ／= 2
- 其实喝插入排序的逻辑相识这里的Increment 相当于插入排序的1
+ 其实和插入排序的逻辑相似这里的Increment 相当于插入排序的1
  具体过程可由shellSort.jpg看出。
  */
 void ShellSort(ElementType A[],int N){

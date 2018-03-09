@@ -36,6 +36,16 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
+void
+lh_Insert(ElementType X,List L,Position P){
+    if (L == NULL || P == NULL) {
+        printf("List and Position can not be NULL!!!");
+    }
+    PtrToNode TmpCell = malloc(sizeof(struct Node));
+    TmpCell->Element = X;
+    TmpCell->Next = P->Next;
+    
+}
 
 
 

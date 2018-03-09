@@ -5,11 +5,7 @@
 
 #define Error( Str )        FatalError( Str )
 #define FatalError( Str )   fprintf( stderr, "%s\n", Str ), exit( 1 )
-        struct Node
-        {
-            ElementType Element;
-            PtrToNode   Next;
-        };
+
 
 /* START: fig3_40.txt */
         int
