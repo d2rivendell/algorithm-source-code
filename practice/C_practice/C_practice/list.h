@@ -12,6 +12,7 @@ typedef int ElementType;
         struct Node;
         typedef struct Node *PtrToNode;
         typedef PtrToNode List;
+        typedef PtrToNode ListNode;
         typedef PtrToNode Position;
         struct Node
         {
