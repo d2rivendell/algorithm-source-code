@@ -9,35 +9,36 @@
 #include <stdlib.h>
 #include "list.h"
 #include <time.h>
+#include "Tool.h"
 #define false   0
 #define true   1
-int main(int argc, const char * argv[]) {
-    
-    srand((unsigned)time(NULL));//以时间作种
-    List chainList = malloc(sizeof(List));
-    chainList->Element = rand() % 100;
-    chainList->Next = NULL;
-    Insert(20, chainList, Header(chainList));
-    Insert(30, chainList, chainList->Next);
-    List p = chainList;
-    int i = 0;
-    while (p) {
-        printf("%d---> %d\n",i,p->Element);
-        p = p->Next;
-        i++;
-    }
-    DeleteList(chainList);
 
-  
-//    printf("'+' = %d\n'-' = %d\n'*' = %d\n'/' = %d\n",'+','-','*','/');
-//    printf("=======\n");
-//    char ch;
-//    scanf("%c",&ch);
-//    printf("%d",ch);
+
+
+List reverse1(List node);
+List reverse2(List node);
+ListNode nthToLast(ListNode head,int n );
+int main(int argc, const char * argv[]) {
+//    List chainList = malloc(sizeof(List));
+//    chainList->Element = rand() % 100;
+//    chainList->Next = NULL;
+//    Insert(20, chainList, Header(chainList));
+//    Insert(30, chainList, chainList->Next);
+//    List p = chainList;
+//       DeleteList(chainList);
     
+    ElementType *A = createArray(5);
+    List aList = createList(A, 5);
+    printList(aList);
+    printList(reverse2(aList));
+    
+    printList(nthToLast(aList, <#int n#>))
+    
+    free(A);
     
     return 0;
 }
+
 
 void
 lh_Insert(ElementType X,List L,Position P){
@@ -56,10 +57,10 @@ lh_Insert(ElementType X,List L,Position P){
 List reverse1(List node){
     List pre = NULL;
     while (node != NULL) {
-        List nextNode = node->Next;
-        node->Next = pre;
-        pre = node;
-        node = nextNode;
+        List nextNode = node->Next;//暂存下一个
+        node->Next = pre;//下一个指向当前
+        pre = node;//当前赋值给上一个
+        node = nextNode;//下一个变成当前
     }
     return pre;
 }
@@ -70,11 +71,12 @@ List reverse2(List node){
     if(node->Next == NULL){
         return node;
     }
-    //reverseNode  是
+    //reverseNode是倒数第二个node的next，即 reverseNode = 倒数第二个node->Next
+    //即是最后一个List
     List reverseNode = reverse2(node->Next);
-    node->Next->Next = node;
-    node->Next = NULL;
-    return reverseNode;
+    node->Next->Next = node;//把下一个List指向当前
+    node->Next = NULL;//当前node的下一个置空，（为转向作准备）
+    return reverseNode;//最后一个List，反转后变成Head
 }
 
 /**

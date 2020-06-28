@@ -9,6 +9,7 @@
 #include <stdio.h>
 typedef  int ElementType;
 
+void BubbleSort(ElementType A[],int N);
 void InsertSort(ElementType A[],int n);
 void ShellSort(ElementType A[],int n);
 void HeapSort(ElementType A[],int n);
@@ -18,7 +19,7 @@ int main(int argc, const char * argv[]) {
    
     
     ElementType A[] = {26,8,43,16,12,11,4,32,18,22,7,17,33,3,25};
-    HeapSort(A, 15);
+    BubbleSort(A, 15);
     for (int i = 0; i < 15; i++) {
         printf("%d ",A[i]);
     }
@@ -26,8 +27,26 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
-
-
+/**
+ 冒泡排序
+ */
+void BubbleSort(ElementType A[],int N){
+    int i,j;
+    for(i = 1; i< N; i++){
+        int flag = 1;
+        for(j = N - 1; j >= i; j--){
+            if(A[j-1]>A[j]){
+                int temp = A[j];
+                A[j] = A[j-1];
+                A[j-1] = temp;
+                flag = 0;
+            }
+        }
+        if(flag){
+            break;
+        }
+    }
+}
 /**插入排序
  */
 void

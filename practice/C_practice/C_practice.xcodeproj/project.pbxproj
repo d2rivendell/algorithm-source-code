@@ -10,6 +10,13 @@
 		3506B9B81FFE0D56008DA0AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9B71FFE0D56008DA0AA /* main.c */; };
 		3506B9BE1FFE0F32008DA0AA /* HashSep.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9BD1FFE0F32008DA0AA /* HashSep.c */; };
 		351509F71FDD347B00465413 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 351509F61FDD347B00465413 /* main.c */; };
+		351CA82524A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82624A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82724A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82824A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82924A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82A24A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
+		351CA82B24A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
 		35D42D2C1FD7D0A800A8C9A5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D2B1FD7D0A800A8C9A5 /* main.c */; };
 		35D42D321FD7D0C400A8C9A5 /* queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D311FD7D0C400A8C9A5 /* queue.c */; };
 		35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D341FD7E53000A8C9A5 /* ADTTree.c */; };
@@ -104,6 +111,8 @@
 		351509EF1FDD330000465413 /* deleteMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteMin.png; sourceTree = "<group>"; };
 		351509F41FDD347B00465413 /* Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sort; sourceTree = BUILT_PRODUCTS_DIR; };
 		351509F61FDD347B00465413 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		351CA82324A8F0D40063A272 /* Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		351CA82424A8F0D40063A272 /* Tool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Tool.c; sourceTree = "<group>"; };
 		352542C51FDD4FC600501AF9 /* shellSort.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shellSort.jpg; sourceTree = "<group>"; };
 		35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PercolateDown_to_buidHeap.png; sourceTree = "<group>"; };
 		35D42D291FD7D0A800A8C9A5 /* Queue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Queue; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				4FC0C2071E9F34B500A9D63D /* fatal.h */,
+				351CA82324A8F0D40063A272 /* Tool.h */,
+				351CA82424A8F0D40063A272 /* Tool.c */,
 				4FC0C2011E9F205000A9D63D /* readme.md */,
 				4F17B7A81E9DBF2C00EDEEBA /* List */,
 				4FD55BC81E9E179C00FFEE59 /* Stack */,
@@ -519,6 +530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3506B9BE1FFE0F32008DA0AA /* HashSep.c in Sources */,
+				351CA82B24A8F0D40063A272 /* Tool.c in Sources */,
 				3506B9B81FFE0D56008DA0AA /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				351509F71FDD347B00465413 /* main.c in Sources */,
+				351CA82A24A8F0D40063A272 /* Tool.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D42D2C1FD7D0A800A8C9A5 /* main.c in Sources */,
+				351CA82824A8F0D40063A272 /* Tool.c in Sources */,
 				35D42D321FD7D0C400A8C9A5 /* queue.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35E2CFAA1FD8EE1500BF7EF2 /* main.c in Sources */,
+				351CA82924A8F0D40063A272 /* Tool.c in Sources */,
 				35E2CFB01FD905BD00BF7EF2 /* BinHeap.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351CA82524A8F0D40063A272 /* Tool.c in Sources */,
 				4FC0C20B1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
 				4F17B7AA1E9DBF2C00EDEEBA /* main.c in Sources */,
 				4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */,
@@ -565,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D42D381FD7FBBF00A8C9A5 /* AVLTree.c in Sources */,
+				351CA82724A8F0D40063A272 /* Tool.c in Sources */,
 				4FC0C2141E9F3B1A00A9D63D /* main.c in Sources */,
 				35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */,
 			);
@@ -577,6 +594,7 @@
 				4FC0C20C1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
 				4FD55BCA1E9E179C00FFEE59 /* main.c in Sources */,
 				4FC0C2001E9F1F5900A9D63D /* stackli.c in Sources */,
+				351CA82624A8F0D40063A272 /* Tool.c in Sources */,
 				4FC0C2021E9F205000A9D63D /* readme.md in Sources */,
 				4FD55BD01E9E17BB00FFEE59 /* stackar.c in Sources */,
 				4FC0C2061E9F347800A9D63D /* MyList.c in Sources */,
