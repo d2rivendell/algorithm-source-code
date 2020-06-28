@@ -7,7 +7,7 @@
 //
 
 #include "LeetCode1.h"
-
+#include <stdlib.h>
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *head =  (struct ListNode *)malloc(sizeof(struct ListNode));
@@ -30,4 +30,26 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
         cur = cur->next;
     }
     return head;
+}
+
+
+//void char_reverse(char* cha){
+//    char* begin = cha;
+//    char* end = cha + strlen(cha) - 1;// 最后一个字符是 \n
+//    while (begin < end) {
+//        char temp = *begin;
+//        *(begin++) = *end;
+//        *(end--) = temp;
+//    }
+//    printf("result:%s",cha);
+//}
+
+
+void reverseString(char* s, int sSize){
+    for(int i = 0; i < sSize/2; i++){
+        char temp = s[i];
+        s[i] = s[sSize - i - 1];
+        s[sSize - i - 1] = temp;
+        
+    }
 }

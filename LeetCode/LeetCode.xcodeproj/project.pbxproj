@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		35D860CC249CFB9B0072EEFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D860CB249CFB9B0072EEFF /* main.m */; };
 		35D860D4249CFD6F0072EEFF /* LeetCode1.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D860D3249CFD6F0072EEFF /* LeetCode1.c */; };
+		D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */ = {isa = PBXBuildFile; fileRef = D9D7EA8724A8A2F5003A698F /* Sort.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		35D860CB249CFB9B0072EEFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		35D860D2249CFD6F0072EEFF /* LeetCode1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeetCode1.h; sourceTree = "<group>"; };
 		35D860D3249CFD6F0072EEFF /* LeetCode1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = LeetCode1.c; sourceTree = "<group>"; };
+		D9D7EA8624A8A2F5003A698F /* Sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sort.h; sourceTree = "<group>"; };
+		D9D7EA8724A8A2F5003A698F /* Sort.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Sort.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +63,21 @@
 		35D860CA249CFB9B0072EEFF /* LeetCode */ = {
 			isa = PBXGroup;
 			children = (
+				D9D7EA8524A8A2E6003A698F /* Sort */,
 				35D860CB249CFB9B0072EEFF /* main.m */,
 				35D860D2249CFD6F0072EEFF /* LeetCode1.h */,
 				35D860D3249CFD6F0072EEFF /* LeetCode1.c */,
 			);
 			path = LeetCode;
+			sourceTree = "<group>";
+		};
+		D9D7EA8524A8A2E6003A698F /* Sort */ = {
+			isa = PBXGroup;
+			children = (
+				D9D7EA8624A8A2F5003A698F /* Sort.h */,
+				D9D7EA8724A8A2F5003A698F /* Sort.c */,
+			);
+			path = Sort;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D860D4249CFD6F0072EEFF /* LeetCode1.c in Sources */,
+				D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */,
 				35D860CC249CFB9B0072EEFF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -254,6 +269,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

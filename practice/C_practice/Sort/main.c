@@ -37,7 +37,7 @@ InsertSort(ElementType A[],int N){
         ElementType p = A[i];
         for ( j = i; j > 0; j--) {
             if(A[j - 1] > p){
-                A[j] = A[j-1];
+                A[j] = A[j-1];//往后移让位置给P
             }else{
                 break;
             }

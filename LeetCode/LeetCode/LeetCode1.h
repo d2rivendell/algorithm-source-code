@@ -14,7 +14,6 @@
 
 
 //2. 两数相加
-
 struct ListNode {
      int val;
      struct ListNode *next;
@@ -22,5 +21,8 @@ struct ListNode {
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 
+
+/// 反转字符串
+void reverseString(char* s, int sSize);
 
 #endif /* LeetCode1_h */
