@@ -8,6 +8,7 @@
 
 #include "LeetCode1.h"
 #include <stdlib.h>
+#include <string.h>
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *head =  (struct ListNode *)malloc(sizeof(struct ListNode));
@@ -50,6 +51,28 @@ void reverseString(char* s, int sSize){
         char temp = s[i];
         s[i] = s[sSize - i - 1];
         s[sSize - i - 1] = temp;
-        
     }
+}
+
+//pwwkew
+int lengthOfLongestSubstring(char * s){
+    //通过滑动窗口解决， 由start和i之间组成一个滑动窗口
+    int *all =  malloc(sizeof(int) * 128);//保存字符最近的下标
+    int start = 0;//当前窗口的开始位置
+    int count = 0;//统计当前不相同的个数
+    int max = 0;//当前最大不重复的个数
+    
+    memset(all, -1, sizeof(int) * 128);
+    for (int i = 0; i < strlen(s); i++) {
+        if (all[s[i]] >= start){//和窗口范围内重复了(包括窗口边界start)
+            start = all[s[i]]  + 1;//调整窗口位置,在重复的位置+1 ❗️
+            count = i - start + 1;//调整当前count❗️
+        }else{
+            count += 1;
+        }
+        max = (count > max) ? count : max;
+        all[s[i]] = i;
+    }
+    free(all);
+    return max;
 }

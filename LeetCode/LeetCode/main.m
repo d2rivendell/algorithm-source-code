@@ -37,5 +37,7 @@ void SortTest(){
 
 void
 LeetCode(){
-    reverseString("1234", 4);
+//    reverseString("1234", 4);
+    int max = lengthOfLongestSubstring("pwwkew");
+    printf("max: %d\n", max);
 }

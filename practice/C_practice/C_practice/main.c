@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
     printList(aList);
     printList(reverse2(aList));
     
-    printList(nthToLast(aList, <#int n#>))
+    printList(nthToLast(aList, 2));
     
     free(A);
     

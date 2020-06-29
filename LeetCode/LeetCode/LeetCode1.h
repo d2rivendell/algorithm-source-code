@@ -18,11 +18,12 @@ struct ListNode {
      int val;
      struct ListNode *next;
 };
-
+//?
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 
 
 /// 反转字符串
 void reverseString(char* s, int sSize);
 
+int lengthOfLongestSubstring(char * s);
 #endif /* LeetCode1_h */
