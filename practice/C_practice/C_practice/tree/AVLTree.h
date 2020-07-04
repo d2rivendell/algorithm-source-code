@@ -25,5 +25,5 @@ AvlPosition SingleRotateWidthLeft(AvlTree T);
 AvlPosition SingleRotateWidthRight(AvlTree T);
 AvlPosition DoubleRotateWidthLeft(AvlTree T);
 AvlPosition DoubleRotateWidthRight(AvlTree T);
-AvlTree Insert(AvlTree T,AvlElementType X);
+AvlTree Insert_avl(AvlTree T,AvlElementType X);
 #endif /* AVLTree_h */

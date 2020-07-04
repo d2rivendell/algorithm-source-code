@@ -158,7 +158,7 @@ ListNode nthToLast(ListNode head,int n ){
         }
         l2 = l2->Next;
     }
-    while(l2->Next!= NULL){
+    while(l2->Next != NULL){
         l1 = l1->Next;
         l2 = l2->Next;
     }

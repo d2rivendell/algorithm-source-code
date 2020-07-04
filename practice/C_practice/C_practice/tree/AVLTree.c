@@ -123,7 +123,7 @@ DoubleRotateWidthRight(AvlTree T){
 }
 
 AvlTree
-Insert(AvlTree T,AvlElementType X){
+Insert_avl(AvlTree T,AvlElementType X){
     if(T == NULL){
         T = malloc(sizeof(AvlTree));
         T->element = X;

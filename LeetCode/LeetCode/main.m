@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #include "LeetCode1.h"
 #include "Sort.h"
+
+
 void SortTest(void);
 void LeetCode(void);
 
@@ -38,6 +40,7 @@ void SortTest(){
 void
 LeetCode(){
 //    reverseString("1234", 4);
-    int max = lengthOfLongestSubstring("pwwkew");
-    printf("max: %d\n", max);
+//    int max = lengthOfLongestSubstring("pwwkew");
+    int res = isPalindrome(0);
+    printf("res: %d\n", res);
 }

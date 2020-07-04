@@ -10,17 +10,17 @@
 		3506B9B81FFE0D56008DA0AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9B71FFE0D56008DA0AA /* main.c */; };
 		3506B9BE1FFE0F32008DA0AA /* HashSep.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9BD1FFE0F32008DA0AA /* HashSep.c */; };
 		351509F71FDD347B00465413 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 351509F61FDD347B00465413 /* main.c */; };
-		351CA82524A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82624A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82724A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82824A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82924A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82A24A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
-		351CA82B24A8F0D40063A272 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 351CA82424A8F0D40063A272 /* Tool.c */; };
 		35D42D2C1FD7D0A800A8C9A5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D2B1FD7D0A800A8C9A5 /* main.c */; };
 		35D42D321FD7D0C400A8C9A5 /* queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D311FD7D0C400A8C9A5 /* queue.c */; };
 		35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D341FD7E53000A8C9A5 /* ADTTree.c */; };
 		35D42D381FD7FBBF00A8C9A5 /* AVLTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D371FD7FBBF00A8C9A5 /* AVLTree.c */; };
+		35DFAFDD24B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFDE24B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFDF24B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFE024B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFE124B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFE224B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
+		35DFAFE324B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
 		35E2CFAA1FD8EE1500BF7EF2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFA91FD8EE1500BF7EF2 /* main.c */; };
 		35E2CFB01FD905BD00BF7EF2 /* BinHeap.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFAF1FD905BD00BF7EF2 /* BinHeap.c */; };
 		4F17B7AA1E9DBF2C00EDEEBA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F17B7A91E9DBF2C00EDEEBA /* main.c */; };
@@ -111,18 +111,20 @@
 		351509EF1FDD330000465413 /* deleteMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteMin.png; sourceTree = "<group>"; };
 		351509F41FDD347B00465413 /* Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sort; sourceTree = BUILT_PRODUCTS_DIR; };
 		351509F61FDD347B00465413 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		351CA82324A8F0D40063A272 /* Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
-		351CA82424A8F0D40063A272 /* Tool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Tool.c; sourceTree = "<group>"; };
 		352542C51FDD4FC600501AF9 /* shellSort.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shellSort.jpg; sourceTree = "<group>"; };
+		3586218A24AF970A00CA00D5 /* 二叉树中序遍历迭代法.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "二叉树中序遍历迭代法.gif"; sourceTree = "<group>"; };
 		35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PercolateDown_to_buidHeap.png; sourceTree = "<group>"; };
 		35D42D291FD7D0A800A8C9A5 /* Queue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Queue; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D42D2B1FD7D0A800A8C9A5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		35D42D301FD7D0C400A8C9A5 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = queue.h; path = queue/queue.h; sourceTree = SOURCE_ROOT; };
-		35D42D311FD7D0C400A8C9A5 /* queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = queue.c; path = queue/queue.c; sourceTree = SOURCE_ROOT; };
+		35D42D301FD7D0C400A8C9A5 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = queue.h; path = C_practice/queue/queue.h; sourceTree = SOURCE_ROOT; };
+		35D42D311FD7D0C400A8C9A5 /* queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = queue.c; path = C_practice/queue/queue.c; sourceTree = SOURCE_ROOT; };
 		35D42D331FD7E53000A8C9A5 /* ADTTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADTTree.h; sourceTree = "<group>"; };
 		35D42D341FD7E53000A8C9A5 /* ADTTree.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ADTTree.c; sourceTree = "<group>"; };
 		35D42D361FD7FBBF00A8C9A5 /* AVLTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVLTree.h; sourceTree = "<group>"; };
 		35D42D371FD7FBBF00A8C9A5 /* AVLTree.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AVLTree.c; sourceTree = "<group>"; };
+		35DFAFDA24B09AB400CE9E39 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tool.h; path = C_practice/Tool.h; sourceTree = "<group>"; };
+		35DFAFDB24B09AB400CE9E39 /* fatal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fatal.h; path = C_practice/fatal.h; sourceTree = "<group>"; };
+		35DFAFDC24B09AB400CE9E39 /* Tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Tool.c; path = C_practice/Tool.c; sourceTree = "<group>"; };
 		35E2CFA11FD8D29A00BF7EF2 /* ADT1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ADT1.png; sourceTree = "<group>"; };
 		35E2CFA21FD8D2A200BF7EF2 /* ADT2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ADT2.png; sourceTree = "<group>"; };
 		35E2CFA71FD8EE1500BF7EF2 /* Heap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Heap; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,10 +137,9 @@
 		4F17B7B11E9DBF4000EDEEBA /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		4FC0C1FE1E9F1F5900A9D63D /* stackli.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stackli.c; sourceTree = "<group>"; };
 		4FC0C1FF1E9F1F5900A9D63D /* stackli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stackli.h; sourceTree = "<group>"; };
-		4FC0C2011E9F205000A9D63D /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
-		4FC0C2041E9F347800A9D63D /* MyList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MyList.c; sourceTree = "<group>"; };
-		4FC0C2051E9F347800A9D63D /* MyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyList.h; sourceTree = "<group>"; };
-		4FC0C2071E9F34B500A9D63D /* fatal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fatal.h; sourceTree = "<group>"; };
+		4FC0C2011E9F205000A9D63D /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = readme.md; path = C_practice/readme.md; sourceTree = "<group>"; };
+		4FC0C2041E9F347800A9D63D /* MyList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MyList.c; path = MyList/MyList.c; sourceTree = "<group>"; };
+		4FC0C2051E9F347800A9D63D /* MyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyList.h; path = MyList/MyList.h; sourceTree = "<group>"; };
 		4FC0C2091E9F370E00A9D63D /* CaculateBasic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CaculateBasic.c; sourceTree = "<group>"; };
 		4FC0C20A1E9F370E00A9D63D /* CaculateBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaculateBasic.h; sourceTree = "<group>"; };
 		4FC0C2111E9F3B1A00A9D63D /* tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tree; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,7 +213,8 @@
 				3506B9BC1FFE0F32008DA0AA /* HashSep.h */,
 				3506B9BD1FFE0F32008DA0AA /* HashSep.c */,
 			);
-			path = Hash_Table;
+			name = Hash_Table;
+			path = C_practice/Hash_Table;
 			sourceTree = "<group>";
 		};
 		351509F51FDD347B00465413 /* Sort */ = {
@@ -222,7 +224,8 @@
 				35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */,
 				351509F61FDD347B00465413 /* main.c */,
 			);
-			path = Sort;
+			name = Sort;
+			path = C_practice/Sort;
 			sourceTree = "<group>";
 		};
 		35D42D2A1FD7D0A800A8C9A5 /* Queue */ = {
@@ -232,7 +235,8 @@
 				35D42D301FD7D0C400A8C9A5 /* queue.h */,
 				35D42D311FD7D0C400A8C9A5 /* queue.c */,
 			);
-			path = Queue;
+			name = Queue;
+			path = C_practice/queue;
 			sourceTree = "<group>";
 		};
 		35E2CFA81FD8EE1500BF7EF2 /* Heap */ = {
@@ -243,15 +247,16 @@
 				35E2CFAF1FD905BD00BF7EF2 /* BinHeap.c */,
 				351509EF1FDD330000465413 /* deleteMin.png */,
 			);
-			path = Heap;
+			name = Heap;
+			path = C_practice/Heap;
 			sourceTree = "<group>";
 		};
 		4F17B79D1E9DBF2C00EDEEBA = {
 			isa = PBXGroup;
 			children = (
-				4FC0C2071E9F34B500A9D63D /* fatal.h */,
-				351CA82324A8F0D40063A272 /* Tool.h */,
-				351CA82424A8F0D40063A272 /* Tool.c */,
+				35DFAFDB24B09AB400CE9E39 /* fatal.h */,
+				35DFAFDC24B09AB400CE9E39 /* Tool.c */,
+				35DFAFDA24B09AB400CE9E39 /* Tool.h */,
 				4FC0C2011E9F205000A9D63D /* readme.md */,
 				4F17B7A81E9DBF2C00EDEEBA /* List */,
 				4FD55BC81E9E179C00FFEE59 /* Stack */,
@@ -289,7 +294,7 @@
 				4F17B7A91E9DBF2C00EDEEBA /* main.c */,
 			);
 			name = List;
-			path = C_practice;
+			path = C_practice/List;
 			sourceTree = "<group>";
 		};
 		4FC0C2031E9F346D00A9D63D /* MyList */ = {
@@ -314,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC0C2131E9F3B1A00A9D63D /* main.c */,
+				3586218A24AF970A00CA00D5 /* 二叉树中序遍历迭代法.gif */,
 				35E2CFA11FD8D29A00BF7EF2 /* ADT1.png */,
 				35E2CFA21FD8D2A200BF7EF2 /* ADT2.png */,
 				35D42D331FD7E53000A8C9A5 /* ADTTree.h */,
@@ -321,7 +327,8 @@
 				35D42D361FD7FBBF00A8C9A5 /* AVLTree.h */,
 				35D42D371FD7FBBF00A8C9A5 /* AVLTree.c */,
 			);
-			path = tree;
+			name = tree;
+			path = C_practice/tree;
 			sourceTree = "<group>";
 		};
 		4FD55BC81E9E179C00FFEE59 /* Stack */ = {
@@ -334,7 +341,8 @@
 				4FD55BCE1E9E17BB00FFEE59 /* stackar.c */,
 				4FD55BC91E9E179C00FFEE59 /* main.c */,
 			);
-			path = Stack;
+			name = Stack;
+			path = C_practice/Stack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -530,7 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3506B9BE1FFE0F32008DA0AA /* HashSep.c in Sources */,
-				351CA82B24A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFE324B09AB400CE9E39 /* Tool.c in Sources */,
 				3506B9B81FFE0D56008DA0AA /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,7 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				351509F71FDD347B00465413 /* main.c in Sources */,
-				351CA82A24A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFE224B09AB400CE9E39 /* Tool.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D42D2C1FD7D0A800A8C9A5 /* main.c in Sources */,
-				351CA82824A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFE024B09AB400CE9E39 /* Tool.c in Sources */,
 				35D42D321FD7D0C400A8C9A5 /* queue.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,7 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35E2CFAA1FD8EE1500BF7EF2 /* main.c in Sources */,
-				351CA82924A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFE124B09AB400CE9E39 /* Tool.c in Sources */,
 				35E2CFB01FD905BD00BF7EF2 /* BinHeap.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,7 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				351CA82524A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFDD24B09AB400CE9E39 /* Tool.c in Sources */,
 				4FC0C20B1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
 				4F17B7AA1E9DBF2C00EDEEBA /* main.c in Sources */,
 				4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */,
@@ -581,7 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D42D381FD7FBBF00A8C9A5 /* AVLTree.c in Sources */,
-				351CA82724A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFDF24B09AB400CE9E39 /* Tool.c in Sources */,
 				4FC0C2141E9F3B1A00A9D63D /* main.c in Sources */,
 				35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */,
 			);
@@ -594,7 +602,7 @@
 				4FC0C20C1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
 				4FD55BCA1E9E179C00FFEE59 /* main.c in Sources */,
 				4FC0C2001E9F1F5900A9D63D /* stackli.c in Sources */,
-				351CA82624A8F0D40063A272 /* Tool.c in Sources */,
+				35DFAFDE24B09AB400CE9E39 /* Tool.c in Sources */,
 				4FC0C2021E9F205000A9D63D /* readme.md in Sources */,
 				4FD55BD01E9E17BB00FFEE59 /* stackar.c in Sources */,
 				4FC0C2061E9F347800A9D63D /* MyList.c in Sources */,
