@@ -111,6 +111,7 @@
 		351509EF1FDD330000465413 /* deleteMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteMin.png; sourceTree = "<group>"; };
 		351509F41FDD347B00465413 /* Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sort; sourceTree = BUILT_PRODUCTS_DIR; };
 		351509F61FDD347B00465413 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		351C31E124B0E97200D635E6 /* invertTree.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = invertTree.gif; sourceTree = "<group>"; };
 		352542C51FDD4FC600501AF9 /* shellSort.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shellSort.jpg; sourceTree = "<group>"; };
 		3586218A24AF970A00CA00D5 /* 二叉树中序遍历迭代法.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "二叉树中序遍历迭代法.gif"; sourceTree = "<group>"; };
 		35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PercolateDown_to_buidHeap.png; sourceTree = "<group>"; };
@@ -319,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC0C2131E9F3B1A00A9D63D /* main.c */,
+				351C31E124B0E97200D635E6 /* invertTree.gif */,
 				3586218A24AF970A00CA00D5 /* 二叉树中序遍历迭代法.gif */,
 				35E2CFA11FD8D29A00BF7EF2 /* ADT1.png */,
 				35E2CFA21FD8D2A200BF7EF2 /* ADT2.png */,
@@ -851,6 +853,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 7C5K69AA8B;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -859,6 +862,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 7C5K69AA8B;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

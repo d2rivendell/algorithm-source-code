@@ -18,6 +18,8 @@
 List reverse1(List node);
 List reverse2(List node);
 ListNode nthToLast(ListNode head,int n );
+struct ListNode* rotateRight(struct ListNode* head, int k);
+
 int main(int argc, const char * argv[]) {
 //    List chainList = malloc(sizeof(List));
 //    chainList->Element = rand() % 100;
@@ -39,6 +41,29 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
+struct ListNode* rotateRight(struct ListNode* head, int k){
+    
+    struct ListNode *p = head;
+    int i = 1;
+    while(p->next= NULL){
+        i++;
+        p = p->next;
+    }
+    struct ListNode *last = p;
+    if (k > i){//大于节点数
+        k /= i;
+    }
+    int rK = i - k;
+    p = head;
+    for(int j = 0; j < rK - 1; j++){
+        p = p->next;
+    }
+    struct ListNode *next = p->next;
+    p->next = NULL;
+    last->next = head;
+    return next;
+    
+}
 
 void
 lh_Insert(ElementType X,List L,Position P){

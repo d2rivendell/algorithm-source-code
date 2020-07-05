@@ -23,11 +23,15 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 /// 反转字符串
 void reverseString(char* s, int sSize);
 
+//最长不重复字符的长度
 int lengthOfLongestSubstring(char * s);
 
 //整数反转 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
 int reverse(int x) ;
 
-//回文数
+//判断数字是否是回文数
 int isPalindrome(int x);
+
+//最长回文子串
+char * longestPalindrome(char * s);
 #endif /* LeetCode1_h */

@@ -112,3 +112,58 @@ int isPalindrome(int x){
         return 1;
     }
 }
+
+
+/*
+ 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+ 
+ 示例 1：
+
+ 输入: "babad"
+ 输出: "bab"
+ 注意: "aba" 也是一个有效答案
+ https://leetcode-cn.com/problems/longest-palindromic-substring/
+ */
+char * longestPalindrome(char * s){
+    int len = strlen(s);
+    int w1 = 0, w2 = 0;
+    char *temp = (char *) malloc(sizeof(char) * len);
+    int i = 0;
+    for(i = 0; i < len; i++){
+        
+    }
+    free(temp);
+    return "";
+}
+
+//61. 旋转链表。 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+struct ListNode* rotateRight(struct ListNode* head, int k){
+     //注意边界条件， 当为0或者是链表长度的时候，返回自身
+      if(head == NULL){
+          return NULL;
+      }
+      if (head->next == NULL){
+          return head;
+      }
+      struct ListNode *p = head;
+      int count = 1;
+      //计算链表长度，并找到最后一个节点，让链表封闭起来（这样可以处理k==0,或者k==count的情况. 
+      //返回之前会断开链表）
+      while(p->next != NULL){
+        count++;
+        p = p->next;
+      }
+      struct ListNode *last = p;
+      last->next = head;
+
+      k  %= count;
+      int step = count - k;
+      p = head;
+      for(int j = 0; j < step - 1; j++){
+          p = p->next;
+      }
+       struct ListNode *next = p->next;
+       p->next = NULL;// 断环
+       return next;
+       
+}
