@@ -79,6 +79,7 @@ lh_Insert(ElementType X,List L,Position P){
 /**
  反转链表非递归
  */
+//MARK: - 反转链表非递归
 List reverse1(List node){
     List pre = NULL;
     while (node != NULL) {
@@ -92,6 +93,7 @@ List reverse1(List node){
 /**
  反转链表递归
  */
+//MARK: - 反转链表递归
 List reverse2(List node){
     if(node->Next == NULL){
         return node;
@@ -108,6 +110,7 @@ List reverse2(List node){
  判断链表是否有环
  https://blog.csdn.net/u011373710/article/details/54024366#%E5%88%A4%E6%96%AD%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF%E6%89%BE%E5%88%B0%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E8%8A%82%E7%82%B9
  */
+//MARK: - 判断链表是否有环
 int hasCycle(List head){
     if(head == NULL|| head->Next == NULL){
         return false;
@@ -131,8 +134,8 @@ int hasCycle(List head){
  Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
  Output: 7 -> 0 -> 8
  Explanation: 342 + 465 = 807.
-
  */
+//MARK: -链表相加：
 struct Node* addTwoNumbers(struct Node* l1, struct Node* l2) {
     struct Node  *result = malloc(sizeof(struct Node));
     struct Node  *a = l1;
@@ -168,9 +171,8 @@ struct Node* addTwoNumbers(struct Node* l1, struct Node* l2) {
     return result->Next;
     
 }
-/**
- 得到链表倒数第n个节点
- */
+
+//MARK: - 得到链表倒数第n个节点
 ListNode nthToLast(ListNode head,int n ){
     if(head == NULL||n<1){
         return NULL;

@@ -73,6 +73,7 @@ int lengthOfLongestSubstring(char * s){
  整数反转 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
  关键：正负号，溢出
  */
+//MARK: - 整数反转
 int reverse(int x) {
     int rev = 0;
     int INT_MAX = 0x7fffffff;//2147483647
@@ -89,7 +90,7 @@ int reverse(int x) {
     return rev;
 }
 
-//判断数字是否是回文数， 小于0不是（因为有符号），
+//MARK: - 判断数字是否是回文数， 小于0不是（因为有符号），
 int isPalindrome(int x){
     if(x < 0){
         return 0;
@@ -137,6 +138,7 @@ char * longestPalindrome(char * s){
 }
 
 //61. 旋转链表。 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+//MARK: - 旋转链表
 struct ListNode* rotateRight(struct ListNode* head, int k){
      //注意边界条件， 当为0或者是链表长度的时候，返回自身
       if(head == NULL){
@@ -166,4 +168,25 @@ struct ListNode* rotateRight(struct ListNode* head, int k){
        p->next = NULL;// 断环
        return next;
        
+}
+
+/*
+ 给定 nums = [0,0,1,1,1,2,2,3,3,4],
+ 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+ */
+//MARK:- 26. 删除排序数组中的重复项
+int removeDuplicates(int* nums, int numsSize){
+   //数组是排序好的，左边的指针记录z无重复的， 右边的指针相当于去试探。
+   //当发现和慢指针位置的值不一样时就将其放在慢指针位置的后面，再把慢指针往后移动一位
+   if(numsSize == 0 || numsSize == 1){
+       return numsSize;
+   }
+   int slow = 0;
+   for(int fast = 1; fast < numsSize; fast++){
+      if(nums[slow] != nums[fast]){
+          nums[slow + 1] = nums[fast];
+          slow += 1;
+      }
+   }
+   return slow + 1;
 }

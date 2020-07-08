@@ -34,4 +34,7 @@ int isPalindrome(int x);
 
 //最长回文子串
 char * longestPalindrome(char * s);
+
+//26. 删除排序数组中的重复项 (双直指针)
+int removeDuplicates(int* nums, int numsSize);
 #endif /* LeetCode1_h */

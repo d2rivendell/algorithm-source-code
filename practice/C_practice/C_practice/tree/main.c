@@ -101,7 +101,7 @@ void FreeTree(SearchTree T){
 //}
 
 
-//将有序数组转换为二叉搜索树,且高度为1
+//MARK: - 将有序数组转换为二叉搜索树,且高度为1
 //https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/solution/jiang-you-xu-shu-zu-zhuan-huan-wei-er-cha-sou-s-33/
 struct TreeNode* sortedArrayToBST(int* nums, int numsSize){
     //因为要使用递归，参数要调整
@@ -122,7 +122,7 @@ struct TreeNode* sortedArrayToBSTHelper(int* nums, int left, int right){
 
 
 
-//翻转二叉树
+//MARK: - 翻转二叉树
 struct TreeNode* invertTree(struct TreeNode* root){
     //递归
     if(root == NULL){
@@ -136,7 +136,7 @@ struct TreeNode* invertTree(struct TreeNode* root){
 }
 
 
-//镜像二叉树
+//MARK: - 镜像二叉树
 bool isSymmetric(struct TreeNode* root){
     if(root == NULL){//注意入参
         return true;
@@ -156,7 +156,7 @@ bool isSymmetricHelper(struct TreeNode* left, struct TreeNode* right){
     return flag && (left->val == right->val);
 }
 
-//相同二叉树
+//MARK: - 相同二叉树
 bool isSameTree(struct TreeNode* p, struct TreeNode* q){
     if(p==NULL && q ==NULL){
         return true;
