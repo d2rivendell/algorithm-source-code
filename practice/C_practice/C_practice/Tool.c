@@ -14,11 +14,12 @@
 
 void
 printList(List L){
+    List head = L;
     printf("\n");
     int i = 0;
-    while (L) {
-        printf("%d---> %d\n",i,L->Element);
-        L = L->Next;
+    while (head) {
+        printf("%d---> %d\n",i,head->Element);
+        head = head->Next;
         i++;
     }
     printf("\n");

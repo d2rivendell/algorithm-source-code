@@ -9,7 +9,7 @@
 #include "queue.h"
 #include <stdlib.h>
 #define MaxElementSize 20
-#define MinElementSize 3
+#define MinElementSize 2 //队列最小是2， 是1的话有问题， 因为front下面在1开始
 struct LHQueueRecord{
     int size;
     int capacity;
@@ -42,6 +42,8 @@ createQueue(int maxSize){
 
 /**
  初始化队列：rear在front 的前面表示队列为空
+ 因为 rear在front前，若队列capacity==1的话，enqueue一个元素的话，rear的位置还是0. 会有问题
+ 若队列capacity==2的话，enqueue一个元素的话，rear的位置是1. dequeue是正常的,
  */
 void MakeEmpty( Queue Q ){
     Q->size = 0;
@@ -59,7 +61,7 @@ Enqueue(Queue Q,ElementType X){
         return ;
     }
     if(!IsFull(Q)){
-        //判断 下个rear的位置
+        //判断 下个rear的位置, 当前位置已经在末尾，real的位置放在开头
         if(Q->rear + 1 == Q->capacity){
             Q->rear = 0;
         }else{

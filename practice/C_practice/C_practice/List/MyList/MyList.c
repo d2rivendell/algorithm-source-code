@@ -61,10 +61,11 @@ void deleteList(List L){ // 联同L 一起删了
 }
 
 void printList(List L){
+    List head = L;
 pp:
-    if(L != NULL){
+    if(head != NULL){
         printf("%d\n",L->Element);
-        L = L->next;
+        head = head->next;
         goto pp;
     }
     

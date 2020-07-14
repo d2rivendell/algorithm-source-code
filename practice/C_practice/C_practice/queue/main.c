@@ -13,16 +13,18 @@
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
-    Queue Q = createQueue(8);
-    for (int i = 0; i < 8; i++) {
+    int size = 12;
+    Queue Q = createQueue(size);
+    for (int i = 0; i <size; i++) {
         int x = rand()%20;
         printf("%d ",x);
         Enqueue(Q, x);
     }
     printf("\ndequeue...\n");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < size; i++) {
         printf("%d ",Dequeue(Q));
     }
+     printf("\n");
       printf("\nenqueue...\n");
     for (int i = 0; i < 4; i++) {
         int x = rand()%20;

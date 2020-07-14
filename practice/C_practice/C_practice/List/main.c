@@ -32,38 +32,39 @@ int main(int argc, const char * argv[]) {
     ElementType *A = createArray(5);
     List aList = createList(A, 5);
     printList(aList);
-    printList(reverse2(aList));
+    List res = reverse1(aList);
+    printList(res);
     
-    printList(nthToLast(aList, 2));
+    printList(nthToLast(res, 0));
     
     free(A);
     
     return 0;
 }
 
-struct ListNode* rotateRight(struct ListNode* head, int k){
-    
-    struct ListNode *p = head;
-    int i = 1;
-    while(p->next= NULL){
-        i++;
-        p = p->next;
-    }
-    struct ListNode *last = p;
-    if (k > i){//大于节点数
-        k /= i;
-    }
-    int rK = i - k;
-    p = head;
-    for(int j = 0; j < rK - 1; j++){
-        p = p->next;
-    }
-    struct ListNode *next = p->next;
-    p->next = NULL;
-    last->next = head;
-    return next;
-    
-}
+//struct ListNode* rotateRight(struct ListNode* head, int k){
+//
+//    struct ListNode *p = head;
+//    int i = 1;
+//    while(p->next= NULL){
+//        i++;
+//        p = p->next;
+//    }
+//    struct ListNode *last = p;
+//    if (k > i){//大于节点数
+//        k /= i;
+//    }
+//    int rK = i - k;
+//    p = head;
+//    for(int j = 0; j < rK - 1; j++){
+//        p = p->next;
+//    }
+//    struct ListNode *next = p->next;
+//    p->next = NULL;
+//    last->next = head;
+//    return next;
+//
+//}
 
 void
 lh_Insert(ElementType X,List L,Position P){
@@ -179,13 +180,13 @@ ListNode nthToLast(ListNode head,int n ){
     }
     ListNode l1 = head;
     ListNode l2 = head;
-    for(int i = 0;i<n-1;i++){
+    for(int i = 0;i<n;i++){
         if(l2 == NULL){
             return NULL;
         }
         l2 = l2->Next;
     }
-    while(l2->Next != NULL){
+    while(l2 != NULL){
         l1 = l1->Next;
         l2 = l2->Next;
     }
