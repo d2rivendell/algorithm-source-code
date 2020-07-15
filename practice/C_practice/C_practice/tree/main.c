@@ -12,12 +12,13 @@
 #include "ADTTree.h"
 #include <math.h>
 
+
+
 /*
  前序遍历：根结点 ---> 左子树 ---> 右子树
  中序遍历：左子树---> 根结点 ---> 右子树
  后序遍历：左子树 ---> 右子树 ---> 根结点
 */
-
 
 void PrintMidOrderTree(SearchTree T);
 void FreeTree(SearchTree T);
@@ -26,8 +27,8 @@ int* inorderTraversal(struct TreeNode* root, int* returnSize);
 struct TreeNode* sortedArrayToBST(int* nums, int numsSize);
 struct TreeNode* sortedArrayToBSTHelper(int* nums, int left, int right);
 
-bool isSymmetric(struct TreeNode* root);
-bool isSymmetricHelper(struct TreeNode* left, struct TreeNode* right);
+int isSymmetric(struct TreeNode* root);
+int isSymmetricHelper(struct TreeNode* left, struct TreeNode* right);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -36,10 +37,19 @@ int main(int argc, const char * argv[]) {
 //    struct TreeNode *tree = sortedArrayToBST(a, 8);
 //    PrintMidOrderTree(tree);
 //    FreeTree(tree);
-    printf("%d \n",reverse(1534236469));
     return 0;
 }
-
+struct TreeNode* invertTree2(struct TreeNode* root);
+struct TreeNode* invertTree2(struct TreeNode* root){
+    if(root == NULL){
+        return NULL;
+    }
+    struct TreeNode * left = invertTree2(root->left);
+    struct TreeNode * right = invertTree2(root->right);
+    root->left = right;
+    root->right = left;
+    return root;
+}
 
 /**
  中序遍历：左子树---> 根结点 ---> 右子树
@@ -48,9 +58,9 @@ int main(int argc, const char * argv[]) {
 void
 PrintMidOrderTree(SearchTree T){
     if(T != NULL){
-        PrintTree(T->left);
+        PrintMidOrderTree(T->left);
         printf("%d \n",T->element);
-        PrintTree(T->right);
+        PrintMidOrderTree(T->right);
     }
 }
 /**
@@ -60,8 +70,8 @@ void
 PrintPreOrderTree(SearchTree T){
     if(T != NULL){
         printf("%d \n",T->element);
-        PrintTree(T->left);
-        PrintTree(T->right);
+        PrintPreOrderTree(T->left);
+        PrintPreOrderTree(T->right);
     }
 }
 
@@ -71,8 +81,8 @@ PrintPreOrderTree(SearchTree T){
 void
 PrintLastOrderTree(SearchTree T){
     if(T != NULL){
-        PrintTree(T->left);
-        PrintTree(T->right);
+        PrintLastOrderTree(T->left);
+        PrintLastOrderTree(T->right);
         printf("%d \n",T->element);
     }
 }
@@ -128,8 +138,8 @@ struct TreeNode* invertTree(struct TreeNode* root){
     if(root == NULL){
         return NULL;
     }
-    TreeNode right = invertTree(root->left);
-    TreeNode left =  invertTree(root->right)
+    struct TreeNode *right = invertTree(root->left);
+    struct TreeNode *left =  invertTree(root->right);
     root->left = right;
     root->right = left;
     return root;
@@ -137,32 +147,32 @@ struct TreeNode* invertTree(struct TreeNode* root){
 
 
 //MARK: - 镜像二叉树
-bool isSymmetric(struct TreeNode* root){
+int isSymmetric(struct TreeNode* root){
     if(root == NULL){//注意入参
-        return true;
+        return 1;
     }
     return isSymmetricHelper(root->left, root->right);
 }
 //使用的是后顺遍历
-bool isSymmetricHelper(struct TreeNode* left, struct TreeNode* right){
+int isSymmetricHelper(struct TreeNode* left, struct TreeNode* right){
     if(left == NULL && right == NULL){//都为空时
-        return true;
+        return 1;
     }
     if((left != NULL && right == NULL) || (left == NULL && right != NULL)){//只有一个为空时
-        return false;
+        return -1;
     }
     //左右树相等， 对应的节点也想等时才成立
-    bool flag = helper(left->left, right->right) && helper(left->right, right->left) ;
-    return flag && (left->val == right->val);
+    int flag = isSymmetricHelper(left->left, right->right) && isSymmetricHelper(left->right, right->left) ;
+    return flag && (left->element == right->element);
 }
 
 //MARK: - 相同二叉树
-bool isSameTree(struct TreeNode* p, struct TreeNode* q){
+int isSameTree(struct TreeNode* p, struct TreeNode* q){
     if(p==NULL && q ==NULL){
-        return true;
+        return 1;
     }
     if((p!=NULL && q ==NULL) || (p==NULL && q !=NULL)){
-        return false;
+        return -1;
     }
-    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right) && (p->val == q->val);
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right) && (p->element == q->element);
 }

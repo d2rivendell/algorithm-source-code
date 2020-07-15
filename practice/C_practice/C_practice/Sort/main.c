@@ -33,39 +33,53 @@ void quicksortHelper(int n[], int l, int r);
 int partition(int n[], int l, int r);
 
 
-
+void heapUp(int A[], int N);
 
 int main(int argc, const char * argv[]) {
    
-    int len = 15;
+    int len = 13;
     ElementType *A = createArray(len);
-    HeapSort(A, 15);
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
     }
-    printf("\n %d 第: %d 个\n",A[2], BinarySearch(A, len, A[2]) + 1);
+    printf("\n==============\n");
+    heapUp(A, len);
+    for (int i = 0; i < len; i++) {
+        printf("%d ",A[i]);
+    }
+    printf("\n %d 在 第: %d 个\n",A[2], BinarySearch(A, len, A[2]) + 1);
 
     return 0;
 }
 
-void toHeap(int A[], int N);
-void heapUp(int A[], int N, int loc);
+void PercolateDown(int A[], int i, int N);
+void heapUp(int A[], int N){
+    for (int i =  N/2 - 1; i >= 0 ; i--) {
+        PercolateDown(A, i, N);
+    }
+    for (int i = 0; i < N; i++) {
+        ArraySwap(A, 0, N - i - 1);
+        PercolateDown(A, 0, N - i - 1);
+    }
+    
+}
+void PercolateDown(int A[], int i, int N){//i是当前的顶部节点
+    int temp = A[i];//当前根节点
+    int child = 0;
+    for (temp = A[i];  2 * i + 1 < N; i = child) {//循环一次节点变为子节点
+        child = 2 * i + 1;
+        if (child + 1 < N && A[child + 1] > A[child]) {
+            child += 1;
+        }
+        if (A[child] > temp) {
+            A[i] = A[child];
+        }else{
+            break;
+        }
+    }
+    A[i] = temp;
+}
 
-
-//构建一个大堆
-//void toHeap(int A[], int N){
-//    for (int i = N/2; i > 0; i /= 2){
-//        heapUp(A, N, i);
-//    }
-//}
-//
-//void heapUp(int A[], int N, int loc){
-//    int child = 2 * loc;
-//    for(int i = loc; i > loc/2; i--){
-//        if(A[child] < )
-//    }
-//
-//}
 
 //MARK:- ========  工具函数  ========
 void Swap(ElementType *a,ElementType *b){
@@ -186,9 +200,9 @@ void ShellSort(ElementType A[],int N){
  */
 void HeapSort(ElementType A[],int N){
     int i = 0;
-    //构建max堆
-    for (i = N/2; i >= 0; i--) {
-        PercDown(A, i, N);//从倒数第一层的左边开始构建
+    //构建max堆，从倒数第一层的节点边开始构建
+    for (i = N/2-1; i >= 0; i--) {
+        PercDown(A, i, N);//把第i个节点下滤
     }
     //deleteMax 把删除的max值依次放在最后面
     for (i = N - 1; i >= 0; i--) {
@@ -203,26 +217,27 @@ void HeapSort(ElementType A[],int N){
  构建堆（下滤）,和优先队列里的二叉堆不一样，这里数组下标从0开始。
  节点i的左儿子在2i+1,右儿子在2i+2
 
-
+如果父节点小于子节点。把父节点和子节点交换， 再在子节点重复这个过程
  @param A 待构建的数组
  @param i 位置
  @param N 数组元素个数
  */
-void PercDown(ElementType A[],int i,int N){
-    ElementType temp;
+void PercDown(ElementType A[],int i,int N){//把第i个节点下滤
+    ElementType temp;//保存该层父节点
     int child = 0;
-    for (temp = A[i]; 2 * i + 1 < N; i = child) {
-        child = 2 * i + 1;
-        if (child != N - 1 && A[child] < A[child + 1]) {
-            child++;
+    for (temp = A[i]; 2 * i + 1 < N; i = child) {//有左节点
+        child = 2 * i + 1;//左边节点
+        if (child + 1 < N && A[child] < A[child + 1]) {//如果存在右节点，而且右节点比左节点大
+            child++;//右节点
         }
-        if (temp < A[child]) {
+        if (temp < A[child]) {//如果子节点比父节点大，父节点下滤
             A[i] = A[child];
         }else{
-            break;
+            break;//当前位置就是合适的，马上跳出，不跳出i变为 1=child
         }
     }
     A[i] = temp;
+
 }
 
 
