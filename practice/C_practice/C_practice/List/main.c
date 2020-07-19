@@ -19,6 +19,7 @@ List reverse1(List node);
 List reverse2(List node);
 ListNode nthToLast(ListNode head,int n );
 struct ListNode* rotateRight(struct ListNode* head, int k);
+List removeNthFromEnd(List head, int n);
 
 int main(int argc, const char * argv[]) {
 //    List chainList = malloc(sizeof(List));
@@ -32,13 +33,13 @@ int main(int argc, const char * argv[]) {
     ElementType *A = createArray(5);
     List aList = createList(A, 5);
     printList(aList);
-    List res = reverse1(aList);
+//
+//    List res = reverse2(aList);
+//    printList(res);
+//    printList(nthToLast(res, 0));
+    List res =removeNthFromEnd(aList, 2);
     printList(res);
-    
-    printList(nthToLast(res, 0));
-    
     free(A);
-    
     return 0;
 }
 
@@ -66,16 +67,37 @@ int main(int argc, const char * argv[]) {
 //
 //}
 
-void
-lh_Insert(ElementType X,List L,Position P){
-    if (L == NULL || P == NULL) {
-        printf("List and Position can not be NULL!!!");
+
+
+
+//MARK: -删除链表倒数第N个节点
+//条件：给定的 n 保证是有效的。
+//边界情况：n=1，而且链表节点只有一个； 删除的节点正好是表头
+List removeNthFromEnd(List head, int n){
+    //    ｜ pre| first|      second|
+    if(n == 0){
+        return NULL;
     }
-    PtrToNode TmpCell = malloc(sizeof(struct Node));
-    TmpCell->Element = X;
-    TmpCell->Next = P->Next;
-    
+    List first = head;//first记录的是要删除的位置
+    List second = head;//second目的是要记住链表尾部
+    List pre = NULL;//first的前一个节点
+    int count = n-1;
+    while(count-- > 0){
+        second = second->Next;
+    }
+    while(second->Next != NULL){//⚠️：遍历到最后一个节点
+        second = second->Next;
+        pre = first;
+        first = first->Next;
+    }
+    if(pre == NULL){//删除的位置是在表头
+        return  first->Next;
+    }else{//删除的位置非表头
+        pre->Next = first->Next;
+        return head;
+    }
 }
+
 
 /**
  反转链表非递归
@@ -91,20 +113,17 @@ List reverse1(List node){
     }
     return pre;
 }
-/**
- 反转链表递归
- */
+
 //MARK: - 反转链表递归
+//https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode/
 List reverse2(List node){
-    if(node->Next == NULL){
+    if (node == NULL || node->Next ==NULL) {
         return node;
     }
-    //reverseNode是倒数第二个node的next，即 reverseNode = 倒数第二个node->Next
-    //即是最后一个List
-    List reverseNode = reverse2(node->Next);
-    node->Next->Next = node;//把下一个List指向当前
-    node->Next = NULL;//当前node的下一个置空，（为转向作准备）
-    return reverseNode;//最后一个List，反转后变成Head
+    List last = reverse2(node->Next);//我始终是末尾的节点，但是最终我会变成老大
+    node->Next->Next = node;//亲爱的下一个节点快点指向我
+    node->Next = NULL;//下一个节点你既然指向我了，我就没必要指向你了，我要让位置给我的上一个节点。 因为我可能是head,翻转后我的下一个节点是空
+    return last;
 }
 
 /**

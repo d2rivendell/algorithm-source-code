@@ -10,7 +10,6 @@
 #include "LeetCode1.h"
 #include "Sort.h"
 
-
 void SortTest(void);
 void LeetCode(void);
 
@@ -19,12 +18,13 @@ void arrayPrint(int arr[], int N){
     for (int i = 0; i < N; i++) {
         printf("%d ", arr[i]);
     }
+    
     printf("\n");
 }
 
 
 int main(int argc, const char * argv[]) {
-    SortTest();
+//    SortTest();
     LeetCode();
     return 0;
 }
@@ -41,6 +41,6 @@ void
 LeetCode(){
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
-    int res = isPalindrome(0);
+    int res = countPrimes(10000);
     printf("res: %d\n", res);
 }

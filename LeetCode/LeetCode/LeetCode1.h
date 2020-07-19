@@ -37,4 +37,7 @@ char * longestPalindrome(char * s);
 
 //26. 删除排序数组中的重复项 (双直指针)
 int removeDuplicates(int* nums, int numsSize);
+
+//质数个数
+int countPrimes(int n);
 #endif /* LeetCode1_h */

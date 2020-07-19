@@ -11,7 +11,7 @@
 //#include "AVLTree.h"
 #include "ADTTree.h"
 #include <math.h>
-
+#include "Stack.h"
 
 
 /*
@@ -23,7 +23,7 @@
 void PrintMidOrderTree(SearchTree T);
 void FreeTree(SearchTree T);
 int* inorderTraversal(struct TreeNode* root, int* returnSize);
-
+struct TreeNode* upsidedownTree(struct TreeNode* root);
 struct TreeNode* sortedArrayToBST(int* nums, int numsSize);
 struct TreeNode* sortedArrayToBSTHelper(int* nums, int left, int right);
 
@@ -51,10 +51,9 @@ struct TreeNode* invertTree2(struct TreeNode* root){
     return root;
 }
 
-/**
- 中序遍历：左子树---> 根结点 ---> 右子树
- 遍历是升序序列
- */
+
+//MARK: -中序遍历：左子树---> 根结点 ---> 右子树
+// 遍历是升序序列
 void
 PrintMidOrderTree(SearchTree T){
     if(T != NULL){
@@ -63,9 +62,30 @@ PrintMidOrderTree(SearchTree T){
         PrintMidOrderTree(T->right);
     }
 }
-/**
- 前序遍历：根结点 ---> 左子树 ---> 右子树
- */
+
+//MARK: - 迭代中序遍历
+int* inorderTraversal(struct TreeNode* root, int* returnSize){
+    if (root == NULL) {
+        return NULL;
+    }
+    MyStack *stack =  MakeStack(20);
+    returnSize = malloc(sizeof(int) * 20);
+    int cur = 0;
+    while (StactIsEmpty(stack) == -1 || root != NULL) {
+        if(root) {//便利左树
+            myPush(stack, root);
+            root =  root->left;
+        }else{//当前节点为空，说明左边走到头了，从栈中弹出节点并保存，然后转向右边节点，继续上面整个过程
+            struct TreeNode *node = myPop(stack);
+            returnSize[cur++] = node->element;
+            root = node->right;
+        }
+    }
+    myFreeStack(stack);
+    return returnSize;
+}
+
+//MARK: - 前序遍历：根结点 ---> 左子树 ---> 右子树
 void
 PrintPreOrderTree(SearchTree T){
     if(T != NULL){
@@ -75,9 +95,8 @@ PrintPreOrderTree(SearchTree T){
     }
 }
 
-/**
- 后序遍历：左子树 ---> 右子树 --->  根结点
- */
+
+//MARK: -后序遍历：左子树 ---> 右子树 --->  根结点
 void
 PrintLastOrderTree(SearchTree T){
     if(T != NULL){
@@ -145,6 +164,24 @@ struct TreeNode* invertTree(struct TreeNode* root){
     return root;
 }
 
+
+//MARK: -上下反转二叉树
+//和递归翻转链表类似
+struct TreeNode* upsidedownTree(struct TreeNode* root){
+    if(root == NULL || root->left == NULL){
+        return root;//排除空树，或者返回最左数
+    }
+    struct TreeNode *leftChild = root->left;//默认
+    struct TreeNode *rightChild =  = root->right;
+    struct TreeNode* last =  upsidedownTree(root->left);//我始终是最后一个左树
+    
+    leftChild->left = rightChild;
+    leftChild->right = root;
+    //防止如果root是最右节点，这里需要置空，防止双向引用
+    root->left = NULL;
+    root->right = NULL;
+    return last;
+}
 
 //MARK: - 镜像二叉树
 int isSymmetric(struct TreeNode* root){

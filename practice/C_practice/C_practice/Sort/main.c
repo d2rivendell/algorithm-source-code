@@ -35,8 +35,11 @@ int partition(int n[], int l, int r);
 
 void heapUp(int A[], int N);
 
+
 int main(int argc, const char * argv[]) {
    
+    int B[9] = {1,8,6,2,5,4,8,3,7};
+    heapUp(&B, 9);
     int len = 13;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {
@@ -64,20 +67,20 @@ void heapUp(int A[], int N){
     
 }
 void PercolateDown(int A[], int i, int N){//i是当前的顶部节点
-    int temp = A[i];//当前根节点
+    int top = A[i];//当前根节点
     int child = 0;
-    for (temp = A[i];  2 * i + 1 < N; i = child) {//循环一次节点变为子节点
+    for (;  2 * i + 1 < N; i = child) {//循环一次节点变为子节点
         child = 2 * i + 1;
         if (child + 1 < N && A[child + 1] > A[child]) {
             child += 1;
         }
-        if (A[child] > temp) {
+        if (A[child] > top) {
             A[i] = A[child];
         }else{
             break;
         }
     }
-    A[i] = temp;
+    A[i] = top;
 }
 
 
@@ -138,6 +141,7 @@ void BubbleSort(ElementType A[],int N){
             break;
         }
     }
+
 }
 
 //MARK: 插入排序

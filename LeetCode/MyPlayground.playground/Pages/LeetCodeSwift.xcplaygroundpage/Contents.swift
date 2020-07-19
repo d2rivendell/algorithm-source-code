@@ -18,7 +18,7 @@ extension String{
 }
 
 example("最小覆盖子串, 为啥该方法在swift下耗时这么长") {
-    
+    return
     /*
      给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字符的最小子串。
      输入: S = "ADOBECODEBANC", T = "ABC"
@@ -84,6 +84,7 @@ example("最小覆盖子串, 为啥该方法在swift下耗时这么长") {
 
 
 example("最长回文") {
+    return
     /*
      给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
      
@@ -146,3 +147,247 @@ example("最长回文") {
     print(longestPalindrome("cbbd"))
 }
 
+
+example("94. 二叉树的中序遍历") {
+    return
+    class TreeNode{
+        var val = 0;
+        var left: TreeNode?
+        var right: TreeNode?
+        init(_ val: Int) {
+            self.val = val
+        }
+    }
+    
+    let root1 = TreeNode.init(1);
+    let root2 = TreeNode.init(2);
+    let root3 = TreeNode.init(3);
+    
+    root1.right = root2
+    root2.left = root3
+    
+    class Solution {
+        func inorderTraversal(_ root: TreeNode?) -> [Int] {
+            var rootNode = root
+            var array: [Int] = []
+            var stackArray: [TreeNode] = []
+            while(rootNode != nil || stackArray.isEmpty == false){
+                print("-")
+                if let rNode =  rootNode {
+                    stackArray.append(rNode)
+                    rootNode = rNode.left
+                }else{
+                    if let node = stackArray.popLast(){
+                        rootNode = node.right
+                        array.append(node.val)
+                    }
+                }
+            }
+            return array;
+        }
+    }
+    print(Solution().inorderTraversal(root1))
+}
+
+
+
+example("LRU") {
+    
+    //这种方式链表和链尾都是空的相当于围墙， 删除和增加都不需要特别去指定， 顺序是由新到旧
+    class LRUCache {
+        //双向链表 为了更快删除
+        class Node {
+            var val: Int = 0
+            var key: Int = 0//根据key可以找到字典的位置
+            var next: Node? = nil
+            var pre:  Node? = nil
+            init(key:Int, val: Int) {
+                self.key = key
+                self.val = val
+            }
+        }
+        var capacity: Int  = 0
+        var head: Node//链表头部
+        var tail: Node//链表尾部
+        var size = 0
+        var dict:[Int: Node] = [:]
+        init(_ capacity: Int) {
+            self.capacity = capacity;
+            self.head = Node(key: 0, val: 0)
+            self.tail = Node(key: 0, val: 0)
+            self.head.next = self.tail
+            self.tail.pre = self.head
+        }
+        
+        func get(_ key: Int) -> Int {
+            if let hot = dict[key]{//存在, 更新到末尾的位置
+                removeNode(node: hot)
+                addNode(node: hot)
+                return hot.val
+            }else{
+                return -1
+            }
+        }
+        
+        func put(_ key: Int, _ value: Int) {
+            if let hot = dict[key] {//存在, 在中间抽离， 并更新到末尾的位置
+                hot.val = value
+                removeNode(node: hot)
+                addNode(node: hot)
+            }else{//不存在
+                if size == capacity{//满了 要先删除迟钝节点
+                    debugPrint(" 满了 delete")
+                    if let overTime =  pop(){
+                        removeNode(node: overTime)
+                    }
+                }
+                //尾部追加新节点
+                let node = Node(key: key, val: value)
+                addNode(node: node)
+            }
+        }
+        
+        func removeNode(node: Node) {
+            node.pre?.next = node.next
+            node.next?.pre = node.pre
+            self.dict[node.key] = nil
+            self.size -= 1
+        }
+        
+        func addNode(node: Node) {
+            let top = head.next
+            node.next = top
+            top?.pre = node
+            node.pre = head
+            head.next = node
+            self.dict[node.key] = node
+            self.size += 1
+        }
+        
+        func pop() -> Node? {
+            if size > 0 {
+                return tail.pre
+            }
+            return nil
+        }
+    }
+   
+    
+    let cache = LRUCache.init(2)
+    cache.put(1, 1);
+    cache.put(2, 2);
+    print("get:",cache.get(1));       // 返回  1
+    cache.put(3, 3);    // 该操作会使得关键字 2 作废
+    print("get:",cache.get(2));       // 返回 -1 (未找到)
+    cache.put(4, 4);    // 该操作会使得关键字 1 作废
+    print("get:",cache.get(1));       // 返回 -1 (未找到)
+    print("get:",cache.get(3));       // 返回  3
+    print("get:",cache.get(4));       // 返回  4
+}
+
+
+/*
+ 
+ 
+ //采用和和NSCache 不一样的策略, 这里head指向的是最新的，越往后越旧
+ class LRUCache {
+ //双向链表 为了更快删除
+ class Node {
+ var val: Int = 0
+ var key: Int = 0//根据key可以找到字典的位置
+ var next: Node? = nil
+ var pre:  Node? = nil
+ init(key:Int, val: Int) {
+ self.key = key
+ self.val = val
+ }
+ }
+ var capacity: Int  = 0
+ var head: Node//链表头部
+ var tail: Node//链表尾部
+ var size = 0
+ var dict:[Int: Node] = [:]
+ init(_ capacity: Int) {
+ self.capacity = capacity;
+ self.head = Node(key: 0, val: 0)
+ self.tail = Node(key: 0, val: 0)
+ self.head.next = self.tail
+ self.tail.pre = self.head
+ }
+ 
+ func get(_ key: Int) -> Int {
+ if let hot = dict[key]{//存在, 更新到末尾的位置
+ removeNode(node: hot)
+ addNode(node: hot)
+ return hot.val
+ }else{
+ return -1
+ }
+ }
+ 
+ func put(_ key: Int, _ value: Int) {
+ if let hot = dict[key] {//存在, 在中间抽离， 并更新到末尾的位置
+ hot.val = value
+ removeNode(node: hot)
+ addNode(node: hot)
+ }else{//不存在
+ if size == capacity{//满了 要先删除迟钝节点
+ debugPrint(" 满了 delete")
+ if let overTime =  pop(){
+ removeNode(node: overTime)
+ }
+ }
+ //尾部追加新节点
+ let node = Node(key: key, val: value)
+ addNode(node: node)
+ }
+ }
+ 
+ func removeNode(node: Node) {
+ node.pre?.next = node.next
+ node.next?.pre = node.pre
+ self.dict[node.key] = nil
+ self.size -= 1
+ }
+ 
+ func addNode(node: Node) {
+ let top = head.next
+ node.next = top
+ top?.pre = node
+ node.pre = head
+ head.next = node
+ self.dict[node.key] = node
+ self.size += 1
+ }
+ 
+ func pop() -> Node? {
+ if size > 0 {
+ return tail.pre
+ }
+ return nil
+ }
+ }
+ 
+ class ViewController: UIViewController {
+ 
+ override func viewDidLoad() {
+ super.viewDidLoad()
+ 
+ let cache = LRUCache.init(2)
+ cache.put(1, 1);
+ cache.put(2, 2);
+ print("get:",cache.get(1));       // 返回  1
+ cache.put(3, 3);    // 该操作会使得关键字 2 作废
+ print("get:",cache.get(2));       // 返回 -1 (未找到)
+ cache.put(4, 4);    // 该操作会使得关键字 1 作废
+ print("get:",cache.get(1));       // 返回 -1 (未找到)
+ print("get:",cache.get(3));       // 返回  3
+ print("get:",cache.get(4));       // 返回  4
+ }
+ 
+ 
+ }
+ 
+ 
+
+ */

@@ -10,6 +10,8 @@
 		3506B9B81FFE0D56008DA0AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9B71FFE0D56008DA0AA /* main.c */; };
 		3506B9BE1FFE0F32008DA0AA /* HashSep.c in Sources */ = {isa = PBXBuildFile; fileRef = 3506B9BD1FFE0F32008DA0AA /* HashSep.c */; };
 		351509F71FDD347B00465413 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 351509F61FDD347B00465413 /* main.c */; };
+		357F5ECD24C2C28900AB300B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F17B7A91E9DBF2C00EDEEBA /* main.c */; };
+		35AE716B24C092E1002018F3 /* Stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2091E9F370E00A9D63D /* Stack.c */; };
 		35D42D2C1FD7D0A800A8C9A5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D2B1FD7D0A800A8C9A5 /* main.c */; };
 		35D42D321FD7D0C400A8C9A5 /* queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D311FD7D0C400A8C9A5 /* queue.c */; };
 		35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D42D341FD7E53000A8C9A5 /* ADTTree.c */; };
@@ -23,13 +25,10 @@
 		35DFAFE324B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
 		35E2CFAA1FD8EE1500BF7EF2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFA91FD8EE1500BF7EF2 /* main.c */; };
 		35E2CFB01FD905BD00BF7EF2 /* BinHeap.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFAF1FD905BD00BF7EF2 /* BinHeap.c */; };
-		4F17B7AA1E9DBF2C00EDEEBA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F17B7A91E9DBF2C00EDEEBA /* main.c */; };
 		4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F17B7B01E9DBF4000EDEEBA /* list.c */; };
 		4FC0C2001E9F1F5900A9D63D /* stackli.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C1FE1E9F1F5900A9D63D /* stackli.c */; };
 		4FC0C2021E9F205000A9D63D /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2011E9F205000A9D63D /* readme.md */; };
-		4FC0C2061E9F347800A9D63D /* MyList.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2041E9F347800A9D63D /* MyList.c */; };
-		4FC0C20B1E9F370E00A9D63D /* CaculateBasic.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2091E9F370E00A9D63D /* CaculateBasic.c */; };
-		4FC0C20C1E9F370E00A9D63D /* CaculateBasic.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2091E9F370E00A9D63D /* CaculateBasic.c */; };
+		4FC0C20C1E9F370E00A9D63D /* Stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2091E9F370E00A9D63D /* Stack.c */; };
 		4FC0C2141E9F3B1A00A9D63D /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2131E9F3B1A00A9D63D /* main.c */; };
 		4FD55BC21E9E00DA00FFEE59 /* cursor.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FD55BC01E9E00DA00FFEE59 /* cursor.c */; };
 		4FD55BCA1E9E179C00FFEE59 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FD55BC91E9E179C00FFEE59 /* main.c */; };
@@ -141,8 +140,8 @@
 		4FC0C2011E9F205000A9D63D /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = readme.md; path = C_practice/readme.md; sourceTree = "<group>"; };
 		4FC0C2041E9F347800A9D63D /* MyList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MyList.c; path = MyList/MyList.c; sourceTree = "<group>"; };
 		4FC0C2051E9F347800A9D63D /* MyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyList.h; path = MyList/MyList.h; sourceTree = "<group>"; };
-		4FC0C2091E9F370E00A9D63D /* CaculateBasic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CaculateBasic.c; sourceTree = "<group>"; };
-		4FC0C20A1E9F370E00A9D63D /* CaculateBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaculateBasic.h; sourceTree = "<group>"; };
+		4FC0C2091E9F370E00A9D63D /* Stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stack.c; sourceTree = "<group>"; };
+		4FC0C20A1E9F370E00A9D63D /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		4FC0C2111E9F3B1A00A9D63D /* tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tree; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC0C2131E9F3B1A00A9D63D /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		4FD55BC01E9E00DA00FFEE59 /* cursor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cursor.c; sourceTree = "<group>"; };
@@ -310,8 +309,8 @@
 		4FC0C2081E9F36AD00A9D63D /* Mystack */ = {
 			isa = PBXGroup;
 			children = (
-				4FC0C2091E9F370E00A9D63D /* CaculateBasic.c */,
-				4FC0C20A1E9F370E00A9D63D /* CaculateBasic.h */,
+				4FC0C2091E9F370E00A9D63D /* Stack.c */,
+				4FC0C20A1E9F370E00A9D63D /* Stack.h */,
 			);
 			name = Mystack;
 			sourceTree = "<group>";
@@ -578,9 +577,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				357F5ECD24C2C28900AB300B /* main.c in Sources */,
 				35DFAFDD24B09AB400CE9E39 /* Tool.c in Sources */,
-				4FC0C20B1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
-				4F17B7AA1E9DBF2C00EDEEBA /* main.c in Sources */,
 				4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */,
 				4FD55BC21E9E00DA00FFEE59 /* cursor.c in Sources */,
 			);
@@ -593,6 +591,7 @@
 				35D42D381FD7FBBF00A8C9A5 /* AVLTree.c in Sources */,
 				35DFAFDF24B09AB400CE9E39 /* Tool.c in Sources */,
 				4FC0C2141E9F3B1A00A9D63D /* main.c in Sources */,
+				35AE716B24C092E1002018F3 /* Stack.c in Sources */,
 				35D42D351FD7E53000A8C9A5 /* ADTTree.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,13 +600,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FC0C20C1E9F370E00A9D63D /* CaculateBasic.c in Sources */,
+				4FC0C20C1E9F370E00A9D63D /* Stack.c in Sources */,
 				4FD55BCA1E9E179C00FFEE59 /* main.c in Sources */,
 				4FC0C2001E9F1F5900A9D63D /* stackli.c in Sources */,
 				35DFAFDE24B09AB400CE9E39 /* Tool.c in Sources */,
 				4FC0C2021E9F205000A9D63D /* readme.md in Sources */,
 				4FD55BD01E9E17BB00FFEE59 /* stackar.c in Sources */,
-				4FC0C2061E9F347800A9D63D /* MyList.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

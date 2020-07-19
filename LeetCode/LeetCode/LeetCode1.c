@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-
+#include <string.h>
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *head =  (struct ListNode *)malloc(sizeof(struct ListNode));
@@ -189,4 +189,68 @@ int removeDuplicates(int* nums, int numsSize){
       }
    }
    return slow + 1;
+}
+
+
+//11. 盛最多水的容器
+#define DEL(x, y) (x > y ? x - y : y - x)
+#define MIN(x, y) (x > y ? y : x)
+int area(int i, int j,int left, int right){
+    return DEL(i, j) * MIN(left, right);
+}
+
+int maxArea(int* height, int heightSize){
+    if(heightSize == 0){
+        return 0;
+    }
+    int max = -1;
+    int i = 0, j = 0;
+    for( i = 0; i < heightSize - 1; i++){
+        for( j = i + 1; j < heightSize; j++){
+            int a =  area(i,j,height[i], height[j]);
+            if(a > max){
+                max = a;
+            }
+        }
+    }
+    return max;
+}
+
+//MARK: 204. 计数质数
+int isPrime(int  n);
+
+int countPrimes(int n){
+    int count = 0;
+    for(int i = 2; i < n; i++){
+        if(isPrime(i) == 1){
+            count++;
+        }
+    }
+    return count;
+}
+
+int isPrime(int  n){
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            return 0;
+        }
+    }
+    return  1;
+}
+
+//MARK: 斐波那契数列
+int climbStairs(int n){
+    //0 1 1 2 3 5
+    if (n == 0){
+        return 0;
+    }
+    int stepOne = 0;
+    int stepTwo = 1;
+    int res = 0;
+    for(int i = 0; i < n; i++){
+        res = stepOne + stepTwo;
+        stepOne = stepTwo;
+        stepTwo = res;
+    }
+    return res;
 }
