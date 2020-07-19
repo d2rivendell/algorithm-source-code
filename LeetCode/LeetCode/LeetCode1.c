@@ -247,10 +247,22 @@ int climbStairs(int n){
     int stepOne = 0;
     int stepTwo = 1;
     int res = 0;
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i < n; i++){
         res = stepOne + stepTwo;
         stepOne = stepTwo;
         stepTwo = res;
     }
     return res;
+}
+//
+double PowerHelper(double base, int exponent){
+    if (exponent == 0) {
+        return 1;
+    }
+    double res = PowerHelper(base, exponent/2);//exponent==2时返回
+    return exponent%2 == 0 ? res * res: res * res * base;
+}
+double Power(double base, int exponent){
+    return exponent > 0 ? PowerHelper(base, exponent) : 1.0/PowerHelper(base, -exponent) ;
+
 }

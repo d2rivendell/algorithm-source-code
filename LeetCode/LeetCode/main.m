@@ -41,6 +41,6 @@ void
 LeetCode(){
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
-    int res = countPrimes(10000);
-    printf("res: %d\n", res);
+    double res = Power(2, -1);
+    printf("res: %f\n", res);
 }

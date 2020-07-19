@@ -40,4 +40,6 @@ int removeDuplicates(int* nums, int numsSize);
 
 //质数个数
 int countPrimes(int n);
+
+double Power(double base, int exponent);
 #endif /* LeetCode1_h */

@@ -20,7 +20,8 @@ List reverse2(List node);
 ListNode nthToLast(ListNode head,int n );
 struct ListNode* rotateRight(struct ListNode* head, int k);
 List removeNthFromEnd(List head, int n);
-
+struct Node* addTwoNumbers(struct Node* l1, struct Node* l2);
+List mergeTwoLists(List l1, List l2);
 int main(int argc, const char * argv[]) {
 //    List chainList = malloc(sizeof(List));
 //    chainList->Element = rand() % 100;
@@ -31,18 +32,75 @@ int main(int argc, const char * argv[]) {
 //       DeleteList(chainList);
     
     ElementType *A = createArray(5);
+    ElementType *B = createArray(5);
     List aList = createList(A, 5);
+    List bList = createList(B, 5);
     printList(aList);
+    printList(bList);
 //
 //    List res = reverse2(aList);
 //    printList(res);
 //    printList(nthToLast(res, 0));
-    List res =removeNthFromEnd(aList, 2);
-    printList(res);
+//    List res =removeNthFromEnd(aList, 2);
+    printList(addTwoNumbers(aList, bList));
     free(A);
     return 0;
 }
 
+//MARK: 2. 两数相加
+List addTwoNumbers(List l1, List l2){
+    struct Node *head =  (struct Node *)malloc(sizeof(struct Node));
+    struct Node *cur = head;
+    int carry = 0;
+    while(l1 != NULL || l2 != NULL ){
+        cur->Next =  (struct Node *)malloc(sizeof(struct Node));
+        cur = cur->Next;
+        cur->Next = NULL;//要置空
+        int a = (l1 == NULL ? 0 : l1->Element);
+        int b = (l2 == NULL ? 0 : l2->Element);
+        int sum = carry + a + b;
+        carry = sum/10;
+        cur->Element = sum % 10;
+        
+        if(l1 != NULL) l1 = l1->Next;
+        if(l2 != NULL) l2 = l2->Next;
+        
+    }
+    if(carry > 0){
+        cur->Next =  (struct Node *)malloc(sizeof(struct Node));
+        cur = cur->Next;
+        cur->Next = NULL;//要置空
+        cur->Element = carry;
+    }
+    return head->Next;
+}
+
+
+//MARK: 21. 合并两个有序链表
+List mergeTwoLists(List l1, List l2){
+    if(l1 == NULL || l2 == NULL){
+        return l2 == NULL ? l1 : l2;
+    }
+    List mergedList = malloc(sizeof(struct Node));
+    List head = mergedList;
+    while(l1 != NULL && l2 != NULL){
+        if(l1->Element < l2->Element){
+            head->Next = l1;
+            l1 = l1->Next ;
+        }else{
+            head->Next = l2;
+            l2= l2->Next ;
+        }
+        head = head->Next;
+        if(l2 == NULL){
+            head->Next = l1;
+        }
+        if(l1 == NULL){
+            head->Next = l2;
+        }
+    }
+    return mergedList->Next;
+}
 //struct ListNode* rotateRight(struct ListNode* head, int k){
 //
 //    struct ListNode *p = head;
@@ -156,41 +214,41 @@ int hasCycle(List head){
  Explanation: 342 + 465 = 807.
  */
 //MARK: -链表相加：
-struct Node* addTwoNumbers(struct Node* l1, struct Node* l2) {
-    struct Node  *result = malloc(sizeof(struct Node));
-    struct Node  *a = l1;
-    struct Node  *b = l2;
-    struct Node *curr = result;
-    int carry = 0;//进位
-    while (a !=NULL || b != NULL) {
-        int i = (a != NULL) ? a->Element:0;
-        int j = (b != NULL) ? b->Element:0;
-        int s = i + j + carry;
-        carry = s/10;
-        struct Node  *cell = malloc(sizeof(struct Node));
-        //要置空 否则在其他编译器会报错
-        cell->Next = NULL;
-        cell->Element = s%10;
-        curr->Next = cell;
-        curr = cell;
-        if(a != NULL){
-            a = a->Next;
-        }
-        if(b != NULL){
-            b = b->Next;
-        }
-    }
-    if (carry > 0) {
-        struct Node  *cell = malloc(sizeof(struct Node));
-        //要置空 否则在其他编译器会报错
-        cell->Next = NULL;
-        cell->Element = carry;
-        curr->Next =cell;
-        curr = cell;
-    }
-    return result->Next;
-    
-}
+//struct Node* addTwoNumbers(struct Node* l1, struct Node* l2) {
+//    struct Node  *result = malloc(sizeof(struct Node));
+//    struct Node  *a = l1;
+//    struct Node  *b = l2;
+//    struct Node *curr = result;
+//    int carry = 0;//进位
+//    while (a !=NULL || b != NULL) {
+//        int i = (a != NULL) ? a->Element:0;
+//        int j = (b != NULL) ? b->Element:0;
+//        int s = i + j + carry;
+//        carry = s/10;
+//        struct Node  *cell = malloc(sizeof(struct Node));
+//        //要置空 否则在其他编译器会报错
+//        cell->Next = NULL;
+//        cell->Element = s%10;
+//        curr->Next = cell;
+//        curr = cell;
+//        if(a != NULL){
+//            a = a->Next;
+//        }
+//        if(b != NULL){
+//            b = b->Next;
+//        }
+//    }
+//    if (carry > 0) {
+//        struct Node  *cell = malloc(sizeof(struct Node));
+//        //要置空 否则在其他编译器会报错
+//        cell->Next = NULL;
+//        cell->Element = carry;
+//        curr->Next =cell;
+//        curr = cell;
+//    }
+//    return result->Next;
+//
+//}
 
 //MARK: - 得到链表倒数第n个节点
 ListNode nthToLast(ListNode head,int n ){
@@ -213,3 +271,31 @@ ListNode nthToLast(ListNode head,int n ){
 
 }
 
+
+//MARK: 52. 两个链表的第一个公共节点
+//考虑有可能没有公共节点的情况
+//https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    if(headA == NULL || headB == NULL){
+        return NULL;
+    }
+    struct ListNode *curA = headA;
+    struct ListNode *curB = headB;
+    int hasChange = 0;
+    while(curA != curB){
+        curA = curA->next;
+        curB = curB->next;
+        if((curB == NULL || curA == NULL) &&  hasChange == 2){
+            return NULL;
+        }
+        if(curA == NULL){
+            curA = headB;
+            hasChange += 1;
+        }
+        if(curB == NULL){
+            curB = headA;
+            hasChange += 1;
+        }
+    }
+    return curA;
+}
