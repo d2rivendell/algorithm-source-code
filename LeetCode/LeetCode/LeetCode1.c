@@ -247,7 +247,7 @@ int climbStairs(int n){
     int stepOne = 0;
     int stepTwo = 1;
     int res = 0;
-    for(int i = 1; i < n; i++){
+    for(int i = 0; i < n; i++){
         res = stepOne + stepTwo;
         stepOne = stepTwo;
         stepTwo = res;
@@ -265,4 +265,52 @@ double PowerHelper(double base, int exponent){
 double Power(double base, int exponent){
     return exponent > 0 ? PowerHelper(base, exponent) : 1.0/PowerHelper(base, -exponent) ;
 
+}
+
+
+//MARK: 4. 寻找两个正序数组的中位数
+//给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出这两个正序数组的中位数，
+//并且要求算法的时间复杂度为 O(log(m + n))。
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
+    //
+    int mid = (nums1Size + nums2Size)/2;
+    int isDoubleValue = (nums1Size + nums2Size) % 2 == 0;
+    if (isDoubleValue) mid--;//中位数有两个，令中位数为遍历方向靠前的一位
+    int i = nums1Size-1;//从最后一位开始遍历
+    int j = nums2Size-1;//从最后一位开始遍历
+    int count = 0;//记录当前是第几个数
+    double val = 0;//第一个中位数
+    double otherVal = 0;//第二个中位数
+    int getFirstTurn = 0;//用来找第二个中位数标记
+    while(count++ <= mid){
+        int a = -1;
+        int b = -1;
+        if(i >= 0)  a = nums1[i];
+        if(j >= 0)  b = nums2[j];
+        if(a > b){
+            if(getFirstTurn == 0){
+                val = a;
+            }else{//现在是在找前一个数
+                getFirstTurn = 0;
+                otherVal = a;
+                isDoubleValue = 0;
+            }
+            i--;
+        }else{
+            if(getFirstTurn == 0){
+                 val = b;
+            }else{//现在是在找前一个数
+                getFirstTurn = 0;
+                otherVal = b;
+                isDoubleValue = 0;
+            }
+            j--;
+        }
+        if(count+1 > mid && isDoubleValue == 1 ){//只找到了一个，还有前一个
+            count -= 1;
+            getFirstTurn = 1;
+        }
+    }
+    otherVal = otherVal == 0 ? val : otherVal;
+    return (val + otherVal)/2.0;
 }
