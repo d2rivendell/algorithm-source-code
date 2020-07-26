@@ -198,7 +198,7 @@ int isSymmetricHelper(struct TreeNode* left, struct TreeNode* right){
     if((left != NULL && right == NULL) || (left == NULL && right != NULL)){//只有一个为空时
         return -1;
     }
-    //左右树相等， 对应的节点也想等时才成立
+    // （当前左节点，当前右节点）（左节点左数，右节点右数）（左节点右数，右节点左数对比）
     int flag = isSymmetricHelper(left->left, right->right) && isSymmetricHelper(left->right, right->left) ;
     return flag && (left->element == right->element);
 }

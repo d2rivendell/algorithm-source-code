@@ -12,6 +12,14 @@
 #include <string.h>
 #include <string.h>
 
+
+
+void SwapArr(int A[], int a, int b){
+    int temp = A[a];
+    A[a] = A[b];
+    A[b] = temp;
+}
+
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *head =  (struct ListNode *)malloc(sizeof(struct ListNode));
     struct ListNode *cur = head;
@@ -254,7 +262,8 @@ int climbStairs(int n){
     }
     return res;
 }
-//
+
+//MARK: 剑指 Offer 16. 数值的整数次方
 double PowerHelper(double base, int exponent){
     if (exponent == 0) {
         return 1;
@@ -313,4 +322,153 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
     }
     otherVal = otherVal == 0 ? val : otherVal;
     return (val + otherVal)/2.0;
+}
+
+//MARK: 剑指 Offer 29. 顺时针打印矩阵
+int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize){
+    if(matrixSize == 0){
+        *returnSize = 0;
+        return NULL;
+    }
+    int l = 0;
+    int r = matrixColSize[0] - 1;//是col
+    int t = 0;
+    int b = matrixSize - 1;//是row
+    printf("l: %d, r: %d, t:%d, b:%d \n", l, r, t, b);
+    int *res= malloc(sizeof(int) * matrixColSize[0] * matrixSize);
+    *returnSize  = matrixColSize[0] * matrixSize;
+    int k = 0;
+    while(1){
+        printf("//从左到右,由left开始\n");
+        for(int i = l; i <= r; i++) res[k++] = matrix[t][i];
+        t += 1;
+        if(t > b) break;//遍历完了
+        
+        printf("//从上到下,由top开始\n");
+        for(int i = t; i <= b; i++) res[k++] = matrix[i][r];
+        r -= 1;
+        if(r < l) break;//遍历完了
+        
+        printf("//从右到左,由right开始\n");
+        for(int i = r; i >= l; i--) res[k++] = matrix[b][i];
+        b -= 1;
+        if(t > b) break;//遍历完了
+        
+        printf("//从下到上,由bottom开始\n");
+        for(int i = b; i >= t; i--) res[k++] = matrix[i][l];
+        l += 1;
+        if(r < l) break;//遍历完了
+    }
+    return res;
+}
+
+//MARK: 剑指 Offer 15. 二进制中1的个数
+int hammingWeight(uint32_t n) {
+    uint32_t mask = 0x01;
+    int count = 0;
+    int i = 32 - 1;
+    while(i-- >= 0){
+        if(n & mask)count++;
+        n = n>>1;
+    }
+    return count;
+}
+
+//MARK: 剑指 Offer 05. 替换空格
+char* replaceSpace(char* s){
+    if(s == NULL){
+        return NULL;
+    }
+    int len = 0;
+    int finalLen = 0;
+    int blankLen = 0;
+    int i = 0;
+    while(s[i] != '\0'){
+        len++;
+        if(s[i] == ' ')
+            blankLen++;
+        i++;
+    }
+    finalLen = len + blankLen * 2;
+    printf("original: %d, final: %d\n", len, finalLen);
+    char *res = (char *)malloc(sizeof(char) * (finalLen + 1));
+    res[finalLen] = '\0';
+    //双指针
+    i = len-1;
+    int j = finalLen-1;
+    while(i >= 0){
+        if(s[i] == ' '){
+            res[j--] = '0';
+            res[j--] = '2';
+            res[j--] = '%';
+        }else{
+            res[j--] = s[i];
+        }
+        printf("+ %c\n",s[i]);
+        i--;
+    }
+    return res;
+}
+
+
+
+//MARK: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+//[奇数, 偶数]
+int* exchange(int* nums, int numsSize, int* returnSize){
+    int i = 0;
+    int j = numsSize - 1;
+    //[1,2,3,4]
+    while(i < j){
+        while(nums[i] % 2 != 0 && i < j){
+            i++;
+        }
+        while(nums[j] % 2 == 0 && i < j){
+            j--;
+        }
+        SwapArr(nums, i, j);
+    }
+    *returnSize = numsSize;
+    return nums;
+}
+
+
+//MARK:  剑指 Offer 50. 第一个只出现一次的字符
+char firstUniqChar(char* s){
+    /*
+      1. memset 的大小包括  sizeof(char) * size！！而不是size!
+      2. " "和 ' '是不一样的
+      3. strlen长度不包括'\0'
+     */
+    int size = 128;
+    int *all = (int *)malloc(sizeof(int) * size);
+    memset(all, -1, sizeof(int) * size);
+    unsigned long len = strlen(s);//strlen长度不包括'\0'
+    for(unsigned i = 0; i < len; i++){
+        all[s[i]] += 1;
+    }
+    for(unsigned i = 0; i < len; i++){
+        if(all[s[i]] == 0){
+            free(all);
+            return s[i];
+        }
+    }
+    free(all);
+    return ' ';
+}
+
+//MARK: 剑指 Offer 03. 数组中重复的数字
+int findRepeatNumber(int* nums, int numsSize){
+    //malloc 的size要注意是什么
+    int  maxSize = 100000;
+    int *record = malloc(sizeof(int) * maxSize);
+    memset(record, 0 , maxSize);
+    for(int i = 0; i <= numsSize; i++){
+        if(record[nums[i]] > 0){
+            free(record);
+            return nums[i];
+        }else{
+            record[nums[i]] += 1;
+        }
+    }
+    return 0;
 }

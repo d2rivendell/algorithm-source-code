@@ -42,4 +42,9 @@ int removeDuplicates(int* nums, int numsSize);
 int countPrimes(int n);
 
 double Power(double base, int exponent);
+
+int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize);
+
+char firstUniqChar(char* s);
+
 #endif /* LeetCode1_h */

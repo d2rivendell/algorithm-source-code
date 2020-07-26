@@ -1,6 +1,10 @@
 import Foundation
 
-
+/*
+ 实现队列： 使用数组 arr.remove(at: 0)
+ 实现栈: arr.popLast()
+ 
+ */
 func example(_ name: String, clourse: ()->Void){
     print("\(name)")
     print("-------")
@@ -391,3 +395,99 @@ example("LRU") {
  
 
  */
+
+
+
+
+example("上下打印二叉树") {
+    //借助队列的方式去实现
+    
+    class TreeNode {
+        public var val: Int
+        public var left: TreeNode?
+        public var right: TreeNode?
+        public init(_ val: Int) {
+            self.val = val
+            self.left = nil
+            self.right = nil
+        }
+    }
+   
+    class Solution {
+        func levelOrder(_ root: TreeNode?) -> [Int] {
+            if root == nil{
+                return []
+            }
+            var stack: [TreeNode] = [root!]
+            var res: [Int] = []
+            while(!stack.isEmpty){
+                let node = stack.remove(at: 0)
+//                stack.popLast()
+                if let left = node.left{
+                    stack.append(left)
+                }
+                if let right = node.right{
+                    stack.append(right)
+                }
+                res.append(node.val)
+            }
+            return res
+        }
+        
+    }
+}
+
+
+//MARK: 剑指 Offer 09. 用两个栈实现队列
+example("剑指 Offer 09. 用两个栈实现队列") {
+    /*
+     ⚠️ 不要用自定义size字段记录数组的下标，容易出错
+        直接使用swift的数组接口 isEmpty和count
+   */
+    class CQueue {
+        class Stack{
+            var capacity = 10000
+            var array: [Int] = []
+            func push(_ value: Int){
+                if(array.count == capacity){
+                    return
+                }
+                array.append(value)
+            }
+            func pop() -> Int{
+                return array.popLast() ?? -1
+            }
+            var isEmpty: Bool{
+                return array.isEmpty
+            }
+        }
+        var leftStack =  Stack()
+        var rightStack =  Stack()//记录头， 为空时从left中拿过来
+        
+        init() {
+            
+        }
+        
+        func appendTail(_ value: Int) {
+            //不用拿右边的数组过来
+            leftStack.push(value)
+        }
+        
+        func deleteHead() -> Int {
+            //把左边的栈倒入右边， 清空左边栈
+            if(rightStack.isEmpty){
+                while(leftStack.isEmpty == false){
+                    rightStack.push(leftStack.pop())
+                }
+            }
+            return rightStack.pop()
+        }
+    }
+
+}
+
+var set = Set<Int>()
+let res1, _ = set.insert(1)
+let res2, _ = set.insert(1)
+
+

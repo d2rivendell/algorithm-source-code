@@ -44,7 +44,7 @@ ElementType *createArray(int N){
     srand((unsigned)time(NULL));//以时间作种
     ElementType *A = (ElementType *)malloc(sizeof(ElementType) * N);
     for (int i = 0; i < N; i++) {
-        A[i] = rand() % 10;
+        A[i] = rand() % 100;
     }
     return A;
 }

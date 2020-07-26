@@ -25,6 +25,7 @@ void arrayPrint(int arr[], int N){
 
 int main(int argc, const char * argv[]) {
 //    SortTest();
+    
     LeetCode();
     return 0;
 }
@@ -41,6 +42,7 @@ void
 LeetCode(){
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
-    double res = Power(2, -1);
-    printf("res: %f\n", res);
+//    double res = Power(2, -1);
+    
+    printf("res:  %c\n", firstUniqChar("leetcode"));
 }
