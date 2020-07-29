@@ -3,6 +3,7 @@ import Foundation
 /*
  实现队列： 使用数组 arr.remove(at: 0)
  实现栈: arr.popLast()
+ 数组append数组： arr.append(contentsOf: xx)
  
  */
 func example(_ name: String, clourse: ()->Void){
@@ -422,7 +423,6 @@ example("上下打印二叉树") {
             var res: [Int] = []
             while(!stack.isEmpty){
                 let node = stack.remove(at: 0)
-//                stack.popLast()
                 if let left = node.left{
                     stack.append(left)
                 }
@@ -491,3 +491,30 @@ let res1, _ = set.insert(1)
 let res2, _ = set.insert(1)
 
 
+//MARK: 104. 二叉树的最大深度
+//非递归方式
+example("104. 二叉树的最大深度"){
+     //和上下遍历二叉树的逻辑那道题的思路类， 利用队列， 但是我们需要把每一行的pop掉
+    class Solution {
+        func maxDepth(_ root: TreeNode?) -> Int {
+            guard let rootNode = root else { return 0}
+            var Queue: [TreeNode] = [rootNode]
+            var deep = 0
+            while(!Queue.isEmpty){
+                var temp: [TreeNode] = []
+                while(!Queue.isEmpty){
+                     let node =  Queue.remove(at: 0)
+                     if let left = node.left{
+                         temp.append(left)
+                     }
+                     if let right = node.right{
+                         temp.append(right)
+                     }
+                }
+                Queue.append(contentsOf: temp)
+                deep += 1
+            }
+            return deep
+        }
+    }
+}
