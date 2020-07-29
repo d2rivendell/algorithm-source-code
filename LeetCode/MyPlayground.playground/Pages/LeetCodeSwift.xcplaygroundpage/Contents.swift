@@ -171,24 +171,45 @@ example("94. 二叉树的中序遍历") {
     root1.right = root2
     root2.left = root3
     
+    //左-中-右
     class Solution {
         func inorderTraversal(_ root: TreeNode?) -> [Int] {
             var rootNode = root
             var array: [Int] = []
             var stackArray: [TreeNode] = []
             while(rootNode != nil || stackArray.isEmpty == false){
-                print("-")
-                if let rNode =  rootNode {
+                if let rNode =  rootNode {//遍历到最左边
                     stackArray.append(rNode)
                     rootNode = rNode.left
-                }else{
+                }else{//出栈 加入结果
                     if let node = stackArray.popLast(){
-                        rootNode = node.right
+                        rootNode = node.right//有右节点的话转向
                         array.append(node.val)
                     }
                 }
             }
             return array;
+        }
+    }
+    
+    //前序遍历
+    class Solution2 {
+        func preorderTraversal(_ root: TreeNode?) -> [Int] {
+            var cur = root
+            var res:[Int] = []
+            var stack: [TreeNode] = []
+            while(cur != nil ||  stack.isEmpty == false){
+                if let  node = cur {
+                    res.append(node.val)
+                    stack.append(node)
+                    cur = node.left
+                }else{
+                    if let node = stack.popLast(){
+                        cur = node.right
+                    }
+                }
+            }
+            return res
         }
     }
     print(Solution().inorderTraversal(root1))

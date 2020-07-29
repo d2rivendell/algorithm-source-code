@@ -472,3 +472,26 @@ int findRepeatNumber(int* nums, int numsSize){
     }
     return 0;
 }
+
+//MARK: 88. 合并两个有序数组
+//插入排序
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
+    if(n == 0){
+        return;
+    }
+    int j = 0;
+    int k = 0;
+    for(int i = m; i < m + n; i++){
+        if(j++ < n){
+            int temp = nums2[i - m];
+            for( k = i; k > 0; k--){
+                if(temp < nums1[k - 1]){
+                    nums1[k] = nums1[k-1];
+                }else{
+                    break;
+                }
+            }
+            nums1[k] = temp;
+        }
+    }
+}

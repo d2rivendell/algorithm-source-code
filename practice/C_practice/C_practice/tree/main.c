@@ -64,6 +64,7 @@ PrintMidOrderTree(SearchTree T){
 }
 
 //MARK: - 迭代中序遍历
+//左-中-右 
 int* inorderTraversal(struct TreeNode* root, int* returnSize){
     if (root == NULL) {
         return NULL;
