@@ -86,13 +86,15 @@ int reverse(int x) {
     int rev = 0;
     int INT_MAX = 0x7fffffff;//2147483647
     int INT_MIN = 0x80000000;//-2147483648
+    int maxEnd = INT_MAX % 10;
+    int minEnd = INT_MIN % 10;
     while (x != 0) {
         int pop = x % 10;
         x /= 10;
         // 正数：NT_MAX/10 == 214748364。 1. rev大于这个数，肯定溢出。 2.rev等于于这个数，余数大于7 也要溢出
         //负数同理
-        if (rev > INT_MAX/10 || (rev == INT_MAX / 10 && pop > 7)) return 0;
-        if (rev < INT_MIN/10 || (rev == INT_MIN / 10 && pop < -8)) return 0;
+        if (rev > INT_MAX/10 || (rev == INT_MAX / 10 && pop > maxEnd)) return 0;
+        if (rev < INT_MIN/10 || (rev == INT_MIN / 10 && pop < minEnd)) return 0;
         rev = rev * 10 + pop;//这里会溢出，累加之前做判断。
     }
     return rev;

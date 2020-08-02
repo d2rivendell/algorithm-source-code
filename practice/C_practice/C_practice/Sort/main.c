@@ -37,9 +37,6 @@ void heapUp(int A[], int N);
 
 
 int main(int argc, const char * argv[]) {
-   
-    int B[9] = {1,8,6,2,5,4,8,3,7};
-    heapUp(&B, 9);
     int len = 13;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {

@@ -4,8 +4,10 @@ import Foundation
  实现队列： 使用数组 arr.remove(at: 0)
  实现栈: arr.popLast()
  数组append数组： arr.append(contentsOf: xx)
+ 数组遍历： enumerated()
  
  */
+
 func example(_ name: String, clourse: ()->Void){
     print("\(name)")
     print("-------")
@@ -536,6 +538,40 @@ example("104. 二叉树的最大深度"){
                 deep += 1
             }
             return deep
+        }
+    }
+}
+
+
+
+example("二叉树展开为链表") {
+    //先前序遍历，并放在数组中
+    //取出数组的node， 相连接为链表
+    class Solution {
+        func flatten(_ root: TreeNode?) {
+            var arr: [TreeNode] = []
+            helper(root, &arr)
+            var temp = arr
+            var head: TreeNode? = nil
+            for (idx, node) in arr.enumerated(){
+                var first: TreeNode? = nil
+                var second: TreeNode? = nil
+                first = arr[idx]
+                if arr.count > idx + 1{
+                    second = arr[idx + 1]
+                }
+                first?.left = nil
+                first?.right = second
+            }
+        }
+        
+        // 前顺遍历
+        func helper(_ root: TreeNode?, _ arr: inout [TreeNode]){
+            if let node = root{
+                arr.append(node)
+                helper(node.left, &arr)
+                helper(node.right, &arr)
+            }
         }
     }
 }
