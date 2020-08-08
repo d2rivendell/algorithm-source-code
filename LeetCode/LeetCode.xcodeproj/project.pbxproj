@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = algorithm.xcodeproj; path = ../algorithm/algorithm.xcodeproj; sourceTree = "<group>"; };
 		35D860C8249CFB9B0072EEFF /* LeetCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LeetCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D860CB249CFB9B0072EEFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		35D860D2249CFD6F0072EEFF /* LeetCode1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeetCode1.h; sourceTree = "<group>"; };
@@ -44,9 +45,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35B8B65724DE631600FE4DE9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		35D860BF249CFB9B0072EEFF = {
 			isa = PBXGroup;
 			children = (
+				35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */,
 				35D860CA249CFB9B0072EEFF /* LeetCode */,
 				35D860C9249CFB9B0072EEFF /* Products */,
 			);
@@ -124,6 +133,12 @@
 			mainGroup = 35D860BF249CFB9B0072EEFF;
 			productRefGroup = 35D860C9249CFB9B0072EEFF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 35B8B65724DE631600FE4DE9 /* Products */;
+					ProjectRef = 35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				35D860C7249CFB9B0072EEFF /* LeetCode */,

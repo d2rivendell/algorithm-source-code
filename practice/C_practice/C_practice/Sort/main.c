@@ -37,7 +37,7 @@ void heapUp(int A[], int N);
 
 
 int main(int argc, const char * argv[]) {
-    int len = 13;
+    int len = 2;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
     }
-    printf("\n %d 在 第: %d 个\n",A[2], BinarySearch(A, len, A[2]) + 1);
+    printf("\n %d 在 第: %d 个\n",A[1], BinarySearch(A, len, A[1]));
 
     return 0;
 }
@@ -97,11 +97,13 @@ void ArraySwap(int n[], int i, int j){
 
 int BinarySearch(int n[], int len, int a){
     //    [x, x, x, x,x];  0110>1---->011
+    if (len == 0) {//防止传空进来
+        return -1;
+    }
     unsigned int begin = 0;
-    unsigned int end = len;
-    unsigned int count = len;
+    unsigned int end = len - 1;
     while (begin < end) {
-        int min = begin + (count >> 1);//防止出现溢出
+        int min = begin + (end -  begin)/2;//防止出现溢出
         if(a == n[min]){
             return min;
         }else if (a < n[min] ){
@@ -109,9 +111,12 @@ int BinarySearch(int n[], int len, int a){
         }else if (a > n[min]){
             begin = min + 1;
         }
-        count = count >> 1;//每次循环后数组查找的个数会折半
     }
-    return begin;
+    if (begin >= len || n[begin] != a) {//要判断是不是
+        return -1;
+    }else{
+       return begin;
+    }
 
 }
 

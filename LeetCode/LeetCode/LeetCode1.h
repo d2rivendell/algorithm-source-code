@@ -32,9 +32,6 @@ int reverse(int x) ;
 //判断数字是否是回文数
 int isPalindrome(int x);
 
-//最长回文子串
-char * longestPalindrome(char * s);
-
 //26. 删除排序数组中的重复项 (双直指针)
 int removeDuplicates(int* nums, int numsSize);
 
@@ -46,5 +43,18 @@ double Power(double base, int exponent);
 int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize);
 
 char firstUniqChar(char* s);
+
+
+int primeCount(int n);
+
+char * reverseWords(char *s);
+
+void revertStr(char *s);
+
+//找零钱
+int coins(int money, int A[], int N);
+
+//MARK: 最长回文子串  --动态规划
+char * longestPalindrome(char * s);
 
 #endif /* LeetCode1_h */

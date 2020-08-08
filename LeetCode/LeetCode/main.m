@@ -24,8 +24,7 @@ void arrayPrint(int arr[], int N){
 
 
 int main(int argc, const char * argv[]) {
-//    SortTest();
-    
+//    printf("count: %d", primeCount(3));
     LeetCode();
     return 0;
 }
@@ -43,6 +42,9 @@ LeetCode(){
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
 //    double res = Power(2, -1);
-    
-    printf("res:  %c\n", firstUniqChar("leetcode"));
+//    revertStr("  I     am a Student.     ");
+    int A[] = {1, 5, 20, 20, 25, 31};
+//    printf("%d\n", coins(51, &A, 6));
+//    printf("res:||%s||\n", reverseWords("  I     am a Student.     "));
+    printf("%s\n",longestPalindrome2("ac"));
 }

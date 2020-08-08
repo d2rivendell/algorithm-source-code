@@ -12,7 +12,8 @@
 #include <string.h>
 #include <string.h>
 
-
+#define DEL(x, y) (x > y ? x - y : y - x)
+#define MIN(x, y) (x > y ? y : x)
 
 void SwapArr(int A[], int a, int b){
     int temp = A[a];
@@ -124,29 +125,6 @@ int isPalindrome(int x){
     }
 }
 
-
-/*
- 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
- 
- 示例 1：
-
- 输入: "babad"
- 输出: "bab"
- 注意: "aba" 也是一个有效答案
- https://leetcode-cn.com/problems/longest-palindromic-substring/
- */
-char * longestPalindrome(char * s){
-    int len = strlen(s);
-    int w1 = 0, w2 = 0;
-    char *temp = (char *) malloc(sizeof(char) * len);
-    int i = 0;
-    for(i = 0; i < len; i++){
-        
-    }
-    free(temp);
-    return "";
-}
-
 //61. 旋转链表。 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
 //MARK: - 旋转链表
 struct ListNode* rotateRight(struct ListNode* head, int k){
@@ -203,8 +181,6 @@ int removeDuplicates(int* nums, int numsSize){
 
 
 //11. 盛最多水的容器
-#define DEL(x, y) (x > y ? x - y : y - x)
-#define MIN(x, y) (x > y ? y : x)
 int area(int i, int j,int left, int right){
     return DEL(i, j) * MIN(left, right);
 }
@@ -496,4 +472,290 @@ void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
             nums1[k] = temp;
         }
     }
+}
+
+//MARK:- 26. 删除排序数组中的重复项
+// 1 2 2 3 4 4 5
+int removeDuplicates2(int* nums, int numsSize){
+    if(numsSize == 0 || numsSize == 1){
+        return numsSize;
+    }
+    int i = 0;
+    int j = 1;
+    while(j < numsSize){
+        if (nums[j] != nums[i]){
+            int temp = nums[i + 1];
+            nums[i + 1] = nums[j];
+            nums[j] = temp;
+            i++;
+        }
+        j++;
+    }
+    return i + 1;
+}
+
+
+//素数对， 给定一个整形数字 3<= n <= 1000。找出有多少对素素加起来正好等于n
+int isPrimeNumber(int n){
+    for(int i = 2; i * i <= n; i++){
+        if(n % i == 0){
+            return 0;
+        }
+    }
+    return 1;
+}
+int primeCount(int n){
+    int mid = n/2;
+    int count = 0;
+    for(int i = 2; i <= mid; i++){
+        if( isPrimeNumber(i) && isPrimeNumber(n-i) )
+            count++;
+    }
+    return count;
+}
+
+//腾讯面试题 "I am a Student."
+void copyWord(char *src, int i, int len, char *dest, int *p){
+    for (int j = 0; j <= len; j++) {
+        dest[(*p)++] = src[j + i];
+    }
+}
+char *reverseWords(char *s){
+    int len =  (int)strlen(s);
+    char *res = malloc(sizeof(char) * len + 1);
+    res[len] = '\0';
+    int left = len - 1;
+    int right = len - 1;
+    char last = s[right];
+    if (last == '.') {
+        res[right] = last;
+        left--;
+        right--;
+    }
+    int k = 0;
+    while (left >= 0) {
+        if (s[left - 1] == ' ' || left - 1 < 0) {
+            copyWord(s, left, right-left, res, &k);
+            if(left - 1 > 0) res[k++] = ' ';
+            right = left-2;
+            left -= 2;
+        }else{
+            left--;
+        }
+    }
+    return res;
+}
+
+#define NOTFOUND '~'
+typedef  char StackElement;
+struct MyStack {
+    StackElement *elements;
+    int size;
+    int cur;//当前的个数
+};
+
+struct MyStack * MyStackMake(int count){
+    if (count <= 0) {
+        return NULL;
+    }
+    struct MyStack *stack =  malloc(sizeof(struct MyStack));
+    StackElement *elements = malloc(sizeof(StackElement) * count);
+    memset(elements, 0, count);
+    stack->elements = elements;
+    stack->size = count;
+    stack->cur = 0;
+    return  stack;
+}
+
+
+int stackIsEmpty(struct MyStack *stack){
+    if (stack->cur == 0) {
+        return 1;
+    }
+    return 0;
+}
+int stackIsFull(struct MyStack *stack){
+    if (stack->cur == stack->size) {
+        return 1;
+    }
+    return 0;
+}
+StackElement MyStackPop(struct MyStack *stack){
+    if (stackIsEmpty(stack))  {
+        return NOTFOUND;
+    }else{
+        stack->cur--;
+        return stack->elements[stack->cur];
+    }
+}
+void MyStackPush(struct MyStack *stack, StackElement v){
+    if (stackIsFull(stack)) {
+        return ;
+    }else{
+        stack->cur++;
+        stack->elements[stack->cur-1] = v;
+    }
+}
+
+StackElement MyStackTop(struct MyStack *stack){
+    if (stackIsEmpty(stack)) {
+        return NOTFOUND;
+    }else{
+        return stack->elements[stack->cur-1];
+    }
+}
+
+
+//"I am a Student."
+//tnedutS a ma I
+//使用两个栈来操作
+void revertStr(char *s){
+    int len = (int)strlen(s);
+    struct MyStack *stack =  MyStackMake(len);
+    for (int i = 0; i < len; i++) {
+        if (s[i] == ' ') {
+            //栈为空且上一个是空格时，不会存储空格
+            if (MyStackTop(stack) != ' ' && !stackIsEmpty(stack))  MyStackPush(stack, s[i]);
+        }else{
+            MyStackPush(stack, s[i]);
+        }
+    }
+    while (MyStackTop(stack )== ' ') {//去除末位空格
+        MyStackPop(stack);
+    }
+    int find = 0;
+    if (MyStackTop(stack) == '.') {
+        find = 1;
+        MyStackPop(stack);
+    }
+    struct MyStack *res =  MyStackMake(len);
+    char *ss = malloc(sizeof(char) * len + 1);
+    int k = 0;
+    while (!stackIsEmpty(stack)) {
+        if (MyStackTop(stack) == ' ') {
+            while (stackIsEmpty(res) == 0) {
+                ss[k++] = MyStackPop(res);
+            }
+            ss[k++] = MyStackPop(stack);
+        }else{
+            MyStackPush(res, MyStackPop(stack));
+        }
+    }
+    while (stackIsEmpty(res) == 0) {
+        ss[k++] = MyStackPop(res);
+    }
+    if (find) {
+        ss[k++] = '.';
+    }
+    ss[k++] = '\0';
+    printf("\n");
+    printf("%s\n",ss);
+}
+
+
+//MARK: 找零钱 --动态规划法
+//money：要找的零钱；A: 现有的零钱数组, 是排序好的；N：零钱的张数
+int coins(int money, int A[], int changeCount){
+    if (money == 0) {
+        return -1;
+    }
+    //dp[i]表示要找到零钱为i的最小的张数
+    int *dp = (int *)malloc(sizeof(int) * (money + 1));
+    // faces[i]是凑够i分时最后那枚硬币的面值
+    int *faces = (int *)malloc(sizeof(int) * (money + 1));
+    memset(faces, 1, money + 1);
+    memset(dp, 0, money + 1);
+    //自底向上
+    for (int i = 1; i <= money; i++) {
+        int MIN = 0x7fffffff;
+//        int minIdx = -1;
+        for (int j = 0; j < changeCount; j++) {
+            int change = A[j];//零钱
+            if (change > i) {
+                break;
+            }
+            //MIN表示: 对于金额i, 先使用了零钱charge, 剩余零钱最小的零钱张数为dp[i - charge]
+            if (dp[i - change] < MIN) {
+                MIN = MIN(dp[i - change], MIN);
+                faces[i] = change;
+            }
+            if (MIN == 0x7fffffff) {//金额i确实无法找零，要设置为-1，为了让MIN+1==0
+                MIN = -1;
+            }
+        }
+        dp[i] = MIN + 1;
+    }
+    printf("the money is: ");
+    int c = money;
+    while (c > 0) {
+        printf("%d ", faces[c]);
+        c -= faces[c];
+    }
+    printf("\n");
+    free(faces);
+    return dp[money];
+}
+
+
+
+
+void copyChar(char *src, int b1, int len, char *dst, int b2){
+    for (int i = 0; i < len; i++) {
+        dst[b2++] = src[b1+i];
+    }
+}
+
+
+//MARK: 5. 最长回文子串
+/*
+ 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+ 
+ 示例 1：
+ 
+ 输入: "babad"
+ 输出: "bab"
+ 注意: "aba" 也是一个有效答案
+ https://leetcode-cn.com/problems/longest-palindromic-substring/
+ */
+//arr[i][j] 表示s[i-j]之间的字符是否是回文， 如果s[i+1][j-1]是回文且s[i] == s[j]，则s[i-j]是回文
+//状态转移条件是。j-i<3时，s[i][j]是回文
+char * longestPalindrome(char * s){
+    int len = (int)strlen(s);
+    if (len == 0 || len == 1) {
+        return s;
+    }
+    int **arr = malloc(sizeof(int *) * len);
+    for (int i = 0; i < len; i++) {
+        arr[i] =  malloc(sizeof(int *) * len);
+    }
+    for (int i = 0; i < len; i++) {
+        arr[i][i] =  1;//对角线.
+    }
+    int maxLen = 1;//len大于1，肯定会有结果maxLen >=1,初始设置为1
+    int begin = 0;
+    for (int l = 1; l < len; l++) {//j表示长度
+        for (int i = 0; i < l; i++) {
+            if (s[i] != s[l]) {//s[i] != s[j]
+                arr[i][l] = 0;
+            }else{//s[i] == s[j]
+                if (l-i<3) {
+                    arr[i][l] = 1;
+                }else {
+                    arr[i][l] = arr[i+1][l-1];//参照左下角的
+                }
+            }
+            if (arr[i][l] && l- i + 1 > maxLen) {
+                maxLen = l -i + 1;
+                begin = i;
+            }
+        }
+    }
+    char *dst =  malloc(sizeof(char) * (maxLen + 1));
+    copyChar(s, begin, maxLen, dst, 0);
+    dst[maxLen] = '\0';
+    for (int i = 0; i < len; i++) {
+        free(arr[i]);
+    }
+    free(arr);
+    return dst;
 }

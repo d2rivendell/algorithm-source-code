@@ -131,6 +131,7 @@ List mergeTwoLists(List l1, List l2){
 //MARK: -删除链表倒数第N个节点
 //条件：给定的 n 保证是有效的。
 //边界情况：n=1，而且链表节点只有一个； 删除的节点正好是表头
+// 1 2 3 4 5 6
 List removeNthFromEnd(List head, int n){
     //    ｜ pre| first|      second|
     if(n == 0){

@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:LeetCodeCPlusPlus/LeetCodeCPlusPlus.xcodeproj">
+      location = "group:../algorithm/algorithm.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../practice/C_practice/C_practice.xcodeproj">

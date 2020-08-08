@@ -436,7 +436,6 @@ example("上下打印二叉树") {
             self.right = nil
         }
     }
-   
     class Solution {
         func levelOrder(_ root: TreeNode?) -> [Int] {
             if root == nil{
