@@ -47,6 +47,7 @@ char firstUniqChar(char* s);
 
 int primeCount(int n);
 
+//151. 翻转字符串里的单词
 char * reverseWords(char *s);
 
 void revertStr(char *s);

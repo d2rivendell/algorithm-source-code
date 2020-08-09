@@ -38,7 +38,41 @@ def overhalf(gifts, n):
             dic[v] = 1
     return 0
 
+@example("17. 电话号码的字母组合")
+def letterCombinations(digits):
+    """
+        :type digits: str
+        :rtype: List[str]
+        """
+    phone = {'2': ['a', 'b', 'c'],
+                '3': ['d', 'e', 'f'],
+                '4': ['g', 'h', 'i'],
+                '5': ['j', 'k', 'l'],
+                '6': ['m', 'n', 'o'],
+                '7': ['p', 'q', 'r', 's'],
+                '8': ['t', 'u', 'v'],
+                '9': ['w', 'x', 'y', 'z']}
+                    
+    def backtrack(combination, next_digits):
+                # next_digits不能再分的时候
+                if len(next_digits) == 0:
+                    # the combination is done
+                    output.append(combination)
+                # next_digits还能分的时候
+                else:
+                    # iterate over all letters which map
+                    # the next available digit
+                    for letter in phone[next_digits[0]]:
+                        # append the current letter to the combination
+                        # and proceed to the next digits
+                        backtrack(combination + letter, next_digits[1:])
+                                            
+    output = []
+    if digits:
+       backtrack("", digits)
+    return output
 
 if __name__ == '__main__':
  print(overhalf([1,2,3,2,2],5))
  reverseStr()
+ print(letterCombinations("23"))

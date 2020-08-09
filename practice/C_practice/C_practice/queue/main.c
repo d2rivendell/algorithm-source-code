@@ -14,6 +14,7 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     int size = 12;
+
     Queue Q = createQueue(size);
     for (int i = 0; i <size; i++) {
         int x = rand()%20;

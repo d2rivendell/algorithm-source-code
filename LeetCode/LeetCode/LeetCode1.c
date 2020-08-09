@@ -54,14 +54,15 @@ void reverseString(char* s, int sSize){
     }
 }
 
-//最长不重复字符的长度
+//MARK:最长不重复字符的长度
+//abcbdb
 int lengthOfLongestSubstring(char * s){
     //通过滑动窗口解决， 由start和i之间组成一个滑动窗口
     int *all =  malloc(sizeof(int) * 128);//保存字符最近的下标
     int start = 0;//当前窗口的开始位置
     int count = 0;//统计当前不相同的个数
     int max = 0;//当前最大不重复的个数
-    
+    int begin = 0;//最后用来打印的
     memset(all, -1, sizeof(int) * 128);
     for (int i = 0; i < strlen(s); i++) {
         if (all[s[i]] >= start){//和窗口范围内重复了(包括窗口边界start)
@@ -70,8 +71,16 @@ int lengthOfLongestSubstring(char * s){
         }else{
             count += 1;
         }
-        max = (count > max) ? count : max;
+        if(count > max){
+            begin = start;
+            max = count;
+        }
         all[s[i]] = i;
+    }
+    for(int i = 0; i < strlen(s); i++){
+        if(i >= begin && i < (begin + max)){
+            printf("%c",s[i]);
+        }
     }
     free(all);
     return max;
@@ -164,7 +173,7 @@ struct ListNode* rotateRight(struct ListNode* head, int k){
  */
 //MARK:- 26. 删除排序数组中的重复项
 int removeDuplicates(int* nums, int numsSize){
-   //数组是排序好的，左边的指针记录z无重复的， 右边的指针相当于去试探。
+   //数组是排序好的，左边的指针记录无重复的位置，也是最终的长度。 右边的指针相当于去试探。
    //当发现和慢指针位置的值不一样时就将其放在慢指针位置的后面，再把慢指针往后移动一位
    if(numsSize == 0 || numsSize == 1){
        return numsSize;
@@ -172,11 +181,23 @@ int removeDuplicates(int* nums, int numsSize){
    int slow = 0;
    for(int fast = 1; fast < numsSize; fast++){
       if(nums[slow] != nums[fast]){
-          nums[slow + 1] = nums[fast];
-          slow += 1;
+          nums[slow++] = nums[fast];
       }
    }
    return slow + 1;
+}
+
+//MARK: 27. 就地移除指定的元素
+//和上面26类似
+int removeElement(int* nums, int numsSize, int val){
+    //val是要移除的元素
+    int cur = 0;
+    for(int i = 0; i < numsSize; i++){
+        if(nums[i] != val){
+            nums[cur++] = nums[i];
+        }
+    }
+    return cur;
 }
 
 
@@ -515,37 +536,70 @@ int primeCount(int n){
 }
 
 //腾讯面试题 "I am a Student."
-void copyWord(char *src, int i, int len, char *dest, int *p){
-    for (int j = 0; j <= len; j++) {
-        dest[(*p)++] = src[j + i];
+
+//MARK: 151. 翻转字符串里的单词
+void reversSingle(char *s, int left, int right){
+    for(int i = 0; i < (right - left + 1)/2; i++){
+        char temp = s[left + i];
+        s[left + i] = s[right - i];
+        s[right - i] = temp;
     }
 }
-char *reverseWords(char *s){
-    int len =  (int)strlen(s);
-    char *res = malloc(sizeof(char) * len + 1);
-    res[len] = '\0';
-    int left = len - 1;
-    int right = len - 1;
-    char last = s[right];
-    if (last == '.') {
-        res[right] = last;
-        left--;
-        right--;
+char * reverseWords(char * s){
+    if(s == NULL){
+        return s;
     }
-    int k = 0;
-    while (left >= 0) {
-        if (s[left - 1] == ' ' || left - 1 < 0) {
-            copyWord(s, left, right-left, res, &k);
-            if(left - 1 > 0) res[k++] = ' ';
-            right = left-2;
-            left -= 2;
-        }else{
-            left--;
+    int len =  (int)strlen(s);
+    //step 1. 原地去除空格两边和中间多余的空格
+    int cur = 0;//cur之前的字符是处理过的，这个也是最终的字符串长度
+    int preIsSpace = 1;//前一个是否是空格,根据这个来判断是否该往前移动
+    // hello  word
+    for(int i = 0;i < len; i++){
+        if(s[i] != ' '){//当前不是空格
+            preIsSpace = 0;
+            s[cur++] = s[i];
+        }else if(preIsSpace == 0){//当前不是空格,前一个也不是空格
+            preIsSpace = 1;
+            s[cur++] = s[i];
+        }else{//当前是空格，前面一个是空格
+            //什么也不做，让i往前移动，
         }
     }
-    return res;
+    if(cur == 0){//说明全部是空字符串
+        return "";
+    }
+    len = preIsSpace == 1 ? cur - 1 : cur; //把最后一个可能是空格的忽略掉
+    s[len] = '\0';
+    
+    //step2: 翻转整个字符串
+    //核心是找到空格的位置
+    reversSingle(s, 0, len - 1);
+    int left = 0;
+    for (int i = 0; i < len; i++) {
+        if(s[i] != ' ') continue;//找到是空格为止
+        reversSingle(s, left, i-1);
+        left = i+1;//left指向空格的下一个字符
+    }
+    reversSingle(s, left, len - 1);//最后一个需要单独在外面进行翻转
+//    int left = 0;
+//    int right = 0;
+//    while(right + 1 < len && s[right + 1] != ' ' ){
+//        right++;
+//    }
+//    //step: 3对内部单个单词进行翻转
+//    while(right < len){
+//        reversSingle(s, left, right);
+//        right += 2;
+//        left = right;
+//        while((right + 1 < len && s[right + 1] != ' ') ){
+//            right++;
+//        }
+//    }
+    return s;
 }
 
+
+//MARK:两个栈处理翻转
 #define NOTFOUND '~'
 typedef  char StackElement;
 struct MyStack {
@@ -706,7 +760,7 @@ void copyChar(char *src, int b1, int len, char *dst, int b2){
 }
 
 
-//MARK: 5. 最长回文子串
+//MARK: 5. 最长回文子串 --动态规划法
 /*
  给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
  
@@ -758,4 +812,37 @@ char * longestPalindrome(char * s){
     }
     free(arr);
     return dst;
+}
+
+
+//MARK: 剑指 Offer 47. 礼物的最大价值 --动态规划法
+//类似动态规划
+int maxValue(int** grid, int gridSize, int* gridColSize){
+    int row = gridSize;
+    int col = gridColSize[0];
+    //dp保存当前位置最大价值的礼物
+    int **dp = malloc(sizeof(int *) * row);
+    for(int i = 0; i < row; i++){
+        dp[i] = malloc(sizeof(int) *col);
+    }
+    for(int i = 0; i < row; i++){
+        for(int j = 0; j < col; j++){
+            int val = grid[i][j];
+            int max = 0;
+            if(i-1 >= 0){//存在上面位置
+                max = dp[i-1][j];
+            }
+            if(j-1 >= 0 && max < dp[i][j-1]){//存在左边位置
+                max =  dp[i][j-1];
+            }
+            printf("%d %d\n",val,max);
+            dp[i][j] = val + max;
+        }
+    }
+    int v = dp[row-1][col-1];
+    for(int i = 0; i < row; i++){
+        free(dp[i]);
+    }
+    free(dp);
+    return v;
 }
