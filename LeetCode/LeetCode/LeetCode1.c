@@ -11,6 +11,7 @@
 #include <math.h>
 #include <string.h>
 #include <string.h>
+#include <math.h>
 
 #define DEL(x, y) (x > y ? x - y : y - x)
 #define MIN(x, y) (x > y ? y : x)
@@ -845,4 +846,57 @@ int maxValue(int** grid, int gridSize, int* gridColSize){
     }
     free(dp);
     return v;
+}
+
+//N皇后
+void place(int row, int n, int *cols);
+int isValid(int row, int col, int *cols);
+void printQueen(int *cols, int n);
+void placeQueen(int n){
+    //cols[i]用来记录第i行皇后放置在第几列
+    int *cols = malloc(sizeof(int) * n);
+    place(0, n, cols);
+}
+
+//在第row行放置皇后
+void place(int row, int n, int *cols){
+    if (row >= n) {
+        printf("存在！\n");
+        printQueen(cols, n);
+        return;
+    }
+    for(int i = 0; i < n ; i++) {//遍历row行的第i列
+        if (isValid(row, i, cols)) {
+            cols[row] = i;
+            place(row + 1, n, cols);
+        }
+    }
+}
+
+//判断在[row][col]位置是否满足要求， 相当于剪枝处理
+int isValid(int row, int col, int *cols){
+    for (int i = 0; i < row; i++) {
+        if (cols[i] == col) {//同一列已经摆过了
+            return 0;
+        }
+        //对角线是否摆过 (通过对角线的倒数绝对值相等来判断)
+        if(row-i == abs(col - cols[i])){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void printQueen(int *cols, int n){
+    for(int i = 0; i < n ; i++) {//行
+        for(int j = 0; j < n ; j++) {//列
+            if (cols[i] == j) {
+                printf("1 ");
+            }else{
+                printf("0 ");
+            }
+        }
+        printf("\n");
+    }
+    printf("------------------------\n");
 }

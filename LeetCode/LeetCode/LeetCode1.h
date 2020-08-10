@@ -58,4 +58,6 @@ int coins(int money, int A[], int N);
 //MARK: 最长回文子串  --动态规划
 char * longestPalindrome(char * s);
 
+//N皇后
+void placeQueen(int n);
 #endif /* LeetCode1_h */
