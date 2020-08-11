@@ -38,7 +38,7 @@ def overhalf(gifts, n):
             dic[v] = 1
     return 0
 
-@example("17. 电话号码的字母组合")
+@example("17. 电话号码的字母组合 -回溯法")
 def letterCombinations(digits):
     """
         :type digits: str
@@ -72,7 +72,25 @@ def letterCombinations(digits):
        backtrack("", digits)
     return output
 
+@example("排列 -回溯法")
+def strArrange(str):
+    listStr = list(str)
+    output = []
+    def backtree(combination, next):
+        if len(next) == 0:
+            output.append(combination)
+            return
+        else:
+            for (idx, sub) in enumerate(next):
+                next_copy = next.copy()
+                next_copy.pop(idx)
+                backtree(combination+sub, next_copy)
+
+    backtree("", listStr)
+    return output
+
 if __name__ == '__main__':
- print(overhalf([1,2,3,2,2],5))
- reverseStr()
+ #print(overhalf([1,2,3,2,2],5))
+ #reverseStr()
  print(letterCombinations("23"))
+ print(strArrange("abc"))
