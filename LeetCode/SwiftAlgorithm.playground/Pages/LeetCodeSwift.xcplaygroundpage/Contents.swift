@@ -441,15 +441,15 @@ example("上下打印二叉树") {
             if root == nil{
                 return []
             }
-            var stack: [TreeNode] = [root!]
+            var queue: [TreeNode] = [root!]
             var res: [Int] = []
-            while(!stack.isEmpty){
-                let node = stack.remove(at: 0)
+            while(!queue.isEmpty){
+                let node = queue.remove(at: 0)
                 if let left = node.left{
-                    stack.append(left)
+                    queue.append(left)
                 }
                 if let right = node.right{
-                    stack.append(right)
+                    queue.append(right)
                 }
                 res.append(node.val)
             }

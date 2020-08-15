@@ -2,13 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../SwiftDataStructure/SwiftDataStructure.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../algorithm/algorithm.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../practice/C_practice/C_practice.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:MyPlayground.playground">
+      location = "group:/Users/leon/Documents/GitHub/algorithm-source-code/LeetCode/SwiftAlgorithm.playground">
    </FileRef>
    <FileRef
       location = "group:LeetCode.xcodeproj">

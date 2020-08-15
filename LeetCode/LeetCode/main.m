@@ -53,5 +53,5 @@ LeetCode(){
     memcpy(ss, s, len);
     ss[len] = '\0';
     printf("res:||%s||\n", reverseWords(ss));
-    placeQueen(4);
+//    placeQueen(4);
 }

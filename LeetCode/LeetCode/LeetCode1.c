@@ -575,6 +575,8 @@ char * reverseWords(char * s){
     //step2: 翻转整个字符串
     //核心是找到空格的位置
     reversSingle(s, 0, len - 1);
+    
+    //step: 3对内部单个单词进行翻转
     int left = 0;
     for (int i = 0; i < len; i++) {
         if(s[i] != ' ') continue;//找到是空格为止
@@ -582,6 +584,8 @@ char * reverseWords(char * s){
         left = i+1;//left指向空格的下一个字符
     }
     reversSingle(s, left, len - 1);//最后一个需要单独在外面进行翻转
+    
+// 下面的方式
 //    int left = 0;
 //    int right = 0;
 //    while(right + 1 < len && s[right + 1] != ' ' ){
