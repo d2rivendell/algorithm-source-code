@@ -6,7 +6,12 @@
 //  Copyright © 2020 rivendell. All rights reserved.
 //
 import Foundation
+/*
+ 图类： 所有的顶点map， 边集合set
+ 顶点类： 顶点值， 入度边集合set， 出度边集合set
+ 边： 起始顶点， 目标顶点， 权重（可选）
 
+ */
 //V：顶点的值 E：边的权重
 class Graph<V: Hashable, E>{
     
@@ -173,14 +178,14 @@ class Graph<V: Hashable, E>{
 }
 
 
-//MAKR: 拓扑排序
+//MARK:  拓扑排序
 //前提： 有向无环图
 /*
  只有当一个活动的前驱全部都完成后，这才活动才能能进行
  步骤：
  ①把所有入度为0的顶点放入L中，然后把这些顶点从图去掉
  ②重复操作①，直到找不入度为0的顶点
- 
+课程表： https://leetcode-cn.com/problems/course-schedule-ii/
  */
 extension Graph{
     
@@ -211,5 +216,23 @@ extension Graph{
             }
         }
         return list
+    }
+}
+
+
+//MARK:  最小生成树
+/*
+ 生成树：连通图的 极小子，它含有中全部n 个顶点，恰好只有 n – 1条边
+ 最小生成树（ Minimum Spanning Tree Tree，简称 MSTMST）：
+   也称为最小权重生成树（ Minimum Weight Spanning Tree Tree）、最小支撑树
+   是所有生成树中，总权值最小的那棵
+   适用于有权的连通图
+ 应用场景： 城市间铺设光缆最短距离（费用）
+ */
+extension Graph{
+
+    //使用切分定力
+    func prim(){
+        
     }
 }

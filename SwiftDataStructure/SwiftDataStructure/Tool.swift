@@ -14,6 +14,15 @@ protocol QueueProtocol {
     var isEmpty: Bool { get }
 }
 
+protocol StackProtocol {
+    associatedtype Element
+    func push(_ e: Element)
+    func pop() -> Element?
+    var isEmpty: Bool { get }
+}
+
+
+
 class Queue<E>: QueueProtocol {
     typealias Element = E
     private var _array: [E] = []
@@ -29,12 +38,6 @@ class Queue<E>: QueueProtocol {
 }
 
 
-protocol StackProtocol {
-    associatedtype Element
-    func push(_ e: Element)
-    func pop() -> Element?
-    var isEmpty: Bool { get }
-}
 class Stack<E>: StackProtocol {
     typealias Element = E
     private var _array: [E] = []

@@ -26,10 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		355730CF24E8271C00B53DE7 /* topologicalSort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topologicalSort.png; sourceTree = "<group>"; };
+		355730D224E829CB00B53DE7 /* topo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topo.png; sourceTree = "<group>"; };
+		355730D324E82B5E00B53DE7 /* Prime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prime.png; sourceTree = "<group>"; };
 		359DA45924E7D51400204E23 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		359DA45B24E7D54C00204E23 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		359DA45F24E819F600204E23 /* GraphTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTest.swift; sourceTree = "<group>"; };
-		359DA46124E81AE700204E23 /* no_weight_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_weight_02.png; sourceTree = "<group>"; };
 		35EF232E24E79E0D00592BA5 /* SwiftDataStructure */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftDataStructure; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EF233124E79E0D00592BA5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,10 +47,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		355730D024E8297B00B53DE7 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				355730D124E8297B00B53DE7 /* graph */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		355730D124E8297B00B53DE7 /* graph */ = {
+			isa = PBXGroup;
+			children = (
+				355730D324E82B5E00B53DE7 /* Prime.png */,
+				355730D224E829CB00B53DE7 /* topo.png */,
+				355730CF24E8271C00B53DE7 /* topologicalSort.png */,
+			);
+			path = graph;
+			sourceTree = "<group>";
+		};
 		359DA45E24E819DD00204E23 /* testCase */ = {
 			isa = PBXGroup;
 			children = (
-				359DA46124E81AE700204E23 /* no_weight_02.png */,
 				359DA45F24E819F600204E23 /* GraphTest.swift */,
 			);
 			path = testCase;
@@ -76,6 +95,7 @@
 				359DA45E24E819DD00204E23 /* testCase */,
 				35EF233124E79E0D00592BA5 /* main.swift */,
 				359DA45924E7D51400204E23 /* Tool.swift */,
+				355730D024E8297B00B53DE7 /* image */,
 				359DA45B24E7D54C00204E23 /* Graph.swift */,
 			);
 			path = SwiftDataStructure;
