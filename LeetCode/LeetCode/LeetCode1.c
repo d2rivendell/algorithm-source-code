@@ -15,7 +15,7 @@
 
 #define DEL(x, y) (x > y ? x - y : y - x)
 #define MIN(x, y) (x > y ? y : x)
-
+#define MAX(x, y) (x > y ? x : y)
 void SwapArr(int A[], int a, int b){
     int temp = A[a];
     A[a] = A[b];
@@ -903,4 +903,37 @@ void printQueen(int *cols, int n){
         printf("\n");
     }
     printf("------------------------\n");
+}
+
+
+//MARK: 剑指 Offer 42. 连续子数组的最大和 --分治
+//左闭右开
+int maxSubArrayHelper(int A[], int left, int right);
+int  maxSubArray(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    return maxSubArrayHelper(A, 0, N);
+}
+
+//左闭右开[1,4): 1 2 3
+int maxSubArrayHelper(int A[], int left, int right){
+    if (right - left < 2){//只有一个元素的时候 right - left <= 1
+        return A[left];
+    }
+    int mid = (right + left) >> 1;
+    int leftMaxSum = A[mid - 1];
+    int leftsum = leftMaxSum;
+    for (int i = mid - 2; i >= 0; i--) { //找到左半边最大的总数，由右边开始
+        leftsum += A[i];
+        leftMaxSum = MAX(leftMaxSum, leftsum);
+    }
+    int rightSum = A[mid];
+    int rightMaxSum = rightSum;
+    for (int i = mid + 1; i < right; i++) { //找到左半边最大的总数，由右边开始
+        rightSum += A[i];
+        rightMaxSum = MAX(rightSum, rightMaxSum);
+    }
+    return MAX(leftMaxSum + rightMaxSum,
+               MAX(maxSubArrayHelper(A, left, mid), maxSubArrayHelper(A, mid, right)));
 }

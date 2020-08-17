@@ -47,11 +47,16 @@ LeetCode(){
 //
 //    printf("%s\n",longestPalindrome("ac"));
 //
-    char *s = "  the sky is blue ";
-    int len = (int)strlen(s);
-    char *ss = malloc(sizeof(char) * (len + 1));
-    memcpy(ss, s, len);
-    ss[len] = '\0';
-    printf("res:||%s||\n", reverseWords(ss));
+//字符串
+//    char *s = "  the sky is blue ";
+//    int len = (int)strlen(s);
+//    char *ss = malloc(sizeof(char) * (len + 1));
+//    memcpy(ss, s, len);
+//    ss[len] = '\0';
+//    printf("res:||%s||\n", reverseWords(ss));
+    
+//N皇后
 //    placeQueen(4);
+    int A[9] = {-2,1,-3,4,-1,2,1,-5,4};
+    printf("最大子序列： %d\n",  maxSubArray(A, 9));
 }
