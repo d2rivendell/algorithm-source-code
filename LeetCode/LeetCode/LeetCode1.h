@@ -59,4 +59,7 @@ int coins(int money, int A[], int N);
 char * longestPalindrome(char * s);
 //N皇后
 void placeQueen(int n);
+
+int  maxSubArray(int A[], int N);
+int  maxSubArrayDp(int A[], int N);
 #endif /* LeetCode1_h */

@@ -15,7 +15,7 @@
 
 #define DEL(x, y) (x > y ? x - y : y - x)
 #define MIN(x, y) (x > y ? y : x)
-
+#define MAX(x, y) (x > y ? x : y)
 void SwapArr(int A[], int a, int b){
     int temp = A[a];
     A[a] = A[b];
@@ -909,4 +909,73 @@ void printQueen(int *cols, int n){
         printf("\n");
     }
     printf("------------------------\n");
+}
+
+
+//MARK: 剑指 Offer 42. 连续子数组的最大和 --分治
+//左闭右开
+int maxSubArrayHelper(int A[], int left, int right);
+int  maxSubArray(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    return maxSubArrayHelper(A, 0, N);
+}
+
+//左闭右开[1,4): 1 2 3
+int maxSubArrayHelper(int A[], int left, int right){
+    if (right - left < 2){//只有一个元素的时候 right - left <= 1
+        return A[left];
+    }
+    int mid = (right + left) >> 1;
+    int leftMaxSum = A[mid - 1];
+    int leftsum = leftMaxSum;
+    for (int i = mid - 2; i >= 0; i--) { //找到左半边最大的总数，由右边开始
+        leftsum += A[i];
+        leftMaxSum = MAX(leftMaxSum, leftsum);
+    }
+    int rightSum = A[mid];
+    int rightMaxSum = rightSum;
+    for (int i = mid + 1; i < right; i++) { //找到左半边最大的总数，由右边开始
+        rightSum += A[i];
+        rightMaxSum = MAX(rightSum, rightMaxSum);
+    }
+    return MAX(leftMaxSum + rightMaxSum,
+               MAX(maxSubArrayHelper(A, left, mid), maxSubArrayHelper(A, mid, right)));
+}
+
+
+//MARK: 剑指 Offer 42. 连续子数组的最大和 --动态规划
+/*
+ [-2,1,-3,4,-1,2,1,-5,4]
+ dp[i]表示第i个数字之前最大的和，包括A[i]！
+ 因为要包括A[i],所以转移公式如下：
+ 如果 dp[i-1] < 0, dp[i] = A[i];  (前面一个已经是负数了，肯定不能加了)
+ 如果 dp[i-1] >= 0, dp[i] = dp[i-1] + A[i];
+ */
+int  maxSubArrayDp(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    //dp[i]表示 前i个数列中的最大和
+    int *dp = malloc(sizeof(int) * N);
+    memset(dp, 0, N);
+    int max = A[0];
+    dp[0] = max;
+    for (int i = 1; i < N; i++) {
+        if (dp[i-1]  >= 0) {
+            dp[i] = dp[i-1] + A[i];
+        }else{
+            dp[i] = A[i];
+        }
+        if (max < dp[i]){
+            max = dp[i];
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        printf("%d ", dp[i]);
+    }
+    printf("\n");
+    return max;
+    
 }
