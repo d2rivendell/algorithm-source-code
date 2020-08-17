@@ -776,47 +776,53 @@ void copyChar(char *src, int b1, int len, char *dst, int b2){
  注意: "aba" 也是一个有效答案
  https://leetcode-cn.com/problems/longest-palindromic-substring/
  */
-//arr[i][j] 表示s[i-j]之间的字符是否是回文， 如果s[i+1][j-1]是回文且s[i] == s[j]，则s[i-j]是回文
-//状态转移条件是。j-i<3时，s[i][j]是回文
+/*
+   j -------------
+ i
+｜                ｜
+｜                ｜
+｜________________｜
+ // dp[i][j] 表示s[i-j]之间的字符是否是回文，如果 dp[i+1][i-1] == 1 && s[i] == [j]，则s[i-j]是回文
+ //或者[1,2,1]， [2,2]这两种情况下初始的dp[0][2],dp[0][1]不等于0，但是它们也是回文，所以需要特殊处理
+ //j-i <= 2的时候默认也是回文
+ */
 char * longestPalindrome(char * s){
     int len = (int)strlen(s);
     if (len == 0 || len == 1) {
         return s;
     }
-    int **arr = malloc(sizeof(int *) * len);
+    //dp[i][j]表示s[i-j]是否回文
+    int **dp = malloc(sizeof(int *) * len);
     for (int i = 0; i < len; i++) {
-        arr[i] =  malloc(sizeof(int *) * len);
+        dp[i] = malloc(sizeof(int) * len);
+        memset(dp[i], 0, sizeof(int) * len);
+        dp[i][i] = 1;//顺便把对角线设置了
     }
-    for (int i = 0; i < len; i++) {
-        arr[i][i] =  1;//对角线.
-    }
-    int maxLen = 1;//len大于1，肯定会有结果maxLen >=1,初始设置为1
+    int maxLen = 1;
     int begin = 0;
-    for (int l = 1; l < len; l++) {//j表示长度
-        for (int i = 0; i < l; i++) {
-            if (s[i] != s[l]) {//s[i] != s[j]
-                arr[i][l] = 0;
-            }else{//s[i] == s[j]
-                if (l-i<3) {
-                    arr[i][l] = 1;
-                }else {
-                    arr[i][l] = arr[i+1][l-1];//参照左下角的
+    for (int j = 1; j < len; j++) {//左到右
+        for (int i = 0;  i < j; i++) {//
+            if (s[i] != s[j]) {
+                dp[i][j] = 0;
+            }else{
+                if (dp[i+1][j-1] || j -i <= 2) {
+                    dp[i][j] = 1;
                 }
             }
-            if (arr[i][l] && l- i + 1 > maxLen) {
-                maxLen = l -i + 1;
+            if (dp[i][j] && (j - i + 1) > maxLen) {
+                maxLen = (j - i + 1);
                 begin = i;
             }
         }
     }
-    char *dst =  malloc(sizeof(char) * (maxLen + 1));
-    copyChar(s, begin, maxLen, dst, 0);
-    dst[maxLen] = '\0';
+    char *res = malloc(sizeof(char) * (maxLen + 1));
+    memcpy(res, s+begin, maxLen);
+    res[maxLen] = '\0';
     for (int i = 0; i < len; i++) {
-        free(arr[i]);
+        free(dp[i]);
     }
-    free(arr);
-    return dst;
+    free(dp);
+    return res;
 }
 
 
@@ -852,7 +858,7 @@ int maxValue(int** grid, int gridSize, int* gridColSize){
     return v;
 }
 
-//N皇后
+//MARK: N皇后 --回溯法
 void place(int row, int n, int *cols);
 int isValid(int row, int col, int *cols);
 void printQueen(int *cols, int n);

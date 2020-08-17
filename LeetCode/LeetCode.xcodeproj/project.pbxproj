@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3566CF9924E9640800DB23F3 /* longestPalindrome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = longestPalindrome.png; sourceTree = "<group>"; };
 		35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = algorithm.xcodeproj; path = ../algorithm/algorithm.xcodeproj; sourceTree = "<group>"; };
 		35D860C8249CFB9B0072EEFF /* LeetCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LeetCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D860CB249CFB9B0072EEFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3566CF9724E963EB00DB23F3 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				3566CF9924E9640800DB23F3 /* longestPalindrome.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 		35B8B65724DE631600FE4DE9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +81,7 @@
 		35D860CA249CFB9B0072EEFF /* LeetCode */ = {
 			isa = PBXGroup;
 			children = (
+				3566CF9724E963EB00DB23F3 /* image */,
 				D9D7EA8524A8A2E6003A698F /* Sort */,
 				35D860CB249CFB9B0072EEFF /* main.m */,
 				35D860D2249CFD6F0072EEFF /* LeetCode1.h */,

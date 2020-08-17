@@ -275,6 +275,7 @@ example("LRU") {
             }
         }
         
+        
         func removeNode(node: Node) {
             node.pre?.next = node.next
             node.next?.pre = node.pre

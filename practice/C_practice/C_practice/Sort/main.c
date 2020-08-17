@@ -32,18 +32,17 @@ void Quicksort(int n[], int len);
 void quicksortHelper(int n[], int l, int r);
 int partition(int n[], int l, int r);
 
-
-void heapUp(int A[], int N);
-
+void  heapSort2(int A[], int N);
+void PerDown2(int A[], int N, int i);
 
 int main(int argc, const char * argv[]) {
-    int len = 2;
+    int len = 20;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
     }
     printf("\n==============\n");
-    heapUp(A, len);
+    heapSort2(A, len);
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
     }
@@ -52,34 +51,33 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-void PercolateDown(int A[], int i, int N);
-void heapUp(int A[], int N){
-    for (int i =  N/2 - 1; i >= 0 ; i--) {
-        PercolateDown(A, i, N);
+void heapSort2(int A[], int N){
+    for(int i = N/2-1; i >= 0; i--){
+        PerDown2(A,  N, i);
     }
-    for (int i = 0; i < N; i++) {
+    for(int i = 0; i < N; i++){
         ArraySwap(A, 0, N - i - 1);
-        PercolateDown(A, 0, N - i - 1);
+        PerDown2(A,  N-i-1, 0);
     }
     
 }
-void PercolateDown(int A[], int i, int N){//i是当前的顶部节点
-    int top = A[i];//当前根节点
-    int child = 0;
-    for (;  2 * i + 1 < N; i = child) {//循环一次节点变为子节点
+
+void PerDown2(int A[], int N, int i){
+    int  root = A[i];
+    int  child = 0;
+    for(; 2 * i + 1 < N; i = child){
         child = 2 * i + 1;
-        if (child + 1 < N && A[child + 1] > A[child]) {
+        if(child + 1 < N && A[child + 1] > A[child]){
             child += 1;
         }
-        if (A[child] > top) {
+        if(A[child] > root){
             A[i] = A[child];
         }else{
             break;
         }
     }
-    A[i] = top;
+    A[i] = root;
 }
-
 
 //MARK:- ========  工具函数  ========
 void Swap(ElementType *a,ElementType *b){
