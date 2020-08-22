@@ -12,7 +12,7 @@
 
 void SortTest(void);
 void LeetCode(void);
-
+void testLengthOfLIS();
 void arrayPrint(int arr[], int N){
     printf("\n");
     for (int i = 0; i < N; i++) {
@@ -105,8 +105,10 @@ LeetCode(){
 //    int A[] = {1, 5, 20, 20, 25, 31};
 //    printf("%d\n", coins(19, &A, 6));
 //
-    printf("%s\n",longestPalindrome("cbbd"));
+//    printf("%s\n",longestPalindrome("cbbd"));
 //
+    
+    
 //字符串
 //    char *s = "  the sky is blue ";
 //    int len = (int)strlen(s);
@@ -121,6 +123,15 @@ LeetCode(){
     
 //N皇后
 //    placeQueen(4);
-    int A[9] = {-2,1,-3,4,-1,2,1,-5,4};
-    printf("最大子序列： %d\n",  maxSubArrayDp(A, 9));
+//    int A[9] = {-2,1,-3,4,-1,2,1,-5,4};
+//    printf("连续最大子序列和： %d\n",  maxSubArrayDp2(A, 9));
+    
+    testLengthOfLIS();
+}
+
+
+void testLengthOfLIS(){
+    int A[9] = {1,3,6,7,9,4,10,5,6};
+//    int A[] = {2, 2}
+     printf("最大上升子序列长度： %d\n",  lengthOfLIS2(A, 9));
 }

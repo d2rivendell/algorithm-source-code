@@ -977,5 +977,120 @@ int  maxSubArrayDp(int A[], int N){
     }
     printf("\n");
     return max;
+}
+
+int  maxSubArrayDp2(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    int max = A[0];
+    int dp = max;
+    for (int i = 1; i < N; i++) {
+        if (dp  >= 0) {
+            dp = dp + A[i];
+        }else{
+            dp = A[i];
+        }
+        if (max < dp){
+            max = dp;
+        }
+    }
+    printf("\n");
+    return max;
     
 }
+//最大连续子序列和（求最大和） --done
+//最大长上升子序列（求长度）--doing
+//最长上升子序列长度、最长公共子序列、最长公共字符串
+
+
+//MARK: 300. 最长上升子序列的长度 --动态规划
+/*
+ ⚠️是严格上升
+
+ [1,3,6,7,9,4,10,5,6]
+ dp[i]表示包含第i个数字最大的子序列的长度
+ 初始化: dp[i] = 1
+ 状态转移：
+ 遍历x∈[0,i-1]之间。如果A[x] >= A[i] 跳过（注意等于的也要跳过）， 找到最大的dp[x]。 dp[i] = dp[x] + 1
+ 
+ */
+int  lengthOfLIS(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    int *dp = malloc(sizeof(int) * N);
+    // 注意不能用memset初始化为1,。 memset是对每个字节设置 int会被设置
+    //为 0000 0001 0000 0001 0000 0001 0000 0001
+    int max = 1;
+    for (int i = 0; i < N; i++) {
+        dp[i] = 1;
+//        int localMax = 0;
+        for (int x = 0; x < i; x++) {
+            if (A[x] >= A[i]) continue;
+//            if (dp[x] > localMax) {
+//                localMax = dp[x];
+//            }
+            dp[i] = MAX(dp[i], dp[x] + 1);
+        }
+        if(dp[i] > max){
+            max = dp[i];
+        }
+    }
+    free(dp);
+    return max;
+}
+
+//MARK: 300. 最长上升子序列的长度 --牌顶
+/*
+ top为牌顶数组
+
+  如果A[i] <= top[x] 则把A[i]的牌顶下标为x的数组
+  如果A[i] > top[x] 即A[i]大于现有牌顶的值 则新开牌顶
+ */
+//[1,3,6,7,9,4,10,5,6]
+int  lengthOfLIS2(int A[], int N){
+    if (N == 0) {
+        return 0;
+    }
+    //建立数组保存所有堆的牌顶,最坏情况是所有的都是上升的需要建立N个牌顶
+    int *top = malloc(sizeof(int) * N);
+    //牌顶的个数
+    int topCount = 1;
+    top[0] = A[0];
+    for (int i = 1; i < N; i++) {
+        //这里可以优化为二分查找
+//常规查找1
+//        int t = 0;
+//        for (; t < topCount; t++) {
+//            if (A[i] <=  top[t]) {//找到合适的位置
+//                top[t] = A[i];
+//                break;
+//            }
+//        }
+//        if(t == topCount){//A[i]大于现有牌顶的值 开新牌顶
+//            topCount++;
+//            top[topCount - 1] = A[i];
+//        }
+        //二分查找
+        int left = 0;
+        int right = topCount;
+        while (left < right) {
+            int  mid = (left + right) >> 1;
+            //找到第一个小于且等于牌顶的位置
+            if (A[i] <= top[mid]) {
+                right = mid;
+            }else if (A[i] > top[mid]){
+                left = mid + 1;
+            }
+        }
+        top[left] = A[i];//此时：left == right
+        if(right == topCount){//A[i]大于现有牌顶的值 开新牌顶
+            topCount++;
+            top[topCount - 1] = A[i];
+        }
+    }
+    return topCount;
+}
+
+

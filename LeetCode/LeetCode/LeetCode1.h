@@ -60,6 +60,12 @@ char * longestPalindrome(char * s);
 //N皇后
 void placeQueen(int n);
 
+//连续子数组的最大和 
 int  maxSubArray(int A[], int N);
 int  maxSubArrayDp(int A[], int N);
+int  maxSubArrayDp2(int A[], int N);
+
+//最长上升子序列的长度
+int  lengthOfLIS(int A[], int N);
+int  lengthOfLIS2(int A[], int N);
 #endif /* LeetCode1_h */
