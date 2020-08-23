@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		35D860CC249CFB9B0072EEFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D860CB249CFB9B0072EEFF /* main.m */; };
-		35D860D4249CFD6F0072EEFF /* LeetCode1.c in Sources */ = {isa = PBXBuildFile; fileRef = 35D860D3249CFD6F0072EEFF /* LeetCode1.c */; };
+		35DC104B24F2537C00B74380 /* StringArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC104A24F2537C00B74380 /* StringArray.c */; };
+		35DC104E24F253EA00B74380 /* DynamicPlanning.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC104D24F253EA00B74380 /* DynamicPlanning.c */; };
+		35DC105024F2549400B74380 /* NumberArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC104F24F2549400B74380 /* NumberArray.c */; };
+		35DC105224F255D500B74380 /* ListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC105124F255D500B74380 /* ListNode.c */; };
 		D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */ = {isa = PBXBuildFile; fileRef = D9D7EA8724A8A2F5003A698F /* Sort.c */; };
 /* End PBXBuildFile section */
 
@@ -29,8 +32,11 @@
 		35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = algorithm.xcodeproj; path = ../algorithm/algorithm.xcodeproj; sourceTree = "<group>"; };
 		35D860C8249CFB9B0072EEFF /* LeetCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LeetCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D860CB249CFB9B0072EEFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		35D860D2249CFD6F0072EEFF /* LeetCode1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeetCode1.h; sourceTree = "<group>"; };
-		35D860D3249CFD6F0072EEFF /* LeetCode1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = LeetCode1.c; sourceTree = "<group>"; };
+		35D860D2249CFD6F0072EEFF /* LeetCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeetCode.h; sourceTree = "<group>"; };
+		35DC104A24F2537C00B74380 /* StringArray.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = StringArray.c; sourceTree = "<group>"; };
+		35DC104D24F253EA00B74380 /* DynamicPlanning.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DynamicPlanning.c; sourceTree = "<group>"; };
+		35DC104F24F2549400B74380 /* NumberArray.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = NumberArray.c; sourceTree = "<group>"; };
+		35DC105124F255D500B74380 /* ListNode.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ListNode.c; sourceTree = "<group>"; };
 		D9D7EA8624A8A2F5003A698F /* Sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sort.h; sourceTree = "<group>"; };
 		D9D7EA8724A8A2F5003A698F /* Sort.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Sort.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,8 +90,11 @@
 				3566CF9724E963EB00DB23F3 /* image */,
 				D9D7EA8524A8A2E6003A698F /* Sort */,
 				35D860CB249CFB9B0072EEFF /* main.m */,
-				35D860D2249CFD6F0072EEFF /* LeetCode1.h */,
-				35D860D3249CFD6F0072EEFF /* LeetCode1.c */,
+				35D860D2249CFD6F0072EEFF /* LeetCode.h */,
+				35DC104A24F2537C00B74380 /* StringArray.c */,
+				35DC104F24F2549400B74380 /* NumberArray.c */,
+				35DC105124F255D500B74380 /* ListNode.c */,
+				35DC104D24F253EA00B74380 /* DynamicPlanning.c */,
 			);
 			path = LeetCode;
 			sourceTree = "<group>";
@@ -161,7 +170,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35D860D4249CFD6F0072EEFF /* LeetCode1.c in Sources */,
+				35DC104B24F2537C00B74380 /* StringArray.c in Sources */,
+				35DC105224F255D500B74380 /* ListNode.c in Sources */,
+				35DC105024F2549400B74380 /* NumberArray.c in Sources */,
+				35DC104E24F253EA00B74380 /* DynamicPlanning.c in Sources */,
 				D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */,
 				35D860CC249CFB9B0072EEFF /* main.m in Sources */,
 			);

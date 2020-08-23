@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "LeetCode1.h"
+#include "LeetCode.h"
 #include "Sort.h"
 
 void SortTest(void);
 void LeetCode(void);
 void testLengthOfLIS();
+void testLongestCommonSubsequence();
 void arrayPrint(int arr[], int N){
     printf("\n");
     for (int i = 0; i < N; i++) {
@@ -22,66 +23,7 @@ void arrayPrint(int arr[], int N){
     printf("\n");
 }
 
-//就地移除字符串所有的空格
-void removeAllBlank(char *s){
-    //如果当前是空格
-    int len = (int)strlen(s);
-    int cur = 0;
-    int count = 0;
-    for(int i = 0; i < len; i++){
-        if(s[i] == ' '){//当前是空格
-            count++;
-        }else{//非空格
-            s[cur++] = s[i];
-        }
-    }
-    printf("空格的个数是%d\n",count);
-    s[cur] = '\0';
-}
 
-//就地移除两边的空格， 单词之间最多只能有一个空格
-//“ I am a student ”
-void normalString(char *s){
-    int len = (int)strlen(s);
-    int cur = 0;
-    int preIsBlank = 1;//初始化设置为1防止第一个字符就是空格
-    int count = 0;
-    for(int i = 0; i < len; i++){
-        if(s[i] == ' '){//空格
-            // 如果前面是空格就会跳过
-            if(preIsBlank){
-                //do nothing
-                count++;
-            }else{
-                s[cur++] = s[i];
-            }
-            preIsBlank = 1;
-        }else{
-            s[cur++] = s[i];
-            preIsBlank = 0;
-        }
-    }
-    if(cur == 0){//说明s都是空格
-        s[cur] = '\0';
-        return;
-    }
-    //末尾可能会有空格
-    if(preIsBlank) {
-        cur =  cur - 1;
-    }
-    s[cur] = '\0';
-}
-
-void singleReverse(char *s, int a, int b){
-    int len = b - a + 1;
-    //1 2 3
-    //1 2 3 4
-    for(int i = 0; i < len/2; i++){
-        char temp = s[a + i];
-        s[a + i] = s[a + len - 1 - i];
-        s[a + len - 1 -i]  = temp;
-    }
-}
 
 int main(int argc, const char * argv[]) {
     LeetCode();
@@ -126,7 +68,9 @@ LeetCode(){
 //    int A[9] = {-2,1,-3,4,-1,2,1,-5,4};
 //    printf("连续最大子序列和： %d\n",  maxSubArrayDp2(A, 9));
     
-    testLengthOfLIS();
+//    testLengthOfLIS();
+    
+    testLongestCommonSubsequence();
 }
 
 
@@ -134,4 +78,10 @@ void testLengthOfLIS(){
     int A[9] = {1,3,6,7,9,4,10,5,6};
 //    int A[] = {2, 2}
      printf("最大上升子序列长度： %d\n",  lengthOfLIS2(A, 9));
+}
+
+//最长公共子序列
+void testLongestCommonSubsequence(){
+    printf("最长公共子序列： %d\n",  longestCommonSubsequence2("abcdefhn", "aefz"));
+    
 }

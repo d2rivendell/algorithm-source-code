@@ -36,7 +36,7 @@ void  heapSort2(int A[], int N);
 void PerDown2(int A[], int N, int i);
 
 int main(int argc, const char * argv[]) {
-    int len = 20;
+    int len = 4;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
@@ -98,9 +98,9 @@ int BinarySearch(int n[], int len, int a){
     if (len == 0) {//防止传空进来
         return -1;
     }
-    unsigned int begin = 0;
-    unsigned int end = len - 1;
-    while (begin < end) {
+    int begin = 0;
+    int end = len - 1;
+    while (begin <= end) {
         int min = begin + (end -  begin)/2;//防止出现溢出
         if(a == n[min]){
             return min;
@@ -110,11 +110,7 @@ int BinarySearch(int n[], int len, int a){
             begin = min + 1;
         }
     }
-    if (begin >= len || n[begin] != a) {//要判断是不是
-        return -1;
-    }else{
-       return begin;
-    }
+     return -1;
 
 }
 

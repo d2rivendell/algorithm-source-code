@@ -10,6 +10,12 @@
 #define LeetCode1_h
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define DEL(x, y) (x > y ? x - y : y - x)
+#define MIN(x, y) (x > y ? y : x)
+#define MAX(x, y) (x > y ? x : y)
 
 //2. 两数相加
 struct ListNode {
@@ -68,4 +74,8 @@ int  maxSubArrayDp2(int A[], int N);
 //最长上升子序列的长度
 int  lengthOfLIS(int A[], int N);
 int  lengthOfLIS2(int A[], int N);
+
+//最长公共子序列 子序列是不连续的
+int longestCommonSubsequence(char * text1, char * text2);
+int longestCommonSubsequence2(char * text1, char * text2);
 #endif /* LeetCode1_h */
