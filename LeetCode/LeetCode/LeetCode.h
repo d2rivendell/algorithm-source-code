@@ -22,6 +22,7 @@ struct ListNode {
      int val;
      struct ListNode *next;
 };
+
 //?
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 
@@ -78,4 +79,19 @@ int  lengthOfLIS2(int A[], int N);
 //最长公共子序列 子序列是不连续的
 int longestCommonSubsequence(char * text1, char * text2);
 int longestCommonSubsequence2(char * text1, char * text2);
+
+//MARK: 86. 分隔链表 --双指针
+struct ListNode* partition(struct ListNode* head, int x);
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* LeetCode1_h */

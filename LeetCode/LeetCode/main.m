@@ -14,6 +14,21 @@ void SortTest(void);
 void LeetCode(void);
 void testLengthOfLIS();
 void testLongestCommonSubsequence();
+void testPartitionList();
+struct ListNode  *createList(int A[], int N){
+    struct ListNode  *p = (struct ListNode *) malloc(sizeof(struct ListNode ));
+    struct ListNode  *head = p;
+    for (int i = 0; i < N; i++) {
+        p->val = A[i];
+        p->next = NULL;
+        if (i + 1 < N){
+            p->next = (struct ListNode *) malloc(sizeof(struct ListNode ));
+            p = p->next;
+        }
+    }
+    return head;
+}
+
 void arrayPrint(int arr[], int N){
     printf("\n");
     for (int i = 0; i < N; i++) {
@@ -22,7 +37,14 @@ void arrayPrint(int arr[], int N){
     
     printf("\n");
 }
-
+void listPrint(struct ListNode *head){
+    printf("\n");
+    while (head) {
+        printf("%d ",head->val);
+        head = head->next;
+    }
+    printf("\n");
+}
 
 
 int main(int argc, const char * argv[]) {
@@ -70,7 +92,9 @@ LeetCode(){
     
 //    testLengthOfLIS();
     
-    testLongestCommonSubsequence();
+//    testLongestCommonSubsequence();
+    
+    testPartitionList();
 }
 
 
@@ -84,4 +108,11 @@ void testLengthOfLIS(){
 void testLongestCommonSubsequence(){
     printf("最长公共子序列： %d\n",  longestCommonSubsequence2("abcdefhn", "aefz"));
     
+}
+
+
+void testPartitionList(){
+    printf("分隔链表：\n");
+    int A[] = {1,4,3,2,5,2};
+    listPrint(partition(createList(A, 6), 3));
 }
