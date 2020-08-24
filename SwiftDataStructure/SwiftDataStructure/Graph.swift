@@ -179,7 +179,7 @@ class Graph<V: Hashable, E>{
 
 
 //MARK:  拓扑排序
-//前提： 有向无环图
+//前提： 有向无环图，开始之前要判断有无环？
 /*
  只有当一个活动的前驱全部都完成后，这才活动才能能进行
  步骤：
@@ -234,5 +234,88 @@ extension Graph{
     //使用切分定力
     func prim(){
         
+    }
+}
+
+
+
+
+
+
+//简易版
+class Solution {
+    var vertexs: [Int: Vertex]  = [:]
+    var edges: [Edge] = []
+    init() {
+        
+    }
+    class Vertex{
+       var inEdges: [Edge] = []
+       var outEdges: [Edge] = []
+       var value: Int
+       init(_ value: Int){
+         self.value = value
+       }
+    }
+    class Edge{
+        var from: Int
+        var to: Int
+        init(_ from: Int, _ to: Int){
+            self.from = from
+            self.to = to
+        }
+    }
+
+    func findOrder(_ numCourses: Int, _ prerequisites: [[Int]]) -> [Int] {
+       if prerequisites.isEmpty{
+          var res: [Int] = []
+          for i in 0..<numCourses{
+              res.append(i)
+          }
+           return res.reversed()
+       }
+       for arr in prerequisites{
+          let fromValue = arr[1]
+          let toValue = arr[0]
+          let edge =  Edge(fromValue, toValue)
+          edges.append(edge)
+          if let from =  vertexs[fromValue]{
+              from.outEdges.append(edge)
+          }else{
+              let from = Vertex(fromValue)
+              from.outEdges.append(edge)
+              vertexs[fromValue] =  from
+          }
+
+          if let to =  vertexs[toValue]{
+             to.inEdges.append(edge)
+          }else{
+              let to = Vertex(toValue)
+              to.inEdges.append(edge)
+              vertexs[toValue] =  to
+          }
+       }
+      print(edges)
+       var queue: [Vertex] = []
+       var record: [Int: Int] = [:]
+       var result: [Int] = []
+       for vertex in vertexs.values{
+           if vertex.inEdges.isEmpty{
+            queue.append(vertex)
+           }else{
+              record[vertex.value] =  vertex.inEdges.count
+           }
+       }
+       while(queue.isEmpty == false){
+              let vertex =  queue.remove(at: 0)
+              result.append(vertex.value)
+              for e in vertex.outEdges{
+                  record[e.to] = vertexs[e.to]!.inEdges.count - 1
+                  if record[e.to] == 0{
+                     queue.append(vertexs[e.to]!)
+                  }
+              }
+       }
+      return result
     }
 }
