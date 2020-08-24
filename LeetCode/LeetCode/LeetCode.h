@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdbool.h>
 #define DEL(x, y) (x > y ? x - y : y - x)
 #define MIN(x, y) (x > y ? y : x)
 #define MAX(x, y) (x > y ? x : y)
@@ -23,6 +23,11 @@ struct ListNode {
      struct ListNode *next;
 };
 
+struct TreeNode {
+     int val;
+     struct TreeNode *left;
+     struct TreeNode *right;
+ };
 //?
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 

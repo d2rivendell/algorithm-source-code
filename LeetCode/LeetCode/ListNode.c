@@ -162,3 +162,63 @@ struct ListNode* removeElements(struct ListNode* head, int val){
     //方法2是直接建立一个新链表，遍历原链表，
     //把不等于val的其他链表装入新链表，返回新链表即可
 }
+
+
+
+
+//MARK: 234. 回文链表
+/*
+ 输入: 1->2->2->1
+ 输出: true
+ 要求时间复杂度是O(n), 空间复杂度是O(1)。
+ 可以根据快慢指针找到链表中点，再把链表节点后半部分翻转， 前半部分再和后半部分比较
+ 链表节点是奇数时可以直接取中间， 是偶数时要取后一个节点开始作为后半边节点的开始
+ 比较完之后要把后半部分链表还原回去
+ */
+
+// 1 2 1     其中中点是2
+// 1 2 2 1   左边的2作为中点
+struct ListNode* middleOfList(struct ListNode* head){
+    if (head == NULL) {
+        return NULL;
+    }
+    struct ListNode* slow = head;
+    struct ListNode* fast = head->next;
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow->next;
+}
+
+struct ListNode*  reverseList(struct ListNode* head){
+    struct ListNode* pre = NULL;
+    while (head) {
+         struct ListNode* next =  head->next;
+         head->next = pre;
+         pre = head;
+         head = next;
+    }
+    return pre;
+}
+bool isListPalindrome(struct ListNode* head){
+    //空和只有一个都算
+    if (head == NULL || head->next == NULL)  return true;
+    struct ListNode* leftNode = head;
+    struct ListNode* midNode = middleOfList(head);
+    struct ListNode* rightNode = reverseList(midNode);
+    struct ListNode* rNode = rightNode;
+    bool result = true;
+    while (rightNode) {//rightNode最后一个指向的是空
+        if (leftNode->val != rightNode->val) {
+            //不能在这直接return还需要 恢复链表
+            result =  false;
+            break;
+        }
+        leftNode = leftNode->next;
+        rightNode = rightNode->next;
+    }
+    //恢复
+    reverseList(rNode);
+    return result;
+}
