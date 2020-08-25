@@ -26,6 +26,7 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
     if (left && right) {//子节点都返回值 说明都找到了， 现在的节点就是最近的节点
         return root;
     }
+    //只找到了一个返回 找到的那一个
     return left != NULL ? left : right;
 }
 
