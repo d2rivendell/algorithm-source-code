@@ -69,8 +69,11 @@ int* inorderTraversal(struct TreeNode* root, int* returnSize){
     if (root == NULL) {
         return NULL;
     }
-    MyStack *stack =  MakeStack(20);
-    returnSize = malloc(sizeof(int) * 20);
+    //建立一个指向 TreeNode *类型的可变数组，用来充当栈的功能
+    struct TreeNode **stack = malloc(0);
+    //当前数组的容量， 也就是栈顶的位置
+    int stk = 0;
+    int resSize = 0
     int cur = 0;
     while (StactIsEmpty(stack) == -1 || root != NULL) {
         if(root) {//便利左树

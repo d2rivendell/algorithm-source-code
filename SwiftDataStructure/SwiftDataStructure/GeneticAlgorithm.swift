@@ -151,6 +151,6 @@ func main() {
   }
   print("fittest string: \(String(bytes: fittest, encoding: .utf8)!)")
 }
-main()
+//main()
 
 

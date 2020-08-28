@@ -8,5 +8,11 @@
 
 import Foundation
 
-testGraph()
-testTopologicalSort()
+//testGraph()
+//testTopologicalSort()
+
+//for _ in 0..<30{
+//    testSkipListRandom()
+//}
+
+testSkipListTest()

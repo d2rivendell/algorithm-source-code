@@ -13,6 +13,8 @@
 		359DA45C24E7D54C00204E23 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DA45B24E7D54C00204E23 /* Graph.swift */; };
 		359DA46024E819F600204E23 /* GraphTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DA45F24E819F600204E23 /* GraphTest.swift */; };
 		35EF233224E79E0D00592BA5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF233124E79E0D00592BA5 /* main.swift */; };
+		D93117E724F5264800B5D585 /* GeneticAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */; };
+		D9866F6924F8C8CC00F2EDB5 /* SkipListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +43,9 @@
 		359DA45F24E819F600204E23 /* GraphTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTest.swift; sourceTree = "<group>"; };
 		35EF232E24E79E0D00592BA5 /* SwiftDataStructure */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftDataStructure; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EF233124E79E0D00592BA5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticAlgorithm.swift; sourceTree = "<group>"; };
+		D9866F6724F89EC300F2EDB5 /* skiplist-basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skiplist-basic.png"; sourceTree = "<group>"; };
+		D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipListTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +62,7 @@
 		355730D024E8297B00B53DE7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				D9866F6624F89EB700F2EDB5 /* skipList */,
 				3566CFF524F0EEA800DB23F3 /* Bloom */,
 				355730D124E8297B00B53DE7 /* graph */,
 			);
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				359DA45F24E819F600204E23 /* GraphTest.swift */,
+				D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */,
 			);
 			path = testCase;
 			sourceTree = "<group>";
@@ -117,8 +124,17 @@
 				359DA45B24E7D54C00204E23 /* Graph.swift */,
 				3566CFF124F0EB6400DB23F3 /* BloomFilter.swift */,
 				3566CFF624F0F20800DB23F3 /* SkipList.swift */,
+				D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */,
 			);
 			path = SwiftDataStructure;
+			sourceTree = "<group>";
+		};
+		D9866F6624F89EB700F2EDB5 /* skipList */ = {
+			isa = PBXGroup;
+			children = (
+				D9866F6724F89EC300F2EDB5 /* skiplist-basic.png */,
+			);
+			path = skipList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,12 +194,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9866F6924F8C8CC00F2EDB5 /* SkipListTest.swift in Sources */,
 				359DA46024E819F600204E23 /* GraphTest.swift in Sources */,
 				359DA45C24E7D54C00204E23 /* Graph.swift in Sources */,
 				3566CFF724F0F20800DB23F3 /* SkipList.swift in Sources */,
 				35EF233224E79E0D00592BA5 /* main.swift in Sources */,
 				3566CFF224F0EB6400DB23F3 /* BloomFilter.swift in Sources */,
 				359DA45A24E7D51400204E23 /* Tool.swift in Sources */,
+				D93117E724F5264800B5D585 /* GeneticAlgorithm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -318,6 +337,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
