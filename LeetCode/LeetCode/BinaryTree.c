@@ -31,9 +31,109 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
 }
 
 
+//MARK: - 迭代中序遍历
+//左-中-右
+int* inorderTraversal(struct TreeNode* root, int* returnSize){
+    if (root == NULL) {
+           *returnSize = 0;
+           return NULL;
+       }
+       //建立一个指向 TreeNode *类型的可变数组，用来充当栈的功能
+       struct TreeNode **stack = (struct TreeNode **)malloc(0);
+       //当前数组的容量， 也就是栈顶的位置
+       int stk_top = 0;
+       
+       //可变数组
+       int cur = 0;
+       int *result = (int *)malloc(0);
+       while (stk_top != 0 || root != NULL) {
+           if(root) {//便利左树
+               //栈扩容
+               stk_top++;
+               stack = realloc(stack, sizeof(struct TreeNode *) * stk_top);
+               
+               stack[stk_top-1] = root;
+               root =  root->left;
+           }else{//当前节点为空，说明左边走到头了，从栈中弹出节点并保存，然后转向右边节点，继续上面整个过程
+               struct TreeNode *node = stack[--stk_top];
+               //数组扩容
+               cur++;
+               result = realloc(result, sizeof(int) * cur);
+               
+               result[cur-1] = node->val;
+               root = node->right;
+               free(node);
+           }
+       }
+       free(stack);
+       *returnSize = cur;
+       return result;
+}
+
+//MARK:二叉树前序遍历
+int* preorderTraversal(struct TreeNode* root, int* returnSize){
+    if (root == NULL) {
+        *returnSize = 0;
+        return NULL;
+    }
+    //栈
+    int stk_top = 0;
+    struct TreeNode **stack = (struct TreeNode **)malloc(0);
+    
+    //数组
+    int cur = 0;
+    int *result = (int *)malloc(0);
+    
+    while (stk_top != 0 || root) {
+        if (root) {
+            //1.存入数组
+            //数组扩容
+            cur++;
+            result = realloc(result,sizeof(int) * cur);
+            result[cur-1] = root->val;
+            //2.左树入栈
+            //栈扩容
+            stk_top++;
+            stack = realloc(stack,sizeof(struct ListNode *) * stk_top);
+            stack[stk_top-1] = root;
+            root = root->left;
+        }else{
+            struct TreeNode *node = stack[--stk_top];
+            root = node->right;
+            free(node);
+        }
+    }
+    
+    free(stack);
+    *returnSize = cur;
+    return result;
+}
+
+//MARK: -上下反转二叉树
+//和递归翻转链表类似
+struct TreeNode* upsidedownTree(struct TreeNode* root){
+    if(root == NULL || root->left == NULL){
+        return root;//排除空树，或者返回最左数
+    }
+    struct TreeNode *leftChild = root->left;//默认
+    struct TreeNode *rightChild = root->right;
+    struct TreeNode* last =  upsidedownTree(root->left);//我始终是最后一个左树
+    
+    leftChild->left = rightChild;
+    leftChild->right = root;
+    //防止如果root是最右节点，这里需要置空，防止双向引用
+    root->left = NULL;
+    root->right = NULL;
+    return last;
+}
+
 
 //MARK: 99. 恢复二叉搜索树
 /*
  https://leetcode-cn.com/problems/recover-binary-search-tree/
- 
+ 二叉搜索树中的两个节点被错误地交换。
+ 请在不改变其结构的情况下，恢复这棵树。
  */
+void recoverTree(struct TreeNode* root){
+     
+}

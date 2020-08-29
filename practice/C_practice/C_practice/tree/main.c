@@ -67,26 +67,35 @@ PrintMidOrderTree(SearchTree T){
 //左-中-右 
 int* inorderTraversal(struct TreeNode* root, int* returnSize){
     if (root == NULL) {
-        return NULL;
-    }
-    //建立一个指向 TreeNode *类型的可变数组，用来充当栈的功能
-    struct TreeNode **stack = malloc(0);
-    //当前数组的容量， 也就是栈顶的位置
-    int stk = 0;
-    int resSize = 0
-    int cur = 0;
-    while (StactIsEmpty(stack) == -1 || root != NULL) {
-        if(root) {//便利左树
-            myPush(stack, root);
-            root =  root->left;
-        }else{//当前节点为空，说明左边走到头了，从栈中弹出节点并保存，然后转向右边节点，继续上面整个过程
-            struct TreeNode *node = myPop(stack);
-            returnSize[cur++] = node->element;
-            root = node->right;
-        }
-    }
-    myFreeStack(stack);
-    return returnSize;
+           return NULL;
+       }
+       //建立一个指向 TreeNode *类型的可变数组，用来充当栈的功能
+       struct TreeNode **stack = (struct TreeNode **)malloc(0);
+       //当前数组的容量， 也就是栈顶的位置
+       int stk_top = 0;
+       
+       //可变数组
+       int cur = 0;
+       int *result = (int *)malloc(0);
+       while (stk_top != 0 || root != NULL) {
+           if(root) {//便利左树
+               //栈扩容
+               stk_top++;
+               stack = realloc(stack, sizeof(struct TreeNode *) * stk_top);
+               stack[stk_top-1] = root;
+               root =  root->left;
+           }else{//当前节点为空，说明左边走到头了，从栈中弹出节点并保存，然后转向右边节点，继续上面整个过程
+               struct TreeNode *node = stack[--stk_top];
+               //数组扩容
+               cur++;
+               result = realloc(result, sizeof(int) * cur);
+               result[cur-1] = node->element;
+               root = node->right;
+           }
+       }
+       free(stack);
+       *returnSize = cur;
+       return result;
 }
 
 //MARK: - 前序遍历：根结点 ---> 左子树 ---> 右子树
@@ -176,7 +185,7 @@ struct TreeNode* upsidedownTree(struct TreeNode* root){
         return root;//排除空树，或者返回最左数
     }
     struct TreeNode *leftChild = root->left;//默认
-    struct TreeNode *rightChild =  = root->right;
+    struct TreeNode *rightChild = root->right;
     struct TreeNode* last =  upsidedownTree(root->left);//我始终是最后一个左树
     
     leftChild->left = rightChild;

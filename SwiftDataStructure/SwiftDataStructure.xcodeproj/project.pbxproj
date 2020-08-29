@@ -15,6 +15,7 @@
 		35EF233224E79E0D00592BA5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF233124E79E0D00592BA5 /* main.swift */; };
 		D93117E724F5264800B5D585 /* GeneticAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */; };
 		D9866F6924F8C8CC00F2EDB5 /* SkipListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */; };
+		D9E6B42124F9F70D003E1EFB /* BloomFilterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6B42024F9F70D003E1EFB /* BloomFilterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 		D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticAlgorithm.swift; sourceTree = "<group>"; };
 		D9866F6724F89EC300F2EDB5 /* skiplist-basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skiplist-basic.png"; sourceTree = "<group>"; };
 		D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipListTest.swift; sourceTree = "<group>"; };
+		D9E6B42024F9F70D003E1EFB /* BloomFilterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomFilterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				359DA45F24E819F600204E23 /* GraphTest.swift */,
 				D9866F6824F8C8CC00F2EDB5 /* SkipListTest.swift */,
+				D9E6B42024F9F70D003E1EFB /* BloomFilterTest.swift */,
 			);
 			path = testCase;
 			sourceTree = "<group>";
@@ -163,7 +166,8 @@
 		35EF232624E79E0D00592BA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = rivendell;
 				TargetAttributes = {
@@ -197,6 +201,7 @@
 				D9866F6924F8C8CC00F2EDB5 /* SkipListTest.swift in Sources */,
 				359DA46024E819F600204E23 /* GraphTest.swift in Sources */,
 				359DA45C24E7D54C00204E23 /* Graph.swift in Sources */,
+				D9E6B42124F9F70D003E1EFB /* BloomFilterTest.swift in Sources */,
 				3566CFF724F0F20800DB23F3 /* SkipList.swift in Sources */,
 				35EF233224E79E0D00592BA5 /* main.swift in Sources */,
 				3566CFF224F0EB6400DB23F3 /* BloomFilter.swift in Sources */,
