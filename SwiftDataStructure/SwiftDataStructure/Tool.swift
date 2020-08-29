@@ -53,7 +53,7 @@ class Stack<E>: StackProtocol {
 }
 
 
-func example(_ name: String, clourse: ()->Void){
+public func example(_ name: String, clourse: ()->Void){
     print("\(name)")
     print("-------")
     clourse()

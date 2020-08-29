@@ -11,8 +11,8 @@ import Foundation
 //testGraph()
 //testTopologicalSort()
 
-//for _ in 0..<30{
-//    testSkipListRandom()
-//}
+//testSkipListRandom()
 
-testSkipListTest()
+//testSkipListTest()
+
+testBloomFiltert()

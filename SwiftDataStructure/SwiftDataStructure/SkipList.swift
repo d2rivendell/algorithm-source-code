@@ -6,7 +6,7 @@
 //  Copyright © 2020 rivendell. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 /*
  跳表，又叫做跳跃表、跳跃列表，在有序链的基础上增加了“跳跃”功能

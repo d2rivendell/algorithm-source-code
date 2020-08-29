@@ -12,9 +12,11 @@ import Foundation
 func testSkipListRandom() {
     example("跳表 - random") {
         let skipList = SkipList<Int, Int>()
-        let level = skipList.randomLevel()
-        print("\(level)")
-        assert(level <= maxLevel, "randomLevel越界")
+        for _ in 0..<100{
+          let level = skipList.randomLevel()
+//          print("\(level)")
+          assert(level <= maxLevel, "randomLevel越界")
+        }
     }
 }
 
