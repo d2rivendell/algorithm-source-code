@@ -134,15 +134,14 @@ struct TreeNode* upsidedownTree(struct TreeNode* root){
  二叉搜索树中的两个节点被错误地交换。
  请在不改变其结构的情况下，恢复这棵树。
  
- 对于二叉搜索树，中序遍历的值是由小到大排序好的。被错误地交换，相当于排序出错了，只有找到排序出错的两个位置，再进行交换即可
+ 对于二叉搜索树，【中序遍历】的值是由小到大排序好的。被错误地交换，相当于排序出错了，只有找到排序出错的两个位置，再进行交换即可第二个shi
+ 如果有两个位置错误交换的话，第一个肯定是大的值，这个值本来是在后面的。 第二个是小的值，这个值本来是在前面的。
  */
 struct TreeNode* first;
 struct TreeNode* second;
 struct TreeNode* pre;
 void findWrongTree(struct TreeNode* root);
 void check(struct TreeNode* root);
-
-
 
 //递归法
 void recoverTree(struct TreeNode* root){
@@ -152,13 +151,15 @@ void recoverTree(struct TreeNode* root){
     second->val = temp;
 }
 
-void check(struct TreeNode* root){
-    if (pre != NULL && pre->val > root->val) {
-        second = root;
+void check(struct TreeNode* node){
+    if (pre != NULL && pre->val > node->val) {
+        //第二个是较小的值
+        second = node;
         if(first != NULL) return;
+        //第一个是较大的值，
         first = pre;
     }
-    pre = root;
+    pre = node;
 }
 void findWrongTree(struct TreeNode* root){
     if (root == NULL) {
@@ -167,4 +168,34 @@ void findWrongTree(struct TreeNode* root){
     findWrongTree(root->left);
     check(root);
     findWrongTree(root->right);
+}
+
+
+//迭代法
+void recoverTree2(struct TreeNode* root){
+    struct TreeNode **stack = malloc(0);
+    int stk_top = 0;
+    while (root != NULL || stk_top != 0) {
+        if (root) {
+            stk_top++;
+            stack = realloc(stack, sizeof(struct TreeNode *) * stk_top);
+            stack[stk_top-1] = root;
+            root = root->left;
+        }else{
+            struct TreeNode * node = stack[stk_top-1];
+            if (pre != NULL && pre->val > node->val) {
+                second = node;
+                if (first == NULL) {
+                    first = pre;
+                }
+            }
+            pre = node;
+            root = node->right;
+            free(node);
+        }
+    }
+    int temp = first->val;
+    first->val = second->val;
+    second->val = temp;
+    free(stack);
 }
