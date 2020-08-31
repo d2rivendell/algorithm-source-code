@@ -133,7 +133,38 @@ struct TreeNode* upsidedownTree(struct TreeNode* root){
  https://leetcode-cn.com/problems/recover-binary-search-tree/
  二叉搜索树中的两个节点被错误地交换。
  请在不改变其结构的情况下，恢复这棵树。
+ 
+ 对于二叉搜索树，中序遍历的值是由小到大排序好的。被错误地交换，相当于排序出错了，只有找到排序出错的两个位置，再进行交换即可
  */
+struct TreeNode* first;
+struct TreeNode* second;
+struct TreeNode* pre;
+void findWrongTree(struct TreeNode* root);
+void check(struct TreeNode* root);
+
+
+
+//递归法
 void recoverTree(struct TreeNode* root){
-     
+    findWrongTree(root);
+    int temp = first->val;
+    first->val = second->val;
+    second->val = temp;
+}
+
+void check(struct TreeNode* root){
+    if (pre != NULL && pre->val > root->val) {
+        second = root;
+        if(first != NULL) return;
+        first = pre;
+    }
+    pre = root;
+}
+void findWrongTree(struct TreeNode* root){
+    if (root == NULL) {
+        return;
+    }
+    findWrongTree(root->left);
+    check(root);
+    findWrongTree(root->right);
 }
