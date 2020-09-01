@@ -8,10 +8,111 @@
 
 #include <stdio.h>
 #include "Tool.h"
+
+void heapInsert(int A[], int n, int val);
+void perDown2(int A[], int n, int i);
+void arraySwap2(int A[], int a, int b){
+    int temp = A[a];
+    A[a] = A[b];
+    A[b] = temp;
+}
+void heapSort2(int A[], int n){
+    
+    for(int i = n/2-1; i >= 0; i--){
+        perDown2(A, n, i);
+    }
+    
+//    for(int i = 0; i < n; i++){
+//        arraySwap2(A, n - i - 1, 0);
+//        perDown2(A, n - i - 1, 0);
+//    }
+}
+//构建大堆
+void perDown2(int A[], int n, int i){
+    int root = A[i];
+    int child = 0;
+    for(; 2 * i + 1 < n; i = child){
+        child = 2 * i  + 1;
+        if(child + 1 < n && A[child+1] > A[child]){
+            child = child + 1;
+        }
+        if(A[child] > root){
+            A[i] = A[child];
+        }else{
+            break;
+        }
+    }
+    A[i] = root;
+    
+}
+
+//在构建好的大堆中插入
+/*
+ 上虑 (空穴上移)
+ 对于根节点i:
+   左子树： 2 * i+ 1
+   右子树： 2 * i + 2
+ 
+ 对于子树i, 父节点 (i-1)/2
+ */
+void heapInsert(int A[], int n, int val){
+    int parent = 0;
+    int i = n - 1;
+    for (; (i-1)/2 >= 0 && i != 0; i = parent) {
+        parent = (i-1)/2;
+        if (A[parent] < val) {
+            A[i] = A[parent];
+        }else{
+            break;
+        }
+    }
+    if (A[i] < val) {
+        A[i] = val;
+    }
+}
+
+void quickHelper2(int A[], int left, int right);
+int partition2(int A[], int begin, int end);
+void quickSort2(int A[], int n){
+    if(n <= 1){
+        return;
+    }
+    quickHelper2(A, 0, n-1);
+}
+
+//分治算法
+void quickHelper2(int A[], int left, int right){
+    if(left < right){
+        int p = partition2(A, left, right);
+        quickHelper2(A,left, p - 1);
+        quickHelper2(A,p + 1, right);
+    }
+}
+
+int partition2(int A[], int begin, int end){
+    int guard = A[begin];
+    int i = begin;
+    int j = end;
+    while(i < j){
+        //右边开始
+        while(A[j] >= guard && i < j){
+            j--;
+        }
+        while(A[i] <= guard && i < j){
+            i++;
+        }
+        arraySwap2(A, i , j);
+    }
+    //i , j重叠了
+    arraySwap2(A, i , begin);
+    return i;
+}
+
 typedef  int ElementType;
 
 void Swap(ElementType *a,ElementType *b);
 void ArraySwap(int n[], int i, int j);
+void ArrayPrint(int A[], int n);
 int BinarySearch(int n[], int len, int a);
 
 //冒泡排序
@@ -36,48 +137,29 @@ void  heapSort2(int A[], int N);
 void PerDown2(int A[], int N, int i);
 
 int main(int argc, const char * argv[]) {
-    int len = 4;
+    int len = 9;
     ElementType *A = createArray(len);
     for (int i = 0; i < len; i++) {
         printf("%d ",A[i]);
     }
     printf("\n==============\n");
     heapSort2(A, len);
-    for (int i = 0; i < len; i++) {
-        printf("%d ",A[i]);
-    }
+    ArrayPrint(A, len);
+    printf("inser 16");
+    heapInsert(A, len, 16);
+     ArrayPrint(A, len);
+    printf("inser 32");
+    heapInsert(A, len, 32);
+     ArrayPrint(A, len);
+    printf("inser 95");
+    heapInsert(A, len, 95);
+     ArrayPrint(A, len);
     printf("\n %d 在 第: %d 个\n",A[1], BinarySearch(A, len, A[1]));
 
     return 0;
 }
 
-void heapSort2(int A[], int N){
-    for(int i = N/2-1; i >= 0; i--){
-        PerDown2(A,  N, i);
-    }
-    for(int i = 0; i < N; i++){
-        ArraySwap(A, 0, N - i - 1);
-        PerDown2(A,  N-i-1, 0);
-    }
-    
-}
 
-void PerDown2(int A[], int N, int i){
-    int  root = A[i];
-    int  child = 0;
-    for(; 2 * i + 1 < N; i = child){
-        child = 2 * i + 1;
-        if(child + 1 < N && A[child + 1] > A[child]){
-            child += 1;
-        }
-        if(A[child] > root){
-            A[i] = A[child];
-        }else{
-            break;
-        }
-    }
-    A[i] = root;
-}
 
 //MARK:- ========  工具函数  ========
 void Swap(ElementType *a,ElementType *b){
@@ -114,6 +196,13 @@ int BinarySearch(int n[], int len, int a){
 
 }
 
+void ArrayPrint(int A[], int n){
+    printf("\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ",A[i]);
+    }
+    printf("\n");
+}
 
 
 
