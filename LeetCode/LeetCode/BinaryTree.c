@@ -199,3 +199,40 @@ void recoverTree2(struct TreeNode* root){
     second->val = temp;
     free(stack);
 }
+
+
+//MARK: 面试题 04.05. 合法二叉搜索树
+/*
+ https://leetcode-cn.com/problems/legal-binary-search-tree-lcci/
+ 输入:
+ 5
+ / \
+1   4
+   / \
+  3   6
+输出: false
+ 注意3和5.
+ root要和左树的最大值，右数的最小值对比
+ */
+bool isValidBST(struct TreeNode* root){
+    if(root == NULL){
+        return true;
+    }
+    struct TreeNode* leftMaxNode = root->left;
+    struct TreeNode* rightMinNode = root->right;
+    while(leftMaxNode && leftMaxNode->right != NULL){
+        leftMaxNode = leftMaxNode->right;
+    }
+    while(rightMinNode && rightMinNode->left != NULL){
+        rightMinNode = rightMinNode->left;
+    }
+    bool leftFix = true;
+    bool rightFix = true;
+    if(leftMaxNode && leftMaxNode->val >= root->val){
+        leftFix = false;
+    }
+    if(rightMinNode && rightMinNode->val <= root->val){
+        rightFix = false;
+    }
+    return leftFix && rightFix && isValidBST(root->left) && isValidBST(root->right);
+}

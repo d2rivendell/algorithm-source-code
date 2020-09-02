@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../SwiftLeetCode/SwiftLeetCode.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../SwiftDataStructure/SwiftDataStructure.xcodeproj">
    </FileRef>
    <FileRef
