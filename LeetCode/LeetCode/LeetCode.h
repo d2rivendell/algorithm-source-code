@@ -90,13 +90,12 @@ struct ListNode* partition(struct ListNode* head, int x);
 
 
 
+//小堆处理 A和B的前N1大的值
+void topNSort(int A[], int N1, int B[], int N2);
 
 
-
-
-
-
-
+//739. 每日温度 -栈
+int* dailyTemperatures(int* T, int TSize, int* returnSize);
 
 
 #endif /* LeetCode1_h */

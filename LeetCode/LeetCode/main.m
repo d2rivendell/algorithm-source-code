@@ -15,6 +15,18 @@ void LeetCode(void);
 void testLengthOfLIS();
 void testLongestCommonSubsequence();
 void testPartitionList();
+void topNTest();
+void testDailyTemperatures();
+
+int *createIntArray(int N){
+    srand((unsigned)time(NULL));//以时间作种
+    int *A = (int *)malloc(sizeof(int) * N);
+    for (int i = 0; i < N; i++) {
+        A[i] = rand() % 100;
+    }
+    return A;
+}
+
 struct ListNode  *createList(int A[], int N){
     struct ListNode  *p = (struct ListNode *) malloc(sizeof(struct ListNode ));
     struct ListNode  *head = p;
@@ -94,7 +106,13 @@ LeetCode(){
     
 //    testLongestCommonSubsequence();
     
-    testPartitionList();
+//分隔链表
+//    testPartitionList();
+    
+//topNTest
+//    topNTest();
+    
+    testDailyTemperatures();
 }
 
 
@@ -115,4 +133,44 @@ void testPartitionList(){
     printf("分隔链表：\n");
     int A[] = {1,4,3,2,5,2};
     listPrint(partition(createList(A, 6), 3));
+}
+
+
+void topNTest(){
+    printf("topNTest：\n");
+    int N = 10;
+    int *A = createIntArray(N);
+    sleep(1);
+    int *B = createIntArray(N);
+    int *combine =(int *)malloc(sizeof(int) * N * 2);
+    for (int i = 0; i < 2 * N; i++) {
+        if(i < N){
+            combine[i] = A[i];
+        }else{
+            combine[i] = B[i-N];
+        }
+    }
+    arrayPrint(A, N);
+    arrayPrint(B, N);
+    topNSort(A, N, B, N);
+    
+    printf("result: \n");
+    InsertSort(A,N);
+    arrayPrint(A, N);
+    
+    printf("对比一般排序: \n");
+    InsertSort(combine, 2 * N);
+    arrayPrint(combine, 2 * N);
+}
+
+
+void testDailyTemperatures(){
+    int temperatures[8] = {73, 74, 75, 71, 69, 72, 76, 73};
+    int returnSize;
+    int *res = dailyTemperatures(&temperatures, 8, &returnSize);
+    for(int i=0; i < returnSize;i++){
+        printf("%d  ", res[i]);
+    }
+    printf("\n");
+    free(res);
 }

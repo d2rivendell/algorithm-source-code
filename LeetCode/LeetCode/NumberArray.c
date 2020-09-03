@@ -394,3 +394,34 @@ int removeDuplicates(int* nums, int numsSize){
  这是一个TOP-N问题，用个数为N的最小堆来解决。
  首先读入第一数组的500个数来创建大小为500的小顶堆，建堆的时间复杂度为O(mlogm)(m为数组的大小即为500 ），然后遍历后续19个数组，并与堆顶（最小）元素进行比较。如果比最小的数小，则继续读取后续数字；如果比堆顶的数字大，则替换堆顶元素并重新调整堆为小顶堆。整个过程直至20个数组全部遍历完一遍为止。然后按照中序遍历的方式输出当前堆中的所有500个数字。
  */
+void perDown(int A[], int n, int i);
+void topNSort(int A[], int N1, int B[], int N2){
+    for(int i = N1/2-1; i >= 0; i--){
+        perDown(A, N1, i);
+    }
+    //如果比最小的大则执行插入
+    for (int i = 0; i < N2; i++) {
+        if (B[i] > A[0]) {
+            A[0] = B[i];
+            perDown(A, N1, 0);
+        }
+    }
+}
+//构建小堆
+void perDown(int A[], int n, int i){
+    int root = A[i];
+    int child = 0;
+    for(; 2 * i + 1 < n; i = child){
+        child = 2 * i  + 1;
+        if(child + 1 < n && A[child+1] < A[child]){
+            child = child + 1;
+        }
+        if(A[child] < root){
+            A[i] = A[child];
+        }else{
+            break;
+        }
+    }
+    A[i] = root;
+    
+}
