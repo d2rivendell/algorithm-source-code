@@ -170,7 +170,7 @@ void topNTest(){
 void testDailyTemperatures(){
     int temperatures[8] = {73, 74, 75, 71, 69, 72, 76, 73};
     int returnSize;
-    int *res = dailyTemperatures(&temperatures, 8, &returnSize);
+    int *res = dailyTemperatures2(&temperatures, 8, &returnSize);
     for(int i=0; i < returnSize;i++){
         printf("%d  ", res[i]);
     }

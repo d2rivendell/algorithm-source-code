@@ -96,6 +96,7 @@ void topNSort(int A[], int N1, int B[], int N2);
 
 //739. 每日温度 -栈
 int* dailyTemperatures(int* T, int TSize, int* returnSize);
+int* dailyTemperatures2(int* T, int TSize, int* returnSize);
 
 //MARK:654. 最大二叉树
 struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize);

@@ -48,10 +48,53 @@ int* dailyTemperatures(int* T, int TSize, int* returnSize){//时间复杂度有�
     return res;
 }
 
-//反向开始
-//int* dailyTemperatures2(int* T, int TSize, int* returnSize){
-//
-//}
+//倒推法，反向开始,  类似动态规划
+/*
+- i用来扫描所有的元素，从右往左扫描（ 逐渐递减），一开始i指向倒数第2个元素
+
+- 对于每一个i ，一开始令 j = i + 1
+  ① 如果 T[i] < T[j]那么values[j] = j - i 然后i--
+  ② 如果 T[i] == T[j]
+        如果values[j] == 0, 那么values[i] == 0,然后i--
+        如果values[j] != 0, 那么values[i] == values[j] + j - i,然后i--
+  ③  如果 T[i] > T[j] 否则，
+        如果T[j] == 0;  说明j的右边没有任何一个数字比i大， values[i] = 0; 然后ii--
+        如果T[j] != 0; 设置j = j + values[j], 找比j大的下一个值，和i再比较。回到步骤①
+ */
+int* dailyTemperatures2(int* T, int TSize, int* returnSize){
+    if(T == NULL || TSize == 0) {
+        return NULL;
+    }
+    int *res = malloc(sizeof(int) * TSize);
+    memset(res, 0, sizeof(int) * TSize);
+    *returnSize = TSize;
+    int j = 0;
+    for (int i = TSize - 2; i >= 0; i--) {
+        j = i + 1;
+        while (true) {
+            if (T[i] < T[j]) {
+                res[i] =  j - i;
+                break;
+            }else if(T[i] == T[j]){
+                if(res[j] == 0){
+                    res[i] = 0;
+                }else{
+                   res[i] = res[j] + j - i;
+                }
+                break;
+            }else if(T[i] > T[j]){
+                if(res[j] == 0){//i位置后面肯定没有比i大大值了
+                    res[i] = 0;
+                    break;
+                }else{
+                    //找比j大的下一个值，和i再比较。
+                    j = res[j] + j;
+                }
+            }
+        }
+    }
+    return res;
+}
 
 
 //MARK:654. 最大二叉树
