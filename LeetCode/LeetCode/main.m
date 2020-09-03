@@ -17,6 +17,7 @@ void testLongestCommonSubsequence();
 void testPartitionList();
 void topNTest();
 void testDailyTemperatures();
+void testParentIndexes();
 
 int *createIntArray(int N){
     srand((unsigned)time(NULL));//以时间作种
@@ -113,6 +114,8 @@ LeetCode(){
 //    topNTest();
     
     testDailyTemperatures();
+    
+    testParentIndexes();
 }
 
 
@@ -172,5 +175,14 @@ void testDailyTemperatures(){
         printf("%d  ", res[i]);
     }
     printf("\n");
+    free(res);
+}
+
+
+void testParentIndexes(){
+    printf("最大二叉树每个节点的父节点的索引\n");
+    int nums[] = {3,2,1,6,0,5};
+    int *res = parentIndexes(&nums, 6);
+    arrayPrint(res, 6);
     free(res);
 }
