@@ -517,6 +517,8 @@ int* subSort(int* array, int arraySize, int* returnSize){
     if(arraySize == 0){
         return res;
     }
+    
+    //顺序找到最后一个比左边最大元素的下标
     int r = -1;
     int max = array[0];
     for(int i = 1; i < arraySize; i++){
@@ -529,6 +531,8 @@ int* subSort(int* array, int arraySize, int* returnSize){
     if(r == -1){
         return res;
     }
+    
+    //逆序找到最后一个比右边边最小元素的下标
     int l = -1;
     int min = array[arraySize - 1];
     for(int i = arraySize - 2; i >= 0; i--){
