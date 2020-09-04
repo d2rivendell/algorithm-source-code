@@ -453,24 +453,21 @@ void sortColors(int* nums, int numsSize){
     while (right >= 0 && nums[right] == 2) {
         right--;
     }
-    
-    for (int i = left; i <= right; i++) {
-        while (true && left < right) {
-            if (nums[i] == 0) {
-                SwapArr(nums, left++, i);
-                break;
-            }else if (nums[i] == 1){
-                break;
-            }else{ // == 2
-                //交换到i的可能是0， 这是还需要第一步的交换判断
-                SwapArr(nums, right--, i);
-            }
+    int i = left;
+    while (i <= right) {//关键 易错点
+        if (nums[i] == 0) {
+            SwapArr(nums, left++, i++);
+        }else if (nums[i] == 1){
+            i++;
+        }else{ // == 2
+            //交换到i的可能是0， 这是还需要第一步的交换判断
+            SwapArr(nums, right--, i);
         }
     }
 }
 
 
-
+//MARK:合并两个有序的数组
 /*
  https://leetcode-cn.com/problems/merge-sorted-array
  给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
@@ -493,7 +490,7 @@ void mergeTwoArray(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, 
     int i = m - 1;
     int j = n - 1;
     int cur = m + n - 1;
-    while (j >= 0) {
+    while (j >= 0) {//会对比n次，因为有n个坑位
         if (i >= 0 && nums1[i] >= nums2[j]) {
             nums1[cur--] = nums1[i--];
         }else{
@@ -503,7 +500,48 @@ void mergeTwoArray(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, 
 }
 
 
-
+//MARK: 面试题 16.16. 部分排序
+/*
+ https://leetcode-cn.com/problems/sub-sort-lcci/
+ 给定一个整数数组，编写一个函数，找出索引m和n，只要将索引区间[m,n]的元素排好序，整个数组就是有序的。注意：n-m尽量最小，也就是说，找出符合条件的最短序列。函数返回值为[m,n]，若不存在这样的m和n（例如整个数组是有序的），请返回[-1,-1]。
+ 
+ 示例：
+ 输入： [1,2,4,7,10,11,7,12,6,7,16,18,19]
+ 输出： [3,9]
+ */
+int* subSort(int* array, int arraySize, int* returnSize){
+    int *res = malloc(sizeof(int) * 2);
+    *returnSize = 2;
+    res[0] = -1;
+    res[1] = -1;
+    if(arraySize == 0){
+        return res;
+    }
+    int r = -1;
+    int max = array[0];
+    for(int i = 1; i < arraySize; i++){
+        if(array[i] >= max){
+            max = array[i];
+        }else{
+            r = i;
+        }
+    }
+    if(r == -1){
+        return res;
+    }
+    int l = -1;
+    int min = array[arraySize - 1];
+    for(int i = arraySize - 2; i >= 0; i--){
+        if(array[i] <= min){
+            min = array[i];
+        }else{
+            l = i;
+        }
+    }
+    res[0] = l;
+    res[1] = r;
+    return res;
+}
 
 
 
