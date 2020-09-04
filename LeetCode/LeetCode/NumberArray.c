@@ -425,3 +425,100 @@ void perDown(int A[], int n, int i){
     A[i] = root;
     
 }
+
+
+//MARK:75. 颜色分类
+
+/*
+ 给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+ 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+ 示例:
+ 输入: [2,0,2,1,1,0]
+ 输出: [0,0,1,1,2,2]
+ 
+ [2 2 0]
+ 0: [0 2 2]
+ 1:
+ */
+void sortColors(int* nums, int numsSize){
+    if(numsSize == 0 || numsSize == 1){
+        return;
+    }
+    //双指针
+    int left = 0;//指向下一个0的下标
+    int right = numsSize-1;//指向下一个2的下标
+    while (left < numsSize && nums[left] == 0) {
+        left++;
+    }
+    while (right >= 0 && nums[right] == 2) {
+        right--;
+    }
+    
+    for (int i = left; i <= right; i++) {
+        while (true && left < right) {
+            if (nums[i] == 0) {
+                SwapArr(nums, left++, i);
+                break;
+            }else if (nums[i] == 1){
+                break;
+            }else{ // == 2
+                //交换到i的可能是0， 这是还需要第一步的交换判断
+                SwapArr(nums, right--, i);
+            }
+        }
+    }
+}
+
+
+
+/*
+ https://leetcode-cn.com/problems/merge-sorted-array
+ 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+ 说明:
+ 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。
+ 你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
+ 示例:
+ 输入:
+ nums1 = [1,2,3,0,0,0], m = 3
+ nums2 = [2,5,6],       n = 3
+ 输出: [1,2,2,3,5,6]
+ */
+void mergeTwoArray(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
+    //对两个数组逆序处理， cur表示(cur+1)之后都是排序好的
+    //1. nums1[i] > nums2[j]时, 把nums1[i]放到 cur位置， cur--
+    //2. nums1[i] < nums2[j]时, 把nums2[j]放到 cur位置， cur--
+    if (n== 0) {
+        return;
+    }
+    int i = m - 1;
+    int j = n - 1;
+    int cur = m + n - 1;
+    while (j >= 0) {
+        if (i >= 0 && nums1[i] >= nums2[j]) {
+            nums1[cur--] = nums1[i--];
+        }else{
+            nums1[cur--] = nums2[j--];
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

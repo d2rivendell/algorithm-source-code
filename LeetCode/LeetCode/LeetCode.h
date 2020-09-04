@@ -102,4 +102,10 @@ int* dailyTemperatures2(int* T, int TSize, int* returnSize);
 struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize);
 //最大二叉树每个节点的父节点的索引
 int *parentIndexes(int* nums, int numsSize);
+
+
+//颜色
+void sortColors(int* nums, int numsSize);
+
+void mergeTwoArray(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n);
 #endif /* LeetCode1_h */

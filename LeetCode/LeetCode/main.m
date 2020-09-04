@@ -18,6 +18,8 @@ void testPartitionList();
 void topNTest();
 void testDailyTemperatures();
 void testParentIndexes();
+void testSortColors();
+void testMergeTwoArray();
 
 int *createIntArray(int N){
     srand((unsigned)time(NULL));//以时间作种
@@ -113,9 +115,13 @@ LeetCode(){
 //topNTest
 //    topNTest();
     
-    testDailyTemperatures();
+//    testDailyTemperatures();
     
-    testParentIndexes();
+//    testParentIndexes();
+    
+//    testSortColors();
+    
+    testMergeTwoArray();
 }
 
 
@@ -186,3 +192,27 @@ void testParentIndexes(){
     arrayPrint(res, 6);
     free(res);
 }
+
+void testSortColors(){
+    printf("颜色分类\n");
+    int nums[] = {2,0,2,1,1,0};
+    sortColors(nums, 6);
+    arrayPrint(nums, 6);
+}
+void testMergeTwoArray(){
+    printf("testMergeTwoArray： \n");
+    int *nums1 = malloc(sizeof(int) * 6);
+    int *nums2 = malloc(sizeof(int) * 3);
+    
+    int arr1[6] = {1,2,3,0,0,0};
+    int arr2[3] = {2,5,6};
+    for (int i = 0; i < 6; i++) {
+        nums1[i] = arr1[i];
+    }
+    for (int i = 0; i < 3; i++) {
+        nums2[i] = arr2[i];
+    }
+    mergeTwoArray(nums1, 6, 3, nums2, 3, 3);
+    arrayPrint(nums1, 6);
+}
+
