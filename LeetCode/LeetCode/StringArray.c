@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include "LeetCode.h"
 
+
+bool kmp(char *s, char *p);
+
 //MARK:  剑指 Offer 50. 第一个只出现一次的字符
 char firstUniqChar(char* s){
     /*
@@ -35,6 +38,7 @@ char firstUniqChar(char* s){
 
 //MARK:最长不重复字符的长度
 //abcbdb
+//abba
 int lengthOfLongestSubstring(char * s){
     //通过滑动窗口解决， 由start和i之间组成一个滑动窗口
     int *all =  malloc(sizeof(int) * 128);//保存字符最近的下标
@@ -44,7 +48,7 @@ int lengthOfLongestSubstring(char * s){
     int begin = 0;//最后用来打印的
     memset(all, -1, sizeof(int) * 128);
     for (int i = 0; i < strlen(s); i++) {
-        if (all[s[i]] >= start){//和窗口范围内重复了(包括窗口边界start)
+        if (all[s[i]] >= start){//和窗口范围内重复了(包括窗口边界start)， 关键点是在【滑动窗口内】， 所以
             start = all[s[i]]  + 1;//调整窗口位置,在重复的位置+1 ❗️
             count = i - start + 1;//调整当前count❗️
         }else{
@@ -65,6 +69,33 @@ int lengthOfLongestSubstring(char * s){
     return max;
 }
 
+int lengthOfLongestSubstring2(char * s){
+    int len = (int)strlen(s);
+    if(len == 0 || len == 1) return len;
+    //保存窗口内的字符的下标
+    int *dict = malloc(sizeof(int) * 128);
+    memset(dict, 0, sizeof(int) * 128);
+    for(int i = 0; i < 128; i++){
+        dict[i] = -1;
+    }
+    int l=0;//
+    int max = 1;
+    dict[s[0]] = 0;
+    for(int i=1; i < len; i++){
+        int idx = dict[s[i]];
+        //在滑动窗口范围内已经有重复的字符了，关键点是在【滑动窗口内】
+        //所以idx >= l 不可少
+        if(idx != -1 && idx >= l){
+            l = idx+1;
+        }
+        dict[s[i]] = i;
+        if(i-l+1 > max){
+            max = i-l+1;
+        }
+    }
+    free(dict);
+    return max;
+}
 
 //MARK: 剑指 Offer 05. 替换空格
 char* replaceSpace(char* s){
@@ -407,4 +438,171 @@ void singleReverse(char *s, int a, int b){
         s[a + i] = s[a + len - 1 - i];
         s[a + len - 1 -i]  = temp;
     }
+}
+
+//MARK:242. 有效的字母异位词
+/*
+ https://leetcode-cn.com/problems/valid-anagram/
+ 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+ 
+ 示例 1:
+ 
+ 输入: s = "anagram", t = "nagaram"
+ 输出: true
+ 示例 2:
+ 
+ 输入: s = "rat", t = "car"
+ 输出: false
+ 说明:
+ 你可以假设字符串只包含小写字母。
+ 
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode-cn.com/problems/valid-anagram
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+bool isAnagram(char * s, char * t){
+    int sLen = (int)strlen(s);
+    int tLen = (int)strlen(t);
+    if(sLen != tLen) return false;
+    int *container = malloc(sizeof(int) * 128);
+    memset(container, 0 , sizeof(int) * 128);
+    for(int i = 0; i < sLen; i++){
+        //字符会重复
+        container[s[i]] = container[s[i]]  + 1;
+    }
+    for(int i = 0; i < tLen; i++){
+        if(container[t[i]] == 0){
+            free(container);
+            return false;
+        }else{
+            container[t[i]] = container[t[i]] - 1;
+        }
+    }
+    free(container);
+    return true;
+}
+
+
+//MAR: 572. 另一个树的子树
+/*
+ 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
+ 
+ 这道题看似二叉树，其实也可以序列化后变字符串， 问题就转换成了字符串包含的问题
+ 序列化的步骤：
+ 每个节点的元素用一个特殊符号分割开，每个叶子节点的空节点也要用序列化符号表示.
+ 因为加上空节点才能完整表达一棵树.
+ 这里定义'_'为NULL, '|'为元素的分割符
+ 例如:
+   4
+  / \
+ 1   2
+ 对于前序遍历表示法: "|4|1|_|_|2|_|_|"
+对于前序遍历来说第一个和最后一个都要加上'|', 注意第一个和最后一个都要加上'|'
+ 否则对于前序遍历
+ [12] : "12|_|_|"
+ [2] : "2|_|_|"
+ 它们并非子树的关系，
+
+ 对于后序 遍历来说,第一个不需要加上'|'
+ [12] : "_|_|12|"
+ [2] : "_|_|2"
+ */
+char  *traverseTreeAndSerialize(struct TreeNode* tree);
+bool isSubtree2(struct TreeNode* s, struct TreeNode* t){
+    if(t == NULL) return true;
+    if(s == NULL) return false;
+    
+    char *s_str = traverseTreeAndSerialize(s);
+    char *t_str = traverseTreeAndSerialize(t);
+    printf("%s", s_str);
+    //剩下的用KMP算法 进行判断
+    return kmp(s_str, t_str);
+}
+
+//前序遍历
+char  *traverseTreeAndSerialize(struct TreeNode* tree)
+{
+    struct TreeNode **stack = malloc(0);
+    int stk_top = 0;
+    
+    int cur = 1;
+    char *serialize = malloc(sizeof(char) * cur);
+    serialize[cur-1] = '|';
+    while (tree != NULL || stk_top != 0) {
+        if (tree) {
+            cur += 2;
+            serialize = realloc(serialize, sizeof(char) * cur);
+            serialize[cur-1] = '|';
+            serialize[cur-2] = '0' + tree->val;
+            
+            if(tree->left == NULL){
+                cur += 2;
+                serialize = realloc(serialize, sizeof(char) * cur);
+                serialize[cur-1] = '|';
+                serialize[cur-2] = '_' ;
+            }
+            if(tree->right == NULL){
+                cur += 2;
+                serialize = realloc(serialize, sizeof(char) * cur);
+                serialize[cur-1] = '|';
+                serialize[cur-2] = '_' ;
+            }
+            
+            stk_top++;
+            stack = realloc(stack, sizeof(struct TreeNode*) * stk_top);
+            stack[stk_top-1] = tree;
+            tree = tree->left;
+        }else{
+            struct TreeNode *node = stack[--stk_top];
+            tree = node->right;
+            free(node);
+        }
+    }
+    //最后一个是｜,本来要移除掉的， 这里直接把它替换成'\0'就可以了
+    cur++;
+    serialize = realloc(serialize, sizeof(char) * cur);
+    serialize[cur-1] = '\0';
+    free(stack);
+    return serialize;
+}
+
+
+bool kmp(char *s, char *p){
+    return false;
+}
+
+
+
+//MAKR: 面试题 01.09. 字符串轮转
+/*
+ https://leetcode-cn.com/problems/string-rotation-lcci/
+ 字符串轮转。给定两个字符串s1和s2，请编写代码检查s2是否为s1旋转而成（比如，waterbottle是erbottlewat旋转后的字符串）。
+ 示例1:
+ 输入：s1 = "waterbottle", s2 = "erbottlewat"
+ 输出：True
+ 示例2:
+ 输入：s1 = "aa", s2 = "aba"
+ 输出：False
+ */
+
+bool isFlipedString(char* s1, char* s2){
+    int len1 = (int)strlen(s1);
+    int len2 = (int)strlen(s2);
+    if(len1 != len2) return false;
+    if(len1 == 0) return true;
+    char *str = malloc(sizeof(char) * (len2+1));
+    str[len2] = '\0';
+    for(int i = 0; i < len2; i++){
+        //以第i个字符 作为首字母
+        
+        //拷贝第i个及其以后的字符
+        memcpy(str, s2 + i, sizeof(char) * (len2 - i));
+        //拷贝第i个之前的字符
+        memcpy(str + sizeof(char) * (len2 - i), s2, sizeof(char) * i);
+        printf("%s \n",str);
+        if (kmp(s1, str)) {
+            return true;
+        }
+    }
+    return false;
 }

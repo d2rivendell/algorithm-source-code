@@ -236,3 +236,63 @@ bool isValidBST(struct TreeNode* root){
     }
     return leftFix && rightFix && isValidBST(root->left) && isValidBST(root->right);
 }
+
+//MARK: 572. 另一个树的子树
+/*
+ https://leetcode-cn.com/problems/subtree-of-another-tree
+ 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
+ 
+ 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
+ 
+示例 1:
+给定的树 s:
+ 
+     3
+    / \
+   4   5
+  / \
+ 1   2
+ 
+给定的树 t：
+ 
+   4
+  / \
+ 1   2
+ */
+bool isSameTree(struct TreeNode* l, struct TreeNode* r);
+bool isSubtree(struct TreeNode* s, struct TreeNode* t){
+    if(t == NULL) return true;
+    if(s == NULL) return false;
+    
+    struct TreeNode **stack = malloc(0);
+    int stk_top = 0;
+    //前序遍历找到和t根节点相同的节点
+    struct TreeNode* head  =s;
+    //先中序列便利找到s中的一个节点和t的根节点相同的节点
+    while (stk_top != 0 || head != NULL) {
+        if (head) {
+            stk_top++;
+            stack = realloc(stack, sizeof(struct TreeNode *) * stk_top);
+            stack[stk_top-1] = head;
+            //因为s中可能有多个节点和t是一样的，一找到就要便利一次直到找到了才返回
+            if (isSameTree(head, t)) {
+                return true;
+            }
+            head = head->left;
+        }else{
+            struct TreeNode* node = stack[--stk_top];
+            head = node->right;
+        }
+    }
+    return false;
+}
+
+bool isSameTree(struct TreeNode* l, struct TreeNode* r){
+    if (l == NULL && r == NULL) {
+        return true;
+    }
+    if (l == NULL || r== NULL) {
+        return false;
+    }
+    return l->val == r->val && isSameTree(l->left, r->left) && isSameTree(l->right, r->right);
+}
