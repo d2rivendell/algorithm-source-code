@@ -13,6 +13,7 @@
 		35DC105024F2549400B74380 /* NumberArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC104F24F2549400B74380 /* NumberArray.c */; };
 		35DC105224F255D500B74380 /* ListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DC105124F255D500B74380 /* ListNode.c */; };
 		35F1590124FFE9B4000E177E /* StackQueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 35F1590024FFE9B4000E177E /* StackQueue.c */; };
+		35F159392503E7BE000E177E /* kmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 35F159302503E7BE000E177E /* kmp.c */; };
 		D97FEA6524F3FB0700D53792 /* BinaryTree.c in Sources */ = {isa = PBXBuildFile; fileRef = D97FEA6424F3FB0700D53792 /* BinaryTree.c */; };
 		D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */ = {isa = PBXBuildFile; fileRef = D9D7EA8724A8A2F5003A698F /* Sort.c */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,14 @@
 		35DC105124F255D500B74380 /* ListNode.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ListNode.c; sourceTree = "<group>"; };
 		35F1590024FFE9B4000E177E /* StackQueue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = StackQueue.c; sourceTree = "<group>"; };
 		35F1591A250142C4000E177E /* stackMaximumBinaryTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stackMaximumBinaryTree.png; sourceTree = "<group>"; };
+		35F159302503E7BE000E177E /* kmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kmp.c; sourceTree = "<group>"; };
+		35F159312503E7BE000E177E /* kmp1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp1.png; sourceTree = "<group>"; };
+		35F159322503E7BE000E177E /* kmp3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp3.png; sourceTree = "<group>"; };
+		35F159332503E7BE000E177E /* kmp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp2.png; sourceTree = "<group>"; };
+		35F159342503E7BE000E177E /* kmp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp4.png; sourceTree = "<group>"; };
+		35F159352503E7BE000E177E /* KMP.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = KMP.md; sourceTree = "<group>"; };
+		35F159362503E7BE000E177E /* kmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kmp.h; sourceTree = "<group>"; };
+		35F159372503E7BE000E177E /* kmp4_copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp4_copy.png; sourceTree = "<group>"; };
 		D97FEA6424F3FB0700D53792 /* BinaryTree.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BinaryTree.c; sourceTree = "<group>"; };
 		D9D7EA8624A8A2F5003A698F /* Sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sort.h; sourceTree = "<group>"; };
 		D9D7EA8724A8A2F5003A698F /* Sort.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Sort.c; sourceTree = "<group>"; };
@@ -93,6 +102,7 @@
 		35D860CA249CFB9B0072EEFF /* LeetCode */ = {
 			isa = PBXGroup;
 			children = (
+				35F1592F2503E7BE000E177E /* kmp */,
 				3566CF9724E963EB00DB23F3 /* image */,
 				D9D7EA8524A8A2E6003A698F /* Sort */,
 				35D860CB249CFB9B0072EEFF /* main.m */,
@@ -105,6 +115,21 @@
 				35F1590024FFE9B4000E177E /* StackQueue.c */,
 			);
 			path = LeetCode;
+			sourceTree = "<group>";
+		};
+		35F1592F2503E7BE000E177E /* kmp */ = {
+			isa = PBXGroup;
+			children = (
+				35F159362503E7BE000E177E /* kmp.h */,
+				35F159302503E7BE000E177E /* kmp.c */,
+				35F159312503E7BE000E177E /* kmp1.png */,
+				35F159322503E7BE000E177E /* kmp3.png */,
+				35F159332503E7BE000E177E /* kmp2.png */,
+				35F159342503E7BE000E177E /* kmp4.png */,
+				35F159352503E7BE000E177E /* KMP.md */,
+				35F159372503E7BE000E177E /* kmp4_copy.png */,
+			);
+			path = kmp;
 			sourceTree = "<group>";
 		};
 		D9D7EA8524A8A2E6003A698F /* Sort */ = {
@@ -184,6 +209,7 @@
 				35DC105024F2549400B74380 /* NumberArray.c in Sources */,
 				35DC104E24F253EA00B74380 /* DynamicPlanning.c in Sources */,
 				D9D7EA8824A8A2F5003A698F /* Sort.c in Sources */,
+				35F159392503E7BE000E177E /* kmp.c in Sources */,
 				35D860CC249CFB9B0072EEFF /* main.m in Sources */,
 				D97FEA6524F3FB0700D53792 /* BinaryTree.c in Sources */,
 			);

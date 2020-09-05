@@ -8,9 +8,8 @@
 
 #include <stdio.h>
 #include "LeetCode.h"
+#include "kmp.h"
 
-
-bool kmp(char *s, char *p);
 
 //MARK:  剑指 Offer 50. 第一个只出现一次的字符
 char firstUniqChar(char* s){
@@ -483,8 +482,9 @@ bool isAnagram(char * s, char * t){
 }
 
 
-//MAR: 572. 另一个树的子树
+//MARK: 572. 另一个树的子树
 /*
+ https://leetcode-cn.com/problems/subtree-of-another-tree
  给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
  
  这道题看似二叉树，其实也可以序列化后变字符串， 问题就转换成了字符串包含的问题
@@ -516,7 +516,7 @@ bool isSubtree2(struct TreeNode* s, struct TreeNode* t){
     char *t_str = traverseTreeAndSerialize(t);
     printf("%s", s_str);
     //剩下的用KMP算法 进行判断
-    return kmp(s_str, t_str);
+    return kmp(s_str, t_str) != -1;
 }
 
 //前序遍历
@@ -558,7 +558,6 @@ char  *traverseTreeAndSerialize(struct TreeNode* tree)
             free(node);
         }
     }
-    //最后一个是｜,本来要移除掉的， 这里直接把它替换成'\0'就可以了
     cur++;
     serialize = realloc(serialize, sizeof(char) * cur);
     serialize[cur-1] = '\0';
@@ -566,10 +565,6 @@ char  *traverseTreeAndSerialize(struct TreeNode* tree)
     return serialize;
 }
 
-
-bool kmp(char *s, char *p){
-    return false;
-}
 
 
 
@@ -590,19 +585,29 @@ bool isFlipedString(char* s1, char* s2){
     int len2 = (int)strlen(s2);
     if(len1 != len2) return false;
     if(len1 == 0) return true;
-    char *str = malloc(sizeof(char) * (len2+1));
-    str[len2] = '\0';
-    for(int i = 0; i < len2; i++){
-        //以第i个字符 作为首字母
-        
-        //拷贝第i个及其以后的字符
-        memcpy(str, s2 + i, sizeof(char) * (len2 - i));
-        //拷贝第i个之前的字符
-        memcpy(str + sizeof(char) * (len2 - i), s2, sizeof(char) * i);
-        printf("%s \n",str);
-        if (kmp(s1, str)) {
-            return true;
-        }
+//法一： 复杂度高
+//    char *str = malloc(sizeof(char) * (len2+1));
+//    str[len2] = '\0';
+//    for(int i = 0; i < len2; i++){
+//        //以第i个字符 作为首字母
+//        //拷贝第i个及其以后的字符
+//        memcpy(str, s2 + i, sizeof(char) * (len2 - i));
+//        //拷贝第i个之前的字符
+//        memcpy(str + sizeof(char) * (len2 - i), s2, sizeof(char) * i);
+//        printf("%s \n",str);
+//        if (kmp(s1, str) != -1) {
+//            return true;
+//        }
+//    }
+    
+    //法二:
+    char *str = malloc(sizeof(char) * (len2 * 2 + 1));
+    str[len2 * 2] = '\0';
+    memcpy(str, s2, sizeof(char) * len2);
+    memcpy(str + sizeof(char) * len2, s2, sizeof(char) * len2);
+    if(kmp(str, s1) != -1){
+        free(str);
+        return true;
     }
     return false;
 }

@@ -25,7 +25,6 @@
 		35DFAFE324B09AB400CE9E39 /* Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 35DFAFDC24B09AB400CE9E39 /* Tool.c */; };
 		35E2CFAA1FD8EE1500BF7EF2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFA91FD8EE1500BF7EF2 /* main.c */; };
 		35E2CFB01FD905BD00BF7EF2 /* BinHeap.c in Sources */ = {isa = PBXBuildFile; fileRef = 35E2CFAF1FD905BD00BF7EF2 /* BinHeap.c */; };
-		35F1592A25036F34000E177E /* kmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 35F1592925036F34000E177E /* kmp.c */; };
 		4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F17B7B01E9DBF4000EDEEBA /* list.c */; };
 		4FC0C2001E9F1F5900A9D63D /* stackli.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C1FE1E9F1F5900A9D63D /* stackli.c */; };
 		4FC0C2021E9F205000A9D63D /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0C2011E9F205000A9D63D /* readme.md */; };
@@ -132,11 +131,6 @@
 		35E2CFA91FD8EE1500BF7EF2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		35E2CFAE1FD905BD00BF7EF2 /* BinHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinHeap.h; sourceTree = "<group>"; };
 		35E2CFAF1FD905BD00BF7EF2 /* BinHeap.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BinHeap.c; sourceTree = "<group>"; };
-		35F1592825036F34000E177E /* kmp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kmp.h; path = C_practice/kmp.h; sourceTree = "<group>"; };
-		35F1592925036F34000E177E /* kmp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = kmp.c; path = C_practice/kmp.c; sourceTree = "<group>"; };
-		35F1592B25036F86000E177E /* kmp1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp1.png; sourceTree = "<group>"; };
-		35F1592C25036F86000E177E /* kmp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp2.png; sourceTree = "<group>"; };
-		35F1592D25037661000E177E /* kmp3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp3.png; sourceTree = "<group>"; };
 		4F17B7A61E9DBF2C00EDEEBA /* C_practice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = C_practice; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F17B7A91E9DBF2C00EDEEBA /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		4F17B7B01E9DBF4000EDEEBA /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
@@ -263,11 +257,6 @@
 				35DFAFDB24B09AB400CE9E39 /* fatal.h */,
 				35DFAFDC24B09AB400CE9E39 /* Tool.c */,
 				35DFAFDA24B09AB400CE9E39 /* Tool.h */,
-				35F1592B25036F86000E177E /* kmp1.png */,
-				35F1592C25036F86000E177E /* kmp2.png */,
-				35F1592D25037661000E177E /* kmp3.png */,
-				35F1592825036F34000E177E /* kmp.h */,
-				35F1592925036F34000E177E /* kmp.c */,
 				4FC0C2011E9F205000A9D63D /* readme.md */,
 				4F17B7A81E9DBF2C00EDEEBA /* List */,
 				4FD55BC81E9E179C00FFEE59 /* Stack */,
@@ -592,7 +581,6 @@
 				35DFAFDD24B09AB400CE9E39 /* Tool.c in Sources */,
 				4F17B7B21E9DBF4000EDEEBA /* list.c in Sources */,
 				4FD55BC21E9E00DA00FFEE59 /* cursor.c in Sources */,
-				35F1592A25036F34000E177E /* kmp.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

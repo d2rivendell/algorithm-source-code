@@ -72,6 +72,7 @@ int force2(char *s, char *p){
  前缀： b、br、bre、brea
  后缀: read、rea、re、r
  没有匹配的，所以匹配值为 0
+ 如果有多个匹配的，要用最大的。即用【最大公共子串】
  模式串匹配表生成步骤：
  模式串的长度为pLen,
  loop: 0 <= i < Plen
@@ -85,14 +86,14 @@ int force2(char *s, char *p){
  0 <= ti <= strLen - 1
  0 <= pi <= pLen - 1
  蛮力匹配一般每次失配的时候都是每次往前挪动一步
- 而在kmp中， 当在ti和pi处失配的时候, ti不变, 模式串往前挪动(pi - next[i])位， 并在p的pi=next[i]处和s的ti处进行。
+ 而在kmp中， 当在ti和pi处失配的时候, ti不变, 模式串往前挪动(pi - next[pi])位， 并在p的pi=next[pi]处和s的ti处进行比较。
+ 之所以用最大公共子串的原因是, 使用最大公共子串时挪动(pi - next[pi])才是最小的，防止跳过头！！！
+  (pi - next[pi])表示： 挪动位数= 匹配的位数- next表在pi的位置。
  直接地说， 当ti和pi失配的时候， ti不变，pi=next[i], ti和pi继续进行匹配
  */
 
 int *next(char *p);
-//s: 要查找的字符串
-//p: 模式串
-//return: 匹配的初始位置， 没有匹配到返回-1
+//@return: 匹配的初始位置， 没有匹配到返回-1
 int kmp(char *s, char *p){
     //kmp 基于蛮力2的基础上 修改
     int strLen = (int)strlen(s);
@@ -104,16 +105,40 @@ int kmp(char *s, char *p){
     int ti = 0;
     int *nextTable = next(p);
     while (pi < pLen && ti <=  strLen - pLen + pi) {
-        if (s[ti] == p[pi]) {
+        if (pi < 0 || s[ti] == p[pi]) {
             ti++;
             pi++;
-        }else{//失配了
-            pi = pLen - nextTable[pi];
+        }else{//失配
+            pi = nextTable[pi];
         }
     }
     return pi == pLen ?  ti - pi :  -1;
 }
 
+
+/*
+ next'表示 pattern的最大公共子串的集合，在此基础上next'的值往右移动1为， 左边空出的位置填-1。
+ 此时新的表用next表示。
+ 
+ 该方法是基于新的模式表next进行构造的， 原理见kmp4.png
+ */
 int *next(char *p){
-    return NULL;
+    int pLen =  (int)strlen(p);
+    int *nextTable  = malloc(sizeof(int) * pLen);
+    memset(nextTable, 0, sizeof(int) * pLen);
+    nextTable[0] = -1;
+    int i = 0;
+    int n = -1;//1. 已知next[i]=n, i=0
+    while (i < pLen - 1) {
+        if (n < 0 || p[i] == p[n]) {//2.当i位置和n位置相等时 (n < 0是第一个特殊条件)
+            nextTable[i+1] = n+1;
+            //i变成i+1了，对应的n变成了n+1。满足next[i]=n条件
+            i++;
+            n++;
+        }else{//2.当i位置和n位置不相等时
+            //i要和k位置比较， k位置就是next[n]
+            n = nextTable[n];
+        }
+    }
+    return nextTable;
 }
