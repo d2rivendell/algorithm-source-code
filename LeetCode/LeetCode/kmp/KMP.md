@@ -110,7 +110,7 @@ kmp使用的是这种方式
 
 ![kmp3](./kmp3.png)
 
-<center>图二</center>
+<center>图三</center>
 
 这么做是为了代码构造next表更方便。
 
@@ -148,9 +148,12 @@ int kmp(char *s, char *p){
             pi = nextTable[pi];
         }
     }
+    free(nextTable);
     return pi == pLen ?  ti - pi :  -1;
 }
 ```
+
+
 
 
 
@@ -159,6 +162,10 @@ int kmp(char *s, char *p){
 下图是经过求最大公共子串往右偏移一位的图
 
 ![kmp4](./kmp4.png)
+
+<center>图四</center>
+
+
 
 经过偏移后新的next表，图中在next[i]处之前 即[0,i-1]的模式串，前缀和后缀最大公共子串的长度为3。
 

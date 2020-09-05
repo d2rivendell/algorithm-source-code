@@ -112,6 +112,7 @@ int kmp(char *s, char *p){
             pi = nextTable[pi];
         }
     }
+    free(nextTable);
     return pi == pLen ?  ti - pi :  -1;
 }
 
