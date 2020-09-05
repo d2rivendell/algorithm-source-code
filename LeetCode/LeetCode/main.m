@@ -61,8 +61,41 @@ void listPrint(struct ListNode *head){
     printf("\n");
 }
 
+//蛮力
+int force(char *s, char *p){
+    int strLen = (int)strlen(s);
+    int pLen = (int)strlen(p);
+    if (s == 0 || p == 0) {
+        return -1;
+    }
+//    int pi = 0;
+//    for(int i = 0; i < strLen - pLen; i++) {
+//        pi = 0;
+//        while(pi < pLen && s[i+pi] == p[pi]){
+//            pi++;
+//        }
+//        if(pi == pLen){
+//            return i;
+//        }
+//    }
+    int pi = 0;
+    int ti = 0;
+    while (pi < pLen && ti <=  strLen - pLen + pi) {
+        if (s[ti] == p[pi]) {
+            pi++;
+            ti++;
+        }else{
+            pi = 0;
+            ti =  ti - pi + 1;
+        }
+    }
+    return pi == pLen ? ti - pi : -1;
+}
 
 int main(int argc, const char * argv[]) {
+    char *s = "DABCDABCFACBA";
+    char *p = "ABCDABCF";
+    printf("location: %d\n",force(s, p));
     LeetCode();
     return 0;
 }
