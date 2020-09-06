@@ -8,7 +8,13 @@
 
 #include <stdio.h>
 #include "LeetCode.h"
-
+void freedp(int **dp, int rows){
+    for(int i = 0; i < rows; i++){
+        printf("%d ", i);
+        free(dp[i]);
+    }
+    free(dp);
+}
 
 //MARK: 找零钱 --动态规划法
 //money：要找的零钱；A: 现有的零钱数组, 是排序好的；N：零钱的张数
@@ -475,3 +481,140 @@ int longestCommonSubsequence2(char * text1, char * text2){
 /*
  子串是连续的
  */
+
+
+
+//MARK: 买卖股票最佳时机
+/*
+ https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock
+ 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+ 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
+ 注意：你不能在买入股票前卖出股票
+ 示例 1:
+ 输入: [7,1,5,3,6,4]
+ 输出: 5
+ 
+ 示例 2:
+ 输入: [7,6,4,3,1]
+ 输出: 0
+ 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
+ */
+int maxProfit(int* prices, int pricesSize){
+    if(pricesSize == 0){
+        return 0;
+    }
+    int max = 0x80000000;
+    int lowestPrice = 0x7fffffff;
+    for(int i = 0; i < pricesSize; i++){
+        lowestPrice = MIN(prices[i], lowestPrice);
+        max = MAX(prices[i] - lowestPrice, max);
+    }
+    return max;
+}
+/*
+ 买卖股票 问题可以转成动态规划问题：
+ 第i天买，第j天卖的利润是
+ 第i~j天内，所有相邻两天股价差的和
+ ｜0 ｜1 ｜2 ｜3 ｜4 ｜5 ｜
+ ｜7 ｜1 ｜5 ｜3 ｜6 ｜4 ｜
+ 转成：
+ ｜0～1｜1 ～2｜2 ～3｜3 ～4｜4 ～5｜
+ ｜-6  ｜ 4  ｜  -2 ｜  3  ｜ -2 ｜
+ 问题就变成求连续子序列最大和问题
+ 
+ */
+int maxProfitdp(int* prices, int pricesSize){
+    if(pricesSize == 0 || pricesSize == 1){
+        return 0;
+    }
+    int *detals = malloc(sizeof(int) * (pricesSize - 1));
+    for(int i = 1; i < pricesSize; i++){
+        detals[i - 1] = prices[i] - prices[i-1];
+    }
+    int dp = detals[0];
+    int max = dp;
+    for(int i = 1; i < pricesSize - 1; i++){
+        if(dp >= 0){
+            dp += detals[i];
+        }else{
+            dp = detals[i];
+        }
+        max = MAX(dp, max);
+    }
+    free(detals);
+    return MAX(max, 0);
+}
+
+
+//MARK: 72. 编辑距离
+/*
+ https://leetcode-cn.com/problems/edit-distance/
+ 给你两个单词 word1 和 word2，请你计算出将 word1 转换成 word2 所使用的最少操作数 。
+ 
+ 你可以对一个单词进行如下三种操作：
+ 
+ 插入一个字符
+ 删除一个字符
+ 替换一个字符
+  
+ 示例 1：
+ 
+ 输入：word1 = "horse", word2 = "ros"
+ 输出：3
+ 解释：
+ horse -> rorse (将 'h' 替换为 'r')
+ rorse -> rose (删除 'r')
+ rose -> ros (删除 'e')
+ 
+ 定义状态：
+ 假设字符串1"mice"为s1，它的长度为n1；字符串"arise"为s2，它的长度为n2
+ dp是大小为 (n1 + 1) * (n2 + 1)的二维数组
+ dp[i][j]是s1[0,i)转换成s2[0, j)的最少操作数 (注意是左闭右开)
+ 具体如minDistance.png所示
+ 
+ 状态转移方程：
+ 初始时：
+ dp[0][0] = 0 -> 空串转空串
+ dp[i][0] = i -> s1[0, i)转成空串
+ dp[0][j] = j -> 空串转成s2[0, i)
+ 
+ 对于 s1[0, i)和s2[0, j)分四种情况讨论：
+ 1 (删). 删除s1[0, i)最后一个字符-->s1[0, i-1)，再转成s2[0, j), dp[i][j] = 1 + dp[i-1][j][j-1]
+ 2（增）. s1[0, i)转成-->s2[0, j-1)，再插入一个字符转成s2[0, j), dp[i][j] = 1 + dp[i][j-1][j-1]
+ 3（改）.
+    (1)  s1[0, i).count == s2[0, j).count时
+         s1[i-1] != s2[j-1],  dp[i][j] = dp[i-1][j-1]
+    (2)  s1[0, i).count != s2[0, j).count时
+         s1[i-1] != s2[j-1],  dp[i][j] = 1 + dp[i-1][j-1]
+ 
+ 1、2、3三种情况取最小值就是所求 dp[i][j]
+ */
+int minDistance(char * word1, char * word2){
+    int rows = (int)strlen(word1);
+    int cols = (int)strlen(word2);
+    int **dp = malloc(sizeof(int *) * (rows + 1));
+    for(int i = 0; i < rows + 1;i++){
+        dp[i] = malloc(sizeof(int) * (cols + 1));
+        memset(dp[i], 0, sizeof(int) * (cols + 1));
+        dp[i][0] = i;
+        if(i == 0){
+            for(int j = 0; j < cols + 1;j++){
+                dp[0][j] = j;
+            }
+        }
+    }
+    for(int i = 1; i < rows + 1;i++){
+        for(int j = 1; j < cols + 1; j++){
+            int top = dp[i-1][j] + 1;//增加
+            int left = dp[i][j-1] + 1;//删除
+            int leftTop = dp[i-1][j-1];
+            if(word1[i-1] != word2[j-1]){
+                leftTop++;
+            }
+            dp[i][j] = MIN(MIN(leftTop, top), left);
+        }
+    }
+    int max = dp[rows][cols];
+    freedp(dp, rows);
+    return max;
+}

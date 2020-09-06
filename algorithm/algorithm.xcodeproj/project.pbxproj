@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		35B8B65424DE5C8E00FE4DE9 /* main.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = main.py; sourceTree = "<group>"; };
+		35B8B65424DE5C8E00FE4DE9 /* dfs.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = dfs.py; sourceTree = "<group>"; };
 		35B8B65A24DE6FC100FE4DE9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		35F1590324FFE9EC000E177E /* dataStructure.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = dataStructure.py; sourceTree = "<group>"; };
 		35F1590424FFE9F3000E177E /* letterCombinations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = letterCombinations.png; sourceTree = "<group>"; };
@@ -17,7 +17,7 @@
 		35B8B64924DE5AC600FE4DE9 = {
 			isa = PBXGroup;
 			children = (
-				35B8B65424DE5C8E00FE4DE9 /* main.py */,
+				35B8B65424DE5C8E00FE4DE9 /* dfs.py */,
 				35F1590424FFE9F3000E177E /* letterCombinations.png */,
 				35F1590324FFE9EC000E177E /* dataStructure.py */,
 				35B8B65A24DE6FC100FE4DE9 /* README.md */,

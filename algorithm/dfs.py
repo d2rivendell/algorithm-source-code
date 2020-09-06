@@ -56,7 +56,6 @@ def letterCombinations(digits):
     def backtrack(combination, next_digits):
                 # next_digits不能再分的时候
                 if len(next_digits) == 0:
-                    # the combination is done
                     output.append(combination)
                 # next_digits还能分的时候
                 else:
@@ -89,8 +88,82 @@ def strArrange(str):
     backtree("", listStr)
     return output
 
+#https://leetcode-cn.com/problems/permutations/submissions/
+@example("数组排列 -回溯法")
+def permute(nums):
+        numsLen = len(nums)
+        if nums is None or numsLen == 0:
+            return []
+        output = []
+        #使用used记录上一层已经使用的数字，确保下一层不会重复使用
+        used = []
+        #法一：传递result给下一个dfs前把当前result copy以下
+        # def dfs(idx, res):
+        #     if idx == numsLen:
+        #         output.append(res)
+        #         return
+        #     else:
+        #         for v in nums:
+        #             if v in used:
+        #                 continue
+        #             used.append(v)
+#             copy_res = res.copy()#传递给下一层之前需要拷贝
+        #             copy_res.append(v)
+        #             dfs(idx + 1,  copy_res)
+        #             #恢复
+        #             used.remove(v)
+        # dfs(0, [])
+
+        #法二： 传递result给下一个dfs后，把最后一个移除掉。 最后一层出结果时copy result
+        # def dfs(idx, res):
+        #     if idx == numsLen:
+        #         output.append(res.copy())
+        #         return
+        #     else:
+        #         for v in nums:
+        #             if v in used:
+        #                 continue
+        #             used.append(v)
+        #             # copy_res = res.copy()
+        #             # copy_res.append(v)
+        #             res.append(v)
+        #             dfs(idx + 1, res)
+        #             # 恢复
+        #             used.remove(v)
+        #             res.pop()
+        #
+        # dfs(0, [])
+
+        #法三， 使用同个result， 最后一层出结果时再copy
+        res = []
+        for i in range(numsLen):
+            res.append(0)
+
+        def dfs(idx):
+            if idx == numsLen:
+                output.append(res.copy())
+                return
+            else:
+                for v in nums:
+                    if v in used:
+                        continue
+                    res[idx] = v
+                    used.append(v)
+                    dfs(idx + 1)
+                    #恢复used表， res不需要恢复，回溯的时候会覆盖掉
+                    used.remove(v)
+
+        dfs(0)
+        return output
+
+
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()
  print(letterCombinations("23"))
  print(strArrange("abc"))
+
+ str = "dasb"
+ toLi = list("dsb")
+ print(toLi)
+ print(''.join(toLi))

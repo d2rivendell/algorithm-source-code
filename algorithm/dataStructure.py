@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from collections import Counter
+from collections import *
 import collections
 from heapq import *
 
@@ -36,3 +36,8 @@ print(stack.pop())
 print("stack len: ", len(stack))
 if len(stack) == 0:
     print("空空如也")
+
+
+lis = [1,2,3]
+lis.pop()
+print(lis)

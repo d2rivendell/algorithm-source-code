@@ -15,6 +15,11 @@ import Foundation
 
 //testSkipListTest()
 
+var str = "1234"
+let strArr = Array(str)
+print(strArr)
+print(String.init(["3", "4"]))
+
 testBloomFiltert()
 
 
