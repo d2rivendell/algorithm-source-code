@@ -71,7 +71,7 @@ def letterCombinations(digits):
        backtrack("", digits)
     return output
 
-@example("排列 -回溯法")
+@example("全排列 -回溯法")
 def strArrange(str):
     listStr = list(str)
     output = []
@@ -82,6 +82,7 @@ def strArrange(str):
         else:
             for (idx, sub) in enumerate(next):
                 next_copy = next.copy()
+                # 不使用used表，直接移除掉使用过的传给下一层
                 next_copy.pop(idx)
                 backtree(combination+sub, next_copy)
 
@@ -91,9 +92,9 @@ def strArrange(str):
 #https://leetcode-cn.com/problems/permutations/submissions/
 @example("数组排列 -回溯法")
 def permute(nums):
+        if nums is None or len(nums) == 0:
+          return []
         numsLen = len(nums)
-        if nums is None or numsLen == 0:
-            return []
         output = []
         #使用used记录上一层已经使用的数字，确保下一层不会重复使用
         used = []
@@ -156,7 +157,66 @@ def permute(nums):
         dfs(0)
         return output
 
+#使用交换的思路处理
+@example("全排列 -回溯法2")
+def permute2(nums):
+    if nums is None or len(nums) == 0:
+        return []
+    numsLen = len(nums)
+    output = []
 
+    def swap(arr, i, j):
+        temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+
+    def dfs(idx):
+        if idx == numsLen:
+            output.append(nums.copy())
+        else:
+            for i, v in enumerate(nums):
+                if i < idx:
+                    continue
+                # 交换 i 和idx的位置的元素
+                nums[idx], nums[i] = nums[i], nums[idx]
+                # swap(nums,idx, i)
+                dfs(idx + 1)
+                # 恢复
+                nums[i], nums[idx] = nums[idx], nums[i]
+                # swap(nums,i, idx)
+
+    dfs(0)
+    return output
+
+
+@example("不重复全排列 -回溯法2")
+def permuteUnique(nums):
+        if nums is None or len(nums) == 0:
+            return []
+        numsLen = len(nums)
+        output = []
+
+        def isRepeat(idx, i):
+            # [idx, i-1] 之间是否有和i重复的
+            while idx <= i - 1:
+                if nums[idx] == nums[i]:
+                    return True
+                idx += 1
+            return False
+
+        def dfs(idx):
+            if idx == numsLen:
+                output.append(nums.copy())
+            else:
+                for i in range(idx, numsLen):
+                    if isRepeat(idx, i):
+                        continue
+                    nums[idx], nums[i] = nums[i], nums[idx]
+                    dfs(idx + 1)
+                    nums[i], nums[idx] = nums[idx], nums[i]
+
+        dfs(0)
+        return output
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()
