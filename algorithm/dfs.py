@@ -172,7 +172,8 @@ def permute2(nums):
 
     def dfs(idx):
         if idx == numsLen:
-            output.append(nums.copy())
+            # output.append(nums.copy())
+            output.append(nums[:])
         else:
             for i, v in enumerate(nums):
                 if i < idx:
@@ -206,7 +207,8 @@ def permuteUnique(nums):
 
         def dfs(idx):
             if idx == numsLen:
-                output.append(nums.copy())
+                # output.append(nums.copy())
+                output.append(nums[:])
             else:
                 for i in range(idx, numsLen):
                     if isRepeat(idx, i):
