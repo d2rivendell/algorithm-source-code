@@ -63,6 +63,7 @@ void listPrint(struct ListNode *head){
 }
 
 int main(int argc, const char * argv[]) {
+    
     char *s = "DABCDABCFACBA";
     char *p = "ABCDABCF";
     printf("location: %d\n",kmp(s, p));
