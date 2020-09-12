@@ -11,6 +11,7 @@
 		35B8B65A24DE6FC100FE4DE9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		35F1590324FFE9EC000E177E /* dataStructure.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = dataStructure.py; sourceTree = "<group>"; };
 		35F1590424FFE9F3000E177E /* letterCombinations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = letterCombinations.png; sourceTree = "<group>"; };
+		D9041D122508A358008545B9 /* str_arr.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = str_arr.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -18,6 +19,7 @@
 			isa = PBXGroup;
 			children = (
 				35B8B65424DE5C8E00FE4DE9 /* dfs.py */,
+				D9041D122508A358008545B9 /* str_arr.py */,
 				35F1590424FFE9F3000E177E /* letterCombinations.png */,
 				35F1590324FFE9EC000E177E /* dataStructure.py */,
 				35B8B65A24DE6FC100FE4DE9 /* README.md */,
