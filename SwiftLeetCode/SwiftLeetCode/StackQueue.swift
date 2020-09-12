@@ -128,8 +128,199 @@ class MinStack {
     }
 }
 
-let stack = MinStack()
-stack.push(-2)
-stack.push(0)
-stack.push(-1)
-stack.getMin()
+class LRUCache {
+    
+    class Node{
+        var key: Int
+        var value: Int
+        var pre: Node? = nil
+        var next: Node?  = nil
+        init(_  key:  Int,  _ val: Int) {
+            self.key = key
+            self.value = val
+        }
+    }
+    var capacity: Int = 0
+    var size: Int = 0
+    var dict: [Int: Node] = [:]
+    var head = Node(0,0)
+    var tail = Node(0,0)
+    var isFull: Bool{
+        return size == capacity
+    }
+    init(_ capacity: Int){
+        self.capacity = capacity
+        self.head.next = self.tail
+        self.tail.pre = self.head
+    }
+    
+    func get(_ key: Int) -> Int {
+        if let node = dict[key]{
+            var value = node.value
+            remove(key)
+            add(key, value)
+            return value
+        }
+        return -1
+    }
+    
+    func put(_ key: Int, _ value: Int){
+        if isFull{
+            drop()
+        }
+        add(key, value)
+    }
+    
+    
+    func remove(_ key: Int){
+        guard let node = dict[key] else {
+            return
+        }
+        let pre = node.pre
+        let next = node.next
+        pre?.next = next
+        next?.pre = pre
+        dict[key] = nil
+        self.size -= 1
+    }
+    
+    func add(_ key: Int, _ value: Int){
+        let node = Node(key, value)
+        let next =  self.head.next
+        next?.pre = node
+        
+        node.next = next
+        node.pre = self.head
+        
+        self.head.next = node
+        dict[key] = node
+        print(node.value)
+        self.size += 1
+    }
+    
+    func drop(){
+        if self.size == 0{
+            return
+        }
+        
+        let node = tail.pre
+        let pre = node?.pre
+        
+        tail.pre = pre
+        pre?.next = tail
+        dict[node!.key] = nil
+        self.size -= 1
+    }
+    
+    
+    
+}
+//let stack = MinStack()
+//stack.push(-2)
+//stack.push(0)
+//stack.push(-1)
+//stack.getMin()
+
+
+//MARK: LRUCache -- 146. LRU缓存机制
+class LRUCache {
+    
+    class Node{
+        var key: Int
+        var value: Int
+        var pre: Node? = nil
+        var next: Node?  = nil
+        init(_  key:  Int,  _ val: Int) {
+            self.key = key
+            self.value = val
+        }
+    }
+    var capacity: Int = 0
+    var size: Int = 0
+    var dict: [Int: Node] = [:]
+    var head = Node(0,0)
+    var tail = Node(0,0)
+    var isFull: Bool{
+        return size == capacity
+    }
+    init(_ capacity: Int){
+        self.capacity = capacity
+        self.head.next = self.tail
+        self.tail.pre = self.head
+    }
+    
+    func get(_ key: Int) -> Int {
+        if let node = dict[key]{
+            let value = node.value
+            remove(key)
+            add(key, value)
+            return value
+        }
+        return -1
+    }
+    
+    func put(_ key: Int, _ value: Int){
+        // 错在这里， 不应该直接丢弃， 而是判断里面是不是有了key，只需要更新下就行了
+        //        if isFull{
+        //            drop()
+        //        }
+        if let _ = dict[key]{
+            remove(key)
+            add(key, value)
+        }else{
+            if isFull{
+                drop()
+            }
+            add(key, value)
+        }
+        
+        add(key, value)
+    }
+    
+    
+    func remove(_ key: Int){
+        guard let node = dict[key] else {
+            return
+        }
+        let pre = node.pre
+        let next = node.next
+        
+        pre?.next = next
+        next?.pre = pre
+        
+        dict[key] = nil
+        self.size -= 1
+    }
+    
+    func add(_ key: Int, _ value: Int){
+        let node = Node(key, value)
+        
+        let next =  self.head.next
+        next?.pre = node
+        
+        node.next = next
+        node.pre = self.head
+        
+        self.head.next = node
+        dict[key] = node
+        self.size += 1
+    }
+    
+    func drop(){
+        if self.size == 0{
+            return
+        }
+        remove(tail.pre!.key)
+    }
+    
+}
+
+print("LRU")
+let obj = LRUCache(2)
+print(obj.get(2))
+obj.put(2, 6)
+print(obj.get(1))
+obj.put(1, 5)
+obj.put(1, 2)
+print(obj.get(1))
+print(obj.get(2))

@@ -21,5 +21,3 @@ print(strArr)
 print(String.init(["3", "4"]))
 
 testBloomFiltert()
-
-

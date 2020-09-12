@@ -229,3 +229,8 @@ if __name__ == '__main__':
  toLi = list("dsb")
  print(toLi)
  print(''.join(toLi))
+ vb = [1,2]
+ vb += [3]
+ print(vb)
+ table = {}
+ print(table.get('1',  default=3))
