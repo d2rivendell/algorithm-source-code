@@ -112,7 +112,7 @@ func crossover(dna1: [UInt8], dna2: [UInt8], dnaSize: Int) -> [UInt8] {
 var population: [[UInt8]] = randomPopulation(from: lex, populationSize: POP_SIZE, dnaSize: DNA_SIZE)
 var fittest = population[0]
 
-func main() {
+func geneticAlgorithm() {
   for generation in 0...GENERATIONS {
     var weightedPopulation = [(dna: [UInt8], weight: Double)]()
     //计算每个个体的权重
@@ -124,7 +124,7 @@ func main() {
     
     population = []
     
-    //随机选出两个个体进行繁衍，进行POP_SIZE次， 产生的新一代替换掉当前的这一代
+    //随机选出两个个体进行繁衍，进行POP_SIZE次， 产生的新一代替换掉当前的这一代,适应度更高的被选中概率更大
     (0...POP_SIZE).forEach { _ in
       let ind1 = weightedChoice(items: weightedPopulation)
       let ind2 = weightedChoice(items: weightedPopulation)
@@ -151,6 +151,6 @@ func main() {
   }
   print("fittest string: \(String(bytes: fittest, encoding: .utf8)!)")
 }
-//main()
+
 
 

@@ -175,7 +175,7 @@ char * longestCommonPrefix(char ** strs, int strsSize){
     char *res = (char *)malloc(sizeof(char) * (minLen + 1));
     for(; i < minLen; i++){//列
         char s = strs[0][i];
-        for(int j = 0; j < strsSize; j++){//行
+        for(int j = 1; j < strsSize; j++){//行
             if(strs[j][i] != s){
                 res[i] = '\0';
                 return res;

@@ -112,9 +112,44 @@ double PowerHelper(double base, int exponent){
 }
 double Power(double base, int exponent){
     return exponent > 0 ? PowerHelper(base, exponent) : 1.0/PowerHelper(base, -exponent) ;
-    
+}
+//使用快速幂的方法
+/*
+ 21 = 10101 = 2^4 + 2^2+ 2^0
+ 3^21 = (3^16)*(3^4)*(3^1)
+ */
+double Power2(double base, int exponent){
+    long m = exponent > 0 ? exponent : -(long)exponent;//注意负数变正数时会溢出
+    double res = 1;
+    while (m > 0) {
+        if (m & 1) {//二进制低位是否是1， 是的话和res相乘
+            res = res * base;
+        }
+        base *= base;
+        m = m >> 1;
+    }
+    return exponent > 0 ? res : 1.0/res;
 }
 
+/*扩展题： 求 (x^y) mod z
+ 注意： x^y的结果可能会很大，long类型也无法装下，不能先求x^y再 mod运算。
+ 但是有一个公式：(a * b) % p == ((a % p)  * (b % p)) % p
+ so: 在快速幂的基础上
+ */
+double powMod(double x, int y, int z){
+    if (x < 0 || y < 0 || z ==0) {
+        return 0;
+    }
+    int res = 1;
+    while (y > 0) {
+        if (y & 1) {
+            res = (res % z) * (x % z);
+        }
+        x = (x % z) * (x % z);
+        y = y >> 1;
+    }
+    return res % z;
+}
 
 //MARK: 204. 计数质数
 int isPrime(int  n);
@@ -549,9 +584,43 @@ int* subSort(int* array, int arraySize, int* returnSize){
 
 
 
-
-
-
+//MARK: 剑指 Offer 62. 圆圈中最后剩下的数字
+//https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
+/*
+ swift 版本： 超时
+ func lastRemaining(_ n: Int, _ m: Int) -> Int {
+    if n == 0 || m == 0{
+        return -1
+    }
+    var res = Array<Int>(0..<n)
+    while res.count > 1{
+        let idx = (m-1) % res.count
+         res.remove(at: idx)
+         let pre = res[0..<(idx)]
+         let last = res[idx..<res.count]
+         res =  Array(last) + Array(pre)
+     }
+     return res[0]
+ }
+ 
+ //方法2 构建类似环形链表的结构（这里用数组来表示）
+ func lastRemaining2(_ n: Int, _ m: Int) -> Int {
+   if n == 0 || m == 0{
+    return -1
+   }
+   var res = Array<Int>(0..<n)
+   var idx = 0
+   while res.count > 1{
+      idx = (idx + m - 1) % res.count
+      res.remove(at: idx)
+    }
+   return res[0]
+ }
+ */
+/*
+ 这题是约瑟夫环问题
+ f(n, m) = (f(n-1, m) + m) % n
+ */
 
 
 
