@@ -74,6 +74,9 @@ struct ListNode* rotateRight(struct ListNode* head, int k){
 /*
  给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。
  你应当保留两个分区中每个节点的初始相对位置。
+ 示例:
+ 输入: head = 1->4->3->2->5->2, x = 3
+ 输出: 1->2->2->4->3->5
  */
 struct ListNode* partition(struct ListNode* head, int x){
     //before存储着小于x的值，after存储着大于x的值，最后再join起来
@@ -127,7 +130,12 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
 }
 
 //MARK: 203. 移除链表元素
-//删除链表中等于给定值 val 的所有节点。
+/*https://leetcode-cn.com/problems/remove-linked-list-elements/
+ 删除链表中等于给定值 val 的所有节点。
+ 示例:
+ 输入: 1->2->6->3->4->5->6, val = 6
+ 输出: 1->2->3->4->5
+ */
 struct ListNode* removeElements(struct ListNode* head, int val){
     while(head && head->val == val){//去除开头的
         head = head->next;
@@ -181,18 +189,25 @@ struct ListNode* removeElements(struct ListNode* head, int val){
  */
 
 // 1 2 1     其中中点是2
-// 1 2 2 1   左边的2作为中点
+// 1 2 2 1   右边边的2作为中点
 struct ListNode* middleOfList(struct ListNode* head){
     if (head == NULL) {
         return NULL;
     }
+//    struct ListNode* slow = head;
+//    struct ListNode* fast = head->next;
+//    while (fast->next && fast->next->next) {
+//        slow = slow->next;
+//        fast = fast->next->next;
+//    }
+//    return slow->next;
     struct ListNode* slow = head;
-    struct ListNode* fast = head->next;
-    while (fast->next && fast->next->next) {
-        slow = slow->next;
+    struct ListNode* fast = head;
+    while(fast != NULL && fast->next != NULL){
         fast = fast->next->next;
+        slow = slow->next;
     }
-    return slow->next;
+    return slow;
 }
 
 struct ListNode*  reverseList(struct ListNode* head){
