@@ -136,7 +136,7 @@ double Power2(double base, int exponent){
  但是有一个公式：(a * b) % p == ((a % p)  * (b % p)) % p
  so: 在快速幂的基础上
  */
-double powMod(double x, int y, int z){
+double powMod(int x, int y, int z){
     if (x < 0 || y < 0 || z ==0) {
         return 0;
     }
@@ -631,5 +631,78 @@ int* subSort(int* array, int arraySize, int* returnSize){
 
 
 
+//MARK: 42. 接雨水
+/*
+ https://leetcode-cn.com/problems/trapping-rain-water/solution/jie-yu-shui-by-leetcode/
+ 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+ 输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+ 输出: 6
+ 
+ 和方法 2 相比，我们不从左和从右分开计算，我们想办法一次完成遍历。
+ 从动态编程方法的示意图中我们注意到，只要 right_max[i]>left_max[i] （元素 0 到元素 6），积水高度将由 left_max 决定，类似地 left_max[i]>right_max[i]（元素 8 到元素 11）。
+ 所以我们可以认为如果一端有更高的条形块（例如右端），积水的高度依赖于当前方向的高度（从左到右）。当我们发现另一侧（右侧）的条形块高度不是最高的，我们则开始从相反的方向遍历（从右到左）。
+ 我们必须在遍历时维护 left_max 和 right_max ，但是我们现在可以使用两个指针交替进行，实现 1 次遍历即可完成。
 
-
+ */
+int trap(int* height, int heightSize){
+    //使用双指针,从两边计算
+   //如果对于i位置的值来说， leftMax < rightMax。 那么i位置的水的大小只和leftMax有关
+   if(heightSize < 3){
+        return 0;
+    }
+    int left = 0;
+    int right = heightSize - 1;
+    int leftMax = 0;
+    int rightMax = 0;
+    int ans = 0;
+    while(left < right){
+        if(height[left] < height[right]){//肯定是只和[0, left]位置有关
+            if(height[left] >=  leftMax){
+                leftMax = height[left];
+            }else{
+                ans += (leftMax - height[left]);
+            }
+            ++left;
+        }else{//肯定是只和[right, n-1]位置有关
+           if(height[right] >=  rightMax){//右-->左
+               rightMax = height[right];
+           }else{
+               ans += (rightMax - height[right]);
+           }
+           --right;
+        }
+    }
+    return ans;
+}
+//提前计算i位置[0,i] 和 [i, n-1]的最大值
+int trap1(int* height, int heightSize){
+    if(heightSize < 3){
+        return 0;
+    }
+    int *leftMaxs = malloc(sizeof(int) * heightSize);
+    int *rightMaxs = malloc(sizeof(int) * heightSize);
+   //找出i位置左边最大的值
+   leftMaxs[0] = height[0];
+   for(int i = 1; i < heightSize; i++){
+      if(height[i] > leftMaxs[i-1]){
+          leftMaxs[i] = height[i];
+      }else{
+          leftMaxs[i] = leftMaxs[i-1];
+      }
+   }
+   //找出i右边部分最大值
+   rightMaxs[heightSize-1] = height[heightSize-1];
+   for(int i = heightSize-2; i >= 0; i--){
+        if(height[i] > rightMaxs[i+1]){
+          rightMaxs[i] = height[i];
+      }else{
+          rightMaxs[i] = rightMaxs[i+1];
+      }
+   }
+   int res = 0;
+   for(int i = 1; i < heightSize; i++){
+      int lessMax = MIN(leftMaxs[i], rightMaxs[i]);
+      res +=  lessMax - height[i];
+   }
+   return res;
+}
