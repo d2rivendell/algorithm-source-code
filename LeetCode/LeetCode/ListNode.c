@@ -35,41 +35,6 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
 }
 
 
-
-
-//61. 旋转链表。 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
-//MARK: - 旋转链表
-struct ListNode* rotateRight(struct ListNode* head, int k){
-    //注意边界条件， 当为0或者是链表长度的时候，返回自身
-    if(head == NULL){
-        return NULL;
-    }
-    if (head->next == NULL){
-        return head;
-    }
-    struct ListNode *p = head;
-    int count = 1;
-    //计算链表长度，并找到最后一个节点，让链表封闭起来（这样可以处理k==0,或者k==count的情况.
-    //返回之前会断开链表）
-    while(p->next != NULL){
-        count++;
-        p = p->next;
-    }
-    struct ListNode *last = p;
-    last->next = head;
-    
-    k  %= count;
-    int step = count - k;
-    p = head;
-    for(int j = 0; j < step - 1; j++){
-        p = p->next;
-    }
-    struct ListNode *next = p->next;
-    p->next = NULL;// 断环
-    return next;
-    
-}
-
 //MARK: 86. 分隔链表 --双指针
 /*
  给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。
@@ -240,4 +205,39 @@ bool isListPalindrome(struct ListNode* head){
     //恢复
     reverseList(rNode);
     return result;
+}
+
+//MARK: - 旋转链表
+/*https://leetcode-cn.com/problems/rotate-list/
+ 61. 旋转链表
+ 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+
+ 示例 1:
+
+ 输入: 1->2->3->4->5->NULL, k = 2
+ 输出: 4->5->1->2->3->NULL
+ 解释:
+ 向右旋转 1 步: 5->1->2->3->4->NULL
+ 向右旋转 2 步: 4->5->1->2->3->NULL
+ */
+struct ListNode* rotateRight(struct ListNode* head, int k){
+    if(head == NULL) return NULL;
+     struct ListNode *temp = head;
+     //统计个数 顺便定位到最后一个位置（接环）
+     int count = 1;
+     while(temp->next){
+        temp = temp->next;
+        count++;
+     }
+     //闭环
+     temp->next = head;
+     k = k % count;
+     k = count - k;//第k的就是要返回的根节点
+     //temp记录前一个节点
+     for(int i = 0 ; i < k; i++){
+        temp = head;
+        head = head->next;
+     }
+     temp->next = NULL;
+     return head;
 }
