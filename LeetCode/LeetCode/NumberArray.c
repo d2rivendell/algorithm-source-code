@@ -16,6 +16,23 @@ void SwapArr(int A[], int a, int b){
     A[b] = temp;
 }
 
+//MARK:35. 搜索插入位置
+/* https://leetcode-cn.com/problems/search-insert-position/
+ 
+ */
+int searchInsert(int* nums, int numsSize, int target){
+    int l = 0, r = numsSize - 1;
+    while(l <= r){
+        int m = l + (r - l)/2;
+        if(target <= nums[m]){
+            r = m - 1;
+        }else{
+            l = m + 1;
+        }
+    }
+    return l;
+}
+
 
 //MARK: 剑指 Offer 03. 数组中重复的数字
 int findRepeatNumber(int* nums, int numsSize){
@@ -57,6 +74,21 @@ int isPalindrome(int x){
         free(arr);
         return 1;
     }
+}
+//方法二： 用后一半翻转后的数字和前一半的值做对比
+bool isPalindrome2(int x){
+    if(x < 0) return false;
+    //没有这一步 x=10这种数会被误判
+    if(x % 10 == 0 && x != 0) return false;
+    int reverseX = 0;
+    //倒一半的数（不可能溢出，所以你不需要考虑）
+    //1221
+    //121
+    while(x > reverseX){
+        reverseX = reverseX * 10 + x % 10;
+        x /= 10;
+    }
+    return x == reverseX || x == reverseX/10 ;
 }
 
 
@@ -222,6 +254,22 @@ void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
 
 //MARK:- 26. 删除排序数组中的重复项
 // 1 2 2 3 4 4 5
+/*
+ 给定 nums = [0,0,1,1,1,2,2,3,3,4],
+ 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+ */
+int removeDuplicates(int* nums, int numsSize){
+    //数组是排序好的，左边的指针记录无重复的位置，也是最终的长度。 右边的指针相当于去试探。
+    //当发现和慢指针位置的值不一样时就将其放在慢指针位置的后面，再把慢指针往后移动一位
+    if(numsSize < 2) return numsSize;
+    int cur = 1;
+    for(int i = 1; i < numsSize; i++){
+        if(nums[i] != nums[i-1]){
+            nums[cur++] = nums[i];
+        }
+    }
+    return cur;
+}
 int removeDuplicates2(int* nums, int numsSize){
     if(numsSize == 0 || numsSize == 1){
         return numsSize;
@@ -239,7 +287,18 @@ int removeDuplicates2(int* nums, int numsSize){
     }
     return i + 1;
 }
-
+//27. 移除元素
+int removeElement(int* nums, int numsSize, int val){
+    int cur = 0;
+    for(int i = 0; i < numsSize; i++){
+        if(nums[i] != val){
+            int temp = nums[i];
+            nums[i] = nums[cur];
+            nums[cur++] = temp;
+        }
+    }
+    return cur;
+}
 
 //素数对， 给定一个整形数字 3<= n <= 1000。找出有多少对素素加起来正好等于n
 int isPrimeNumber(int n){
@@ -399,29 +458,6 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
     otherVal = otherVal == 0 ? val : otherVal;
     return (val + otherVal)/2.0;
 }
-
-/*
- 给定 nums = [0,0,1,1,1,2,2,3,3,4],
- 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
- */
-//MARK:- 26. 删除排序数组中的重复项
-int removeDuplicates(int* nums, int numsSize){
-    //数组是排序好的，左边的指针记录无重复的位置，也是最终的长度。 右边的指针相当于去试探。
-    //当发现和慢指针位置的值不一样时就将其放在慢指针位置的后面，再把慢指针往后移动一位
-    if(numsSize == 0 || numsSize == 1){
-        return numsSize;
-    }
-    int slow = 0;
-    for(int fast = 1; fast < numsSize; fast++){
-        if(nums[slow] != nums[fast]){
-            nums[slow++] = nums[fast];
-        }
-    }
-    return slow + 1;
-}
-
-
-
 
 /*
  有20 个数组，每个数组有500 个元素，并且是有序排列好的，现在在这20*500 个数中找出排名前500 的数。
@@ -705,4 +741,65 @@ int trap1(int* height, int heightSize){
       res +=  lessMax - height[i];
    }
    return res;
+}
+
+//MARK: 11. 盛最多水的容器
+/*https://leetcode-cn.com/problems/container-with-most-water/submissions/
+ 输入：[1,8,6,2,5,4,8,3,7]
+ 输出：49
+ 这题可以用 双指针法， 对于left和right指针， 首先肯定是从height比较小的那一端开始缩小，因为相对的 width只是-1， height可能会变得更大
+ area = width * max(height[left], height[right])
+ 
+ */
+int maxArea(int* height, int heightSize){
+    if(heightSize < 2){
+        return 0;
+    }
+    int left = 0;
+    int right = heightSize - 1;
+    int max = 0;
+    while(left < right){
+        int area = MIN(height[left], height[right]) * (right - left);
+        max = area > max ?  area : max;
+        if(height[left] < height[right]){
+            left++;
+        }else{
+            right--;
+        }
+    }
+    return max;
+}
+
+//MARK: 739. 每日温度
+/*https://leetcode-cn.com/problems/daily-temperatures
+ 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。
+
+ 请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替
+ */
+int* dailyTemperatures(int* T, int TSize, int* returnSize){
+    if(TSize == 0){
+        *returnSize = 0;
+        return NULL;
+    }
+    int *res = malloc(sizeof(int) * TSize);
+    memset(res, 0, sizeof(int) * TSize);
+    *returnSize = TSize;
+    res[TSize-1] = 0;
+    int l = 0, r = 0;
+    for(int i = TSize - 2; i >= 0; i--){
+        l = i;
+        r = i + 1;
+        while(r < TSize){
+            if(T[l] < T[r]){
+                res[l] = r - l;
+                break;
+            }else if(T[l] > T[r] && (res[r] > 0)){//可能小于r后面的
+                r = res[r] + r;
+            }else{// ==
+                res[l] = (res[r] == 0 ? 0 : res[r] + r - l);
+                break;
+            }
+        }
+    }
+    return res;
 }

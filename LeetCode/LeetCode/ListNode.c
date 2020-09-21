@@ -241,3 +241,72 @@ bool isListPalindrome(struct ListNode* head){
     reverseList(rNode);
     return result;
 }
+
+
+//MARK: 142. 环形链表II
+/*https://leetcode-cn.com/problems/linked-list-cycle-ii/
+ 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+ */
+struct ListNode *isCycle(struct ListNode *head) {
+    if(head == NULL){
+        return NULL;
+    }
+    struct ListNode *slow = head;
+    struct ListNode *fast = head;
+    while(fast != NULL &&  fast->next != NULL){
+        fast = fast->next->next;
+        slow = slow->next;
+        if(fast != NULL && fast== slow){
+            return slow;
+        }
+    }
+    return NULL;
+}
+struct ListNode *detectCycle(struct ListNode *head) {
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
+    struct ListNode *meetNode =  isCycle(head);
+    if(meetNode == NULL) return NULL;
+    
+    //这步是关键
+    while(meetNode !=  head){
+        meetNode  = meetNode->next;
+        head  = head->next;
+    }
+    return meetNode;
+}
+//MARK: 19. 删除链表的倒数第N个节点
+/*https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+ 19. 删除链表的倒数第N个节点
+ 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+ 
+ 示例：
+ 给定一个链表: 1->2->3->4->5, 和 n = 2.
+                     |   |
+ 当删除了倒数第二个节点后，链表变为 1->2->3->5.
+ 说明：
+ 
+ 给定的 n 保证是有效的。
+ */
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
+    if(head == NULL || n == 0) return head;
+    struct ListNode* first = head;//first是要删除的那个
+    struct ListNode* second = head;//辅助探测边界， 帮忙定位first和pre的
+    int i = 0;
+    for(; i < n-1; i++){
+        second = second->next;
+    }
+    if (second->next == NULL){//删除的是第一个
+        return head->next;
+    }
+    struct ListNode* pre = NULL;//删除的前一个
+    while(second->next){
+        second = second->next;
+        pre = first;
+        first = first->next;
+    }
+    pre->next = first->next;
+    return head;
+    
+}

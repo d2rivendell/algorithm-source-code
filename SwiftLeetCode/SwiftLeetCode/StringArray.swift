@@ -90,3 +90,33 @@ func isFlipedString(_ s1: String, _ s2: String) -> Bool {
     }
     return (s2 + s2).contains(s1)
 }
+
+//MARK: 6. Z 字形变换 https://leetcode-cn.com/problems/zigzag-conversion/
+func convertZ(_ s: String, _ numRows: Int) -> String {
+    if s.count  == 0 {
+        return s
+    }
+    if numRows == 1 {
+        return s
+    }
+    var str = Array(s).map{String($0)}
+    var res: [String] = []
+    let rows = min(numRows, str.count)
+    for _ in 0..<rows{
+        res.append("")
+    }
+    var down = false
+    var currentRow = 0
+    for (idx, c) in str.enumerated(){
+        res[currentRow] += c
+        if currentRow == 0 || currentRow == rows - 1 {
+            down = !down
+        }
+        if down{
+            currentRow += 1
+        }else{
+            currentRow -= 1
+        }
+    }
+    return res.joined()
+}

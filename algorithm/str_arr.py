@@ -72,6 +72,35 @@ def threeSum(nums):
                     r -= 1
         return output
 
+@example("6. Z 字形变换 https://leetcode-cn.com/problems/zigzag-conversion/")
+def convertZ(self, s: str, numRows: int) -> str:
+    """
+    将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
+
+    题解：
+    """
+    if s is None:
+        return None
+    # 行数
+    rows = min(len(s), numRows)
+    if rows == 1:
+        return s
+    #按行来划分
+    res = ["" for i in range(rows)]
+    down = False
+    row = 0
+    strList = list(s)
+    for i in range(len(s)):
+        res[row] = res[row] + strList[i]
+        if row == 0:
+            down = True
+        elif row == rows - 1:
+            down = False
+        if down:
+            row += 1
+        else:
+            row -= 1
+    return ''.join(res)
 if __name__ == '__main__':
-    l = 0
-    l++
+    arr=[0]
+    print(arr[1:])

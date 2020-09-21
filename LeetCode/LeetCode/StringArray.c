@@ -454,10 +454,7 @@ void singleReverse(char *s, int a, int b){
  输出: false
  说明:
  你可以假设字符串只包含小写字母。
- 
- 来源：力扣（LeetCode）
- 链接：https://leetcode-cn.com/problems/valid-anagram
- 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
  */
 bool isAnagram(char * s, char * t){
     int sLen = (int)strlen(s);

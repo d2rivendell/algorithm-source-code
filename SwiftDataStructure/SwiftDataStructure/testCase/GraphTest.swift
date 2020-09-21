@@ -17,7 +17,7 @@ func testGraph() {
         graph.addEdge(from: "V1", to: "V2", weight: 3)
         graph.addEdge(from: "V2", to: "V3", weight: 5)
         graph.addEdge(from: "V3", to: "V4", weight: 5)
-        //print(graph.printGraph())
+//        print(graph.printGraph())
         print(graph.dfs(v: "V1"))
     }
 }
