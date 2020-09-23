@@ -579,8 +579,8 @@ int maxProfitdp(int* prices, int pricesSize){
  dp[0][j] = j -> 空串转成s2[0, i)
  
  对于 s1[0, i)和s2[0, j)分四种情况讨论：
- 1 (删). 删除s1[0, i)最后一个字符-->s1[0, i-1)，再转成s2[0, j), dp[i][j] = 1 + dp[i-1][j][j-1]
- 2（增）. s1[0, i)转成-->s2[0, j-1)，再插入一个字符转成s2[0, j), dp[i][j] = 1 + dp[i][j-1][j-1]
+ 1 (删). 删除s1[0, i)最后一个字符-->s1[0, i-1)，再转成s2[0, j), dp[i][j] = 1 + dp[i-1][j]
+ 2（增）. s1[0, i)转成-->s2[0, j-1)，再插入一个字符转成s2[0, j), dp[i][j] = 1 + dp[i][j-1]
  3（改）.
     (1)  s1[0, i).count == s2[0, j).count时
          s1[i-1] != s2[j-1],  dp[i][j] = dp[i-1][j-1]
@@ -605,8 +605,8 @@ int minDistance(char * word1, char * word2){
     }
     for(int i = 1; i < rows + 1;i++){
         for(int j = 1; j < cols + 1; j++){
-            int top = dp[i-1][j] + 1;//增加
-            int left = dp[i][j-1] + 1;//删除
+            int top = dp[i-1][j] + 1;//删除
+            int left = dp[i][j-1] + 1;//增加
             int leftTop = dp[i-1][j-1];
             if(word1[i-1] != word2[j-1]){
                 leftTop++;

@@ -376,7 +376,7 @@ int hammingWeight(uint32_t n) {
 
 //MARK: 27. 就地移除指定的元素
 //和上面26类似
-int removeElement(int* nums, int numsSize, int val){
+int removeElement1(int* nums, int numsSize, int val){
     //val是要移除的元素
     int cur = 0;
     for(int i = 0; i < numsSize; i++){
@@ -751,7 +751,7 @@ int trap1(int* height, int heightSize){
  area = width * max(height[left], height[right])
  
  */
-int maxArea(int* height, int heightSize){
+int maxArea1(int* height, int heightSize){
     if(heightSize < 2){
         return 0;
     }
@@ -776,7 +776,7 @@ int maxArea(int* height, int heightSize){
 
  请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替
  */
-int* dailyTemperatures(int* T, int TSize, int* returnSize){
+int* dailyTemperatures1(int* T, int TSize, int* returnSize){
     if(TSize == 0){
         *returnSize = 0;
         return NULL;

@@ -57,11 +57,11 @@ Avl_FindMin(AvlElementType X,AvlTree T){
  前提：
  1. T左树的高度比右树多2
  2. T的左树有左树，T的左树的儿子中，左树高度比右树高
-       O(T)              O(T_left)
-      / \               / \
-     O   O             O   O(T)
-    / \               /   / \
-   O   O             O   O   O
+      O(T)              O(T_left)
+      /  \               /   \
+     O    O         O      O(T)
+    /    \              /       /   \
+   O      O         O     O     O
   /
  O
  @param T 返回旋转后的根节点

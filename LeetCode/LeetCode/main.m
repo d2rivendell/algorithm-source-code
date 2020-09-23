@@ -64,9 +64,9 @@ void listPrint(struct ListNode *head){
 
 int main(int argc, const char * argv[]) {
     
-    char *s = "DABCDABCFACBA";
-    char *p = "ABCDABCF";
-    printf("location: %d\n",kmp(s, p));
+    char *s = "beautiful";
+    char *p = "tif";
+    printf("location: %d\n",force(s, p));
     LeetCode();
     return 0;
 }
