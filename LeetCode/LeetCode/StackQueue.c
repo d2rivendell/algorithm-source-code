@@ -207,3 +207,46 @@ int *parentIndexes(int* nums, int numsSize){
      }
     return res;
 }
+
+//MAARK: 20. 有效的括号
+/*https://leetcode-cn.com/problems/valid-parentheses
+ 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+ 有效字符串需满足：
+ 左括号必须用相同类型的右括号闭合。
+ 左括号必须以正确的顺序闭合。
+ 注意空字符串可被认为是有效字符串。
+ 示例 1:
+ 输入: "()"
+ 输出: true
+ */
+bool isBracketsValid(char * s){
+    if(s == NULL) return true;
+    int n = strlen(s);
+    //只保存'{'、'['、'('字符，遇到对应的右半边后出栈
+//    char *stack = malloc(0)
+    char stack[n];//在leetCode上使用空间更小
+    int stk_top = 0;
+    for(int i = 0; i < n; i++){
+        char c = s[i];
+        if (c == ')' || c == '}' || c == ']'){
+            char map = '(';
+            if(c == '}'){
+                map = '{';
+            }else if (c == ']'){
+                map = '[';
+            }
+            //栈为空 或者栈顶和当前字符不匹配
+            if(stk_top < 1 || map != stack[stk_top-1]){
+                return false;
+            }else{//qu
+                stk_top--;
+            }
+        }else if(c == '(' || c == '[' || c == '{'){
+            //    stack = realloc(stack, sizeof(char) * (++stk_top));
+            ++stk_top;
+            stack[stk_top-1] = c;
+        }
+    }
+    //栈不为空说明符号不成对，不是有效的
+    return stk_top == 0;
+}

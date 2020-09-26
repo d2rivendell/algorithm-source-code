@@ -191,6 +191,73 @@ def permuteUnique(nums):
 
         dfs(0)
         return output
+
+
+@example("22. 括号生成 https://leetcode-cn.com/problems/generate-parentheses/")
+def generateParenthesis(n):
+    """
+     剪枝处理： '('的个数不大于n, 当 
+    """
+    if n == 0:
+        return []
+    # 回溯算法, '('符号要小于n-1个
+    output = []
+
+    def dfs(res, left, right):
+        """
+        left:  res中'{'的个数为left-1
+        right: res中'}'的个数为right-1
+        """
+        if len(res) == n * 2:
+            output.append(res)
+        else:
+            #先添加一个左括号
+            if left < n:
+                dfs(res + '(', left + 1, right)
+
+            #当左边括号大于右边时 右边才有可能加括号
+            if right < left:
+                dfs(res + ')', left, right + 1)
+
+    dfs('', 0, 0)
+    return output
+
+@example("10. 正则表达式匹配 https://leetcode-cn.com/problems/regular-expression-matching/")
+def isMatch(s, p):
+    """
+        '.' 匹配任意单个字符
+        '*' 匹配零个或多个前面的那一个元素
+    """
+    l1 = len(s)
+    l2 = len(p)
+    i = 0
+    j = 0
+    if l1 == 0:
+        if l2 == 0:
+            return True
+        elif j + 1 < l2 and p[j + 1] == '*':  # s匹配完了， p剩下的看能不能都当作空气
+            return isMatch(s, p[j + 2:])
+        return False
+
+    if l2 == 0:
+        return False
+    if s[i] == p[j] or p[j] == '.':#当前字符匹配
+        # ⚠️(aaa, ab*a*c*a)
+        if j + 1 < l2 and p[j + 1] == '*':#如果下一个是*号
+            res = isMatch(s[i:], p[j + 2:])  #1️⃣把（p[j]+*）当作空气 消耗掉， i不动
+            if res == False:#当作空气的方案行不通
+                return isMatch(s[i + 1:], p[j:]) #(2️⃣p[j]+*）匹配当前， 不消耗（可能后面还要用到， 消耗留给1️⃣👆）
+            else:
+                return True
+        else:  # 下一个不是*，把当前的p[j]用掉， i也往前挪
+            return isMatch(s[i + 1:], p[j + 1:])
+    else:
+        if j + 1 < l2 and p[j + 1] == '*':
+           return isMatch(s[i:], p[j + 2:])  #当前p[j]位置结合下一个* 当作空气
+        else:
+           return False
+
+
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()
@@ -205,4 +272,10 @@ if __name__ == '__main__':
  vb += [3]
  print(vb)
  table = {}
- print(table.get('1',  default=3))
+ print(table.get('1',  3))
+
+ string = '.*'
+ print(string[0+2:])
+ print(isMatch("ab", ".*c"))
+
+

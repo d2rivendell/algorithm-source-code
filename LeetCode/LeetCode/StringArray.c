@@ -608,3 +608,77 @@ bool isFlipedString(char* s1, char* s2){
     }
     return false;
 }
+
+
+//MARK: 8. 字符串转换整数 (atoi)
+/*
+ 状态机
+             ' '         '+/-'       'number'    'other'
+ start     start         sign        number       end
+ sign      end(存疑)      end         number       end
+ number     end          end         number       end
+ end        end          end            end       end
+ 
+ //start: 0; sign:1;  number:2;  end:3;
+ int map[4][4] = {
+     {0, 1, 2,3},
+     {3,3,2,3},
+     {3,3,2,3},
+     {3,3,3,3},
+ }
+ */
+int changeStatus(char c){
+    if(c == ' '){//空格
+        return 0;
+    }else if(c == '+' || c == '-'){//符号
+        return 1;
+    }else if( c - '0' >= 0 && c - '0' <= 9){//数字
+        return 2;
+    }else{//其他无效字符
+        return 3;
+    }
+}
+
+int myAtoi(char * str){
+    if(str == NULL) return 0;
+    int status = 0;//start
+    int len = (int)strlen(str);
+    int map[4][4] = {
+        {0,1,2,3},
+        {3,3,2,3},
+        {3,3,2,3},
+        {3,3,3,3},
+    };
+    int sign = 1;
+    long res = 0;
+    int int_max = 0x7fffffff;
+    int int_min = 0x80000000;
+    for(int i = 0; i < len; i++) {
+        char c = str[i];
+        status = map[status][changeStatus(c)];
+        if(status == 1){//符号
+            sign = (c == '+' ? 1 : -1);
+        }else if(status == 2){//数字
+            //法一： 注意和整数反转有细节区别, 1.要乘sign;  2.以及 >= 7， <= 8 这两个判断要加等号
+//            int current = c - '0';
+//            if(sign * res > int_max/10 || (sign * res == int_max/10 && sign * current >= 7)){
+//                return int_max;
+//            }
+//            if(sign * res < int_min/10 || (sign * res == int_min/10 && sign * current <= -8)){
+//                return int_min;
+//            }
+            
+            //法二：
+            res = res * 10 + (c - '0');
+            if(sign * res >= int_max){
+                return int_max;
+            }else if(sign * res <= int_min){
+                return int_min;
+            }
+        }else if (status == 3){//end
+            break;
+        }
+    }
+    return res * sign;
+}
+
