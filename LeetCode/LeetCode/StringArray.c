@@ -682,3 +682,95 @@ int myAtoi(char * str){
     return res * sign;
 }
 
+
+//MARK: 43. 字符串相乘
+/*https://leetcode-cn.com/problems/multiply-strings
+ 给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
+ 示例 1:
+ 输入: num1 = "2", num2 = "3"
+ 输出: "6"
+ */
+
+
+/// 多位数 x 个位数 后面补extra个0
+/// @param s 被乘数
+/// @param t 乘数
+/// @param extra 乘积结果后面补0的位数
+char *singleMul(char *s, char t, int extra){
+    int n = (int)strlen(s);
+    int carry = 0;
+    int sum = 0;
+   //长度分别为n1、n2的数，最后的长度不会大于（n1+n2）
+    char *res = malloc(sizeof(char) * (n + 1 + 1 + extra));
+    int cur = 0;
+    while(n > 0 || carry > 0){
+        sum = 0;;
+        if(n > 0){
+          sum =   (s[n - 1] - '0') * (t - '0');
+        }
+        sum += carry;
+        res[cur++] = sum % 10 + '0';
+        carry = sum / 10;
+        n--;
+    }
+    //反转 0 1 2 3
+    for(int i = 0; i <= cur/2 - 1; i++){
+        char temp = res[i];
+        res[i] = res[cur - i - 1];
+        res[cur - i - 1] = temp;
+    }
+    for (int i = 0; i < extra; i++) {
+        res[cur++] = '0';
+    }
+    res[cur] = '\0';
+    return res;
+}
+
+char *addString(char *s1, char *s2){
+    int m = (int)strlen(s1);
+    int n = (int)strlen(s2);
+    int carry = 0;
+    int sum = 0;
+    char *res = malloc(sizeof(char) * (n + 2));
+    int cur = 0;
+    while(m > 0 || n > 0 ||  carry > 0){
+        sum = 0;;
+        if(m > 0){
+          sum += s1[--m] - '0';
+        }
+        if(n > 0){
+          sum += s2[--n] - '0';
+        }
+        sum += carry;
+        res[cur++] = sum % 10 + '0';
+        carry = sum / 10;
+    }
+    res[cur] = '\0';
+    //反转 0 1 2 3
+    for(int i = 0; i <= cur/2 - 1; i++){
+        char temp = res[i];
+        res[i] = res[cur - i - 1];
+        res[cur - i - 1] = temp;
+    }
+    return res;
+}
+
+//123 * 45
+char* multiply(char* num1, char* num2) {
+   int len1 = (int)strlen(num1);
+   int len2 = (int)strlen(num2);
+   char *sum = "0";
+   if(len1 * len2 == 0) return sum;
+   if(strcmp(num1, "0")  == 0|| strcmp(num2, "0") == 0) {
+       return sum;
+   }
+   int n = len2;
+   while(n > 0){
+     //相乘后 后面补0
+     int suffixZero = len2 - n;
+     char *res = singleMul(num1, num2[n - 1], suffixZero);//*
+     sum = addString(sum, res);//+
+     n--;
+   }
+   return sum;
+}

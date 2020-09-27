@@ -62,11 +62,10 @@ void listPrint(struct ListNode *head){
     printf("\n");
 }
 
+
 int main(int argc, const char * argv[]) {
-    
-    char *s = "beautiful";
-    char *p = "tif";
-    printf("location: %d\n",force(s, p));
+
+    printf("location: %s\n",multiply("2", "3"));
     LeetCode();
     return 0;
 }

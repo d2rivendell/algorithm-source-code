@@ -101,6 +101,57 @@ def convertZ(self, s: str, numRows: int) -> str:
         else:
             row -= 1
     return ''.join(res)
+
+
+def multiply(num1, num2):
+    if num1 == '0' or num2 == '0':
+        return '0'
+    def add(s1, s2):
+         res = ""
+         n1 = len(s1)
+         n2 = len(s2)
+         carry = 0
+         while n1 > 0 or n2 > 0 or carry > 0:
+             sum = 0
+             if n1 > 0:
+                 sum += int(s1[n1 - 1])
+                 n1 -= 1
+             if n2 > 0:
+                 sum += int(s2[n2 - 1])
+                 n2 -= 1
+             sum += carry
+             res += str(sum % 10)
+             carry = sum // 10
+         return res[::-1]
+    def singleMul(s, c):
+        res = ""
+        n = len(s)
+        carry = 0
+        base = int(c)
+        while n > 0 or carry > 0:
+            sum = carry
+            if n > 0:
+              sum += int(s[n-1]) * base
+            res += str(sum % 10)
+            carry = sum // 10
+            n -= 1
+
+        return res[::-1]
+
+    num2Len = len(num2)
+    n = num2Len
+    res = '0'
+    while n > 0:
+        temp = singleMul(num1, num2[n - 1])
+        for i in range(num2Len - n):
+            temp += '0'
+        res = add(res, temp)
+        n -= 1
+    return res
+
+
+
+
+
 if __name__ == '__main__':
-    arr=[0]
-    print(arr[1:])
+    print(multiply("123", "456"))
