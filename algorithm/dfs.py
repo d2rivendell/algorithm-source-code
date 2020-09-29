@@ -238,9 +238,9 @@ def isMatch(s, p):
         elif j + 1 < l2 and p[j + 1] == '*':  # s匹配完了， p剩下的看能不能都当作空气
             return isMatch(s, p[j + 2:])
         return False
-
     if l2 == 0:
         return False
+
     if s[i] == p[j] or p[j] == '.':#当前字符匹配
         # ⚠️(aaa, ab*a*c*a)
         if j + 1 < l2 and p[j + 1] == '*':#如果下一个是*号
@@ -251,8 +251,8 @@ def isMatch(s, p):
                 return True
         else:  # 下一个不是*，把当前的p[j]用掉， i也往前挪
             return isMatch(s[i + 1:], p[j + 1:])
-    else:
-        if j + 1 < l2 and p[j + 1] == '*':
+    else:#当前字符不匹配
+        if j + 1 < l2 and p[j + 1] == '*':#如果下一个是*号
            return isMatch(s[i:], p[j + 2:])  #当前p[j]位置结合下一个* 当作空气
         else:
            return False

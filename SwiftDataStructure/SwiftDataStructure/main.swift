@@ -15,6 +15,8 @@ testGraph()
 
 //testSkipListTest()
 
+testTrie()
+
 func strStr(_ haystack: String, _ needle: String) -> Int {
     if(needle.isEmpty) { return -1}
     var arrStr = Array(haystack)
