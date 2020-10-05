@@ -328,6 +328,8 @@ struct ListNode* rotateRight(struct ListNode* head, int k){
      temp->next = NULL;
      return head;
 }
+
+
 //MARK: 148. 排序链表 -- 归并排序
 /*https://leetcode-cn.com/problems/sort-list/
  在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
@@ -342,7 +344,7 @@ struct ListNode* sortList(struct ListNode* head) {
      *  （1）struct ListNode *fast = head;//偶数时 中间第一个作为中点。会死循环❌, 只用在判断是否回文链表那里
      *  （2）struct ListNode *fast = head->next;//偶数时 中间第一个作为中点。
      *   比如当只有两个元素时[1,2]， 使用（1）得到的slow是2,  left=[1,2], right = NULL，继续分解left
-     *   发现是死循环，正确的事方式（2）得出slow = [1], left=[1], right=[2]
+     *   发现是死循环，正确的是方式（2）得出slow是1, left=[1], right=[2]
      */
     struct ListNode *fast = head->next;//偶数时，中间第一个作为中点。
     while(fast != NULL && fast->next != NULL) {

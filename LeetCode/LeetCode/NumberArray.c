@@ -803,3 +803,19 @@ int* dailyTemperatures3(int* T, int TSize, int* returnSize){
     }
     return res;
 }
+
+//MARK: 136. 只出现一次的数字
+/*可以使用位运算
+ 对于[a, b, b]
+ 1. a == a ^ 0
+ 2.
+ c = a ^ b
+ a == c ^ b
+ */
+int singleNumber(int* nums, int numsSize){
+    int res = 0;
+    for(int i = 0; i < numsSize; i++){
+        res ^= nums[i];
+    }
+    return res;
+}

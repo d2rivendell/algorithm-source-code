@@ -31,11 +31,7 @@ def letterCombinations(digits):
                     output.append(combination)
                 # next_digits还能分的时候
                 else:
-                    # iterate over all letters which map
-                    # the next available digit
                     for letter in phone[next_digits[0]]:
-                        # append the current letter to the combination
-                        # and proceed to the next digits
                         backtrack(combination + letter, next_digits[1:])
                                             
     output = []
@@ -43,6 +39,7 @@ def letterCombinations(digits):
        backtrack("", digits)
     return output
 
+#针对字符串的排列 https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/
 @example("全排列 -回溯法")
 def strArrange(str):
     listStr = list(str)
@@ -62,6 +59,7 @@ def strArrange(str):
     return output
 
 #https://leetcode-cn.com/problems/permutations/submissions/
+#nums无重复数字
 @example("数组排列 -回溯法")
 def permute(nums):
         if nums is None or len(nums) == 0:
@@ -162,6 +160,7 @@ def permute2(nums):
     return output
 
 
+#https://leetcode-cn.com/problems/permutations-ii/
 @example("不重复全排列 -回溯法2")
 def permuteUnique(nums):
         if nums is None or len(nums) == 0:
@@ -257,25 +256,104 @@ def isMatch(s, p):
         else:
            return False
 
+# 组合 https://leetcode-cn.com/problems/combinations
+@example("77. 组合")
+def combine(self, n: int, k: int) -> List[List[int]]:
+    """
+        给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
+        输入: n = 4, k = 2  ----->C(2,4)
+        输出:
+        [
+        [2,4],
+        [3,4],
+        [2,3],
+        [1,2],
+        [1,3],
+        [1,4],
+        ]
+    """
+    if k == 0 or n == 0:
+        return []
+    output = []
+    res = []
+    def dfs(cur,n, res):
+            #⚠️这一步放在剪枝前面 否则会被跳过
+            if len(res) == k:
+            output.append(res[:])
+            return
+            #剪枝1
+            #   if cur == n + 1:
+            #       print(cur, res)
+            #       return
+            #剪枝2 剩下无法和res凑够k个
+            if len(res) + (n - cur + 1) < k:
+                #   print("-",cur,"-")
+                return
+            #有两种可能
+            #1.把当前数字作为一个组合元素
+            res.append(cur)
+            dfs(cur+1, n, res)
+            #2. 当前数字不作为组合元素
+            res.remove(cur)
+            dfs(cur+1, n, res)
+     dfs(1,n,res)
+     return output
+
+#https://leetcode-cn.com/problems/subsets/
+@example("子集")
+def subsets(self, nums: List[int]) -> List[List[int]]:
+    """
+        输入: nums = [1,2,3]
+        输出:
+        [
+        [3],
+          [1],
+          [2],
+          [1,2,3],
+          [1,3],
+          [2,3],
+          [1,2],
+          []
+        ]
+    """
+    if nums is None:
+        return []
+    n = len(nums)
+    output = []
+    res = []
+    def dfs(idx, res):
+        if idx == n:
+            output.append(res[:])
+            return
+        #1.选取当前的位置作为子集的一部分
+        res.append(nums[idx])
+        dfs(idx+1, res)
+        #2.跳过当前
+        res.remove(nums[idx])
+        dfs(idx+1, res)
+    
+    dfs(0, res)
+    return output
 
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()
  print(letterCombinations("23"))
  print(strArrange("abc"))
+ print(permute([1,2,3]))
 
- str = "dasb"
- toLi = list("dsb")
- print(toLi)
- print(''.join(toLi))
- vb = [1,2]
- vb += [3]
- print(vb)
- table = {}
- print(table.get('1',  3))
-
- string = '.*'
- print(string[0+2:])
- print(isMatch("ab", ".*c"))
+ # str = "dasb"
+ # toLi = list("dsb")
+ # print(toLi)
+ # print(''.join(toLi))
+ # vb = [1,2]
+ # vb += [3]
+ # print(vb)
+ # table = {}
+ # print(table.get('1',  3))
+ #
+ # string = '.*'
+ # print(string[0+2:])
+ # print(isMatch("ab", ".*c"))
 
 

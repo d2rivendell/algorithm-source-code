@@ -21,5 +21,10 @@ void InsertSort(int A[], int N);
 /// 归并排序
 void MergeSort(int A[], int N);
 
+/// 快速排序法
+void QuickSort(int A[], int N);
+
+///堆排序
+void HeapSort(int A[],int N);
 
 #endif /* Sort_h */

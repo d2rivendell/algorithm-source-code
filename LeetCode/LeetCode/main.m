@@ -10,6 +10,7 @@
 #include "LeetCode.h"
 #include "Sort.h"
 #include "kmp.h"
+#include <stdbool.h>
 
 void SortTest(void);
 void LeetCode(void);
@@ -45,10 +46,13 @@ struct ListNode  *createList(int A[], int N){
     return head;
 }
 
-void arrayPrint(int arr[], int N){
+void arrayPrint(int arr[], int N, bool check){
     printf("\n");
     for (int i = 0; i < N; i++) {
         printf("%d ", arr[i]);
+        if(check && i > 0) {
+            assert(arr[i] >= arr[i-1]);
+        }
     }
     
     printf("\n");
@@ -71,13 +75,13 @@ int main(int argc, const char * argv[]) {
 
 
 void SortTest(){
-    int N = 10;
+    int N = 30;
     int *A = createIntArray(N);
 //    InsertSort(A, sizeof(A)/sizeof(int));
 //    BubbleSort(A, N);
-    arrayPrint(A, N);
-     MergeSort(A, N);
-    arrayPrint(A, N);
+    arrayPrint(A, N, false);
+    MergeSort(A, N);
+    arrayPrint(A, N, true);
    
 }
 
@@ -178,17 +182,17 @@ void topNTest(){
             combine[i] = B[i-N];
         }
     }
-    arrayPrint(A, N);
-    arrayPrint(B, N);
+    arrayPrint(A, N, false);
+    arrayPrint(B, N, false);
     topNSort(A, N, B, N);
     
     printf("result: \n");
     InsertSort(A,N);
-    arrayPrint(A, N);
+    arrayPrint(A, N, false);
     
     printf("对比一般排序: \n");
     InsertSort(combine, 2 * N);
-    arrayPrint(combine, 2 * N);
+    arrayPrint(combine, 2 * N, false);
 }
 
 
@@ -208,7 +212,7 @@ void testParentIndexes(){
     printf("最大二叉树每个节点的父节点的索引\n");
     int nums[] = {3,2,1,6,0,5};
     int *res = parentIndexes(&nums, 6);
-    arrayPrint(res, 6);
+    arrayPrint(res, 6, false);
     free(res);
 }
 
@@ -216,7 +220,7 @@ void testSortColors(){
     printf("颜色分类\n");
     int nums[] = {2,0,2,1,1,0};
     sortColors(nums, 6);
-    arrayPrint(nums, 6);
+    arrayPrint(nums, 6, false);
 }
 void testMergeTwoArray(){
     printf("testMergeTwoArray： \n");
@@ -232,6 +236,6 @@ void testMergeTwoArray(){
         nums2[i] = arr2[i];
     }
     mergeTwoArray(nums1, 6, 3, nums2, 3, 3);
-    arrayPrint(nums1, 6);
+    arrayPrint(nums1, 6, false);
 }
 
