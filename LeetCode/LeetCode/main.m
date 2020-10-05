@@ -65,21 +65,27 @@ void listPrint(struct ListNode *head){
 
 int main(int argc, const char * argv[]) {
 
-    printf("location: %s\n",multiply("2", "3"));
     LeetCode();
     return 0;
 }
 
 
 void SortTest(){
-    int A[] = {7, 9, 2, 6, 8, 1, 4, 3, 5, 0};
+    int N = 10;
+    int *A = createIntArray(N);
 //    InsertSort(A, sizeof(A)/sizeof(int));
-    BubbleSort(A, sizeof(A)/sizeof(int));
-    arrayPrint(A, sizeof(A)/sizeof(int));
+//    BubbleSort(A, N);
+    arrayPrint(A, N);
+     MergeSort(A, N);
+    arrayPrint(A, N);
+   
 }
 
 void
 LeetCode(){
+    struct ListNode temp, *top = &temp;
+    SortTest();
+    return;
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
 //    double res = Power(2, -1);

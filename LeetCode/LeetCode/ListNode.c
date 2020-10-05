@@ -101,6 +101,26 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
  输入: 1->2->6->3->4->5->6, val = 6
  输出: 1->2->3->4->5
  */
+struct ListNode* removeElements1(struct ListNode* head, int val){
+    while(head && head->val == val){
+        head = head->next;
+    }
+    if(head == NULL) return NULL;
+    
+    struct ListNode *pre = head;
+    struct ListNode *cur = head->next;
+    while(cur){
+        while(cur && cur->val == val){
+            cur = cur->next;
+            pre->next = cur;
+        }
+        pre = cur;
+        if(cur){
+            cur = cur->next;
+        }
+    }
+    return head;
+}
 struct ListNode* removeElements(struct ListNode* head, int val){
     while(head && head->val == val){//去除开头的
         head = head->next;
@@ -160,14 +180,14 @@ struct ListNode* middleOfList(struct ListNode* head){
         return NULL;
     }
 //    struct ListNode* slow = head;
-//    struct ListNode* fast = head->next;
+//    struct ListNode* fast = head->next;//偶数时， 第一个作为中点
 //    while (fast->next && fast->next->next) {
 //        slow = slow->next;
 //        fast = fast->next->next;
 //    }
 //    return slow->next;
     struct ListNode* slow = head;
-    struct ListNode* fast = head;
+    struct ListNode* fast = head;//偶数时，第二个作为中点
     while(fast != NULL && fast->next != NULL){
         fast = fast->next->next;
         slow = slow->next;
@@ -307,4 +327,44 @@ struct ListNode* rotateRight(struct ListNode* head, int k){
      }
      temp->next = NULL;
      return head;
+}
+//MARK: 148. 排序链表 -- 归并排序
+/*https://leetcode-cn.com/problems/sort-list/
+ 在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+ 示例 1:
+ 输入: 4->2->1->3
+ 输出: 1->2->3->4
+ */
+struct ListNode* sortList(struct ListNode* head) {
+    if(head == NULL || head->next == NULL) return head;
+    struct ListNode *slow = head;
+    /*   这里需要说明下， 偶数时必须用第一个作为中点，
+     *  （1）struct ListNode *fast = head;//偶数时 中间第一个作为中点。会死循环❌, 只用在判断是否回文链表那里
+     *  （2）struct ListNode *fast = head->next;//偶数时 中间第一个作为中点。
+     *   比如当只有两个元素时[1,2]， 使用（1）得到的slow是2,  left=[1,2], right = NULL，继续分解left
+     *   发现是死循环，正确的事方式（2）得出slow = [1], left=[1], right=[2]
+     */
+    struct ListNode *fast = head->next;//偶数时，中间第一个作为中点。
+    while(fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    struct ListNode *left = head;
+    struct ListNode *right = slow->next;
+    slow->next = NULL;
+    left = sortList(left);
+    right = sortList(right);
+    struct ListNode temp, *top = &temp;
+    while(left && right){
+        if(left->val < right->val){
+            top->next = left;
+            left = left->next;
+        }else{
+            top->next = right;
+            right = right->next;
+        }
+        top = top->next;
+    }
+    top->next = (left != NULL ? left : right);
+    return temp.next;
 }

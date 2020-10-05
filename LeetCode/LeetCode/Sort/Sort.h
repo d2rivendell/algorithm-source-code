@@ -18,7 +18,8 @@ void BubbleSort(int A[], int N);
 ///  插入排序
 void InsertSort(int A[], int N);
 
-
+/// 归并排序
+void MergeSort(int A[], int N);
 
 
 #endif /* Sort_h */

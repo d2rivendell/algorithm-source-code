@@ -88,13 +88,11 @@ int* preorderTraversal(struct TreeNode* root, int* returnSize){
         if (root) {
             //1.存入数组
             //数组扩容
-            cur++;
-            result = realloc(result,sizeof(int) * cur);
+            result = realloc(result,sizeof(int) * (++cur));
             result[cur-1] = root->val;
             //2.左树入栈
             //栈扩容
-            stk_top++;
-            stack = realloc(stack,sizeof(struct ListNode *) * stk_top);
+            stack = realloc(stack,sizeof(struct ListNode *) * (++stk_top));
             stack[stk_top-1] = root;
             root = root->left;
         }else{
@@ -108,6 +106,46 @@ int* preorderTraversal(struct TreeNode* root, int* returnSize){
     *returnSize = cur;
     return result;
 }
+
+//MARK: 二叉树的后序遍历
+int* postorderTraversal(struct TreeNode* root, int* returnSize){
+    //dfs
+    if(root == NULL) {
+        *returnSize = 0;
+        return NULL;
+    }
+    struct TreeNode **stack = malloc(sizeof(struct TreeNode *));
+    stack[0] = root;
+    int stk_top = 1;
+    
+    int *res = malloc(0);
+    int cur = 0;
+    
+    //先bfs
+    while(stk_top > 0){
+        struct TreeNode *node =  stack[--stk_top];
+        res = realloc(res, sizeof(int) * (++cur));
+        res[cur - 1] = node->val;
+        if(node->left != NULL){
+            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+            stack[stk_top - 1] = node->left;
+        }
+        if(node->right != NULL){
+            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+            stack[stk_top - 1] = node->right;
+        }
+    }
+    *returnSize = cur;
+    //后反转数组
+    for(int i = 0; i <= cur/2 - 1; i++){
+        int temp = res[i];
+        res[i] = res[cur - i - 1];
+        res[cur - i - 1] = temp;
+    }
+    return res;
+}
+
+
 
 //MARK: -上下反转二叉树
 //和递归翻转链表类似
@@ -294,3 +332,53 @@ bool isSameTree(struct TreeNode* l, struct TreeNode* r){
     }
     return l->val == r->val && isSameTree(l->left, r->left) && isSameTree(l->right, r->right);
 }
+
+//MARK: 114. 二叉树展开为链表
+/*https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list
+ 例如，给定二叉树
+ 
+     1
+    / \
+   2   5
+  / \   \
+ 3   4   6
+ 将其展开为：
+ 
+1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+ */
+struct TreeNode* helper(struct TreeNode* root){
+    if(root != NULL){
+        struct TreeNode* left = helper(root->left);
+        struct TreeNode* right = helper(root->right);
+        root->left = NULL;
+        if(left != NULL){
+            root->right = left;
+            //找到left最右边的位置
+            while(left->right != NULL){
+                left = left->right;
+            }
+            left->right = right;
+        }
+    }
+    return root;
+}
+
+void flatten(struct TreeNode* root){
+    if(root == NULL){
+        return;
+    }
+    helper(root);
+}
+//法二： 前序遍历后把节点放在数组中， 再一个拼接起来
+
+

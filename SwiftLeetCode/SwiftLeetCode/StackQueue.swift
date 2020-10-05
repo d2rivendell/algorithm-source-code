@@ -319,6 +319,7 @@ class LRUCache {
     
 }
 
+
 print("LRU")
 let obj = LRUCache(2)
 print(obj.get(2))
@@ -328,3 +329,30 @@ obj.put(1, 5)
 obj.put(1, 2)
 print(obj.get(1))
 print(obj.get(2))
+
+//MARK: 104. 二叉树的最大深度
+/*https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+ 
+ */
+class MaxDepthSolution {
+    func maxDepth(_ root: TreeNode?) -> Int {
+        guard let rootNode = root else { return 0}
+        var queue: [TreeNode] = [rootNode]
+        var deep = 0
+        while queue.isEmpty == false {
+            var arr: [TreeNode] = []
+            while queue.isEmpty == false {
+                let node =  queue.remove(at: 0)
+                if let left = node.left {
+                    arr.append(left)
+                }
+                if let right = node.right {
+                    arr.append(right)
+                }
+            }
+            queue.append(contentsOf: arr)
+            deep += 1
+        }
+        return deep
+    }
+}

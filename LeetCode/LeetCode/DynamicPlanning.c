@@ -18,35 +18,38 @@ void freedp(int **dp, int rows){
 
 //MARK: 找零钱 --动态规划法
 //money：要找的零钱；A: 现有的零钱数组, 是排序好的；N：零钱的张数
+/*
+ 找到返回最小零钱的张数，找不到返回-1
+ dp[i]表示找到i块钱需要最小的张数。
+ 初始：dp[0] = 0; (重要， 因为c等于i的时候)
+ 对于i位置， 如果c<=i(小于等于才能找),dp[i - c]存在
+ dp[i] = dp[i-c] + 1
+ */
 int coins(int money, int A[], int changeCount){
     if (money == 0) {
         return -1;
     }
     //dp[i]表示要找到零钱为i的最小的张数
-    int *dp = (int *)malloc(sizeof(int) * (money + 1));
+    int dp[money + 1];
     // faces[i]是凑够i分时最后那枚硬币的面值
-    int *faces = (int *)malloc(sizeof(int) * (money + 1));
-    memset(faces, 1, money + 1);
-    memset(dp, 0, money + 1);
+    int faces[money + 1];
     //自底向上
-    for (int i = 1; i <= money; i++) {
-        int MIN = 0x7fffffff;
-        //        int minIdx = -1;
-        for (int j = 0; j < changeCount; j++) {
-            int change = A[j];//零钱
-            if (change > i) {
-                break;
-            }
-            //MIN表示: 对于金额i, 先使用了零钱charge, 剩余零钱最小的零钱张数为dp[i - charge]
-            if (dp[i - change] < MIN) {
-                MIN = MIN(dp[i - change], MIN);
-                faces[i] = change;
-            }
-            if (MIN == 0x7fffffff) {//金额i确实无法找零，要设置为-1，为了让MIN+1==0
-                MIN = -1;
+    dp[0] = 0;//关键！！！如果i-c == 0, 让下面的if也能为true
+    for(int i = 1; i <= money; i++){
+        faces[i]  =  0;
+        dp[i] = -1;
+        int min = 0x7fffffff;
+        for(int j = 0; j < changeCount; j++){
+            int c = A[j];
+            if(c > i) continue;
+            if(dp[i-c] >= 0 && dp[i-c] < min){
+                min = dp[i - c];
+                faces[i] = c;
             }
         }
-        dp[i] = MIN + 1;
+        if(min != 0x7fffffff){
+            dp[i] = min + 1;
+        }
     }
     printf("the money is: ");
     int c = money;

@@ -121,3 +121,63 @@ example("572. 另一个树的子树") {
         }
     }
 }
+
+class Trie {
+    class Node {
+        var children: [Character: Node] = [:]
+        var c: Character
+        var isWord = false
+        init(_ c: Character){
+            self.c = c
+        }
+    }
+    var root: Node = Node("-")
+    init() {
+        
+    }
+    
+    /** Inserts a word into the trie. */
+    func insert(_ word: String) {
+        if let node = _get(word){
+            node.isWord = true
+        }
+        var node = root
+        for c in word{
+            if let child = node.children[c]{
+                node = child
+            }else{
+                let child = Node(c)
+                node.children[c] = child
+                node = child
+            }
+        }
+        node.isWord = true
+    }
+    
+    /** Returns if the word is in the trie. */
+    func search(_ word: String) -> Bool {
+        guard let node = _get(word), node.isWord else {
+            return false
+        }
+        return true
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    func startsWith(_ prefix: String) -> Bool {
+        guard let node = _get(prefix) else {
+            return false
+        }
+        return true
+    }
+    
+    private func _get(_ word: String)-> Node?{
+        var node = root
+        for c in word{
+            guard let child = node.children[c] else{
+                return nil
+            }
+            node = child
+        }
+        return node
+    }
+}

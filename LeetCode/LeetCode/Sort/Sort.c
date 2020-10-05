@@ -42,3 +42,33 @@ BubbleSort(int A[], int N){
         }
     }
 }
+
+//res: 用于保存中间的排序结果
+void merge_sort_helper(int A[], int res[], int l, int r);
+void MergeSort(int A[], int N){
+    int res[N];
+    merge_sort_helper(A, res, 0, N-1);
+}
+
+void merge_sort_helper(int A[], int res[], int l, int r){
+    if(l >= r) return; //分解到一个的时候，不需要排序， 想想只有一个元素还排序？
+    int mid = l + (r - l)/2;
+    int start1 = l, end1 = mid, start2 = mid + 1, end2 = r;
+    merge_sort_helper(A, res, start1 , end1);
+    merge_sort_helper(A, res, start2 , end2);
+    //合并两个[l, mid], [mid+1, r]的值，即排序A[l,r]范围内的数字
+    int cur = start1;
+    while (start1 <= end1 || start2 <= end2) {
+        if(start1 <= end1 && start2 <= end2) {
+            res[cur++] = A[start1] < A[start2] ? A[start1++] : A[start2++];
+        }else if (start1 <= end1) {
+            res[cur++] = A[start1++];
+        }else {
+            res[cur++] = A[start2++];
+        }
+    }
+    //把中间排序结果存入A
+    for (int i = l; i <= r; i++) {
+        A[i] = res[i];
+    }
+}

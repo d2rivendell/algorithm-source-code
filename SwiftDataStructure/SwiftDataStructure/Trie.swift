@@ -8,6 +8,7 @@
 
 import Foundation
 
+///前缀树， 字典树
 class Trie<V> {
     public class Node<V> {
         ///节点是某个单词的结尾时，即isWord==true时，保存单词对应的value
