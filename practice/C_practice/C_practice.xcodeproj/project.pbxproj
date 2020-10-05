@@ -113,6 +113,81 @@
 		351C31E124B0E97200D635E6 /* invertTree.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = invertTree.gif; sourceTree = "<group>"; };
 		352542C51FDD4FC600501AF9 /* shellSort.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shellSort.jpg; sourceTree = "<group>"; };
 		3586218A24AF970A00CA00D5 /* 二叉树中序遍历迭代法.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "二叉树中序遍历迭代法.gif"; sourceTree = "<group>"; };
+		35A1B45D252B6143001FEE0F /* testcurs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testcurs.c; sourceTree = "<group>"; };
+		35A1B45E252B6143001FEE0F /* treap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = treap.h; sourceTree = "<group>"; };
+		35A1B45F252B6143001FEE0F /* max_sum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = max_sum.c; sourceTree = "<group>"; };
+		35A1B460252B6143001FEE0F /* aatree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aatree.h; sourceTree = "<group>"; };
+		35A1B461252B6143001FEE0F /* binomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binomial.h; sourceTree = "<group>"; };
+		35A1B462252B6143001FEE0F /* testleft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testleft.c; sourceTree = "<group>"; };
+		35A1B463252B6143001FEE0F /* dsl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsl.c; sourceTree = "<group>"; };
+		35A1B464252B6143001FEE0F /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
+		35A1B465252B6143001FEE0F /* testque.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testque.c; sourceTree = "<group>"; };
+		35A1B466252B6143001FEE0F /* fig10_46.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_46.c; sourceTree = "<group>"; };
+		35A1B467252B6143001FEE0F /* redblack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = redblack.c; sourceTree = "<group>"; };
+		35A1B468252B6143001FEE0F /* hashsep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashsep.c; sourceTree = "<group>"; };
+		35A1B469252B6143001FEE0F /* poly.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = poly.c; sourceTree = "<group>"; };
+		35A1B46A252B6143001FEE0F /* hashfunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashfunc.c; sourceTree = "<group>"; };
+		35A1B46B252B6143001FEE0F /* binheap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = binheap.c; sourceTree = "<group>"; };
+		35A1B46C252B6143001FEE0F /* leftheap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftheap.h; sourceTree = "<group>"; };
+		35A1B46D252B6143001FEE0F /* splay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = splay.h; sourceTree = "<group>"; };
+		35A1B46E252B6143001FEE0F /* stackar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stackar.h; sourceTree = "<group>"; };
+		35A1B46F252B6143001FEE0F /* disjsets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = disjsets.c; sourceTree = "<group>"; };
+		35A1B470252B6143001FEE0F /* testhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testhash.c; sourceTree = "<group>"; };
+		35A1B471252B6143001FEE0F /* hashquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashquad.h; sourceTree = "<group>"; };
+		35A1B472252B6143001FEE0F /* fig1_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig1_2.c; sourceTree = "<group>"; };
+		35A1B473252B6143001FEE0F /* sort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sort.c; sourceTree = "<group>"; };
+		35A1B474252B6143001FEE0F /* fig10_45.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_45.c; sourceTree = "<group>"; };
+		35A1B475252B6143001FEE0F /* testsply.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testsply.c; sourceTree = "<group>"; };
+		35A1B476252B6143001FEE0F /* testrb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testrb.c; sourceTree = "<group>"; };
+		35A1B477252B6143001FEE0F /* fig2_11.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig2_11.c; sourceTree = "<group>"; };
+		35A1B478252B6143001FEE0F /* testlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testlist.c; sourceTree = "<group>"; };
+		35A1B479252B6143001FEE0F /* pairheap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pairheap.c; sourceTree = "<group>"; };
+		35A1B47A252B6143001FEE0F /* fig10_55.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_55.c; sourceTree = "<group>"; };
+		35A1B47B252B6143001FEE0F /* testpair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testpair.c; sourceTree = "<group>"; };
+		35A1B47C252B6143001FEE0F /* testaa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testaa.c; sourceTree = "<group>"; };
+		35A1B47D252B6143001FEE0F /* testheap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testheap.c; sourceTree = "<group>"; };
+		35A1B47E252B6143001FEE0F /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
+		35A1B47F252B6143001FEE0F /* avltree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = avltree.c; sourceTree = "<group>"; };
+		35A1B480252B6143001FEE0F /* queue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = queue.c; sourceTree = "<group>"; };
+		35A1B481252B6143001FEE0F /* stackli.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stackli.c; sourceTree = "<group>"; };
+		35A1B482252B6143001FEE0F /* cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cursor.h; sourceTree = "<group>"; };
+		35A1B483252B6143001FEE0F /* redblack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = redblack.h; sourceTree = "<group>"; };
+		35A1B484252B6143001FEE0F /* testdsl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testdsl.c; sourceTree = "<group>"; };
+		35A1B485252B6143001FEE0F /* fig10_40.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_40.c; sourceTree = "<group>"; };
+		35A1B486252B6143001FEE0F /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		35A1B487252B6143001FEE0F /* fig1_3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig1_3.c; sourceTree = "<group>"; };
+		35A1B488252B6143001FEE0F /* dsl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsl.h; sourceTree = "<group>"; };
+		35A1B489252B6143001FEE0F /* binomial.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = binomial.c; sourceTree = "<group>"; };
+		35A1B48A252B6143001FEE0F /* aatree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aatree.c; sourceTree = "<group>"; };
+		35A1B48B252B6143001FEE0F /* fig2_10.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig2_10.c; sourceTree = "<group>"; };
+		35A1B48C252B6143001FEE0F /* testavl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testavl.c; sourceTree = "<group>"; };
+		35A1B48D252B6143001FEE0F /* fig2_9.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig2_9.c; sourceTree = "<group>"; };
+		35A1B48E252B6143001FEE0F /* treap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = treap.c; sourceTree = "<group>"; };
+		35A1B48F252B6143001FEE0F /* fig10_54.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_54.c; sourceTree = "<group>"; };
+		35A1B490252B6143001FEE0F /* testtrp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testtrp.c; sourceTree = "<group>"; };
+		35A1B491252B6143001FEE0F /* binheap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binheap.h; sourceTree = "<group>"; };
+		35A1B492252B6143001FEE0F /* stackar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stackar.c; sourceTree = "<group>"; };
+		35A1B493252B6143001FEE0F /* splay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = splay.c; sourceTree = "<group>"; };
+		35A1B494252B6143001FEE0F /* leftheap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = leftheap.c; sourceTree = "<group>"; };
+		35A1B495252B6143001FEE0F /* teststka.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = teststka.c; sourceTree = "<group>"; };
+		35A1B496252B6143001FEE0F /* testtree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testtree.c; sourceTree = "<group>"; };
+		35A1B497252B6143001FEE0F /* hashsep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashsep.h; sourceTree = "<group>"; };
+		35A1B498252B6143001FEE0F /* kdtree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kdtree.c; sourceTree = "<group>"; };
+		35A1B499252B6143001FEE0F /* fig10_43.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_43.c; sourceTree = "<group>"; };
+		35A1B49A252B6143001FEE0F /* fig10_62.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_62.c; sourceTree = "<group>"; };
+		35A1B49B252B6143001FEE0F /* fatal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fatal.h; sourceTree = "<group>"; };
+		35A1B49C252B6143001FEE0F /* fig1_4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig1_4.c; sourceTree = "<group>"; };
+		35A1B49D252B6143001FEE0F /* hashquad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashquad.c; sourceTree = "<group>"; };
+		35A1B49E252B6143001FEE0F /* teststkl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = teststkl.c; sourceTree = "<group>"; };
+		35A1B49F252B6143001FEE0F /* cursor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cursor.c; sourceTree = "<group>"; };
+		35A1B4A0252B6143001FEE0F /* stackli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stackli.h; sourceTree = "<group>"; };
+		35A1B4A1252B6143001FEE0F /* fig10_53.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_53.c; sourceTree = "<group>"; };
+		35A1B4A2252B6143001FEE0F /* fig10_38.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fig10_38.c; sourceTree = "<group>"; };
+		35A1B4A3252B6143001FEE0F /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		35A1B4A4252B6143001FEE0F /* pairheap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pairheap.h; sourceTree = "<group>"; };
+		35A1B4A5252B6143001FEE0F /* testbin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testbin.c; sourceTree = "<group>"; };
+		35A1B4A6252B6143001FEE0F /* avltree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avltree.h; sourceTree = "<group>"; };
+		35A1B4A7252B6143001FEE0F /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		35C632AD1FF22153002A5BA2 /* PercolateDown_to_buidHeap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PercolateDown_to_buidHeap.png; sourceTree = "<group>"; };
 		35D42D291FD7D0A800A8C9A5 /* Queue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Queue; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D42D2B1FD7D0A800A8C9A5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -228,6 +303,89 @@
 			path = C_practice/Sort;
 			sourceTree = "<group>";
 		};
+		35A1B45C252B6143001FEE0F /* code */ = {
+			isa = PBXGroup;
+			children = (
+				35A1B45D252B6143001FEE0F /* testcurs.c */,
+				35A1B45E252B6143001FEE0F /* treap.h */,
+				35A1B45F252B6143001FEE0F /* max_sum.c */,
+				35A1B460252B6143001FEE0F /* aatree.h */,
+				35A1B461252B6143001FEE0F /* binomial.h */,
+				35A1B462252B6143001FEE0F /* testleft.c */,
+				35A1B463252B6143001FEE0F /* dsl.c */,
+				35A1B464252B6143001FEE0F /* list.c */,
+				35A1B465252B6143001FEE0F /* testque.c */,
+				35A1B466252B6143001FEE0F /* fig10_46.c */,
+				35A1B467252B6143001FEE0F /* redblack.c */,
+				35A1B468252B6143001FEE0F /* hashsep.c */,
+				35A1B469252B6143001FEE0F /* poly.c */,
+				35A1B46A252B6143001FEE0F /* hashfunc.c */,
+				35A1B46B252B6143001FEE0F /* binheap.c */,
+				35A1B46C252B6143001FEE0F /* leftheap.h */,
+				35A1B46D252B6143001FEE0F /* splay.h */,
+				35A1B46E252B6143001FEE0F /* stackar.h */,
+				35A1B46F252B6143001FEE0F /* disjsets.c */,
+				35A1B470252B6143001FEE0F /* testhash.c */,
+				35A1B471252B6143001FEE0F /* hashquad.h */,
+				35A1B472252B6143001FEE0F /* fig1_2.c */,
+				35A1B473252B6143001FEE0F /* sort.c */,
+				35A1B474252B6143001FEE0F /* fig10_45.c */,
+				35A1B475252B6143001FEE0F /* testsply.c */,
+				35A1B476252B6143001FEE0F /* testrb.c */,
+				35A1B477252B6143001FEE0F /* fig2_11.c */,
+				35A1B478252B6143001FEE0F /* testlist.c */,
+				35A1B479252B6143001FEE0F /* pairheap.c */,
+				35A1B47A252B6143001FEE0F /* fig10_55.c */,
+				35A1B47B252B6143001FEE0F /* testpair.c */,
+				35A1B47C252B6143001FEE0F /* testaa.c */,
+				35A1B47D252B6143001FEE0F /* testheap.c */,
+				35A1B47E252B6143001FEE0F /* tree.h */,
+				35A1B47F252B6143001FEE0F /* avltree.c */,
+				35A1B480252B6143001FEE0F /* queue.c */,
+				35A1B481252B6143001FEE0F /* stackli.c */,
+				35A1B482252B6143001FEE0F /* cursor.h */,
+				35A1B483252B6143001FEE0F /* redblack.h */,
+				35A1B484252B6143001FEE0F /* testdsl.c */,
+				35A1B485252B6143001FEE0F /* fig10_40.c */,
+				35A1B486252B6143001FEE0F /* list.h */,
+				35A1B487252B6143001FEE0F /* fig1_3.c */,
+				35A1B488252B6143001FEE0F /* dsl.h */,
+				35A1B489252B6143001FEE0F /* binomial.c */,
+				35A1B48A252B6143001FEE0F /* aatree.c */,
+				35A1B48B252B6143001FEE0F /* fig2_10.c */,
+				35A1B48C252B6143001FEE0F /* testavl.c */,
+				35A1B48D252B6143001FEE0F /* fig2_9.c */,
+				35A1B48E252B6143001FEE0F /* treap.c */,
+				35A1B48F252B6143001FEE0F /* fig10_54.c */,
+				35A1B490252B6143001FEE0F /* testtrp.c */,
+				35A1B491252B6143001FEE0F /* binheap.h */,
+				35A1B492252B6143001FEE0F /* stackar.c */,
+				35A1B493252B6143001FEE0F /* splay.c */,
+				35A1B494252B6143001FEE0F /* leftheap.c */,
+				35A1B495252B6143001FEE0F /* teststka.c */,
+				35A1B496252B6143001FEE0F /* testtree.c */,
+				35A1B497252B6143001FEE0F /* hashsep.h */,
+				35A1B498252B6143001FEE0F /* kdtree.c */,
+				35A1B499252B6143001FEE0F /* fig10_43.c */,
+				35A1B49A252B6143001FEE0F /* fig10_62.c */,
+				35A1B49B252B6143001FEE0F /* fatal.h */,
+				35A1B49C252B6143001FEE0F /* fig1_4.c */,
+				35A1B49D252B6143001FEE0F /* hashquad.c */,
+				35A1B49E252B6143001FEE0F /* teststkl.c */,
+				35A1B49F252B6143001FEE0F /* cursor.c */,
+				35A1B4A0252B6143001FEE0F /* stackli.h */,
+				35A1B4A1252B6143001FEE0F /* fig10_53.c */,
+				35A1B4A2252B6143001FEE0F /* fig10_38.c */,
+				35A1B4A3252B6143001FEE0F /* queue.h */,
+				35A1B4A4252B6143001FEE0F /* pairheap.h */,
+				35A1B4A5252B6143001FEE0F /* testbin.c */,
+				35A1B4A6252B6143001FEE0F /* avltree.h */,
+				35A1B4A7252B6143001FEE0F /* tree.c */,
+			);
+			name = code;
+			path = ../../code;
+			sourceTree = "<group>";
+		};
 		35D42D2A1FD7D0A800A8C9A5 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +412,7 @@
 		4F17B79D1E9DBF2C00EDEEBA = {
 			isa = PBXGroup;
 			children = (
+				35A1B45C252B6143001FEE0F /* code */,
 				35DFAFDB24B09AB400CE9E39 /* fatal.h */,
 				35DFAFDC24B09AB400CE9E39 /* Tool.c */,
 				35DFAFDA24B09AB400CE9E39 /* Tool.h */,

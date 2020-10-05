@@ -21,7 +21,8 @@ int force1(char *s, char *p){
         return -1;
     }
     int pi = 0;
-    for(int ti = 0; ti < strLen - pLen; ti++) {
+    int tiMax = strLen - pLen;
+    for(int ti = 0; ti <= tiMax; ti++) {
         pi = 0;
         while(pi < pLen && s[ti+pi] == p[pi]){
             pi++;
@@ -57,6 +58,7 @@ int force2(char *s, char *p){
             ti++;
         }else{
             pi = 0;
+            //ti在之前的位置往前挪动一步
             ti =  ti - pi + 1;
         }
     }
@@ -92,7 +94,7 @@ kmp使用的是这种方式
 
 ####kmp中next表直观展示
 
-需要特别说明下kmp中的`next`表，在使用的时候不是直接使用图一里面的`next'`表，而是要在图一的基础上往左移动一位， 第0个位置补-1。这么做是为了代码构造next表更方便。如下展示
+需要特别说明下kmp中的`next`表，在使用的时候不是直接使用图一里面的`next'`表，而是要在图一的基础上往右移动一位， 第0个位置补-1。这么做是为了代码构造next表更方便。如下展示
 
 
 
@@ -184,10 +186,52 @@ int *next(char *p){
     nextTable[0] = -1;
     int i = 0;
     int n = -1;//1. 已知next[i]=n, i=0
-    while (i < pLen - 1) {
+    while (i < pLen - 1) {// 用到i+1， 所以是 < pLen -1
         if (n < 0 || p[i] == p[n]) {//2.当i位置和n位置相等时 (n < 0是第一个特殊条件)
-            nextTable[i+1] = n+1;
             //i变成i+1了，对应的n变成了n+1。满足next[i]=n条件
+            nextTable[++i] = ++n;
+        }else{//2.当i位置和n位置不相等时
+            //i要和k位置比较， k位置就是next[n]
+            n = nextTable[n];
+        }
+    }
+    return nextTable;
+}
+```
+
+
+
+
+
+#### next表优化
+
+`next[pi]`的字符和p[pi]的字符是一样的话，没有必要比较。 
+
+
+
+<img src="./kmp5.png" alt="kmp4" style="zoom:40%;" />
+
+<center>图五</center>
+
+可以优化next表让相邻重复的next表的下一个值指向上一个值
+
+优化后的next表
+
+```c
+int *next(char *p){
+    int pLen =  (int)strlen(p);
+    int *nextTable  = malloc(sizeof(int) * pLen);
+    memset(nextTable, 0, sizeof(int) * pLen);
+    nextTable[0] = -1;
+    int i = 0;
+    int n = -1;//1. 已知next[i]=n, i=0
+    while (i < pLen - 1) {// 用到i+1， 所以是 < pLen -1
+        if (n < 0 || p[i] == p[n]) {//2.当i位置和n位置相等时 (n < 0是第一个特殊条件)
+            if(i < pLen - 1 && p[i+1] == p[n+1]){//优化：和前一个相等
+              nextTable[i+1] = nextTable[n+1]
+            }else{
+              nextTable[i+1] = n+1;
+            }
             i++;
             n++;
         }else{//2.当i位置和n位置不相等时
@@ -198,4 +242,30 @@ int *next(char *p){
     return nextTable;
 }
 ```
+
+
+
+
+
+### kmp性能分析
+
+###### 主逻辑
+
+|      | 时间复杂度       |
+| ---- | ---------------- |
+| 最好 | O(m)             |
+| 最坏 | O(n),不超过O(2n) |
+
+###### next表
+
+时间复杂度: O(m)
+
+
+
+###### KMP主体
+
+|      | 时间复杂度 | 空间复杂度 |
+| ---- | ---------- | ---------- |
+| 最好 | O(m)       | O(m)       |
+| 最坏 | O(n+m)     | O(m)       |
 

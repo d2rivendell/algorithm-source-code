@@ -258,7 +258,7 @@ def isMatch(s, p):
 
 # 组合 https://leetcode-cn.com/problems/combinations
 @example("77. 组合")
-def combine(self, n: int, k: int) -> List[List[int]]:
+def combine( n, k) :
     """
         给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
         输入: n = 4, k = 2  ----->C(2,4)
@@ -279,8 +279,8 @@ def combine(self, n: int, k: int) -> List[List[int]]:
     def dfs(cur,n, res):
             #⚠️这一步放在剪枝前面 否则会被跳过
             if len(res) == k:
-            output.append(res[:])
-            return
+                output.append(res[:])
+                return
             #剪枝1
             #   if cur == n + 1:
             #       print(cur, res)
@@ -296,12 +296,12 @@ def combine(self, n: int, k: int) -> List[List[int]]:
             #2. 当前数字不作为组合元素
             res.remove(cur)
             dfs(cur+1, n, res)
-     dfs(1,n,res)
-     return output
+    dfs(1,n,res)
+    return output
 
 #https://leetcode-cn.com/problems/subsets/
 @example("子集")
-def subsets(self, nums: List[int]) -> List[List[int]]:
+def subsets(nums):
     """
         输入: nums = [1,2,3]
         输出:
@@ -341,7 +341,9 @@ if __name__ == '__main__':
  print(letterCombinations("23"))
  print(strArrange("abc"))
  print(permute([1,2,3]))
-
+ arr = ["I"] * 2
+ arr.append("M" * 3)
+ print(arr)
  # str = "dasb"
  # toLi = list("dsb")
  # print(toLi)

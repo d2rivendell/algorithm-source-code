@@ -36,13 +36,16 @@ print(strArr)
 //print(String.init(["3", "4"]))
 
 //testBloomFiltert()
-
+for i in 0...3{
+    print(i)
+}
 //testGeneticAlgorithm()
 let arr = Array<Int>.init(0..<5)
 print(arr)
 ["2", "3"].joined()
 print(strArr[1..<3])
 let subS = String(strArr[1..<3])
+
 
 
 //func lastRemaining(_ n: Int, _ m: Int) -> Int {

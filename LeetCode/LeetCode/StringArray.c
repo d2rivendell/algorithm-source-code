@@ -774,3 +774,47 @@ char* multiply(char* num1, char* num2) {
    }
    return sum;
 }
+
+//MARK: 28. 实现 strStr() ---kmp
+/*https://leetcode-cn.com/problems/implement-strstr/
+ 当 needle 是空字符串时我们应当返回 0
+ */
+void nextTable(char *p, int *table){
+    int pLen = strlen(p);
+    int i = 0, n = -1;
+    table[i] = n;
+    while(i < pLen - 1){
+        if(n < 0 || p[i] == p[n]){
+            i++;
+            n++;
+            //判断是不是和上一个相同
+            if(i < pLen - 1 && p[i] == p[n]){
+                table[i] = table[n];
+            }else{//不相同
+                table[i] = n;
+            }
+        }else{
+            n = table[n];
+        }
+    }
+}
+int strStr(char * haystack, char * needle){
+    if (haystack == NULL || needle == NULL) return -1;
+    int n = strlen(haystack);
+    int m = strlen(needle);
+    if(m == 0) return 0;
+    int *next = malloc(sizeof(int) * m);
+    nextTable(needle, next);
+    int ti = 0;
+    int pi = 0;
+    while(pi < m && ti <= n - m + pi){
+        if(pi < 0 || haystack[ti] == needle[pi]){
+            ti++;
+            pi++;
+        }else{//失配
+            pi = next[pi];
+        }
+    }
+    free(next);
+    return pi == m ? ti - pi : -1;
+}
