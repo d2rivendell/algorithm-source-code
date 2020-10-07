@@ -160,7 +160,7 @@ int *next(char *p){
             i++;
             n++;
             if(i < pLen - 1 && p[i] == p[n]){//优化：和前一个相等
-                nextTable[i] = nextTable[n]
+                nextTable[i] = nextTable[n];
             }else{
                 nextTable[i] = n;
             }

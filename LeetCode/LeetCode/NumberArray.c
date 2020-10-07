@@ -819,3 +819,84 @@ int singleNumber(int* nums, int numsSize){
     }
     return res;
 }
+
+
+//MARK:排列公式
+int combineMulHelp(unsigned int k){
+    unsigned int sum = 1;
+    while(k){
+        sum *= (k--);
+    }
+    return sum;
+}
+int combine(int m, int n){
+    // c(m,  n) = n!/((n-m)! * m!)
+    return combineMulHelp(n)/(combineMulHelp(n-m) * combineMulHelp(m));
+}
+int weights(int n){
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        sum += combine(i, n);
+    }
+    return sum;
+}
+
+//MARK: 33. 搜索旋转排序数组
+/*https://leetcode-cn.com/problems/search-in-rotated-sorted-array
+ 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+ ( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+ 搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
+ 你可以假设数组中【不存在重复】的元素。
+ 你的算法时间复杂度必须是 O(log n) 级别。
+ */
+int rotateSearch(int* nums, int numsSize, int target){
+    //思路： 可以发现的是，我们将数组从中间分开成左右两部分的时候，一定有一部分的数组是有序的。
+    int l = 0, r = numsSize - 1;
+    int m = 0;
+    while(l <= r) {
+        m = l + (r - l)/2;
+        if(nums[m] == target) {
+            return m;
+        }
+        //[l......m.......r]
+        if(nums[l] <= nums[m]) {//左半边是有序的
+            //再判断是l还是r缩小范围
+            if(nums[l] <= target  && target < nums[m]){//target在[l,m)范围
+                r = m - 1;
+            }else{//target在(m,r]范围
+                l = m + 1;
+            }
+        }else{
+            if(nums[m] < target  && target <= nums[r]){//target在[l,m)范围
+                l = m + 1;
+            }else{//target在(m,r]范围
+                r = m - 1;
+            }
+        }
+    }
+    return -1;
+}
+
+//MARK: 剑指 Offer 11. 旋转数组的最小数字
+/*
+ https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+ 这题难点在于 数组中可以有重复的数字
+ */
+int minArray(int* numbers, int numbersSize){
+    int l = 0, r = numbersSize - 1, m = 0;
+    while(l < r){
+        m = l + (r - l)/2;
+        if(numbers[l] < numbers[r]){// 整个数组[l,r]范围内是有序的，左边 肯定是最小
+            return numbers[l];
+        }
+        if(numbers[m]  < numbers[r]){//右半边是有序的
+            r = m;
+        }else if(numbers[m]  == numbers[r]){//不确定 有可能在右半边（都是一堆相同的数的时候，也有可能在左半边）
+            r -= 1;//往左小挪，否则会错过
+        }else{ //numbers[m]  > numbers[r] 转折点在右半边，最小值肯定在右半边
+            l = m + 1;
+        }
+    }
+    //l == r
+    return numbers[l];
+}
