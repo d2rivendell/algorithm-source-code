@@ -157,13 +157,13 @@ int *next(char *p){
     int n = -1;//1. 已知next[i]=n, i=0
     while (i < pLen - 1) {// 用到i+1， 所以是 < pLen -1
         if (n < 0 || p[i] == p[n]) {//2.当i位置和n位置相等时 (n < 0是第一个特殊条件)
+            if(i < pLen - 1 && p[i+1] == p[n+1]){//优化：和前一个相等
+                nextTable[i+1] = nextTable[n+1];
+            }else{
+                nextTable[i+1] = n+1;
+            }
             i++;
             n++;
-            if(i < pLen - 1 && p[i] == p[n]){//优化：和前一个相等
-                nextTable[i] = nextTable[n];
-            }else{
-                nextTable[i] = n;
-            }
         }else{//2.当i位置和n位置不相等时
             //i要和k位置比较， k位置就是next[n]
             n = nextTable[n];

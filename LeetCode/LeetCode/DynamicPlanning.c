@@ -192,7 +192,7 @@ void place(int row, int n, int *cols){
 
 //判断在[row][col]位置是否满足要求， 相当于剪枝处理
 int isValid(int row, int col, int *cols){
-    for (int i = 0; i < row; i++) {
+    for (int i = 0; i < row; i++) {//遍历之前皇后的位置
         if (cols[i] == col) {//同一列已经摆过了
             return 0;
         }

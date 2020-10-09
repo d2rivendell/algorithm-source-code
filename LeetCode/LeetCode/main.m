@@ -68,7 +68,7 @@ void listPrint(struct ListNode *head){
 
 
 int main(int argc, const char * argv[]) {
-
+    printf("4个砝码可以称几种: %d\n", weights(6));
     LeetCode();
     return 0;
 }
@@ -80,7 +80,7 @@ void SortTest(){
 //    InsertSort(A, sizeof(A)/sizeof(int));
 //    BubbleSort(A, N);
     arrayPrint(A, N, false);
-    MergeSort(A, N);
+    mergeSort1(A, N);
     arrayPrint(A, N, true);
    
 }
