@@ -180,3 +180,96 @@ Insert(AvlTree T,AvlElementType X){
 
 注意被旋转的点内部不需要处理更上层的根节点问题， 比如右旋转的T不需要把T的父节点转移给`T->left`, 因为函数返回的是新的根节点， 外层函数会对新的根节点进行指定
 
+
+
+
+
+### 红黑树旋转
+
+
+
+#### 右旋转和左旋转
+
+![single](./image/BTree/single.png)
+
+```swift
+    /// 对grand进行右旋转，并返回新的根节点
+    /// 右旋： 有node 、parent、grand三个节点，把grand向右旋转作为parent的右子节点
+    /// parent作为新的根节点，并重新设置新的根节点的父节点
+    ///      O                                         O (old parent)
+    ///     /                                          /       \
+    ///    O (parent)   ====>             O          O
+    ///   /                                          (node)
+    ///  O (node)
+    @discardableResult
+    func singleRightRotation(_ grand: RBNode?) -> RBNode?{
+        let parent = grand?.left
+        //指定新的根节点的父节点
+        parent?.parent = grand?.parent
+        //将新的根节点的右节点转过来用来平衡
+        grand?.left = parent?.right
+        //旋转原来根节点作为新的根节点的右节点
+        parent?.right = grand
+        
+        return parent
+    }
+    
+    /// 对grand进行左旋转，并返回新的根节点
+    /// 左旋：  有node 、parent、grand三个节点，把grand向左旋转作为parent的左子节点
+    /// parent作为新的根节点，并重新设置新的根节点的父节点
+    /// O                                                  O (old parent)
+    ///  \                                              /       \
+    ///   O (parent)   ====>             O          O
+    ///    \                                                 (node)
+    ///     O (node)
+    @discardableResult
+    func singleLeftRotation(_ grand: RBNode?) -> RBNode? {
+        let parent = grand?.left
+        //指定新的根节点的父节点
+        parent?.parent = grand?.parent
+        //将新的根节点的左节点转过来用来平衡
+        grand?.right = parent?.left
+        //旋转原来根节点作为新的根节点的左节点
+        parent?.left = grand
+        return parent
+    }
+    
+```
+
+
+
+
+
+#### 右双旋和左双旋
+
+```swift
+    /// 右双旋
+    /// 先对parent进行左旋转，在对对grand进行右旋转，并返回新的根节点
+    ///      O (grand)                              O (node)
+    ///     /                                           /       \
+    ///    O (parent)          ====>        O        O(grand)
+    ///     \                                      (parent)
+    ///      O (node)
+    @discardableResult
+    func doubleRightRotation(_ grand: RBNode?) -> RBNode?{
+        let parent = grand?.left
+        singleLeftRotation(parent)
+        return singleRightRotation(grand)
+    }
+    
+    /// 左双旋
+    /// 先对parent进行右旋转，在对对grand进行左旋转，并返回新的根节点
+    /// O (grand)                                    O (node)
+    ///   \                                           /       \
+    ///    O (parent)        ====>    O        O(parent)
+    ///    /                                 (grand)
+    ///   O (node)
+    @discardableResult
+    func doubleLeftRotation(_ grand: RBNode?) -> RBNode?{
+        let parent = grand?.left
+        singleRightRotation( parent)
+        return singleLeftRotation(grand)
+    }
+```
+
+![double](./image/BTree/double.png)
