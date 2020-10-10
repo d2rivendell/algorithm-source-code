@@ -21,9 +21,9 @@ AvlPosition Avl_FindMin(AvlElementType X,AvlTree T);
 AvlPosition Avl_FindMax(AvlElementType X,AvlTree T);
 
 
-AvlPosition SingleRotateWidthLeft(AvlTree T);
-AvlPosition SingleRotateWidthRight(AvlTree T);
-AvlPosition DoubleRotateWidthLeft(AvlTree T);
-AvlPosition DoubleRotateWidthRight(AvlTree T);
+AvlPosition SingleRotateToLeft(AvlTree T);
+AvlPosition SingleRotateToRight(AvlTree T);
+AvlPosition DoubleRotateLeft(AvlTree T);
+AvlPosition DoubleRotateRight(AvlTree T);
 AvlTree Insert_avl(AvlTree T,AvlElementType X);
 #endif /* AVLTree_h */

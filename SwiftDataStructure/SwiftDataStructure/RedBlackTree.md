@@ -1,69 +1,53 @@
-//
-//  AVLTree.c
-//  tree
-//
-//  Created by leon on 2017/12/6.
-//  Copyright © 2017年 Leon. All rights reserved.
-//
+### 性质
 
-#include "AVLTree.h"
-#include <stdlib.h>
-#define AVL_MAX(A,B) A > B ? A:B
-struct AvlNode{
-    AvlElementType element;
-    int height;
-    AvlTree left;
-    AvlTree right;
-};
-
-AvlPosition
-Avl_Find(AvlElementType X,AvlTree T){
-    if(T == NULL){
-        printf("error:T is Null\n");
-        return NULL;
-    }
-    if(T->element > X){
-        return Avl_Find(X, T->left);
-    }else if (T->element < X){
-         return Avl_Find(X, T->right);
-    }else{
-        return T;
-    }
-}
-AvlPosition
-Avl_FindMax(AvlElementType X,AvlTree T){
-    if(T == NULL){
-        return NULL;
-    }
-    while (T->right) {
-        T = T->right;
-    }
-    return T;
-}
-
-AvlPosition
-Avl_FindMin(AvlElementType X,AvlTree T){
-    if(T == NULL){
-        return NULL;
-    }
-    while (T->left) {
-        T = T->left;
-    }
-    return T;
-}
+红黑树的性质：
+ 1. 节点是 RED 或者 BLACK
+ 2. 根节点是 BLACK
+ 3. 叶子节点（外部节点，节点空）都是 BLACK
+ 4. RED节点的子节点都是 BLACK
+    - RED节点的parent都是 BLACK
+    - 从根节点到叶子节点的所路径上不能2个连续的RED节点
+ 5. 从任一节点到叶子节点的所有路径都包含相同数目BLACK节点
 
 
+
+
+
+### 红黑树和4阶B树具有等价性质
+
+
+
+![brtree](./image/BTree/brtree.png)
+
+
+
+红黑树在构建的时间可以当作B数来处理，black节点和它的红子节点融合成为一个B数的节点
+
+
+
+### AVL树的旋转
+
+
+
+#### 右单旋
+
+右旋的前提是:
+
+1. `height(T->left)-height(T->right) == 2 `
+2. `newValue < T->left->val`
+
+```c
 /**
  前提：
  1. T左树的高度比右树多2
  2. T的左树有左树，T的左树的儿子中，左树高度比右树高
-      O(T)              O(T_left)
-      /  \               /   \
-     O    O         O      O(T)
-    /    \              /       /   \
-   O      O         O     O     O
+       O(T)              O(T_left)
+      /  \              /   \
+     O    O           O     O(T)
+    /      \         /     /   \
+   O        O       O     O     O
   /
- O
+ O(new)
  @param T 返回旋转后的根节点
  
  这里其实是右旋（T本来是left的父节点， 把它向右旋转变成left的右节点， 并改变方向， T的left继承原left的右节点）
@@ -79,12 +63,18 @@ SingleRotateToRight(AvlTree T){
     return T_left;
 }
 
+```
 
-/**
- 和SingleRotateToRight类似
- 这里其实是左旋（T本来是right的父节点， 把它向左旋转变成right的左节点， 并改变方向， T的right继承原right的左节点）
- T, T—>right，T->right->right，  让T—>left节点成为新的父节点
- */
+
+
+#### 左单旋
+
+左旋的前提是:
+
+1. `height(T->right)-height(T->left) == 2 `
+2. `newValue > T->right->val`
+
+```c
 AvlPosition
 SingleRotateToLeft(AvlTree T){
     AvlPosition T_right= T->right;
@@ -94,8 +84,18 @@ SingleRotateToLeft(AvlTree T){
     T_right->height = AVL_MAX(Height(T->left),Height(T->right)) + 1;
     return T_right;
 }
+```
 
 
+
+#### 右双旋
+
+右双旋的前提是:
+
+1. `height(T->left)-height(T->right) == 2 `
+2. `newValue > T->left->val`
+
+```c
 /**
  前提：
  1. T左树的高度比右树多2
@@ -113,24 +113,38 @@ SingleRotateToLeft(AvlTree T){
  @return 返回旋转后的根节点
  */
 AvlPosition
-DoubleRotateRight(AvlTree T){
-    /*先把T->left进行右旋转 */
+DoubleRotateRight(AvlTree T){//
+    /*先把T->left进行左旋转 */
    T->left = SingleRotateToLeft(T->left);
    return SingleRotateToRight(T);
 }
+```
 
-/**
-  和DoubleRotateRight类似
- */
+
+
+#### 左双旋
+
+左双旋的前提是:
+
+1. `height(T->right)-height(T->right) == 2 `
+2. `newValue > T->left->val`
+
+```c
 AvlPosition
 DoubleRotateLeft(AvlTree T){
-    /*先把T->right进行左边旋转 */
+    /*先把T->right进行右旋转 */
     T->right = SingleRotateToRight(T->right);
     return SingleRotateToLeft(T);
 }
+```
 
+
+
+#### Insert
+
+```c
 AvlTree
-Insert_avl(AvlTree T,AvlElementType X){
+Insert(AvlTree T,AvlElementType X){
     if(T == NULL){
         T = malloc(sizeof(AvlTree));
         T->element = X;
@@ -139,7 +153,7 @@ Insert_avl(AvlTree T,AvlElementType X){
     }else if (X < T->element){
         T->left = Insert(T->left , X);
         if(Height(T->left) - Height(T->right) == 2){
-            if(X < T->left->element){//X 插在T的左树的左树
+            if(X < T->left->element){//X插在T的左树的左树 
                T = SingleRotateToRight(T);
             }else{//X 插在T的左树的右树
                T = DoubleRotateRight(T);
@@ -148,7 +162,7 @@ Insert_avl(AvlTree T,AvlElementType X){
     }else if (X > T->element){
            T->right = Insert(T->right , X);
         if(Height(T->right) - Height(T->left) == 2){
-            if(X > T->right->element){//X 插在T的右树的右树
+            if(X > T->right->element){//X插在T的右树的右树
                 T = SingleRotateToLeft(T);
             }else{//X 插在T的右树的左树
                 T = DoubleRotateLeft(T);
@@ -158,12 +172,11 @@ Insert_avl(AvlTree T,AvlElementType X){
     T->height = AVL_MAX(Height(T->left),Height(T->right)) + 1;
     return T;
 }
+```
 
-int
-Height(AvlTree T){
-    if(T == NULL){
-        return -1;
-    }else{
-        return T->height;
-    }
-};
+
+
+#### 新的根节点的根节点指引问题
+
+注意被旋转的点内部不需要处理更上层的根节点问题， 比如右旋转的T不需要把T的父节点转移给`T->left`, 因为函数返回的是新的根节点， 外层函数会对新的根节点进行指定
+

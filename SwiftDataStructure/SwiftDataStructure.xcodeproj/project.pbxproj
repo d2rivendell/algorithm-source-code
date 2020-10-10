@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3566CFF224F0EB6400DB23F3 /* BloomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566CFF124F0EB6400DB23F3 /* BloomFilter.swift */; };
 		3566CFF724F0F20800DB23F3 /* SkipList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566CFF624F0F20800DB23F3 /* SkipList.swift */; };
+		3596C78425318F43003CA2C3 /* RedBlackTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3596C78325318F43003CA2C3 /* RedBlackTree.swift */; };
 		359DA45A24E7D51400204E23 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DA45924E7D51400204E23 /* Tool.swift */; };
 		359DA45C24E7D54C00204E23 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DA45B24E7D54C00204E23 /* Graph.swift */; };
 		359DA46024E819F600204E23 /* GraphTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DA45F24E819F600204E23 /* GraphTest.swift */; };
@@ -42,6 +43,11 @@
 		3566CFF324F0EE8B00DB23F3 /* Bloom1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloom1.png; sourceTree = "<group>"; };
 		3566CFF424F0EE9500DB23F3 /* Bloom2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloom2.png; sourceTree = "<group>"; };
 		3566CFF624F0F20800DB23F3 /* SkipList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipList.swift; sourceTree = "<group>"; };
+		3596C78325318F43003CA2C3 /* RedBlackTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBlackTree.swift; sourceTree = "<group>"; };
+		3596C7862531A8CB003CA2C3 /* BTree.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = BTree.md; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
+		3596C78A2531ACFC003CA2C3 /* rotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotation.png; sourceTree = "<group>"; };
+		3596C78B2531ACFC003CA2C3 /* merge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merge.png; sourceTree = "<group>"; };
+		3596C78C2531AF5E003CA2C3 /* RedBlackTree.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = RedBlackTree.md; sourceTree = "<group>"; };
 		359DA45924E7D51400204E23 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		359DA45B24E7D54C00204E23 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		359DA45F24E819F600204E23 /* GraphTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTest.swift; sourceTree = "<group>"; };
@@ -70,6 +76,7 @@
 		355730D024E8297B00B53DE7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				3596C7892531ACFC003CA2C3 /* BTree */,
 				D9866F6624F89EB700F2EDB5 /* skipList */,
 				3566CFF524F0EEA800DB23F3 /* Bloom */,
 				355730D124E8297B00B53DE7 /* graph */,
@@ -95,6 +102,15 @@
 				3566CFF324F0EE8B00DB23F3 /* Bloom1.png */,
 			);
 			path = Bloom;
+			sourceTree = "<group>";
+		};
+		3596C7892531ACFC003CA2C3 /* BTree */ = {
+			isa = PBXGroup;
+			children = (
+				3596C78A2531ACFC003CA2C3 /* rotation.png */,
+				3596C78B2531ACFC003CA2C3 /* merge.png */,
+			);
+			path = BTree;
 			sourceTree = "<group>";
 		};
 		359DA45E24E819DD00204E23 /* testCase */ = {
@@ -136,6 +152,9 @@
 				35A1B45325237EA4001FEE0F /* Trie.swift */,
 				3566CFF124F0EB6400DB23F3 /* BloomFilter.swift */,
 				3566CFF624F0F20800DB23F3 /* SkipList.swift */,
+				3596C78325318F43003CA2C3 /* RedBlackTree.swift */,
+				3596C7862531A8CB003CA2C3 /* BTree.md */,
+				3596C78C2531AF5E003CA2C3 /* RedBlackTree.md */,
 				D93117E624F5264800B5D585 /* GeneticAlgorithm.swift */,
 			);
 			path = SwiftDataStructure;
@@ -218,6 +237,7 @@
 				3566CFF224F0EB6400DB23F3 /* BloomFilter.swift in Sources */,
 				359DA45A24E7D51400204E23 /* Tool.swift in Sources */,
 				D93117E724F5264800B5D585 /* GeneticAlgorithm.swift in Sources */,
+				3596C78425318F43003CA2C3 /* RedBlackTree.swift in Sources */,
 				35F1594A250DBE29000E177E /* GATest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
