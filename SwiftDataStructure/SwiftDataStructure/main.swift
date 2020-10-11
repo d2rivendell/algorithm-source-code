@@ -8,44 +8,47 @@
 
 import Foundation
 
-testGraph()
+//testGraph()
+
 //testTopologicalSort()
 
 //testSkipListRandom()
 
 //testSkipListTest()
 
-testTrie()
+//testTrie()
 
-func strStr(_ haystack: String, _ needle: String) -> Int {
-    if(needle.isEmpty) { return -1}
-    var arrStr = Array(haystack)
-    let count = arrStr.count
-    for i in 0..<count{
-        if String(arrStr[i..<count]).hasPrefix(needle){
-            return i
-        }
-    }
-    return -1
-}
+testBRtree()
 
-print(strStr("hello", "ll"))
-var str = "1234"
-let strArr = Array(str)
-print(strArr)
-//print(String.init(["3", "4"]))
-
-//testBloomFiltert()
-for i in 0...3{
-    print(i)
-}
-//testGeneticAlgorithm()
-let arr = Array<Int>.init(0..<5)
-print(arr)
-["2", "3"].joined()
-print(strArr[1..<3])
-let subS = String(strArr[1..<3])
-
+//func strStr(_ haystack: String, _ needle: String) -> Int {
+//    if(needle.isEmpty) { return -1}
+//    var arrStr = Array(haystack)
+//    let count = arrStr.count
+//    for i in 0..<count{
+//        if String(arrStr[i..<count]).hasPrefix(needle){
+//            return i
+//        }
+//    }
+//    return -1
+//}
+//
+//print(strStr("hello", "ll"))
+//var str = "1234"
+//let strArr = Array(str)
+//print(strArr)
+////print(String.init(["3", "4"]))
+//
+////testBloomFiltert()
+//for i in 0...3{
+//    print(i)
+//}
+////testGeneticAlgorithm()
+//let arr = Array<Int>.init(0..<5)
+//print(arr)
+//["2", "3"].joined()
+//print(strArr[1..<3])
+//let subS = String(strArr[1..<3])
+//
 
 
 //func lastRemaining(_ n: Int, _ m: Int) -> Int {

@@ -60,7 +60,7 @@
 import Foundation
 
 // 红黑树在构建的时间可以当作B数来处理，black节点和它的红子节点融合成为一个B数的节点
-class RBTree<E: Comparable> {
+class RBTree<E: Comparable>: CustomStringConvertible {
      
     class RBNode<E: Comparable>  {
         enum Color {
@@ -68,9 +68,9 @@ class RBTree<E: Comparable> {
             case black
         }
         var color: Color = .red // 建议默认是红色，这样能让红黑树的性质更快得到满足
-        var parent: RBNode?
-        var left: RBNode?
-        var right: RBNode?
+        weak var parent: RBNode?  = nil
+        var left: RBNode? = nil
+        var right: RBNode? = nil
         var element: E
         init(_ element: E, _ parent: RBNode?) {
             self.element = element
@@ -78,12 +78,17 @@ class RBTree<E: Comparable> {
         }
         /// 本节点是否是父节点的左节点
         var isLeft: Bool {
-            return left != nil
+            return self === parent?.left
         }
         /// 本节点是否是父节点的右节点
         var isRight: Bool {
-            return right != nil
+            return self === parent?.right
         }
+        /// 度是否为2
+        var hasTwoChlden: Bool {
+            return self.left != nil  && self.right != nil
+        }
+        
         /// 返回最近的家族成员节点
         func sibling() -> RBNode? {
             if isLeft {
@@ -96,15 +101,136 @@ class RBTree<E: Comparable> {
         }
         
     }
-    
+    /// 注意根节点是不固定的，旋转后会变化
     var root: RBNode<E>?
+    
     public private(set) var size = 0
+    
+    
+    var description: String {
+        var des = ""
+        guard let node = root else {
+            return des
+        }
+        
+        var countQueue: [RBNode<E>] = [node]
+        var deep = 0
+        //bfs统计层数
+        while countQueue.isEmpty == false {
+            var queueTemp: [RBNode<E>] = []
+            while countQueue.isEmpty == false {
+                let node = countQueue.remove(at: 0)
+                if let left = node.left {
+                    queueTemp.append(left)
+                }
+                if let right = node.right {
+                    queueTemp.append(right)
+                }
+            }
+            countQueue = queueTemp
+            deep += 1
+        }
+        
+        var queue: [RBNode<E>?] = [node]
+        
+        
+        //和bfs统计层数算法一样，一层一层打印
+        while queue.isEmpty == false {
+            var queueTemp: [RBNode<E>?] = []
+            func emptyByDeep(_ deep: Int) -> String {
+                var res = ""
+                for _ in 0..<deep {
+                    res += " "
+                }
+                return res
+            }
+            let space = emptyByDeep(deep)
+            des += space
+            while queue.isEmpty == false {
+                guard let node = queue.remove(at: 0) else {
+                    des += "   "
+                    continue
+                }
+                if node.color == .red {
+                    des += "[\(node.element)]\(space)"
+                } else {
+                    des += "\(node.element)\(space)"
+                }
+                if let left = node.left {
+                    queueTemp.append(left)
+                }
+                if let right = node.right {
+                    queueTemp.append(right)
+                }
+                if node.left == nil , node.right == nil {
+                    queueTemp.append(nil)
+                }
+            }
+            deep -= 1
+            des += "\n"
+            queue = queueTemp
+        }
+        return des
+    }
     
 }
 
 //MARK: 工具方法
 extension RBTree {
+    /// 前驱节点和后继节点的概念:
+    /// 前驱节点：对一棵二叉树进行中序遍历，遍历后的顺序，当前节点的前一个节点为该节点的前驱节点；
+    /// 后继节点：对一棵二叉树进行中序遍历，遍历后的顺序，当前节点的后一个节点为该节点的后继节点；
     
+    
+    /// 查找node 的前驱节点,前驱节点在左子树当中（left.right.right.right....）
+    func predecessor(_ node: RBNode<E>) -> RBNode<E>? {
+        if var p = node.left {
+            while p.right != nil {
+                p = p.right!
+            }
+            return p
+        }
+        var n = node
+        // 从父节点、祖父节点中寻找前驱节点
+        while let parent = n.parent, parent.left === n {
+            n = parent
+        }
+        // node.parent == null
+        // node == node.parent.right
+        return n.parent;
+    }
+    
+    /// 查找node 的后继节点,后继节点在右子树当中（right.left.left.left....）
+    func successor(_ node: RBNode<E>) -> RBNode<E>? {
+        if var p = node.right {
+            while p.left != nil {
+                p = p.left!
+            }
+            return p
+        }
+        var n = node
+        // 从父节点、祖父节点中寻找前驱节点
+        while let parent = n.parent, parent.right === n {
+            n = parent
+        }
+        // node.parent == null
+        // node == node.parent.right
+        return n.parent;
+    }
+    
+    func node(of e: E) -> RBNode<E>? {
+        var node = root
+        while let temp = node {
+            if e < temp.element {
+                node = temp.left
+            } else if e >  temp.element {
+                node = temp.right
+            } else {
+                return temp
+            }
+        }
+        return nil
+    }
     /// 给节点染色，并返回改节点
     private func setColor(_ node: RBNode<E>?, with color: RBNode<E>.Color ) {
         guard let nd = node else {
@@ -181,7 +307,7 @@ extension RBTree {
             if node.isLeft { // RL
                 //4. 自己染成黑色， 对grand进行左双旋（parent右旋， grand左旋）
                 setBlack(node)
-                doubleRightRotation(grand)
+                doubleLeftRotation(grand)
             } else { // RR
                 //2. 把parent染黑，进行左旋
                 setBlack(parent)
@@ -205,13 +331,13 @@ extension RBTree {
     @discardableResult
     func singleRightRotation(_ grand: RBNode<E>?) -> RBNode<E>?{
         let parent = grand?.left
-        //指定新的根节点的父节点
-        parent?.parent = grand?.parent
+        let childOfParent = parent?.right
         //将新的根节点的右节点转过来用来平衡
-        grand?.left = parent?.right
+        grand?.left = childOfParent
         //旋转原来根节点作为新的根节点的右节点
         parent?.right = grand
-        
+        //指定childOfParent，parent，grand它们的各自parent关系
+        setupParentAfterRotation(childOfParent, parent, grand)
         return parent
     }
     
@@ -225,13 +351,14 @@ extension RBTree {
     ///     O (node)
     @discardableResult
     func singleLeftRotation(_ grand: RBNode<E>?) -> RBNode<E>? {
-        let parent = grand?.left
-        //指定新的根节点的父节点
-        parent?.parent = grand?.parent
+        let parent = grand?.right
+        let childOfParent = parent?.left
         //将新的根节点的左节点转过来用来平衡
-        grand?.right = parent?.left
+        grand?.right = childOfParent
         //旋转原来根节点作为新的根节点的左节点
         parent?.left = grand
+        //指定childOfParent，parent，grand它们的各自parent关系
+        setupParentAfterRotation(childOfParent, parent, grand)
         return parent
     }
     
@@ -244,8 +371,7 @@ extension RBTree {
     ///      O (node)
     @discardableResult
     func doubleRightRotation(_ grand: RBNode<E>?) -> RBNode<E>?{
-        let parent = grand?.left
-        singleLeftRotation(parent)
+        singleLeftRotation(grand?.left)
         return singleRightRotation(grand)
     }
     
@@ -258,30 +384,50 @@ extension RBTree {
     ///   O (node)
     @discardableResult
     func doubleLeftRotation(_ grand: RBNode<E>?) -> RBNode<E>?{
-        let parent = grand?.left
-        singleRightRotation( parent)
+        singleRightRotation(grand?.right)
         return singleLeftRotation(grand)
     }
+    
+
+    /// 旋转之后需要重新指定parent 和child之间的联系
+    /// - Parameters:
+    ///   - child: 旋转之前parent的子节点， 如果是右旋，child为parent的右节点， 反之是左节点
+    ///   - parent: 旋转后新的根节点
+    ///   - grand: 原来的祖父节点， 右旋后，成为parent的右节点， 左旋后，成为parent的左节点
+    func setupParentAfterRotation(_ child: RBNode<E>?, _ parent: RBNode<E>?,  _ grand: RBNode<E>?){
+        let topParent = grand?.parent
+        parent?.parent = topParent
+        // 还要判断parent是parent?.parent的左节点还是右节点
+        if grand?.isLeft == true {
+            topParent?.left = parent
+        } else if grand?.isRight == true {
+            topParent?.right = parent
+        } else { //🔥 关键： grand本身是root节点
+            root = parent
+        }
+        child?.parent = grand
+        grand?.parent = parent
+    }
+    
 }
 
 //MARK: public
 extension RBTree {
     
-    public func addNode(_ e: E) {
-        defer {
-            size += 1
-        }
+    public func add(_ e: E) {
         if root == nil {
+            size += 1
             root = RBNode<E>(e, nil)
+            afterAdd(root)
             return
         }
         var temp = root
         var parent: RBNode<E> = root!
         while let node = temp { //找到叶子节点
             parent = node
-            if node.element > e {
+            if e < node.element {
                 temp = node.left
-            } else if node.element < e{
+            } else if e > node.element {
                 temp = node.right
             } else {// 重复了 不处理
                 return
@@ -293,6 +439,23 @@ extension RBTree {
         } else {
             parent.right = newNode
         }
+        size += 1
         afterAdd(newNode)
     }
+    
+    public func remove(e: E) {
+        guard let node = node(of: e) else {
+            return
+        }
+        size -= 1
+        if node.hasTwoChlden {//用前驱或者后继替换它即可
+            
+        }
+    }
+    
+    public func clear() {
+        root = nil
+        size = 0
+    }
+    
 }
