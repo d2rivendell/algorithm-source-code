@@ -313,7 +313,176 @@ AVL 没有parent字段，而且添加用的是递归，操作比较简洁
 
 ### 删除
 
+和B树类似，最后真正被删除的元素都在叶子节点中 （和AVL数不一样，红黑树的叶子节点包括一个黑节点及其结合的两个红节点， 和B树类似，一个节点后多个元素）
 
+删除主要按两大类分下去
+
+类目一： 删除的节点是**红色** ： 直接删，不用做调整，因为红色节点依附黑色节点组成 一组元素，组成一个类似 B树的，节点，是不是节点是根据有没有黑色节点 
+
+类目二： 删除的节点是黑色，这时就要分： 
+
+（1） 黑色节至少有一个红色节点， 
+
+（2）黑色节点两个孩子都是黑节点（黑色没有真正的黑节点， 因为他是叶子节点，这里说它有两个黑节点值得是两个**空节点**）
+
+```swift
+ public func remove(e: E) {
+        guard var node = node(of: e) else {
+            return
+        }
+        size -= 1
+        if node.hasTwoChlden {//用前驱或者后继替换它即可
+            //找到后继
+           let successorNode = successor(node)! //hasTwoChlden 肯定有值
+           // 用后继节点的值覆盖度为2的节点的值
+           node.element = successorNode.element
+           // 删除的点 变成后继节点
+           node = successorNode
+        }
+        
+        //node有0个或一个度
+        let child = node.left != nil ? node.left : node.right
+        let nodeIsRoot = node.parent == nil
+        if let child = child { // 删除的node有一个节点, 让child和node.parent建立联系
+            //这里就是类目二（1）的情况
+            child.parent = node.parent //node就没有引用了
+            if nodeIsRoot {
+                root = child
+            } else if node.isLeft {
+                node.parent?.left = child
+            } else {
+                node.parent?.right = child
+            }
+            afterRemove(node,child)//这里是要处理child，因为node已经移除了
+        } else if nodeIsRoot { //没有子节点 但是是根节点
+            root = nil
+            afterRemove(node, nil)
+        } else { //没有子节点 也不是根节点。 断开父节点引用
+          //这里就是类目一 或者类目二（1）的情况
+            if node.isLeft {
+                node.parent?.left = nil
+            } else {
+                node.parent?.right = nil
+            }
+            afterRemove(node, nil)
+        }
+    }
+```
+
+
+
+#### 删除的节点是红色
+
+直接删除
+
+图一删除元素17直接删除即可
+
+#### 删除的节点是黑色
+
+<img src="/Users/leon/Documents/GitHub/algorithm-source-code/SwiftDataStructure/SwiftDataStructure/image/BTree/remove1.png" alt="remove1" style="zoom:50%;" />
+
+<center>图一</center>
+
+
+
+##### 有一个红色的节点： 
+
+该红色的节点就是代替被 删除的黑色节点，直接染黑即可 （在`afterRemove`函数染黑色， 指针的问题在`remove`函数操作了）
+
+```swift
+func afterRemove(_ node: RBNode<E>, _ child: RBNode<E>?) {
+        // 删除的节点是红色 不需要调整；
+        if isRed(of: node) { return }
+        // 替换它的孩子是红色，child染黑即可， 两者合并为
+        if isRed(of: child) {
+            setBlack(child)
+            return
+        }
+}
+```
+
+
+
+
+
+##### 没有其他节点（只有两个黑色空节点）： 
+
+
+
+###### 情况一：
+
+兄弟节点是黑色，且只有空节点， 比如删除88， 兄弟节点76没有红色
+
+- 如果父节点是红色，父节点下移。父节点染黑， 兄弟染红
+
+- 如果父节点是黑色，父节点下移有空腔，父节点染黑，对父节点执行下滤操作， 兄弟染红
+
+  
+
+<img src="/Users/leon/Documents/GitHub/algorithm-source-code/SwiftDataStructure/SwiftDataStructure/image/BTree/remove2.png" alt="remove1" style="zoom:50%;" />
+
+<center>图二</center>
+
+ ```swift
+if isBlack(of: sibling?.left) && isBlack(of: sibling?.right) { //兄弟节点都是黑的，null也是黑节点， 所以这里表示sibling是没有孩子）
+                //将 sibling染成红色、parent染成 BLACK 即可修复红黑树性质
+                //父亲是红色的话要染黑，并有下滤的操作
+                let parentIsBlack = isBlack(of: parent)
+                setBlack(parent)
+                setRed(sibling)
+                if parentIsBlack {//
+                    afterRemove(parent, nil)
+                }
+            }
+ ```
+
+
+
+###### 情况二
+
+**sibling为BLACK**
+
+![remove3](/Users/leon/Documents/GitHub/algorithm-source-code/SwiftDataStructure/SwiftDataStructure/image/BTree/remove3.png)
+
+<center>图三</center>
+
+如要删除图三中的88需要， 对父节点右双旋转，父节点染成黑色， 旋转之后的中心节点继承parent 的颜色
+
+旋转之后的左右节点染为***BLACK\***
+
+```swift
+//兄弟节点至少有1个红节点，
+                if isBlack(of: sibling?.left)  {
+                     singleLeftRotation(sibling)
+                     sibling = parent.left;
+                }
+                setColor(sibling, with: color(of: parent))
+                setBlack(sibling?.left)
+                setBlack(parent)
+                singleRightRotation(parent)
+```
+
+
+
+**sibling为red**
+
+<img src="/Users/leon/Documents/GitHub/algorithm-source-code/SwiftDataStructure/SwiftDataStructure/image/BTree/remove4.png" alt="remove4" style="zoom:50%;" />
+
+
+
+<center>图四</center>
+
+sibling 染成***BLACK***，parent 染成***RED***，进行旋转，变成了图三的情况，  按照图三的情况走即可
+
+```swift
+ //兄弟是红节点（它和父节点在一层）, 这个比较特殊， 先转成黑色和黑色情况一起处理 图四
+if isRed(of: sibling) {
+    setBlack(sibling)
+    setRed(parent)
+    singleRightRotation(parent)
+    sibling = parent.left //兄弟节点改变了
+  }
+```
 
 
 

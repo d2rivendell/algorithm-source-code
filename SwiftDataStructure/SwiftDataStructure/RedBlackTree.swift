@@ -192,7 +192,7 @@ extension RBTree {
         }
         var n = node
         // 从父节点、祖父节点中寻找前驱节点
-        while let parent = n.parent, parent.left === n {
+        while let parent = n.parent, parent.right === n {
             n = parent
         }
         // node.parent == null
@@ -209,8 +209,8 @@ extension RBTree {
             return p
         }
         var n = node
-        // 从父节点、祖父节点中寻找前驱节点
-        while let parent = n.parent, parent.right === n {
+        // 从父节点、祖父节点中寻找后继节点
+        while let parent = n.parent, parent.left === n {
             n = parent
         }
         // node.parent == null
@@ -312,6 +312,91 @@ extension RBTree {
                 //2. 把parent染黑，进行左旋
                 setBlack(parent)
                 singleLeftRotation(grand)
+            }
+        }
+        
+    }
+    
+    /// 移除之后的调整
+    /// - Parameter node: 已经删除的节点， 肯定是在红黑树的叶子节点上（红黑树叶子节点和B树类似， 不是AVL树的概念）
+    /// - Parameter child: 要替换node的位置的孩子,可能为空， 只有在图一场景中才会有，不会参与下面底部旋转的逻辑
+    func afterRemove(_ node: RBNode<E>, _ child: RBNode<E>?) {
+        // 删除的节点是红色 不需要调整 //图一
+        if isRed(of: node) { return }
+        // 替换它的孩子是红色，child染黑即可， 两者合并为
+        if isRed(of: child) { //图一
+            setBlack(child)
+            return// child完成使命，不参与下面的代码判断
+        }
+        // 删除的是根节点 也不需要处理
+        guard let parent = node.parent else {
+            return
+        }
+       
+        //下滤
+        
+        //node的节点是黑色， 再判断它是在parent的哪个方向。
+        // parent.left == nil如果删除的是左节点的话这个判断是有效的
+        // node.isLeft == true 这个判断针对父节点下滤，这时父节点不是真的删除，它的父节点关联还是存在的
+        let nodeIsLeft = parent.left == nil || node.isLeft == true
+        var sibling = nodeIsLeft ? parent.right : parent.left;
+        if nodeIsLeft {
+            //这个if代码是下面 else 代码的镜像，逻辑参考else的代码注释
+            if isRed(of: sibling) {
+               setBlack(sibling)
+               setRed(parent)
+               singleLeftRotation(parent)
+               sibling = parent.right
+            }
+            if isBlack(of: sibling?.left) && isBlack(of: sibling?.right) {
+                let parentIsBlack = isBlack(of: parent)
+                setBlack(parent)
+                setRed(sibling)
+                if parentIsBlack {
+                    afterRemove(parent, nil)
+                }
+            } else {
+                if isBlack(of: sibling?.right)  {
+                     singleRightRotation(sibling)
+                     sibling = parent.right;
+                }
+                setColor(sibling, with: color(of: parent))
+                setBlack(sibling?.right)
+                setBlack(parent)
+                singleLeftRotation(parent)
+            }
+            
+        } else { // 被删除的节点在右边，兄弟节点在左边
+            // 向兄弟节点接节点 （旋转的方式）
+            if isRed(of: sibling) { //兄弟是红节点（它和父节点在一层）, 这个比较特殊， 先转成黑色和黑色情况一起处理 图四
+               setBlack(sibling)
+               setRed(parent)
+               singleRightRotation(parent)
+               sibling = parent.left //兄弟节点改变了
+            }
+            // 下面处理兄弟是黑色节点的情况 （它只能有，至少一个红节点和两个都是黑色节点， 注意null是黑节点这个容易被忽略！）
+            
+            // 需要注意的是 sibling和node都是最后一层， 它们都只能有红色的节点或者空节点，红黑树的性质是
+            // 黑色结合它的红孩子节点作为元素合并称为一个节点，
+            
+            if isBlack(of: sibling?.left) && isBlack(of: sibling?.right) { //兄弟节点都是黑的，null也是黑节点， 所以这里表示sibling是没有孩子） //图二
+                //将 sibling染成红色、parent染成 BLACK 即可修复红黑树性质
+                //父亲是红色的话要染黑，并有下滤的操作
+                let parentIsBlack = isBlack(of: parent)
+                setBlack(parent)
+                setRed(sibling)
+                if parentIsBlack {//
+                    afterRemove(parent, nil)
+                }
+            } else { //兄弟节点至少有1个红节点，图三
+                if isBlack(of: sibling?.left)  {
+                     singleLeftRotation(sibling)
+                     sibling = parent.left;
+                }
+                setColor(sibling, with: color(of: parent))
+                setBlack(sibling?.left)
+                setBlack(parent)
+                singleRightRotation(parent)
             }
         }
         
@@ -444,13 +529,44 @@ extension RBTree {
     }
     
     public func remove(e: E) {
-        guard let node = node(of: e) else {
+        guard var node = node(of: e) else {
             return
         }
         size -= 1
         if node.hasTwoChlden {//用前驱或者后继替换它即可
-            
+            //找到后继
+           let successorNode = successor(node)! //hasTwoChlden 肯定有值
+           // 用后继节点的值覆盖度为2的节点的值
+           node.element = successorNode.element
+           // 删除的点 变成后继节点
+           node = successorNode
         }
+        
+        //node有0个或一个度
+        let child = node.left != nil ? node.left : node.right
+        let nodeIsRoot = node.parent == nil
+        if let child = child { // 删除的node有一个节点, 让child和node.parent建立联系
+            child.parent = node.parent //node就没有引用了
+            if nodeIsRoot {
+                root = child
+            } else if node.isLeft {
+                node.parent?.left = child
+            } else {
+                node.parent?.right = child
+            }
+            afterRemove(node,child)//这里是要处理child，因为node已经移除了
+        } else if nodeIsRoot { //没有子节点 但是是根节点
+            root = nil
+            afterRemove(node, nil)
+        } else { //没有子节点 也不是根节点。 断开父节点引用
+            if node.isLeft {
+                node.parent?.left = nil
+            } else {
+                node.parent?.right = nil
+            }
+            afterRemove(node, nil)
+        }
+        
     }
     
     public func clear() {
