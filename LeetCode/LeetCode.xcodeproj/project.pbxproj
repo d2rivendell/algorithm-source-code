@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3566CF9924E9640800DB23F3 /* longestPalindrome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = longestPalindrome.png; sourceTree = "<group>"; };
+		35992150253B240000A1F55D /* 约瑟夫环3-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约瑟夫环3-5.png"; sourceTree = "<group>"; };
 		35A1B45A252B23DF001FEE0F /* kmp5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kmp5.png; sourceTree = "<group>"; };
 		35B8B65624DE631600FE4DE9 /* algorithm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = algorithm.xcodeproj; path = ../algorithm/algorithm.xcodeproj; sourceTree = "<group>"; };
 		35D860C8249CFB9B0072EEFF /* LeetCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LeetCode; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +110,7 @@
 		35D860CA249CFB9B0072EEFF /* LeetCode */ = {
 			isa = PBXGroup;
 			children = (
+				35992150253B240000A1F55D /* 约瑟夫环3-5.png */,
 				35F1592F2503E7BE000E177E /* kmp */,
 				3566CF9724E963EB00DB23F3 /* image */,
 				D9D7EA8524A8A2E6003A698F /* Sort */,

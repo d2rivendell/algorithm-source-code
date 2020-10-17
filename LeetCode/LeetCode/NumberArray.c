@@ -623,12 +623,15 @@ int* subSort(int* array, int arraySize, int* returnSize){
 //MARK: 剑指 Offer 62. 圆圈中最后剩下的数字
 //https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
 /*
+ 
+ 0,1,,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。
  swift 版本： 超时
  func lastRemaining(_ n: Int, _ m: Int) -> Int {
     if n == 0 || m == 0{
         return -1
     }
     var res = Array<Int>(0..<n)
+    //[....idx...]
     while res.count > 1{
         let idx = (m-1) % res.count
          res.remove(at: idx)
@@ -646,6 +649,10 @@ int* subSort(int* array, int arraySize, int* returnSize){
    }
    var res = Array<Int>(0..<n)
    var idx = 0
+   如果始终是删掉数组的第m个的话
+   (m - 1) % res.count
+   但是下标是从上次删除的位置的下一个开始计算的
+   [...a][idx][...b]
    while res.count > 1{
       idx = (idx + m - 1) % res.count
       res.remove(at: idx)
@@ -655,8 +662,22 @@ int* subSort(int* array, int arraySize, int* returnSize){
  */
 /*
  这题是约瑟夫环问题
+ 假如知道了x = f(n-1, m), 求 f(n, m)
+ 关键是怎么找到f(n-1, m)和f(n, m)的关系。
+ 0 1 2 3 ... [m-1] | m m+1  ... n-1
+ m m+1  .....[x]  ... n-1 0 1 2 3 ... n - 2
+ x是在n个数中剔除m个数， 在剩下的n-1个数中找到第m个数的结果
+ f(n, m) = (m % n + x) % n = (m + x) % n。
+
+ 关系如下：
  f(n, m) = (f(n-1, m) + m) % n
+
  */
+int lastRemaining(int n, int m){
+    if (n == 1) return 0;
+    int x = lastRemaining(n-1, m);
+    return (m + x) % n;
+}
 
 
 

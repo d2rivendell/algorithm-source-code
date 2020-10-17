@@ -22,6 +22,7 @@ void testDailyTemperatures();
 void testParentIndexes();
 void testSortColors();
 void testMergeTwoArray();
+void testKnapsack();
 
 int *createIntArray(int N){
     srand((unsigned)time(NULL));//以时间作种
@@ -80,7 +81,7 @@ void SortTest(){
 //    InsertSort(A, sizeof(A)/sizeof(int));
 //    BubbleSort(A, N);
     arrayPrint(A, N, false);
-    mergeSort1(A, N);
+    MergeSort(A, N);
     arrayPrint(A, N, true);
    
 }
@@ -89,7 +90,7 @@ void
 LeetCode(){
     struct ListNode temp, *top = &temp;
     SortTest();
-    return;
+
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
 //    double res = Power(2, -1);
@@ -133,6 +134,8 @@ LeetCode(){
 //    testParentIndexes();
     
 //    testSortColors();
+    
+    testKnapsack();
     char *s = malloc(sizeof(char) * 12);
     char *s2 = "erbottlewat";
     memcpy(s, s2, sizeof(char) * 11);
@@ -239,3 +242,11 @@ void testMergeTwoArray(){
     arrayPrint(nums1, 6, false);
 }
 
+
+void testKnapsack() {
+    int values[] = {6, 3, 5, 4, 6};
+    int weights[] = {2, 2, 6, 5, 4};
+    int capacity = 10;
+    int res =  knapsack(values, 5, weights, 5, capacity);
+    printf("\ntestKnapsack: %d \n", res);
+}

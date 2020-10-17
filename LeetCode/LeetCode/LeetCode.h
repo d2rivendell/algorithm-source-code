@@ -113,4 +113,6 @@ int kmp(char *s, char *p);
 
 //砝码称重
 int weights(int n);
+
+int knapsack(int *values, int v, int *weights, int w, int capacity);
 #endif /* LeetCode1_h */

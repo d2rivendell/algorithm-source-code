@@ -621,3 +621,33 @@ int minDistance(char * word1, char * word2){
     freedp(dp, rows);
     return max;
 }
+
+
+//MARK: 背包问题
+int knapsack(int *values, int v, int *weights, int w, int capacity) {
+    /*
+     dp[i][j]表示有前j件物体可选，最大承重是j时， 背包的总最大价值
+     初始：dp[0][j] = 0 , dp[i][0] = 0;
+     对于一个物体，想要不要选需要判断选和不选时哪个结果的价值更大
+     dp[i][j] = max(dp[i-1][j], dp[value[i-1]][weights[j] - j] + values[j])
+    */
+    int dp[v+1][capacity+1];
+    for (int i = 0; i < v + 1; i++) {
+        dp[i][0] = 0;
+    }
+    for (int j = 0; j < w + 1; j++) {
+        dp[0][j] = 0;
+    }
+    for (int i = 0; i < v + 1; i++) {// 遍历每个物体
+        for (int j = 0; j < capacity + 1; j++) { //
+            int currentWeight = weights[i - 1];
+            if (currentWeight > j) { //当前不能选
+                dp[i][j] = dp[i-1][j];
+            } else { //当前能选
+                //判断选和不选哪个更大
+                dp[i][j] = MAX(dp[i-1][j], dp[i - 1][j - currentWeight] + values[i-1]);
+            }
+        }
+    }
+    return dp[v][capacity];
+}
