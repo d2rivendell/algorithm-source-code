@@ -921,3 +921,21 @@ int minArray(int* numbers, int numbersSize){
     //l == r
     return numbers[l];
 }
+
+//MARK: 数组中出现次数超过一半的数字
+/*
+ 由于众数出现的次数超过数组长度的一半；若记 众数 的票数为 +1+1 ，
+ 非众数 的票数为 -1−1 ，则一定有所有数字的 票数和 > 0>0
+ */
+int majorityElement(int* nums, int numsSize){
+    if (numsSize == 0) return -1;
+    int x = 0;// 众数
+    int votes = 0;// 票数
+    for (int i = 0; i < numsSize; i++) {
+        if (votes == 0) {//上个众数被淘汰了， 选出新的众数
+            x = nums[i];
+        }
+        votes = nums[i] == x ? votes + 1 : votes - 1;
+    }
+    return x;
+}

@@ -92,6 +92,20 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
         }
     }
     return NULL;
+    
+    /*
+     假设相交的话，链表A长度是m+b，链表B是n+b，公共部分是b，那么走过m+n+b步之后一定会相遇，返回结果。 如果不相交的话，没有公共部分，b=0， 那么走过m+n都指向None，返回None
+     if (headA == NULL || headB == NULL) return NULL;
+       struct ListNode *node1 = headA;
+       struct ListNode *node2 = headB;
+       while (node1 != node2) {
+     // 注意这里是判断 node1 == NULL 而不是 node1-next == NULL
+     // 按照上面的意思必须走够m/n步，才会在某一点重合
+           node1 = node1 == NULL ? headB : node1->next;
+           node2 = node2 == NULL ? headA : node2->next;
+       }
+       return node1;
+     */
 }
 
 //MARK: 203. 移除链表元素
