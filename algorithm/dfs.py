@@ -335,6 +335,65 @@ def subsets(nums):
     dfs(0, res)
     return output
 
+@example("组合总和") #https://leetcode-cn.com/problems/combination-sum/
+def combinationSum(candidates, target):
+    """
+     找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
+     示例 1：
+     输入：candidates = [2,3,6,7], target = 7,
+     所求解集为：
+     [
+       [7],
+       [2,2,3]
+     ]
+    """
+    output = []
+    n = len(candidates)
+    res = []
+
+    def dfs(idx, remain):
+        if remain == 0:
+            output.append(res[:])
+            return
+        if idx == n or remain < 0:
+            return
+        # 1.一直选择当前
+        res.append(candidates[idx])
+        dfs(idx, remain - candidates[idx])
+        # 2. 不选当前
+        res.remove(candidates[idx])
+        dfs(idx + 1, remain)
+
+    dfs(0, target)
+    return output
+
+@example("N皇后") #https://leetcode-cn.com/problems/n-queens/
+def solveNQueens(n):
+        output = []
+        record = [-1] * n
+        def isValid(row, col):
+            for pre_row in range(row):
+                pre_col = record[pre_row]
+                # 纵向和对角线不能存在  ｜x1-x2｜ = |y1-y2|
+                if col == pre_col or abs(col - pre_col) == row - pre_row:
+                    return False
+            return True
+        def findQueue(idx):
+             if(idx == n):
+                 arr = []
+                 for i in range(n):#行
+                     temp = ['.'] * n
+                     temp[record[i]] = 'Q'
+                     arr.append(''.join(temp))
+                 output.append(arr)
+             else:
+                 for col in range(n):
+                     if isValid(idx, col):
+                         record[idx] = col
+                         findQueue(idx+1)
+        findQueue(0)
+        return output
+
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()

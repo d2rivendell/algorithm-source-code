@@ -107,41 +107,88 @@ int* preorderTraversal(struct TreeNode* root, int* returnSize){
     return result;
 }
 
-//MARK: 二叉树的后序遍历
+//MARK: 二叉树的后序遍历 -- 需要反转数组
 int* postorderTraversal(struct TreeNode* root, int* returnSize){
+    // 后序遍历：左 右 中
     //dfs
     if(root == NULL) {
         *returnSize = 0;
         return NULL;
     }
-    struct TreeNode **stack = malloc(sizeof(struct TreeNode *));
-    stack[0] = root;
-    int stk_top = 1;
-    
+
     int *res = malloc(0);
     int cur = 0;
+    // 法一： 层序遍历 中 右 左。 然后逆序即可
+//    struct TreeNode **stack = malloc(sizeof(struct TreeNode *));
+//    stack[0] = root;
+//    int stk_top = 1;
+//    while(stk_top > 0){
+//        struct TreeNode *node =  stack[--stk_top];
+//        res = realloc(res, sizeof(int) * (++cur));
+//        res[cur - 1] = node->val;
+//        if(node->left != NULL){
+//            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+//            stack[stk_top - 1] = node->left;
+//        }
+//        if(node->right != NULL){
+//            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+//            stack[stk_top - 1] = node->right;
+//        }
+//    }
+//      *returnSize = cur;
     
-    //先bfs
-    while(stk_top > 0){
-        struct TreeNode *node =  stack[--stk_top];
-        res = realloc(res, sizeof(int) * (++cur));
-        res[cur - 1] = node->val;
-        if(node->left != NULL){
-            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
-            stack[stk_top - 1] = node->left;
+    // 法二：dfs 遍历中 右 左 再反向输出
+//    struct TreeNode **stack = malloc(0);
+//    int stk_top = 0;
+//    while (stk_top > 0 || root) {
+//        if (root) {
+//            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+//            stack[stk_top - 1] = root;
+//            res = realloc(res, sizeof(int) * (++cur));
+//            res[cur - 1] = root->val;
+//            root = root->right;
+//        } else {
+//            struct TreeNode *node = stack[--stk_top];
+//            root = node->left;
+//        }
+//    }
+//
+//    *returnSize = cur;
+//    //后反转数组
+//    for(int i = 0; i <= cur/2 - 1; i++){
+//        int temp = res[i];
+//        res[i] = res[cur - i - 1];
+//        res[cur - i - 1] = temp;
+//    }
+    
+    // 法三：
+        struct TreeNode **stack = malloc(0);
+        int stk_top = 0;
+       struct TreeNode *preVisited = NULL;
+        while (stk_top > 0 || root) {
+            if (root) {//一直遍历左子树
+                stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+                stack[stk_top - 1] = root;
+                root = root->left;
+            } else {
+                struct TreeNode *node = stack[stk_top-1];//先不移出栈
+                if (node->right && node->right != preVisited) { //有右节点的话 并且上一个不是右节点，处理右节点
+                    /* 这里需要注意， 防止出现死循环
+                        O1
+                         \\
+                           O2
+                     */
+//                    stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
+                    root = node->right;
+                } else {
+                    stk_top--; //出栈
+                    res = realloc(res, sizeof(int) * (++cur));
+                    res[cur - 1] = node->val;
+                    preVisited = node;
+                }
+            }
         }
-        if(node->right != NULL){
-            stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));
-            stack[stk_top - 1] = node->right;
-        }
-    }
     *returnSize = cur;
-    //后反转数组
-    for(int i = 0; i <= cur/2 - 1; i++){
-        int temp = res[i];
-        res[i] = res[cur - i - 1];
-        res[cur - i - 1] = temp;
-    }
     return res;
 }
 

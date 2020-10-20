@@ -14,7 +14,7 @@ def reverseStr():
     L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
     s = "I am a student."
     arr = s.split(" ")
-    if arr[-1][-1] is '.':#最后一个元素的符号
+    if arr[-1][-1] == '.':#最后一个元素的符号
         arr[0] = arr[0] + '.'#放在第一个的前面
         arr[-1] = arr[-1][0:len(arr[-1]) - 1] #取出最后一个单词的最后一个标点符号
     print(" ".join(arr[::-1]))
@@ -150,8 +150,38 @@ def multiply(num1, num2):
     return res
 
 
+@example("罗马数字转整数") #https://leetcode-cn.com/problems/roman-to-integer/
+def romanToInt(s):
+        d = {'I': 1, 'IV': 4, 'V': 5, 'IX': 9, 'X': 10, 'XL': 40, 'L': 50,
+             'XC': 90, 'C': 100, 'CD': 400, 'D': 500, 'CM': 900, 'M': 1000}
+        res = 0
+        while len(s) > 0:
+            a = d.get(s[0:2], 0)
+            b = d.get(s[0:1], 0)
+            res += max(a, b)
+            s = s[2:] if a != 0 else s[1:]
+        return res
+
+#https://leetcode-cn.com/problems/integer-to-roman/
+@example("整数转罗马数字")
+def intToRoman(num):
+    roman_digits = []
+    digits = [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"),
+              (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]
+    for (number, symbol) in digits:
+        a = num // number
+        num = num % number
+        if a == 0:
+            continue
+        roman_digits.append(symbol * a)
+    return ''.join(roman_digits)
 
 
 
 if __name__ == '__main__':
     print(multiply("123", "456"))
+    s1 = ""
+    s2 = "xc"
+    s3 = s1+s2
+    print(s3)
+    print("jj")

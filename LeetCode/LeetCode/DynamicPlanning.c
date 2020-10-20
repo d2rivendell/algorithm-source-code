@@ -632,16 +632,14 @@ int knapsack(int *values, int v, int *weights, int w, int capacity) {
      dp[i][j] = max(dp[i-1][j], dp[value[i-1]][weights[j] - j] + values[j])
     */
     int dp[v+1][capacity+1];
-    for (int i = 0; i < v + 1; i++) {
-        dp[i][0] = 0;
-    }
-    for (int j = 0; j < w + 1; j++) {
-        dp[0][j] = 0;
-    }
     for (int i = 0; i < v + 1; i++) {// 遍历每个物体
-        for (int j = 0; j < capacity + 1; j++) { //
+        for (int j = 0; j < capacity + 1; j++) { //遍历的是背包的容量不是物品的重量
+            if (i == 0 || j == 0) {
+                dp[i][j] = 0;
+                continue;;
+            }
             int currentWeight = weights[i - 1];
-            if (currentWeight > j) { //当前不能选
+            if (currentWeight > j) { //一个物体的重量大于背包的容量，不能选！
                 dp[i][j] = dp[i-1][j];
             } else { //当前能选
                 //判断选和不选哪个更大

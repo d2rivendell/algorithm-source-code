@@ -62,38 +62,34 @@ int* dailyTemperatures(int* T, int TSize, int* returnSize){//时间复杂度有�
         如果T[j] != 0; 设置j = j + values[j], 找比j大的下一个值，和i再比较。回到步骤①
  */
 int* dailyTemperatures2(int* T, int TSize, int* returnSize){
-    if(T == NULL || TSize == 0) {
-        return NULL;
-    }
-    int *res = malloc(sizeof(int) * TSize);
-    memset(res, 0, sizeof(int) * TSize);
-    *returnSize = TSize;
-    int j = 0;
-    for (int i = TSize - 2; i >= 0; i--) {
-        j = i + 1;
-        while (true) {
-            if (T[i] < T[j]) {
-                res[i] =  j - i;
-                break;
-            }else if(T[i] == T[j]){
-                if(res[j] == 0){
-                    res[i] = 0;
-                }else{
-                   res[i] = res[j] + j - i;
-                }
-                break;
-            }else if(T[i] > T[j]){
-                if(res[j] == 0){//i位置后面肯定没有比i大大值了
-                    res[i] = 0;
+    if(TSize == 0){
+           *returnSize = 0;
+           return NULL;
+       }
+       int *res = malloc(sizeof(int) * TSize);
+       memset(res, 0, sizeof(int) * TSize);
+       *returnSize = TSize;
+       res[TSize-1] = 0;
+       int l = 0, r = 0;
+       for(int i = TSize - 2; i >= 0; i--){
+           l = i;
+           r = i + 1;
+           while(r < TSize){
+              if(T[l] < T[r]){
+                    res[l] = r - l;
                     break;
-                }else{
-                    //找比j大的下一个值，和i再比较。
-                    j = res[j] + j;
-                }
-            }
-        }
-    }
-    return res;
+               }else if(T[l] > T[r] && (res[r] > 0)){ // res[r] > 0确保不会死循环
+                    //l可能小于r后面的,找到那个位置
+                    r = res[r] + r;
+               }else{// ==
+                   // 此时r和l不一定是相邻的
+                   res[l] = (res[r] == 0 ? 0 : res[r] + r - l);
+                   break;
+               }
+           }
+       }
+       return res;
+ 
 }
 
 
