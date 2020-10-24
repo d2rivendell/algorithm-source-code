@@ -384,3 +384,42 @@ struct ListNode* sortList(struct ListNode* head) {
     top->next = (left != NULL ? left : right);
     return temp.next;
 }
+
+//MARK: 25. K 个一组翻转链表
+/*https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+ 示例：
+ 给你这个链表：1->2->3->4->5
+ 当 k = 2 时，应当返回: 2->1->4->3->5
+ 当 k = 3 时，应当返回: 3->2->1->4->5
+ */
+struct ListNode* reverseKGroup(struct ListNode* head, int k){
+    struct ListNode *newHead = NULL;
+    newHead = head;
+    struct ListNode* pre = NULL; // 上一个末尾
+    while (head) {
+        struct ListNode *left = head;
+        for(int i = 0; i < k - 1; i++) {// 不够k个不需要翻转了
+            head = head->next;
+            if (head == NULL) {
+                //记住最后一组不能翻  但是要链接起来
+                if (pre) pre->next = left;
+                return newHead;
+            }
+        }
+       struct ListNode *right = head;
+       struct ListNode *next = head->next;
+       // 断开和下一个的链接否则会出错
+       right->next = NULL;
+       // 翻转
+       reverseList(left);
+       if (pre == NULL) {
+           newHead = right;
+       } else  {
+           pre->next = right;
+       }
+       // 上一个末尾链接当前新的头部
+       pre = left;
+       head = next;
+    }
+    return newHead;
+}

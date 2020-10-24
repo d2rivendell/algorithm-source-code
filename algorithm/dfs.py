@@ -112,7 +112,7 @@ def permute(nums):
 
         def dfs(idx):
             if idx == numsLen:
-                output.append(res.copy())
+                output.append(res[:])
                 return
             else:
                 for v in nums:

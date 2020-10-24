@@ -52,14 +52,28 @@ def romanToInt(s):
         s = s[2:] if a != 0 else s[1:]
     return res
 
+def pick_fruit(apples, picks):
+     day = len(picks)
+     output = [0] * day
+     for a in apples:
+        i = 0
+        while a > 0 and i < day:
+             p = picks[i] if a >= picks[i] else a
+             output[i] = output[i] + p
+             i += 1
+             a -= p
+     return output
 
 if __name__ == '__main__':
-    print(intToRoman(234))
-    arr = [1,2,3]
-    res = arr[3:4]
-    print(res)
-    di = {'a': 1, 'b':2}
-    for key in di:
-        print(key)
-    for (v, k) in enumerate(di):
-        print(k,v)
+
+    print(pick_fruit([10,20,10], [5,7,2]))
+
+    # print(intToRoman(234))
+    # arr = [1,2,3]
+    # res = arr[3:4]
+    # print(res)
+    # di = {'a': 1, 'b':2}
+    # for key in di:
+    #     print(key)
+    # for (v, k) in enumerate(di):
+    #     print(k,v)

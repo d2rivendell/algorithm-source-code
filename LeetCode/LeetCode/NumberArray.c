@@ -361,12 +361,10 @@ int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSi
 
 //MARK: 剑指 Offer 15. 二进制中1的个数
 int hammingWeight(uint32_t n) {
-    uint32_t mask = 0x01;
     int count = 0;
-    int i = 32 - 1;
-    while(i-- >= 0){
-        if(n & mask)count++;
-        n = n>>1;
+    while (n) {
+        if (n & 1) count++;
+        n >>= 1;
     }
     return count;
 }
@@ -561,7 +559,7 @@ void mergeTwoArray(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, 
     int i = m - 1;
     int j = n - 1;
     int cur = m + n - 1;
-    while (j >= 0) {//会对比n次，因为有n个坑位
+    while (j >= 0) {//只要把nums2搬完就可以了
         if (i >= 0 && nums1[i] >= nums2[j]) {
             nums1[cur--] = nums1[i--];
         }else{
