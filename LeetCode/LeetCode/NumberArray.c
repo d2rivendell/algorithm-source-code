@@ -37,9 +37,28 @@ int searchInsert(int* nums, int numsSize, int target){
 //MARK: 剑指 Offer 03. 数组中重复的数字
 int findRepeatNumber(int* nums, int numsSize){
     //malloc 的size要注意是什么
+    /*
+     class Solution {
+         public int findRepeatNumber(int[] nums) {
+             int temp;
+             for(int i=0;i<nums.length;i++){
+                 while (nums[i]!=i){
+                     if(nums[i]==nums[nums[i]]){
+                         return nums[i];
+                     }
+                     temp=nums[i];
+                     nums[i]=nums[temp];
+                     nums[temp]=temp;
+                 }
+             }
+             return -1;
+         }
+     }
+
+     */
     int  maxSize = 100000;
     int *record = malloc(sizeof(int) * maxSize);
-    memset(record, 0 , maxSize);
+    memset(record, 0 , sizeof(int) * maxSize);
     for(int i = 0; i <= numsSize; i++){
         if(record[nums[i]] > 0){
             free(record);
