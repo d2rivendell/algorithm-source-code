@@ -65,7 +65,6 @@ def pick_fruit(apples, picks):
      return output
 
 if __name__ == '__main__':
-
     print(pick_fruit([10,20,10], [5,7,2]))
 
     # print(intToRoman(234))

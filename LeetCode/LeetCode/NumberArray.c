@@ -228,19 +228,32 @@ int isPrime(int  n){
 //MARK: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
 //[奇数, 偶数]
 int* exchange(int* nums, int numsSize, int* returnSize){
-    int i = 0;
-    int j = numsSize - 1;
-    //[1,2,3,4]
-    while(i < j){
-        while(nums[i] % 2 != 0 && i < j){
-            i++;
+//    int i = 0;
+//    int j = numsSize - 1;
+//    //[1,2,3,4]
+//    while(i < j){
+//        while(nums[i] % 2 != 0 && i < j){
+//            i++;
+//        }
+//        while(nums[j] % 2 == 0 && i < j){
+//            j--;
+//        }
+//        SwapArr(nums, i, j);
+//    }
+//    *returnSize = numsSize;
+//    return nums;
+    
+    *returnSize =  numsSize;
+    if (numsSize < 2) return nums;
+    int cur = 0;// 记录奇数
+    // [奇数  偶数]
+    for (int i = 0; i  < numsSize; i++) {
+        if (nums[i] % 2 != 0) { //奇数
+            int temp = nums[i];
+            nums[i] = nums[cur];
+            nums[cur++] = temp;
         }
-        while(nums[j] % 2 == 0 && i < j){
-            j--;
-        }
-        SwapArr(nums, i, j);
     }
-    *returnSize = numsSize;
     return nums;
 }
 
@@ -311,9 +324,13 @@ int removeElement(int* nums, int numsSize, int val){
     int cur = 0;
     for(int i = 0; i < numsSize; i++){
         if(nums[i] != val){
-            int temp = nums[i];
-            nums[i] = nums[cur];
-            nums[cur++] = temp;
+            // 1. 如果是把val放在数组后面
+//            int temp = nums[i];
+//            nums[i] = nums[cur];
+//            nums[cur++] = temp;
+            
+            //2. 直接覆盖不用管
+            nums[cur++] = nums[i];
         }
     }
     return cur;
@@ -387,8 +404,6 @@ int hammingWeight(uint32_t n) {
     }
     return count;
 }
-
-
 
 
 //MARK: 27. 就地移除指定的元素

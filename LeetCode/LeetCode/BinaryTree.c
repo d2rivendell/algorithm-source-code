@@ -164,7 +164,7 @@ int* postorderTraversal(struct TreeNode* root, int* returnSize){
     // 法三：
         struct TreeNode **stack = malloc(0);
         int stk_top = 0;
-       struct TreeNode *preVisited = NULL;
+        struct TreeNode *preVisited = NULL;
         while (stk_top > 0 || root) {
             if (root) {//一直遍历左子树
                 stack = realloc(stack, sizeof(struct TreeNode *) * (++stk_top));

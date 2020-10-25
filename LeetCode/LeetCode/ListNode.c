@@ -261,6 +261,9 @@ struct ListNode *isCycle(struct ListNode *head) {
     }
     return NULL;
 }
+/*
+ m+n
+ */
 struct ListNode *detectCycle(struct ListNode *head) {
     if(head == NULL || head->next == NULL){
         return NULL;
