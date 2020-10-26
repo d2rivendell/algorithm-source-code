@@ -649,3 +649,28 @@ int knapsack(int *values, int v, int *weights, int w, int capacity) {
     }
     return dp[v][capacity];
 }
+
+//MARK: 198. 打家劫舍
+/*https://leetcode-cn.com/problems/house-robber
+ 如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+ 输入：[1,2,3,1]
+ 输出：4
+ 解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+      偷窃到的最高金额 = 1 + 3 = 4
+ */
+int rob(int* nums, int numsSize){
+    /*
+      dp[0] = nums[0]
+      dp[1] = max(nums[0], nums[1])
+      dp[j] = max(dp[i-2]+nums[i], nums[i-1])
+    */
+    if (numsSize == 0) return  0;
+    if (numsSize == 1) return nums[0];
+    int dp[numsSize];
+    dp[0] = nums[0];
+    dp[1] = MAX(nums[0], nums[1]);
+    for(int i = 2;  i < numsSize; i++) {
+        dp[i] = MAX(dp[i-2] + nums[i], dp[i-1]);
+    }
+    return dp[numsSize - 1];
+}
