@@ -66,46 +66,9 @@ def permute(nums):
           return []
         numsLen = len(nums)
         output = []
-        #使用used记录上一层已经使用的数字，确保下一层不会重复使用
+        # 使用used记录上一层已经使用的数字，确保下一层不会重复使用
+        # 这种情况只有数组中元素不重复的时候才有用， 有局限性
         used = []
-        #法一：传递result给下一个dfs前把当前result copy以下
-        # def dfs(idx, res):
-        #     if idx == numsLen:
-        #         output.append(res)
-        #         return
-        #     else:
-        #         for v in nums:
-        #             if v in used:
-        #                 continue
-        #             used.append(v)
-#             copy_res = res.copy()#传递给下一层之前需要拷贝
-        #             copy_res.append(v)
-        #             dfs(idx + 1,  copy_res)
-        #             #恢复
-        #             used.remove(v)
-        # dfs(0, [])
-
-        #法二： 传递result给下一个dfs后，把最后一个移除掉。 最后一层出结果时copy result
-        # def dfs(idx, res):
-        #     if idx == numsLen:
-        #         output.append(res.copy())
-        #         return
-        #     else:
-        #         for v in nums:
-        #             if v in used:
-        #                 continue
-        #             used.append(v)
-        #             # copy_res = res.copy()
-        #             # copy_res.append(v)
-        #             res.append(v)
-        #             dfs(idx + 1, res)
-        #             # 恢复
-        #             used.remove(v)
-        #             res.pop()
-        #
-        # dfs(0, [])
-
-        #法三， 使用同个result， 最后一层出结果时再copy
         res = []
         for i in range(numsLen):
             res.append(0)
@@ -181,7 +144,9 @@ def permuteUnique(nums):
                 # output.append(nums.copy())
                 output.append(nums[:])
             else:
+                # 二：dic = set()  #或者可以每一层都可以用一个set来记录。
                 for i in range(idx, numsLen):
+                    # 二：if nums[i] in dic:
                     if isRepeat(idx, i):
                         continue
                     nums[idx], nums[i] = nums[i], nums[idx]
@@ -214,7 +179,7 @@ def generateParenthesis(n):
             if left < n:
                 dfs(res + '(', left + 1, right)
 
-            #当左边括号大于右边时 右边才有可能加括号
+            #当左边括号大于右边时 右边 f才有可能加括号
             if right < left:
                 dfs(res + ')', left, right + 1)
 
@@ -394,6 +359,32 @@ def solveNQueens(n):
         findQueue(0)
         return output
 
+#https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
+@example("剑指 Offer 35. 复杂链表的复制")
+class Node:
+    def __init__(self, x, next=None, random=None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+def copyRandomList(head):
+    """
+    :type head: Node
+    :rtype: Node
+    """
+    visited = {}
+
+    def dfs(node):
+        if node is None:
+            return node
+        if node in visited:
+            return visited[node]
+        newNode = Node(node.val, None, None)
+        visited[node] = newNode
+        newNode.next = dfs(node.next)
+        newNode.random = dfs(node.random)
+        return newNode
+
+    return dfs(head)
 if __name__ == '__main__':
  #print(overhalf([1,2,3,2,2],5))
  #reverseStr()
@@ -416,5 +407,9 @@ if __name__ == '__main__':
  # string = '.*'
  # print(string[0+2:])
  # print(isMatch("ab", ".*c"))
+ arr = [1,2,3]
+ arr_2 = map(str, arr)
+ print(list(arr_2))
+
 
 

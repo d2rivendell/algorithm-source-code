@@ -1,4 +1,5 @@
 import collections
+import functools
 
 def example(text):
     def decorator(func):
@@ -176,8 +177,49 @@ def intToRoman(num):
         roman_digits.append(symbol * a)
     return ''.join(roman_digits)
 
+#https://leetcode-cn.com/problems/compare-version-numbers/
+@example("165. 比较版本号")
+def compareVersion(version1, version2):
+    v1 = version1.split('.')
+    v2 = version2.split('.')
+    l = max(len(v1), len(v2))
+    i, j = 0, 0
+    # 补0这样 后面少很多判断
+    if len(v1) < l:
+        v1 += ['0'] * (l - len(v1))
+    elif len(v2) < l:
+        v2 += ['0'] * (l - len(v2))
+    while i < l:
+        v_1, v_2 = int(v1[i]), int(v2[j])
+        if v_1 < v_2:
+            return -1
+        elif v_1 > v_2:
+            return 1
+        i += 1
+        j += 1
+    return 0
 
 
+#https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
+@example("剑指 Offer 45. 把数组排成最小的数")
+def minNumber(nums):
+    """
+       输入: [3,30,34,5,9]
+       输出: "3033459"
+
+       思路： 若 x + y > y + x, 则 x > y
+             若 x + y < y + x, 则 x < y
+        如： "330"  > "303"
+            "30" < "3"
+    :param nums:
+    :return:
+    """
+    strs = list(map(str, nums))
+    def compareStr(s1, s2):
+        a, b = s1 + s2, s2 + s1
+        return 1 if a > b else -1
+    strs = sorted(strs, key=functools.cmp_to_key(compareStr))
+    return "".join(strs)
 if __name__ == '__main__':
     print(multiply("123", "456"))
     s1 = ""
@@ -185,3 +227,4 @@ if __name__ == '__main__':
     s3 = s1+s2
     print(s3)
     print("jj")
+

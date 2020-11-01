@@ -873,6 +873,43 @@ int singleNumber(int* nums, int numsSize){
     return res;
 }
 
+// MAARK:剑指 Offer 56 - I. 数组中数字出现的次数
+/*https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
+一个整型数组 nums里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。
+ 要求时间复杂度是O(n)，空间复杂度是O(1)。
+ 输入：nums = [4,1,4,6]
+ 输出：[1,6] 或 [6,1]
+ */
+int* singleNumbers(int* nums, int numsSize, int* returnSize){
+    int res = 0;
+    for(int i = 0; i < numsSize; i++) {
+        res ^= nums[i];
+    }
+    /*
+     [a,b, c,c,d,d]
+     res 里面包含了 a和b的信息， 但是现在没有分离出来，
+     找到 ret 二进制中某个位为1的位置， 表示 a和b在该位置是不一样的: 1 = 0 ^ 1
+     */
+    int flag = 1;
+    while((flag & res) == 0) { // (flag & res)要括号起来， 不然会先和 == 结合！
+        flag <<= 1;
+    }
+    //  利用这个flag, 根据与flag二进制位相同的位置和不同的位置划分为 [a, c, c], [b, d, d]
+    int a = 0, b = 0;
+    for(int i = 0; i < numsSize; i++) {
+        if (flag & nums[i]) {
+            a ^= nums[i];
+        }else {
+            b ^= nums[i];
+        }
+    }
+    *returnSize = 2;
+    int *ans = malloc(sizeof(int) * 2);
+    ans[0] = a;
+    ans[1] = b;
+    return ans;
+}
+
 
 //MARK:排列公式
 int combineMulHelp(unsigned int k){
@@ -970,4 +1007,94 @@ int majorityElement(int* nums, int numsSize){
         votes = nums[i] == x ? votes + 1 : votes - 1;
     }
     return x;
+}
+
+
+//MARK: 238. 除自身以外数组的乘积
+/*
+ 初始化两个空数组 L 和 R。对于给定索引 i，L[i] 代表的是 i 左侧所有数字的乘积，
+ R[i] 代表的是 i 右侧所有数字的乘积。
+ nums[i] = L[i] * R[i]。
+ */
+int* productExceptSelf(int* nums, int numsSize, int* returnSize){
+     int *res = malloc(sizeof(int) * numsSize);
+     res[0] = 1;
+     for(int i = 1; i < numsSize; i++) {
+       res[i] = nums[i-1] *res[i-1];
+     }
+     int r = 1;
+     for(int i = numsSize - 2; i >= 0; i--) {
+        r =  nums[i+1] * r;
+        res[i] = res[i] * r;
+        
+     }
+     *returnSize = numsSize;
+     return res;
+}
+
+
+int* productExceptSelf1(int* nums, int numsSize, int* returnSize){
+     int l[numsSize];
+     int r[numsSize];
+     l[0] = 1;
+     r[numsSize-1] = 1;
+     for(int i = 1; i < numsSize; i++) {
+       l[i] = nums[i-1] *l[i-1];
+       r[numsSize-1-i] = nums[numsSize-i] * r[numsSize-i];
+     }
+     int *res = malloc(sizeof(int) * numsSize);
+     for(int i = 0; i < numsSize; i++) {
+        res[i] = l[i] * r[i];
+     }
+     *returnSize = numsSize;
+     return res;
+}
+
+
+void mergeN(int **nums, int N, int M){
+    
+    
+}
+
+
+int reversePairsMergeSort(int *nums, int *temp, int l, int r) {
+    if (l >= r) return 0;
+    int m = l + (r - l)/2;
+    int l1 = l, r1 = m, l2 = m + 1, r2 = r;
+    int count = reversePairsMergeSort(nums, temp,l1,r1) + reversePairsMergeSort(nums, temp,l2,r2);
+    int cur = l1;
+    while (l1 <= r1 || l2 <= r2) {
+        if (l1 <= r1 && l2 <= r2) {
+            if (nums[l2] < nums[l1]) { //右边合并的时候, 统计左边数组剩余的个数
+               temp[cur++] = nums[l2++];
+               count += r1 - l1 + 1;
+            } else {
+               temp[cur++] = nums[l1++];
+            }
+        } else if(l2 <= r2)  { //右边合并的时候, 统计左边数组剩余的个数
+           temp[cur++] = nums[l2++];
+           count += r1 - l1 + 1;
+        } else {
+           temp[cur++] = nums[l1++];
+        }
+    }
+    for (int i = l; i <= r; i++) {
+        nums[i] = temp[i];
+    }
+    return count;
+}
+//MARK: 剑指 Offer 51. 数组中的逆序对
+/*https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
+ 输入: [7,5,6,4]
+ 输出: 5
+ 核心是：右边合并的时候, 统计左边数组剩余的个数
+ */
+int reversePairs(int* nums, int numsSize){
+  // 利用归并排序
+  // 【左】  【右】
+  // 合并的时候，如果是取右边的放到数组中，说明有逆序产生了
+  if (numsSize == 0) return 0;
+  int *temp = malloc(sizeof(int) * numsSize);
+  memset(temp, 0, sizeof(int) * numsSize);
+  return reversePairsMergeSort(nums, temp, 0,  numsSize - 1);
 }

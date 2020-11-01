@@ -279,7 +279,7 @@ class Solution {
           let toValue = arr[0]
           let edge =  Edge(fromValue, toValue)
           edges.append(edge)
-          if let from =  vertexs[fromValue]{
+          if let from = vertexs[fromValue]{
               from.outEdges.append(edge)
           }else{
               let from = Vertex(fromValue)
@@ -287,7 +287,7 @@ class Solution {
               vertexs[fromValue] =  from
           }
 
-          if let to =  vertexs[toValue]{
+          if let to = vertexs[toValue]{
              to.inEdges.append(edge)
           }else{
               let to = Vertex(toValue)
