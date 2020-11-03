@@ -64,9 +64,57 @@ def pick_fruit(apples, picks):
              a -= p
      return output
 
+def heapy(nums, i, n):
+    node = nums[i]
+    child = 0
+    while 2 * i + 1 < n:
+        child = 2 * i + 1
+        if child + 1 < n and nums[child+1] < nums[child]:
+            child += 1
+        if nums[child] < node:
+            nums[i] = nums[child]
+        else:
+            break
+        i = child
+    nums[i] = node
+
+# 0 1 2 3 4 5 6 7 8 9
+# 1
+from queue import PriorityQueue
+
+
+def mergeN(arrays):
+    N = len(arrays) # 数组个数
+    M = len(arrays[0]) # 数组元素的个数
+    output = []
+    heapArr = []
+    dic = {}
+    for i in range(N):
+        dic[arrays[i]] = i
+        heapArr.append(arrays[i][0])
+    for i in range(N//2-1, -1, -1):
+        heapy(heapArr, i, N)
+    preIdx = dic[heapArr[0]]
+    need = (N - 1) * M
+    for i in range(N):
+        output.append(heapArr[0])
+        heapArr[0] =
+        arr = arrays[i]
+
+        if len(output) == need:
+            break
+    # 数组为空， 将堆内数字排序再添加到output中
+    for i in range(N):
+        heapArr[i], heapArr[N-1-i] = heapArr[N-1-i], heapArr[i]
+        heapy(heapArr, 0, N - 1 -i)
+    output += heapArr
+    return output
+
+
+
+
 if __name__ == '__main__':
     print(pick_fruit([10,20,10], [5,7,2]))
-
     # print(intToRoman(234))
     # arr = [1,2,3]
     # res = arr[3:4]

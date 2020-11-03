@@ -220,11 +220,9 @@ def minNumber(nums):
         return 1 if a > b else -1
     strs = sorted(strs, key=functools.cmp_to_key(compareStr))
     return "".join(strs)
+import  heapq
 if __name__ == '__main__':
     print(multiply("123", "456"))
-    s1 = ""
-    s2 = "xc"
-    s3 = s1+s2
-    print(s3)
-    print("jj")
+    arr = [(), (), (12,)]
+
 
