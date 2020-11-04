@@ -67,7 +67,7 @@ def pick_fruit(apples, picks):
 
 
 
-@example("N个排序好的数组合并成为一个排序的数组")
+
 def heapy(nums, i, n):
     node = nums[i]
     child = 0
@@ -88,10 +88,11 @@ def heapSort(heapArr):
         heapy(heapArr, i, N)
 
 class Element:
-      def __init__(self, row, col, val):
+      def __init__(self, row, col, val, count):
           self.row = row
           self.col = col
           self.val = val
+          self.count = count
 
       def __eq__(self, other):
           return self.val == other.val
@@ -102,23 +103,25 @@ class Element:
       def __gt__(self, other):
           return self.val > other.val
 
+@example("N个排序好的数组合并成为一个排序的数组")
 def mergeN(arrays):
     N = len(arrays) # 数组个数
-    M = len(arrays[0]) # 数组元素的个数
     output = []
     heapArr = []
     for i in range(N):
-        ele = Element(0,i, arrays[i][0])
+        # 使用Element表示一个数组
+        ele = Element(0,i, arrays[i][0], len(arrays[i]))
         heapArr.append(ele)
     heapSort(heapArr)
     while True:
         ele = heapArr[0]
         output.append(ele.val)
-        if ele.row + 1 < M:
+        if ele.row + 1 < ele.count:
             ele.row += 1
             ele.val = arrays[ele.col][ele.row]
             heapy(heapArr, 0, len(heapArr))
         else: # 当前数组满了
+            # 堆的规模减1
             heapArr.pop(0)
             if len(heapArr) > 0:
                 heapSort(heapArr)
@@ -131,9 +134,11 @@ def mergeN(arrays):
 
 if __name__ == '__main__':
     print(pick_fruit([10,20,10], [5,7,2]))
-    arryas = [[100, 102, 103, 104, 105, 106, 108, 109, 110, 111],
-           [1, 2, 3, 4, 115, 118, 119, 112, 113, 116]]
+    arryas = [[8, 12, 23, 34, 45, 120, 121, 122, 130, 136],
+              [100, 102, 103, 104, 105, 106, 108, 109, 110, 111],
+             [1, 2, 3, 4, 115, 118, 119, 112, 123, 156]]
     out = mergeN(arryas)
+    print(len(out))
     print(out)
     # print(intToRoman(234))
     # arr = [1,2,3]
