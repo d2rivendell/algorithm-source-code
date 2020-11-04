@@ -64,6 +64,10 @@ def pick_fruit(apples, picks):
              a -= p
      return output
 
+
+
+
+@example("N个排序好的数组合并成为一个排序的数组")
 def heapy(nums, i, n):
     node = nums[i]
     child = 0
@@ -78,36 +82,48 @@ def heapy(nums, i, n):
         i = child
     nums[i] = node
 
-# 0 1 2 3 4 5 6 7 8 9
-# 1
-from queue import PriorityQueue
+def heapSort(heapArr):
+    N = len(heapArr)
+    for i in range(N // 2 - 1, -1, -1):
+        heapy(heapArr, i, N)
 
+class Element:
+      def __init__(self, row, col, val):
+          self.row = row
+          self.col = col
+          self.val = val
+
+      def __eq__(self, other):
+          return self.val == other.val
+
+      def __lt__(self, other):
+          return self.val < other.val
+
+      def __gt__(self, other):
+          return self.val > other.val
 
 def mergeN(arrays):
     N = len(arrays) # 数组个数
     M = len(arrays[0]) # 数组元素的个数
     output = []
     heapArr = []
-    dic = {}
     for i in range(N):
-        dic[arrays[i]] = i
-        heapArr.append(arrays[i][0])
-    for i in range(N//2-1, -1, -1):
-        heapy(heapArr, i, N)
-    preIdx = dic[heapArr[0]]
-    need = (N - 1) * M
-    for i in range(N):
-        output.append(heapArr[0])
-        heapArr[0] =
-        arr = arrays[i]
-
-        if len(output) == need:
-            break
-    # 数组为空， 将堆内数字排序再添加到output中
-    for i in range(N):
-        heapArr[i], heapArr[N-1-i] = heapArr[N-1-i], heapArr[i]
-        heapy(heapArr, 0, N - 1 -i)
-    output += heapArr
+        ele = Element(0,i, arrays[i][0])
+        heapArr.append(ele)
+    heapSort(heapArr)
+    while True:
+        ele = heapArr[0]
+        output.append(ele.val)
+        if ele.row + 1 < M:
+            ele.row += 1
+            ele.val = arrays[ele.col][ele.row]
+            heapy(heapArr, 0, len(heapArr))
+        else: # 当前数组满了
+            heapArr.pop(0)
+            if len(heapArr) > 0:
+                heapSort(heapArr)
+            else:
+                break
     return output
 
 
@@ -115,6 +131,10 @@ def mergeN(arrays):
 
 if __name__ == '__main__':
     print(pick_fruit([10,20,10], [5,7,2]))
+    arryas = [[100, 102, 103, 104, 105, 106, 108, 109, 110, 111],
+           [1, 2, 3, 4, 115, 118, 119, 112, 113, 116]]
+    out = mergeN(arryas)
+    print(out)
     # print(intToRoman(234))
     # arr = [1,2,3]
     # res = arr[3:4]

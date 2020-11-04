@@ -113,17 +113,17 @@ void quicksortHelper(int A[], int l, int r){
 
 //找到基准点的位置, 在基准点的右边开始找
 int _partition(int A[], int l, int r){
-    int provit = A[l];//我们选择第一个作为基准点
+    int pivot = A[l];//我们选择第一个作为基准点
     int j = r;
     //当[6,4] 基准点为6时， j=1满足条件，如果开始时i=0+1， i和j同时在1的位置，这时不会交换，但是[6,4]顺序是不对的!!
     int i = l;//不要先+1，
     while (i < j) {
         //j先往左边边找 要有等号=
-        while (A[j] >= provit && i < j) {
+        while (A[j] >= pivot && i < j) {
             j--;
         }
         //i先往右边找
-        while (A[i] <= provit && i < j) {
+        while (A[i] <= pivot && i < j) {
             i++;
         }
         //i和j 各自找到了满足的位置， 进行交换
