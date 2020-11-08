@@ -220,9 +220,33 @@ def minNumber(nums):
         return 1 if a > b else -1
     strs = sorted(strs, key=functools.cmp_to_key(compareStr))
     return "".join(strs)
-import  heapq
+
+@example("解压字符串")
+def decodeStr(text):
+    s = str(text)
+    stack = []
+    for i in range(len(s)):
+        if s[i] == ']':
+            temp = []
+            while stack[-1] != "[":
+                temp += stack.pop()
+            stack.pop()
+            num = stack.pop()
+            temp.reverse()
+            stack += int(num) * ["".join(temp)]
+        else:
+            stack.append(s[i])
+    return "".join(stack)
+
+def customCmp(a, b):
+    return 1 if a > b else -1
 if __name__ == '__main__':
     print(multiply("123", "456"))
-    arr = [(), (), (12,)]
+    arr = [1,2,3,4,5,6,7,8,9,10]
+
+    print(arr[:-4])
+    print(decodeStr("ef3[a]2[bc]gh"))
+    print(decodeStr("3[a2[c]]"))
+
 
 

@@ -34,43 +34,6 @@ int searchInsert(int* nums, int numsSize, int target){
 }
 
 
-//MARK: 剑指 Offer 03. 数组中重复的数字
-int findRepeatNumber(int* nums, int numsSize){
-    //malloc 的size要注意是什么
-    /*
-     class Solution {
-         public int findRepeatNumber(int[] nums) {
-             int temp;
-             for(int i=0;i<nums.length;i++){
-                 while (nums[i]!=i){
-                     if(nums[i]==nums[nums[i]]){
-                         return nums[i];
-                     }
-                     temp=nums[i];
-                     nums[i]=nums[temp];
-                     nums[temp]=temp;
-                 }
-             }
-             return -1;
-         }
-     }
-
-     */
-    int  maxSize = 100000;
-    int *record = malloc(sizeof(int) * maxSize);
-    memset(record, 0 , sizeof(int) * maxSize);
-    for(int i = 0; i <= numsSize; i++){
-        if(record[nums[i]] > 0){
-            free(record);
-            return nums[i];
-        }else{
-            record[nums[i]] += 1;
-        }
-    }
-    return 0;
-}
-
-
 //MARK: - 判断数字是否是回文数， 小于0不是（因为有符号），
 int isPalindrome(int x){
     if(x < 0){
@@ -1097,4 +1060,122 @@ int reversePairs(int* nums, int numsSize){
   int *temp = malloc(sizeof(int) * numsSize);
   memset(temp, 0, sizeof(int) * numsSize);
   return reversePairsMergeSort(nums, temp, 0,  numsSize - 1);
+}
+
+
+//MARK: =================== 原地hash法 ===================
+
+
+//MARK: 查找重复的元素
+/* https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+ 找出数组中重复的数字。
+ 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，
+ 但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+ 示例 1：
+ 输入：
+ [2, 3, 1, 0, 2, 5, 3]
+ 输出：2 或 3
+ 
+ 限制：
+ 2 <= n <= 100000
+ */
+int findRepeatNumber(int *nums, int numsSize) {
+    /*
+     把数组视为哈希表（有一类问题是这么做的，但是会修改数组）
+     由于数组元素的值都在指定的范围内，这个范围恰恰好与数组的下标可以一一对应；
+     因此看到数值，就可以知道它应该放在什么位置，这里数字nums[i] 应该放在下标为 i
+     的位置上，这就像是我们人为编写了哈希函数，这个哈希函数的规则还特别简单；
+     而找到重复的数就是发生了哈希冲突；
+     类似问题还有「力扣」第 41 题： 缺失的第一个正数、「力扣」第 442 题： 数组中重复的数据、「力扣」第 448 题： 找到所有数组中消失的数字 。
+     */
+       int temp;
+       for(int i=0; i< numsSize;i++){
+           while (nums[i]!=i){ // 构建一个hash数组
+               if(nums[i]==nums[nums[i]]){
+                   // 如果下标为 nums[i] 的数值 nums[nums[i]]
+                   // 它们二者相等 正好找到了重复的元素，将它返回
+                   return nums[i];
+               }
+               temp=nums[i];
+               nums[i]=nums[temp];
+               nums[temp]=temp;
+           }
+       }
+       return -1;
+}
+
+
+//MARK: 41. 缺失的第一个正数
+/*https://leetcode-cn.com/problems/first-missing-positive/
+ 给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。
+
+ 示例 1:
+
+ 输入: [1,2,0]
+ 输出: 3
+ 示例 2:
+
+ 输入: [3,4,-1,1]
+ 输出: 2
+ */
+
+int firstMissingPositive(int* nums, int numsSize){
+ /*
+  对于N个数， 缺失的正数肯定在[1, N+1]之间!!!
+  利用数组hash表，【如果key有值， 那么让数组内的元素变为负数】
+  如果数组中的值大于N， 我们不需要处理，因为不在hash表内
+  小于等于0的数 因为也不在hash表内， 我们可以将其修改为N+1这样和大于N的数归为一类不用处理
+  */
+    
+    // 处理小于等于0的值， 为了忽略它们
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] <= 0) {
+            nums[i] = numsSize+1;
+        }
+    }
+    // 这里开始 数组里面都没有负数了。 我们用负数来记录hash表有没有值
+    for (int i = 0; i < numsSize; i++) {
+        int v = abs(nums[i]);
+        //因为数组内没有0了， 我们把下标i的用来记录i+1
+        //标记 就是让数组的值变为负数
+        if (v <= numsSize) {
+            nums[v-1] = -abs(nums[v-1]);
+        }
+    }
+    
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] > 0) {//正数表示 没有在hash表里面
+            return i + 1;
+        }
+    }
+    return numsSize+1;
+}
+
+// 法二： 置换算法
+int firstMissingPositive2(int* nums, int numsSize){
+    /*
+     法一是通过判断数组内值< 0表示hash表内有值
+     这里也是利用hash表，但是hash表内nums[i-1] == i表示hash表内有值
+     */
+    
+    //构建hash表，小于等于0和大于N的不在考虑范围之内
+    for (int i = 0; i < numsSize; i++) {
+        /*
+         条件nums[nums[i]-1] != nums[i]是为了防止死循环
+         如果hash表有值，那么nums[i-1] == i
+         如果i == 1时，nums[1] = 4，nums[3] = 4
+         这时交换nums[1]和nums[3],  会死循环。 重复的数字不需要出楼
+         */
+        while ((nums[i] > 0 && nums[i] <= numsSize) && nums[nums[i]-1] != nums[i]) {
+            int temp = nums[i];
+            nums[i] = nums[temp-1];
+            nums[temp-1] = temp;
+        }
+    }
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] != i+1) {
+            return i + 1;
+        }
+    }
+    return numsSize+1;
 }
