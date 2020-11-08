@@ -359,6 +359,44 @@ def solveNQueens(n):
         findQueue(0)
         return output
 
+
+# https://leetcode-cn.com/problems/restore-ip-addresses/
+@example("93. 复原IP地址")
+def restoreIpAddresses(s):
+    """
+          例如："0.1.2.201" 和 "192.168.1.1" 是 有效的 IP 地址，但是
+          "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效的 IP 地址。
+    :return:
+    """
+    output = []
+    n = len(s)
+    if n < 4 or n > 12:
+        return []
+
+    def checkValid(arr):
+        v = int(arr[0]) * 100 + int(arr[1]) * 10 + int(arr[2])
+        return v <= 255
+
+    def dfs(strArr, res):
+        if len(strArr) == 0 and len(res) == 4:
+            output.append(".".join(res))
+        else:
+            if len(strArr) == 0:
+                return
+            if len(res) == 4:
+                return
+            if strArr[0] != "0":
+                if len(strArr) >= 3 and checkValid(strArr[:3]):
+                    dfs(strArr[3:], res + ["".join(strArr[:3])])
+                if len(strArr) >= 2:
+                    dfs(strArr[2:], res + ["".join(strArr[:2])])
+                if len(strArr) >= 1:
+                    dfs(strArr[1:], res + ["".join(strArr[:1])])
+            else:
+                dfs(strArr[1:], res + ["".join(strArr[:1])])
+    dfs(list(s), [])
+    return output
+
 #https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
 @example("剑指 Offer 35. 复杂链表的复制")
 class Node:

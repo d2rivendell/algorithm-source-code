@@ -820,6 +820,8 @@ int* dailyTemperatures3(int* T, int TSize, int* returnSize){
     return res;
 }
 
+//MARK:-   异或操作
+
 //MARK: 136. 只出现一次的数字
 /*可以使用位运算
  对于[a, b, b]
@@ -1063,7 +1065,7 @@ int reversePairs(int* nums, int numsSize){
 }
 
 
-//MARK: =================== 原地hash法 ===================
+//MARK: - =================== 原地hash法 ===================
 
 
 //MARK: 查找重复的元素
@@ -1155,7 +1157,7 @@ int firstMissingPositive(int* nums, int numsSize){
 int firstMissingPositive2(int* nums, int numsSize){
     /*
      法一是通过判断数组内值< 0表示hash表内有值
-     这里也是利用hash表，但是hash表内nums[i-1] == i表示hash表内有值
+     这里也是利用hash表，因为不用考虑0，hash表内nums[i-1] == i表示hash表内有值
      */
     
     //构建hash表，小于等于0和大于N的不在考虑范围之内

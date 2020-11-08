@@ -241,12 +241,17 @@ def decodeStr(text):
 def customCmp(a, b):
     return 1 if a > b else -1
 if __name__ == '__main__':
-    print(multiply("123", "456"))
-    arr = [1,2,3,4,5,6,7,8,9,10]
+    # print(multiply("123", "456"))
+    # arr = [1,2,3,4,5,6,7,8,9,10]
+    #
+    # print(arr[:-4])
+    # print(decodeStr("ef3[a]2[bc]gh"))
+    # print(decodeStr("3[a2[c]]"))
 
-    print(arr[:-4])
-    print(decodeStr("ef3[a]2[bc]gh"))
-    print(decodeStr("3[a2[c]]"))
+    b = "".join(["6", "7", "8"])
+    # a = ["1", "2", "4"]
+    # a += b
+    print(b)
 
 
 
