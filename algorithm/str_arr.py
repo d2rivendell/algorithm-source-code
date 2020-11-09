@@ -238,6 +238,35 @@ def decodeStr(text):
             stack.append(s[i])
     return "".join(stack)
 
+#https://leetcode-cn.com/problems/minimum-window-substring/
+@example("76. 最小覆盖子串")
+def minWindow(s, t):
+        # need用来记录当前窗口内的字符， 在-1， 不在+1
+        need = collections.defaultdict(int)
+        for c in t:
+            need[c] += 1
+        res = (0, len(s) + 1)
+        # needCount == 0 时 说明窗口内满足
+        needCount = len(t)
+        left = 0
+        for j, c in enumerate(s):
+            if need[c] > 0:
+                needCount -= 1
+            need[c] -= 1
+            if needCount == 0:  # 窗口内包含所求的字符
+                while True:  # 排除掉左边的元素
+                    leftC = s[left]
+                    if need[leftC] == 0:  # 找到了最左边的
+                        break
+                    else:
+                        left += 1  # 左窗口往右移
+                        need[leftC] += 1  # 移出窗口要+1
+                # 走到这里，窗口不能再缩小了 需要记录窗口大小
+                if j - left < res[1] - res[0]:
+                    res = (left, j)
+        return "" if res[1] - res[0] > len(s) else s[res[0]: res[1] + 1]
+
+
 def customCmp(a, b):
     return 1 if a > b else -1
 if __name__ == '__main__':
