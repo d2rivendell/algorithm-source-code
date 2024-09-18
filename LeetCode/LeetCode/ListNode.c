@@ -34,6 +34,42 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     return head;
 }
 
+// MARK: 合并 K 个升序链表 https://leetcode.cn/problems/merge-k-sorted-lists/description/
+struct ListNode* mergeKList2(struct ListNode* list1, struct ListNode* list2) {
+    if(list1 == NULL || list2 == NULL) {
+        return list1 == NULL ? list2 : list1;
+    }
+    struct ListNode temp;
+    struct ListNode *head = &temp;
+    while(list1 != NULL || list2 != NULL) {
+        if(list1 != NULL && list2 != NULL) {
+          if(list1->val < list2->val) {
+              head->next = list1;
+              list1 = list1->next;
+          } else {
+              head->next = list2;
+              list2 = list2->next;
+          }
+        } else if (list1 != NULL) {
+           head->next = list1;
+           break;
+        } else {
+           head->next = list2;
+           break;
+        }
+        head = head->next;
+    }
+    return temp.next;
+}
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
+    if(listsSize <= 0 || lists == NULL) return NULL;
+    struct ListNode* pre = lists[0];
+    for(int i = 1; i < listsSize; i++) {
+        pre = mergeKList2(pre, lists[i]);
+    }
+    return pre;
+}
+
 
 //MARK: 86. 分隔链表 --双指针
 /*
@@ -370,7 +406,7 @@ struct ListNode* sortList(struct ListNode* head) {
     }
     struct ListNode *left = head;
     struct ListNode *right = slow->next;
-    slow->next = NULL;
+    slow->next = NULL; // 🔥关键
     left = sortList(left);
     right = sortList(right);
     struct ListNode temp, *top = &temp;

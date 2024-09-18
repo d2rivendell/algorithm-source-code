@@ -15,8 +15,8 @@ import Foundation
 //V：顶点的值 E：边的权重
 class Graph<V: Hashable, E>{
     
-    //顶点包含一个值 和 两个边集合：出度和入度
-    //两个顶点都 存储着同一条边， 只是一个放在出度，一个放在入度
+    // 顶点包含一个值 和 两个边集合：出度和入度
+    // 两个顶点都 存储着同一条边， 只是一个放在出度，一个放在入度
     class Vertex<V: Hashable, E>: Hashable, CustomDebugStringConvertible{
         
         var value: V
@@ -155,6 +155,7 @@ class Graph<V: Hashable, E>{
                 visited.insert(e.to)
             }
         }
+        debugPrint("bfs:")
         collections.forEach { debugPrint($0)}
     }
     
@@ -164,7 +165,8 @@ class Graph<V: Hashable, E>{
         var  visited = Set<Vertex<V,E>>()
         var  collections: [Vertex<V,E>] = []
         dfsHelper(vertex: root, visited: &visited, collections: &collections)
-        collections.forEach { debugPrint($0)}
+        debugPrint("dfs:")
+        collections.forEach { debugPrint("\($0)")}
     }
     
     func dfsHelper(vertex: Vertex<V,E>, visited: inout Set<Vertex<V,E>>, collections: inout [Vertex<V,E>] ){

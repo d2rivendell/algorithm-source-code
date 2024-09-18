@@ -1,3 +1,4 @@
+from heapq import *
 
 def example(text):
     def decorator(func):
@@ -130,6 +131,61 @@ def mergeN(arrays):
     return output
 
 
+#https://leetcode-cn.com/problems/3sum/submissions/
+@example("三数之和")
+def threeSum(nums):
+        """
+        时间复杂度O(n^2)
+        """
+        nums.sort()
+        output = []
+        n = len(nums)
+        for i, v in enumerate(nums):
+            if i != 0 and nums[i] == nums[i - 1]:
+                continue
+            remain = -nums[i]
+            l, r = i + 1, n - 1
+            while l < r:
+                temp = nums[l] + nums[r]
+                if temp == remain:
+                    output.append([v, nums[l], nums[r]])
+                    while l + 1 < r and nums[l + 1] == nums[l]:
+                        l += 1
+                    while r - 1 > l and nums[r - 1] == nums[r]:
+                        r -= 1
+                    l += 1
+                    r -= 1
+                elif temp < remain:
+                    l += 1
+                else:
+                    r -= 1
+        return output
+
+#https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/
+@example("剑指 Offer 41. 数据流中的中位数")
+class MedianFinder(object):
+    """
+    建立一个 小顶堆 A和 大顶堆 B ，各保存列表的一半元素，且规定：
+    偶数时：len(A) = N/2, len(B) = N/2
+    奇数时：len(A) = N+1/2, len(B) = N-1/2
+    """
+    def __init__(self):
+        self.A = []  # 小堆，存放大的一半
+        self.B = []  # 大堆，存放小的一半 因为heap是最小堆， 可以取反实现大堆的功能
+
+    def addNum(self, num):
+        if len(self.A) != len(self.B):  # 奇数，到B中
+            # 将num和A中的数对比，把最小值取出来放到B中
+            heappush(self.A, num)
+            heappush(self.B, -heappop(self.A))
+
+        else:  # 偶数，放到A中
+            # 将num和B中的数对比，把最大值取出来放到A中
+            heappush(self.B, -num)
+            heappush(self.A, -heappop(self.B))
+
+    def findMedian(self):
+        return self.A[0] if len(self.A) != len(self.B) else (self.A[0] - self.B[0]) / 2.0
 
 
 if __name__ == '__main__':

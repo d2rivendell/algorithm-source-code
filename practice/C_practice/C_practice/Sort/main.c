@@ -212,7 +212,7 @@ void ArrayPrint(int A[], int n){
  */
 void BubbleSort(ElementType A[],int N){
     int i,j;
-    for(i = 1; i< N; i++){
+    for(i = 1; i< N; i++){  // 外层只需要循环N-1次
         int flag = 1;
         for(j = N - 1; j >= i; j--){
             if(A[j-1]>A[j]){

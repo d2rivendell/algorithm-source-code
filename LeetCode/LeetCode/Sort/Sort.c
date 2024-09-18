@@ -49,6 +49,7 @@ BubbleSort(int A[], int N){
     }
 }
 
+// MARK: - 归并排序
 //res: 用于保存中间的排序结果
 void merge_sort_helper(int A[], int res[], int l, int r);
 void MergeSort(int A[], int N){
@@ -93,6 +94,15 @@ void merge_sort_helper(int A[], int res[], int l, int r){
  2、 找到后将两个数字进行交换。继续循环交换直到i>=j结束循环；
  3、 最终指针i=j,此时交换基数和i(j)指向的数字即可将数组划分为【小于基数｜基数｜大于基数】的三部分，即完成一趟快排；
  再选择基数左边的数组和基数右边的数组重复1-3步骤
+ 
+ 
+ 复杂度分析：
+ T(n) = O(n) + 2T(n/2)
+ 数学归纳法得出： T(n) = O(nlogn)
+ 
+ 最坏情况下：(类似插入排序)
+ T(n) = O(n) + T(1) + T(n-1) = O(n) + T(n-1)
+ T(n) = O(n^2)
  */
 void quicksortHelper(int A[], int l, int r);
 int _partition(int A[], int l, int r);

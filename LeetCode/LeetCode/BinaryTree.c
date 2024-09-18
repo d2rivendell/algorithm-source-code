@@ -195,6 +195,13 @@ int* postorderTraversal(struct TreeNode* root, int* returnSize){
 
 
 //MARK: -上下反转二叉树
+/*
+      1              4
+     / \            / \
+    2   3    ==>    5   2
+   / \                 / \
+  4   5               3   1
+ */
 //和递归翻转链表类似
 struct TreeNode* upsidedownTree(struct TreeNode* root){
     if(root == NULL || root->left == NULL){
@@ -210,6 +217,25 @@ struct TreeNode* upsidedownTree(struct TreeNode* root){
     root->left = NULL;
     root->right = NULL;
     return last;
+}
+
+// MARK: - 判断对称二叉树
+// https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/description/
+bool helper(struct TreeNode* left, struct TreeNode* right){
+    if(left == NULL && right ==NULL){
+        return true;
+    }
+    if(left == NULL || right == NULL){
+        return false;
+    }
+    return (left->val == right->val) && helper(left->left, right->right) && helper(left->right, right->left);
+}
+
+bool isSymmetric(struct TreeNode* root){
+   if(root == NULL){
+       return true;
+   }
+   return helper(root->left, root->right);
 }
 
 
@@ -290,7 +316,7 @@ void recoverTree2(struct TreeNode* root){
 /*
  https://leetcode-cn.com/problems/legal-binary-search-tree-lcci/
  输入:
- 5
+  5
  / \
 1   4
    / \

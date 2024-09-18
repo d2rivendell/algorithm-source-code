@@ -9,7 +9,7 @@
 import Foundation
 
 
-//MARK: 上下打印二叉树
+//MARK: 上下打印二叉树  (不是前序遍历！！！！！)
 example("上下打印二叉树") {
     //借助队列的方式去实现
     
@@ -43,6 +43,54 @@ example("上下打印二叉树") {
             return res
         }
         
+    }
+}
+
+example("前序遍历") {
+    class Solution {
+        func preorderTraversal(_ root: TreeNode?) -> [Int] {
+            // 中 左 右
+            if root == nil { return []}
+            var stack: [TreeNode] = []
+            var res: [Int] = []
+            var head = root
+            while head != nil || stack.isEmpty == false {
+                if let h = head { // 先读数
+                    stack.append(h)
+                    res.append(h.val)
+                    head = h.left
+                } else {
+                    let node = stack.popLast()!
+                    head = node.right
+                }
+            }
+            return res
+        }
+    }
+}
+
+example("中序遍历") {
+    class Solution {
+        func inorderTraversal(_ root: TreeNode?) -> [Int] {
+            if root == nil { return [] }
+            var stack: [TreeNode] = []
+            var res: [Int] = []
+            var head = root
+            
+
+            while head != nil || stack.isEmpty == false {
+                if let r = head { //直到最左边
+                   stack.append(r)
+                   head = r.left
+                } else {
+                   if let last = stack.popLast() { // 到尽头之后开始读数
+                        res.append(last.val)
+                        head = last.right
+                   }
+                }
+            }
+            return res
+        }
     }
 }
 

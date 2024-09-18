@@ -93,10 +93,12 @@ def convertZ(self, s: str, numRows: int) -> str:
     strList = list(s)
     for i in range(len(s)):
         res[row] = res[row] + strList[i]
+
         if row == 0:
             down = True
         elif row == rows - 1:
             down = False
+
         if down:
             row += 1
         else:
@@ -183,20 +185,22 @@ def compareVersion(version1, version2):
     v1 = version1.split('.')
     v2 = version2.split('.')
     l = max(len(v1), len(v2))
-    i, j = 0, 0
+
     # 补0这样 后面少很多判断
     if len(v1) < l:
         v1 += ['0'] * (l - len(v1))
     elif len(v2) < l:
         v2 += ['0'] * (l - len(v2))
+
+    cur = 0
     while i < l:
-        v_1, v_2 = int(v1[i]), int(v2[j])
+        v_1, v_2 = int(v1[cur]), int(v2[cur])
         if v_1 < v_2:
             return -1
         elif v_1 > v_2:
             return 1
-        i += 1
-        j += 1
+        cur += 1
+
     return 0
 
 
@@ -221,22 +225,30 @@ def minNumber(nums):
     strs = sorted(strs, key=functools.cmp_to_key(compareStr))
     return "".join(strs)
 
+
+#输入：s = "3[a]2[bc]"
+#输出："aaabcbc"
+#输入：s = "3[a2[c]]"
+#输出："accaccacc"
 @example("解压字符串")
-def decodeStr(text):
-    s = str(text)
-    stack = []
-    for i in range(len(s)):
-        if s[i] == ']':
-            temp = []
-            while stack[-1] != "[":
-                temp += stack.pop()
-            stack.pop()
-            num = stack.pop()
-            temp.reverse()
-            stack += int(num) * ["".join(temp)]
-        else:
-            stack.append(s[i])
-    return "".join(stack)
+def decodeString(s: str):
+        stack = []
+        for c in s:
+            if c == ']':
+               temp = []
+               while len(stack) > 0 and stack[-1] != '[':
+                 temp += stack.pop()
+               stack.pop() # pop '['
+               num = []
+               while len(stack) > 0 and stack[-1].isdigit():
+                  num += stack.pop()
+               n = ''.join(num[::-1]) # 数字要逆序
+               # 可能会有嵌套的场景，比如：3[a2[c]] ---> 3[acc]，需要丢回栈内，
+               # 解析下一个`]`后变成 accaccacc
+               stack += int(n) * temp[::-1]
+            else:
+                stack.append(c)
+        return ''.join(stack)
 
 #https://leetcode-cn.com/problems/minimum-window-substring/
 @example("76. 最小覆盖子串")
@@ -264,6 +276,10 @@ def minWindow(s, t):
                 # 走到这里，窗口不能再缩小了 需要记录窗口大小
                 if j - left < res[1] - res[0]:
                     res = (left, j)
+
+                need[s[left]] += 1  # 左窗口往右移,  继续查找
+                left += 1
+                needCount += 1
         return "" if res[1] - res[0] > len(s) else s[res[0]: res[1] + 1]
 
 

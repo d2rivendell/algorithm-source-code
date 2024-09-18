@@ -225,26 +225,20 @@ int* exchange(int* nums, int numsSize, int* returnSize){
 
 
 //MARK: 88. 合并两个有序数组
-//插入排序
+//  m 和 n ，分别表示 nums1 和 nums2 中的元素数目, nums1Size和nums2Size是数组的大小
+// nums1Size > nums2Size
 void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
-    if(n == 0){
-        return;
-    }
-    int j = 0;
-    int k = 0;
-    for(int i = m; i < m + n; i++){
-        if(j++ < n){
-            int temp = nums2[i - m];
-            for( k = i; k > 0; k--){
-                if(temp < nums1[k - 1]){
-                    nums1[k] = nums1[k-1];
-                }else{
-                    break;
-                }
-            }
-            nums1[k] = temp;
-        }
-    }
+    if (n == 0) return;
+     int i = m - 1;
+     int j = n - 1;
+     int cur = nums1Size - 1;
+     while(j >= 0) {
+         if (i >= 0 && nums1[i] > nums2[j]) {
+             nums1[cur--] = nums1[i--];
+         } else {
+             nums1[cur--] = nums2[j--];
+         }
+     }
 }
 
 //MARK:- 26. 删除排序数组中的重复项
@@ -754,7 +748,7 @@ int trap1(int* height, int heightSize){
    int res = 0;
    for(int i = 1; i < heightSize; i++){
       int lessMax = MIN(leftMaxs[i], rightMaxs[i]);
-      res +=  lessMax - height[i];
+      res += lessMax - height[i];
    }
    return res;
 }
@@ -823,7 +817,10 @@ int* dailyTemperatures3(int* T, int TSize, int* returnSize){
 //MARK:-   异或操作
 
 //MARK: 136. 只出现一次的数字
-/*可以使用位运算
+/*
+ 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+ 
+ 可以使用位运算
  对于[a, b, b]
  1. a == a ^ 0
  2.
@@ -856,10 +853,19 @@ int* singleNumbers(int* nums, int numsSize, int* returnSize){
      找到 ret 二进制中某个位为1的位置， 表示 a和b在该位置是不一样的: 1 = 0 ^ 1
      */
     int flag = 1;
+    // 0001   1
+    // 0110   6
+    // 0111   res
+    //    1  flag
+    
+    // 0100   4
+    // 0100   4
+    
     while((flag & res) == 0) { // (flag & res)要括号起来， 不然会先和 == 结合！
         flag <<= 1;
     }
-    //  利用这个flag, 根据与flag二进制位相同的位置和不同的位置划分为 [a, c, c], [b, d, d]
+    // 利用这个flag, 根据与flag二进制位相同的位置和不同的位置划分为 [a, c, c], [b, d, d] （❌这里之前的描述可能是错的）
+    // flag 只是用于区分两个不同的数字，如果是三个数字不同，就不能用了
     int a = 0, b = 0;
     for(int i = 0; i < numsSize; i++) {
         if (flag & nums[i]) {

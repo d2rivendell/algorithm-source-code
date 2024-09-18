@@ -91,7 +91,7 @@ def permute(nums):
         return output
 
 #使用交换的思路处理
-@example("全排列 -回溯法2")
+@example("全排列 -回溯法2") # 0  1  2
 def permute2(nums):
     if nums is None or len(nums) == 0:
         return []

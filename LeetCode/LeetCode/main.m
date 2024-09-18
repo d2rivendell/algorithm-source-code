@@ -88,8 +88,8 @@ void SortTest(){
 
 void
 LeetCode(){
-    struct ListNode temp, *top = &temp;
-    SortTest();
+//    struct ListNode temp, *top = &temp;
+//    SortTest();
 
 //    reverseString("1234", 4);
 //    int max = lengthOfLongestSubstring("pwwkew");
@@ -135,19 +135,21 @@ LeetCode(){
     
 //    testSortColors();
     
-    testKnapsack();
-    char *s = malloc(sizeof(char) * 12);
-    char *s2 = "erbottlewat";
-    memcpy(s, s2, sizeof(char) * 11);
-    s[11] = '\0';
-    printf("%s \n",  s);
-    char *s3 = malloc(sizeof(char) * 12);
-    s3[11] = '\0';
-    //len == 11
-    memcpy(s3, s + sizeof(char) * 8, sizeof(char) * 3);
-    memcpy(s3 + sizeof(char) * 3, s, sizeof(char) * 8);
-    printf("%s \n",  s3);
-    testMergeTwoArray();
+//    testKnapsack();
+//    char *s = malloc(sizeof(char) * 12);
+//    char *s2 = "erbottlewat";
+//    memcpy(s, s2, sizeof(char) * 11);
+//    s[11] = '\0';
+//    printf("%s \n",  s);
+//    char *s3 = malloc(sizeof(char) * 12);
+//    s3[11] = '\0';
+//    //len == 11
+//    memcpy(s3, s + sizeof(char) * 8, sizeof(char) * 3);
+//    memcpy(s3 + sizeof(char) * 3, s, sizeof(char) * 8);
+//    printf("%s \n",  s3);
+//    testMergeTwoArray();
+    int res = reverse(1234567);
+    printf("res: %d \n", res);
 }
 
 

@@ -92,6 +92,10 @@ void copyChar(char *src, int b1, int len, char *dst, int b2){
  // dp[i][j] 表示s[i-j]之间的字符是否是回文，如果 dp[i+1][i-1] == 1 && s[i] == [j]，则s[i-j]是回文
  //或者[1,2,1]， [2,2]这两种情况下初始的dp[0][2],dp[0][1]不等于0，但是它们也是回文，所以需要特殊处理
  //j-i <= 2的时候默认也是回文
+ 
+
+ dp[i][j]要参考 dp[i+1][i-1]即左下角的值， 因此， 要一列一列的填写：
+ 对列升序，再对每一行升序
  */
 char * longestPalindrome(char * s){
     int len = (int)strlen(s);
@@ -135,6 +139,11 @@ char * longestPalindrome(char * s){
 
 //MARK: 剑指 Offer 47. 礼物的最大价值 --动态规划法
 //类似动态规划
+/*
+ 0 0 0 0
+ 0 0 0 0
+ 0 0 0 0
+ */
 int maxValue(int** grid, int gridSize, int* gridColSize){
     int row = gridSize;
     int col = gridColSize[0];
@@ -403,6 +412,7 @@ int  lengthOfLIS2(int A[], int N){
 
 //MARK: 1143. 最长公共子序列 --动态规划
 /*
+ https://leetcode.cn/problems/longest-common-subsequence/description/
  避免数组越界, 要在二维数组外围加一圈值为0的数组
  
  子序列是不连续的
@@ -491,6 +501,7 @@ int longestCommonSubsequence2(char * text1, char * text2){
 /*
  https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock
  给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+ 你只能选择`某一天`买入这只股票，并选择在`未来的某一个不同的日子`卖出该股票。设计一个算法来计算你所能获取的最大利润。
  如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
  注意：你不能在买入股票前卖出股票
  示例 1:
@@ -612,7 +623,7 @@ int minDistance(char * word1, char * word2){
             int left = dp[i][j-1] + 1;//增加
             int leftTop = dp[i-1][j-1];
             if(word1[i-1] != word2[j-1]){
-                leftTop++;
+                leftTop++; // 替换
             }
             dp[i][j] = MIN(MIN(leftTop, top), left);
         }
@@ -662,7 +673,7 @@ int rob(int* nums, int numsSize){
     /*
       dp[0] = nums[0]
       dp[1] = max(nums[0], nums[1])
-      dp[j] = max(dp[i-2]+nums[i], nums[i-1])
+      dp[i] = max(dp[i-2]+nums[i], nums[i-1])
     */
     if (numsSize == 0) return  0;
     if (numsSize == 1) return nums[0];

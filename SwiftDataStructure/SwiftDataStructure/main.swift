@@ -8,7 +8,7 @@
 
 import Foundation
 
-//testGraph()
+testGraph()
 
 //testTopologicalSort()
 
@@ -18,7 +18,7 @@ import Foundation
 
 //testTrie()
 
-testBRtree()
+//testBRtree()
 
 //func strStr(_ haystack: String, _ needle: String) -> Int {
 //    if(needle.isEmpty) { return -1}
@@ -64,4 +64,31 @@ testBRtree()
 //    return res[0]
 //}
 //print(lastRemaining(5, 3))
+
+class Solution2 {
+    static func longestCommonSubsequence(_ text1: String, _ text2: String) -> Int {
+        let row = text1.count
+        let col = text2.count
+        var dp: [[Int]] = Array(repeating: Array(repeating: 0, count: col + 1),
+                                count: row + 1)
+
+        for i in stride(from: 1, to: row + 1, by: 1) {
+            for j in stride(from: 1, to: col + 1, by: 1) {
+              dp[i][j] = 0
+              if text1[text1.index(text1.startIndex, offsetBy: i - 1)] == text2[text2.index(text2.startIndex, offsetBy: j - 1)] {
+                 dp[i][j] = dp[i - 1][j - 1] + 1
+              } else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+              }
+           }
+        }
+
+        let res = dp[row][col];
+        return res
+    }
+}
+print("\(Solution2.longestCommonSubsequence("abcde", "ace"))")
+
+var arr = [1, 2, 3]
+arr.popLast()
 

@@ -471,7 +471,7 @@ bool isAnagram(char * s, char * t){
             free(container);
             return false;
         }else{
-            container[t[i]] = container[t[i]] - 1;
+            container[t[i]] = container[t[i]] - 1; // 非常关键的一步
         }
     }
     free(container);
