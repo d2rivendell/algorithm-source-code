@@ -198,6 +198,24 @@ void reversSingle(char *s, int left, int right){
         s[right - i] = temp;
     }
 }
+/*
+ // python 解法更简单
+ def reverseWords(self, s: str) -> str:
+        if s is None or len(s) <= 1:
+            return s
+         stack = []
+         temp = ''
+         if s[-1] != ' ':
+            s += ' ' # 可以保证最后一个字符一定可以加到栈中
+         for c in s:
+             if c == ' ':
+                 if len(temp) > 0:
+                     stack.append(temp)
+                 temp = ''
+             else:
+                 temp += c
+         return ' '.join(stack[::-1])
+ */
 char * reverseWords(char * s){
     if(s == NULL){
         return s;
@@ -819,4 +837,18 @@ int strStr(char * haystack, char * needle){
     return pi == m ? ti - pi : -1;
 }
 
-
+// - MARK: 392. 判断子序列
+// https://leetcode.cn/problems/is-subsequence/description/?envType=study-plan-v2&envId=leetcode-75
+// 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。 例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+bool isSubsequence(char* s, char* t) {
+    int m = strlen(s);
+    int n = strlen(t);
+    int i = 0, j = 0;
+    while(i < m && j < n) {
+        if(s[i] == t[j]) {
+            i++;
+        }
+        j++;
+    }
+    return i == m;
+}

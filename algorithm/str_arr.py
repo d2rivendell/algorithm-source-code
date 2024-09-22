@@ -282,6 +282,33 @@ def minWindow(s, t):
                 needCount += 1
         return "" if res[1] - res[0] > len(s) else s[res[0]: res[1] + 1]
 
+# https://leetcode.cn/problems/add-binary/description/
+@example("67. 二进制求和")
+def addBinary(self, a: str, b: str) -> str:
+    if a is None:
+        return b
+    if b is None:
+        return a
+
+    aArr = list(a)
+    bArr = list(b)
+    carry = 0
+    res = []
+    sum = 0
+    while len(aArr) != 0 or len(bArr) != 0:
+        m = 0
+        n = 0
+        if len(aArr) != 0:
+            m = int(aArr.pop())
+        if len(bArr) != 0:
+            n = int(bArr.pop())
+        sum = m + n + carry
+        res.append(str(sum % 2))
+        carry = int(sum / 2)
+    while carry > 0:
+        res.append(str(carry % 2))
+        carry = int(carry / 2)
+    return "".join(res[::-1])
 
 def customCmp(a, b):
     return 1 if a > b else -1

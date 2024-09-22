@@ -685,3 +685,22 @@ int rob(int* nums, int numsSize){
     }
     return dp[numsSize - 1];
 }
+
+// MARK: - 746. 使用最小花费爬楼梯
+/* https://leetcode.cn/problems/min-cost-climbing-stairs/description/?envType=study-plan-v2&envId=leetcode-75
+ 输入：cost = [1,100,1,1,1,100,1,1,100,1]
+ 输出：6
+ 和打家劫舍的区别是，这里可以连续的爬
+ */
+int minCostClimbingStairs(int* cost, int costSize) {
+    if(costSize < 2) return 0;
+    int dp[costSize];
+    dp[0] = 0;
+    dp[1] = MIN(cost[0], cost[1]);
+    for(int i = 2; i < costSize; i++) {
+       // 1. 选了当前的：
+       // 2. 没有选当前
+       dp[i] = MIN(dp[i-1] + cost[i], cost[i - 1] + dp[i - 2]);
+    }
+    return dp[costSize - 1];
+}

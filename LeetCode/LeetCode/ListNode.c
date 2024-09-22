@@ -127,6 +127,7 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
             reachEndCount++;
         }
     }
+    // a + c + b    b + c + a
     return NULL;
     
     /*
@@ -152,25 +153,39 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
  输出: 1->2->3->4->5
  */
 struct ListNode* removeElements1(struct ListNode* head, int val){
-    while(head && head->val == val){
-        head = head->next;
-    }
-    if(head == NULL) return NULL;
+//    while(head && head->val == val){
+//        head = head->next;
+//    }
+//    if(head == NULL) return NULL;
+//    
+//    struct ListNode *pre = head;
+//    struct ListNode *cur = head->next;
+//    while(cur){
+//        while(cur && cur->val == val){
+//            cur = cur->next;
+//            pre->next = cur;
+//        }
+//        pre = cur;
+//        if(cur){
+//            cur = cur->next;
+//        }
+//    }
+//    return head;
     
-    struct ListNode *pre = head;
-    struct ListNode *cur = head->next;
-    while(cur){
-        while(cur && cur->val == val){
-            cur = cur->next;
-            pre->next = cur;
-        }
-        pre = cur;
-        if(cur){
-            cur = cur->next;
+    if(head == NULL) return NULL;
+    struct ListNode temp;
+    struct ListNode *top  = &temp;
+    top->next = head;
+    while(top->next != NULL) {
+        if(top->next->val == val) {
+            top->next = top->next->next;
+        } else {
+            top = top->next;
         }
     }
-    return head;
+    return temp.next;
 }
+
 struct ListNode* removeElements(struct ListNode* head, int val){
     while(head && head->val == val){//去除开头的
         head = head->next;
@@ -211,6 +226,30 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 }
 
 
+//MARK: - 反转链表非递归
+struct ListNode* reverse1(struct ListNode* head){
+    if(head == NULL || head->next == NULL) return head;
+    struct ListNode* pre = NULL;
+    while (head != NULL) {
+        struct ListNode* nextNode = head->next;//暂存下一个
+        head->next = pre;//下一个指向当前
+        pre = head;//当前赋值给上一个
+        head = nextNode;//下一个变成当前
+    }
+    return pre;
+}
+
+//MARK: - 反转链表递归
+//https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode/
+struct ListNode* reverse2(struct ListNode* node){
+    if (node == NULL || node->next ==NULL) {
+        return node;
+    }
+    struct ListNode* last = reverse2(node->next);//我始终是末尾的节点，但是最终我会变成老大
+    node->next->next = node;//亲爱的下一个节点快点指向我
+    node->next = NULL;//下一个节点你既然指向我了，我就没必要指向你了，我要让位置给我的上一个节点。 因为我可能是head,翻转后我的下一个节点是空
+    return last;
+}
 
 
 //MARK: 234. 回文链表
@@ -248,7 +287,7 @@ struct ListNode* middleOfList(struct ListNode* head){
 struct ListNode*  reverseList(struct ListNode* head){
     struct ListNode* pre = NULL;
     while (head) {
-         struct ListNode* next =  head->next;
+         struct ListNode* next = head->next;
          head->next = pre;
          pre = head;
          head = next;
