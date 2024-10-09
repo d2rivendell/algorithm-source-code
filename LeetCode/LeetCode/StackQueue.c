@@ -18,6 +18,21 @@
 
  提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。
 
+ func dailyTemperatures(_ temperatures: [Int]) -> [Int] {
+     var stack: [Int] = []
+     var res: [Int] = Array<Int>(repeating: 0, count: temperatures.count)
+     var stackCount = 0
+     for (idx, value) in temperatures.enumerated() {
+        while stack.isEmpty == false, temperatures[stack[stackCount - 1]] < value {
+            let i = stack.popLast()!
+            stackCount -= 1
+            res[i] = idx - i
+        }
+        stack.append(idx)
+        stackCount += 1
+     }
+     return res
+ }
  */
 int* dailyTemperatures(int* T, int TSize, int* returnSize){//时间复杂度有点高
     if (TSize == 0) {
@@ -214,6 +229,32 @@ int *parentIndexes(int* nums, int numsSize){
  示例 1:
  输入: "()"
  输出: true
+ 
+ 
+ class Solution {
+     var symbols: [Character: Character] = [")": "(",
+                                      "]": "[",
+                                      "}": "{"]
+     func isValid(_ s: String) -> Bool {
+       var stack: [Character] = []
+       for c in s {
+          if c == "]" ||
+             c == ")"  ||
+             c == "}" {
+             if stack.isEmpty == false,
+                 let cc = stack.popLast(),
+                 cc == symbols[c] {
+                 continue
+             } else {
+                 return false
+             }
+          } else {
+             stack.append(c)
+          }
+       }
+       return stack.isEmpty
+     }
+ }
  */
 bool isBracketsValid(char * s){
     if(s == NULL) return true;

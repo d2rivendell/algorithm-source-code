@@ -320,15 +320,15 @@ class LRUCache {
 }
 
 
-print("LRU")
-let obj = LRUCache(2)
-print(obj.get(2))
-obj.put(2, 6)
-print(obj.get(1))
-obj.put(1, 5)
-obj.put(1, 2)
-print(obj.get(1))
-print(obj.get(2))
+//print("LRU")
+//let obj = LRUCache(2)
+//print(obj.get(2))
+//obj.put(2, 6)
+//print(obj.get(1))
+//obj.put(1, 5)
+//obj.put(1, 2)
+//print(obj.get(1))
+//print(obj.get(2))
 
 //MARK: 104. 二叉树的最大深度
 /*https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/

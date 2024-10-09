@@ -88,7 +88,7 @@ int reverse(int x) {
     while (x != 0) {
         int pop = x % 10;
         x /= 10;
-        // 正数：NT_MAX/10 == 214748364。 1. rev大于这个数，肯定溢出。 2.rev等于于这个数，余数大于7 也要溢出
+        // 正数：NT_MAX/10 == 214748364。 1. rev大于这个数（比如214748365-->2147483650），肯定溢出。 2.rev等于于这个数，余数大于7 也要溢出
         //负数同理
         if (rev > int_max/10 || (rev == int_max / 10 && pop > maxEnd)) return 0;
         if (rev < int_min/10 || (rev == int_min / 10 && pop < minEnd)) return 0;

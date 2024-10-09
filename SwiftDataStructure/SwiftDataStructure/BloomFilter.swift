@@ -97,7 +97,7 @@ extension BloomFilter{
             }
             // 生成一个二进位的索引
             let  index = combinedHash % bitSize;
-            // 查询index位置的二进位是否为0
+
             _set(index)
         }
     }

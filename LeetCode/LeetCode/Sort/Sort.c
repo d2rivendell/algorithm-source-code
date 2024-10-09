@@ -155,6 +155,9 @@ int _partition(int A[], int l, int r){
  实现思路：先把传入的无序数组构建成堆结构（和队列不同，这里下标从0开始），之前在二叉堆Insert方法用了上滤的思想，这里构建Max堆用下滤实现,
  具体过程参考 PercolateDown_to_buidHeap.png
  
+     0
+  1          2
+ 3  4     5    6
  @param A 待排序的数组
  @param N 数组长度
  */

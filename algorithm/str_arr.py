@@ -106,6 +106,7 @@ def convertZ(self, s: str, numRows: int) -> str:
     return ''.join(res)
 
 
+@example("43. 字符串相乘 https://leetcode.cn/problems/multiply-strings/submissions/111817312/)
 def multiply(num1, num2):
     if num1 == '0' or num2 == '0':
         return '0'
